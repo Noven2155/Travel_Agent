@@ -206,16 +206,16 @@ This will still demonstrate a working multi-agent planning system from input to 
 
 ### Team Hats
 
-**Product Lead — [Name]**  
+**Product Lead — [TBD]**  
 User requirements, documentation, UX, and presentation.
 
-**Agent Lead — [Name]**  
+**Agent Lead — [TBD]**  
 Agent architecture, prompts, tools, orchestration, and guardrails.
 
-**Data Lead — [Name]**  
+**Data Lead — [TBD]**  
 APIs, data collection, caching, validation, and data dictionary.
 
-**Model / Evaluation Lead — [Name]**  
+**Model / Evaluation Lead — [TBD]**  
 Baseline, evaluation set, metrics, experiments, and error analysis.
 
 All team members will contribute code and review major decisions.
