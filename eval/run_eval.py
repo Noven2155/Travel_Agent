@@ -1,6 +1,6 @@
 """Run one system over the frozen eval (or dev) cases.
 
-    python -m eval.run_eval --system rules|single|multi --split eval|dev [--cases v2|v1] [--city chicago|nyc] [--ids A01,B02] [--out DIR]
+    python -m eval.run_eval --system rules|rules_basic|single|multi --split eval|dev [--cases v2|v1] [--city chicago|nyc] [--ids A01,B02] [--out DIR]
 
 --cases selects the frozen case set (default v2 = eval_cases_v2.json with verified true conflicts; v1 kept for history).
 
@@ -45,14 +45,14 @@ def git_commit() -> str:
 
 def main(argv: list[str] | None = None) -> Path:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--system", required=True, choices=["rules", "single", "multi"])
+    ap.add_argument("--system", required=True, choices=["rules", "rules_basic", "single", "multi"])
     ap.add_argument("--split", default="eval", choices=["eval", "dev"])
     ap.add_argument("--cases", default="v2", choices=["v1", "v2"], help="case set version (default v2)")
     ap.add_argument("--city", default=None, help="chicago | nyc (default: both)")
     ap.add_argument("--ids", default=None, help="comma-separated case ids")
     ap.add_argument("--out", default=None, help="output directory (default eval/results/<system>/<timestamp>)")
     a = ap.parse_args(argv)
-    if a.system != "rules":
+    if not a.system.startswith("rules"):
         os.environ.setdefault("CREWAI_DISABLE_TELEMETRY", "true")
         os.environ.setdefault("OTEL_SDK_DISABLED", "true")
     data = json.loads(C.CASES_PATHS[a.cases].read_text())
@@ -72,7 +72,7 @@ def main(argv: list[str] | None = None) -> Path:
     out = Path(a.out) if a.out else C.RESULTS_DIR / a.system / ts
     out.mkdir(parents=True, exist_ok=True)
     missing_places = sorted({c["city"] for c in cases if get_places(c["city"]) is None})
-    meta = dict(system=a.system, split=a.split, cases_version=a.cases, cases_file=C.CASES_PATHS[a.cases].name, city=a.city or "all", ids=a.ids, started=dt.datetime.now().astimezone().isoformat(timespec="seconds"),
+    meta = dict(system=a.system, variant={"rules": "strong", "rules_basic": "basic"}.get(a.system), split=a.split, cases_version=a.cases, cases_file=C.CASES_PATHS[a.cases].name, city=a.city or "all", ids=a.ids, started=dt.datetime.now().astimezone().isoformat(timespec="seconds"),
                 git_commit=git_commit(), cases_sha256=actual, frozen_sha256=frozen, frozen_ok=(frozen == actual) if frozen else None,
                 n_cases=len(cases), weather_mode=os.environ.get("WEATHER_MODE", "fixture"),
                 places_missing_for=missing_places,

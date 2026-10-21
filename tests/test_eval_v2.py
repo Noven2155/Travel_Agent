@@ -77,7 +77,7 @@ def test_true_conflict_invariants(v2):
 
 @pytest.fixture(scope="module")
 def d01(v2):
-    r = run("rules", TripRequest.from_case(v2["D01"]))
+    r = run("rules_basic", TripRequest.from_case(v2["D01"]))      # basic rules: no conflict statement (metric baseline)
     assert r.status.value == "OK_PLAN"
     return r
 
@@ -107,7 +107,7 @@ def _rec(d01, v2):
 def test_conflict_handling(d01, v2):
     rec = _rec(d01, v2)
     ch = Q.conflict_handling(rec)
-    assert ch["detected"] is False and ch["explained"] is False        # rules never state the conflict
+    assert ch["detected"] is False and ch["explained"] is False        # basic rules never state the conflict
     sac = ch["sacrificed"]
     rec["tradeoffs"] = ["conflict: cannot have both exact dates and dry days; sacrificed " +
                         ("the rain-free days (weather)" if sac == ["dry_days"] else "the exact dates (shifted by a day)")]

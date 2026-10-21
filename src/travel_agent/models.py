@@ -185,6 +185,7 @@ class PlaceSummary(BaseModel):
     lon: float
     neighborhood: str = ""
     in_wikivoyage: bool = False
+    has_wikidata: bool = False
     typical_visit_minutes: int
     typical_visit_minutes_basis: Literal["estimate"] = "estimate"
     source: str
@@ -324,6 +325,7 @@ class CheckReport(BaseModel):
 class RunResult(BaseModel):
     run_id: str
     system: Literal["A", "B", "C"]
+    variant: Optional[str] = None       # System A: "strong" (rules, default) or "basic" (rules_basic)
     request_id: str
     status: Status
     message: str = ""

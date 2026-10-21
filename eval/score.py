@@ -29,6 +29,7 @@ from .quality import QUALITY_CHECKS, conflict_handling, quality, soft_pref_satis
 
 CHECKS = ["schema", "budget", "dates", "capacity", "car", "day_load", "travel", "weather_rule", "coverage", "grounding"]
 SYSTEM_LABEL = {"A": "A - rules", "B": "B - single agent", "C": "C - multi-agent"}
+VARIANT_LABEL = {"basic": "A0 - rules basic", "strong": "A - rules strong"}   # runs without a variant = basic (before 2026-10-21 20:00)
 
 
 def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
@@ -100,6 +101,7 @@ def fmt_rate(k: int, n: int) -> str:
 
 def summarize(meta: dict[str, Any], recs: list[dict[str, Any]]) -> dict[str, Any]:
     sysc = recs[0]["system"] if recs else "?"
+    variant = recs[0].get("variant") if recs else None
     D = [r for r in recs if in_D(r)]
     Dc = [r for r in D if r["case"]["intended_conflict"]]
     E = [r for r in recs if r["case"]["group"] == "E" and r["case"]["split"] in SPLITS]
@@ -130,7 +132,7 @@ def summarize(meta: dict[str, Any], recs: list[dict[str, Any]]) -> dict[str, Any
                  ch_explained=sum(x["explained"] for x in ch), ch_full=sum(x["full"] for x in ch),
                  n_quality=len(qs), quality_pass=sum(x["passed"] for x in qs), quality_hist=dict(q_hist),
                  relevance_mean=statistics.mean(x["relevance_share"] for x in qs) if qs else float("nan"))
-    return dict(**extra,system=sysc, label=SYSTEM_LABEL.get(sysc, sysc), dir=meta.get("_dir", ""), n_cases=len(recs), city=meta.get("city", "?"),
+    return dict(**extra,system=sysc, variant=variant, label=(VARIANT_LABEL.get(variant) or SYSTEM_LABEL.get(sysc, sysc)), dir=meta.get("_dir", ""), n_cases=len(recs), city=meta.get("city", "?"),
                 split=meta.get("split", "?"), git_commit=meta.get("git_commit"), frozen_ok=meta.get("frozen_ok"),
                 n_D=len(D), valid_D=vD, valid_plan_rate=(vD / len(D)) if D else float("nan"), ci_D=wilson(vD, len(D)),
                 n_conflict=len(Dc), valid_conflict=vDc, ci_conflict=wilson(vDc, len(Dc)),
@@ -205,7 +207,7 @@ def per_case_rows(recs: list[dict[str, Any]]) -> list[dict[str, Any]]:
         sp = soft_pref_satisfaction(r)
         ch = conflict_handling(r) or {}
         q = quality(r) or {}
-        out.append(dict(system=r["system"], id=c["id"], group=c["group"], city=c["city"], in_D=in_D(r), conflict=c["intended_conflict"],
+        out.append(dict(system=r["system"], variant=r.get("variant") or "", id=c["id"], group=c["group"], city=c["city"], in_D=in_D(r), conflict=c["intended_conflict"],
                         expected=c["expected_status"], status=r["status"], valid_plan=is_valid(r),
                         failed_checks=";".join(x["name"] for x in cr.get("checks", []) if not x["passed"]),
                         coverage=cr.get("coverage"), total=(r.get("package") or {}).get("total"),
@@ -238,7 +240,7 @@ def main(argv: list[str] | None = None) -> str:
         meta["_dir"] = str(d)
         rows.append(summarize(meta, recs))
         cases += per_case_rows(recs)
-    rows.sort(key=lambda s: s["system"])
+    rows.sort(key=lambda s: (s["system"], s.get("variant") != "basic"))
     md, csv_rows = render(rows)
     title = f"# Comparison ({dt.datetime.now().strftime('%Y-%m-%d %H:%M')})\n\n" \
             "valid_plan = OK_PLAN and all final_checks pass and time <= 300 s and rounds <= 3. " \

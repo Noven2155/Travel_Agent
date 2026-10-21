@@ -29,7 +29,7 @@ from travel_agent.tool_log import ToolLog  # noqa: E402
 
 st.set_page_config(page_title="Travel Agent · צוות 8", page_icon="🧳", layout="wide")
 
-SYSTEMS = {"rules": "A – כללים (rules, ללא LLM)", "single": "B – סוכן יחיד (single agent)", "multi": "C – מולטי-אג'נט (multi-agent)"}
+SYSTEMS = {"rules": "A – כללים, חזק (rules strong, ללא LLM)", "rules_basic": "A0 – כללים, בסיסי (rules basic)", "single": "B – סוכן יחיד (single agent)", "multi": "C – מולטי-אג'נט (multi-agent)"}
 STATUS_COLOR = {"OK_PLAN": "green", "CONFLICT_UNRESOLVED": "orange", "NEEDS_DATA": "blue", "NO_PACKAGE_IN_CATALOG": "blue",
                 "INVALID_REQUEST": "red", "TECHNICAL_ERROR": "red", "TIMEOUT": "orange"}
 CHECK_HE = {"schema": "סכמה", "budget": "תקציב", "dates": "תאריכים", "capacity": "קיבולת", "car": "רכב", "day_load": "עומס יומי",
@@ -204,7 +204,7 @@ def page_plan() -> None:
             free_text = st.text_input("טקסט חופשי (רק לסוכנים B/C)", d0.get("free_text") or "")
             system = st.radio("מערכת", list(SYSTEMS), format_func=SYSTEMS.get)
             go = st.form_submit_button("תכנן 🚀", type="primary")
-        if system != "rules":
+        if not system.startswith("rules"):
             ok, why = availability()
             (st.success if ok else st.warning)(f"LLM ({settings()['model']}): {why}")
     with right:

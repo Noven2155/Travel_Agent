@@ -16,7 +16,8 @@ from ..models import (CheckReport, DayCondition, DayPlan, Dropped, Package, RunR
 from ..pipeline import StepOutcome, build_candidates, day_windows, intake, weather_step
 from ..tool_log import ToolLog
 
-SYSTEM_CODES = {"rules": "A", "single": "B", "multi": "C"}
+SYSTEM_CODES = {"rules": "A", "rules_basic": "A", "single": "B", "multi": "C"}
+SYSTEM_VARIANTS = {"rules": "strong", "rules_basic": "basic"}   # two System A baselines (same code A)
 
 
 @dataclass
@@ -72,7 +73,7 @@ def run_system(system: str, raw_request: Any, decide: Callable[[RunContext], Dec
     t0 = time.monotonic()
     log = ToolLog(run_id)
     rid = raw_request.request_id if isinstance(raw_request, TripRequest) else (raw_request.get("request_id") or raw_request.get("id") or "ADHOC")
-    base = dict(run_id=run_id, system=code, request_id=rid)
+    base = dict(run_id=run_id, system=code, variant=SYSTEM_VARIANTS.get(system), request_id=rid)
     req: Optional[TripRequest] = None
     ctx: Optional[RunContext] = None
     try:
