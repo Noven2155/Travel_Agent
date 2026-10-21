@@ -1,0 +1,5 @@
+system,id,city,phrasing_type,status,valid_plan_gold,own_checks_passed,gold_failures,key_score,met,flagged,ignored,parse_accuracy,parse_notes,llm_calls,tokens,wall_time_s,message
+A - rules (keyword parser + strong rules),G01,Chicago,direct,OK_PLAN,True,True,,1.0,2,0,0,1.0,car not mentioned -> no car,0,0,0.204,
+A - rules (keyword parser + strong rules),G02,Chicago,indirect,OK_PLAN,True,True,,1.0,2,0,0,1.0,car not mentioned -> no car,0,0,0.021,
+A - rules (keyword parser + strong rules),G03,New York,direct,OK_PLAN,True,True,,1.0,2,0,0,1.0,car not mentioned -> no car,0,0,0.038,
+A - rules (keyword parser + strong rules),G04,New York,indirect,OK_PLAN,True,True,,0.6667,2,1,0,1.0,car not mentioned -> no car,0,0,0.015,

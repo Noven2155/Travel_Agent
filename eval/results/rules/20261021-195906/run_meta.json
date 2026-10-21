@@ -1,0 +1,19 @@
+{
+ "system": "rules",
+ "variant": "strong",
+ "split": "eval",
+ "cases_version": "v3",
+ "cases_file": "eval_cases_v3.json",
+ "city": "all",
+ "ids": null,
+ "started": "2026-10-21T19:59:06+03:00",
+ "git_commit": "776bd03",
+ "cases_sha256": "f75e08712ffaf308c1e7fcd9e5c85dcef0ad84c274131674daa057c06c90b105",
+ "frozen_sha256": "f75e08712ffaf308c1e7fcd9e5c85dcef0ad84c274131674daa057c06c90b105",
+ "frozen_ok": true,
+ "n_cases": 20,
+ "weather_mode": "fixture",
+ "places_missing_for": [],
+ "note": "",
+ "finished": "2026-10-21T19:59:07+03:00"
+}
