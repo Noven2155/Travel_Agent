@@ -39,6 +39,7 @@ LLM עבור B/C (בחינם בלבד): ברירת המחדל היא מודל מ
 
 ```bash
 python -m eval.run_eval --system rules  --split eval --city chicago     # A, בלי LLM, ~1 שנייה
+python -m eval.run_eval --system rules_basic --split eval              # A0, כללים בסיסי (קו בסיס תחתון)
 python -m eval.run_eval --system single --split dev                     # B (דורש LLM)
 python -m eval.run_eval --system multi  --split dev                     # C (דורש LLM)
 python -m eval.score eval/results/rules/<ts> [eval/results/single/<ts> eval/results/multi/<ts>]
@@ -90,8 +91,9 @@ Three trip planners compared on one frozen eval set (40 eval + 8 dev cases, Chic
 `call_id/source/license/data_date` and are logged per run, code `final_checks`, limits (3 rounds, 270 s), `RunResult`.
 
 - Setup: `pip install -r requirements.txt && pip install -e .`; copy `.env.example` to `.env` for B/C (free local Ollama model by default; free-tier provider optional).
-- Eval: `python -m eval.run_eval --system rules|single|multi --split eval|dev [--cases v2|v1] [--city chicago|nyc]`, then `python -m eval.score <dirs...>`.
+- Eval: `python -m eval.run_eval --system rules|rules_basic|single|multi --split eval|dev [--cases v2|v1] [--city chicago|nyc]`, then `python -m eval.score <dirs...>`.
   v2 (default) has 24 verified true-conflict cases; scoring adds soft_pref_satisfaction, conflict_handling and plan-quality checks (see eval/cases/FROZEN_v2.md).
+  System A has two baselines: `rules` = strong (default; Pareto package choice + conflict explanation, quality rules built into the itinerary) and `rules_basic` = basic (cheapest package, proximity-first).
 - UI: `streamlit run app/streamlit_app.py`. Tests: `python -m pytest -q`.
 - Data: OpenStreetMap (ODbL), Wikivoyage (CC BY-SA), Open-Meteo (CC BY 4.0), Inside Airbnb (CC BY 4.0), Kaggle flights/cars. Synthetic place fields (rating, review_count, typical_visit_minutes, most price_level) are never used for ranking or grounding.
 - Places data: `data/places/chicago_places.csv` (579) and `data/places/nyc_places.csv` (616; attractions from all 5 boroughs, food from Manhattan only - NE Manhattan and Brooklyn food tiles could not be fetched from Overpass). © OpenStreetMap contributors (ODbL 1.0); Wikivoyage text CC BY-SA 4.0.

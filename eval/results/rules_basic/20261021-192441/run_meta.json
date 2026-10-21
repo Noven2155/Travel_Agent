@@ -1,0 +1,19 @@
+{
+ "system": "rules_basic",
+ "variant": "basic",
+ "split": "dev",
+ "cases_version": "v2",
+ "cases_file": "eval_cases_v2.json",
+ "city": "all",
+ "ids": null,
+ "started": "2026-10-21T19:24:41+03:00",
+ "git_commit": "36c4a9e",
+ "cases_sha256": "948087e8a3221fd140568c64c562baa290f3608c499fc1c862db7345cece85f8",
+ "frozen_sha256": "948087e8a3221fd140568c64c562baa290f3608c499fc1c862db7345cece85f8",
+ "frozen_ok": true,
+ "n_cases": 8,
+ "weather_mode": "fixture",
+ "places_missing_for": [],
+ "note": "",
+ "finished": "2026-10-21T19:24:41+03:00"
+}
