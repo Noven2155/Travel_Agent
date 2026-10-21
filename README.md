@@ -97,3 +97,14 @@ Three trip planners compared on one frozen eval set (40 eval + 8 dev cases, Chic
 - UI: `streamlit run app/streamlit_app.py`. Tests: `python -m pytest -q`.
 - Data: OpenStreetMap (ODbL), Wikivoyage (CC BY-SA), Open-Meteo (CC BY 4.0), Inside Airbnb (CC BY 4.0), Kaggle flights/cars. Synthetic place fields (rating, review_count, typical_visit_minutes, most price_level) are never used for ranking or grounding.
 - Places data: `data/places/chicago_places.csv` (579) and `data/places/nyc_places.csv` (616; attractions from all 5 boroughs, food from Manhattan only - NE Manhattan and Brooklyn food tiles could not be fetched from Overpass). © OpenStreetMap contributors (ODbL 1.0); Wikivoyage text CC BY-SA 4.0.
+
+## Free-text segment (v3) and the hybrid system
+
+```bash
+python -m eval.run_eval --system rules  --cases v3 --split eval   # A: keyword parser + strong rules (no LLM)
+python -m eval.run_eval --system hybrid --cases v3 --split eval   # H: one LLM parse call + strong rules (LLM from .env)
+python -m eval.score_v3 eval/results/rules/<ts> [eval/results/hybrid/<ts> ...] --out eval/reports/<name>
+python -m eval.judge eval/results/<system>/<ts>                   # LLM judge; needs JUDGE_MODEL != LLM_MODEL
+```
+
+See `docs/eval_v3_freetext_HE.md` and `docs/STATUS_HE.md`.
