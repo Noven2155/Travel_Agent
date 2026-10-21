@@ -12,7 +12,7 @@ from typing import Any, Callable, Optional
 from .. import config as C
 from ..checks import final_checks
 from ..models import (CheckReport, DayCondition, DayPlan, Dropped, Package, RunResult, Status, TripRequest,
-                      WeatherStatus)
+                      WeatherStatus, effective_request)
 from ..pipeline import StepOutcome, build_candidates, day_windows, intake, weather_step
 from ..tool_log import ToolLog
 
@@ -60,7 +60,8 @@ def package_from_candidate(c: dict[str, Any]) -> Package:
 
 
 def run_checks(ctx: RunContext, package: Optional[Package], days: list[DayPlan], dropped: list[Dropped]) -> CheckReport:
-    windows = day_windows(ctx.req, package.flight_out, package.flight_back) if package and package.flight_out else None
+    eff = effective_request(ctx.req, package)
+    windows = day_windows(eff, package.flight_out, package.flight_back) if package and package.flight_out else None
     return final_checks(ctx.log, ctx.req, package, days, dropped, ctx.conditions, windows)
 
 
@@ -78,7 +79,7 @@ def run_system(system: str, raw_request: Any, decide: Callable[[RunContext], Dec
         req = intake(raw_request)
         conditions, wstatus = weather_step(log, req)
         base.update(request=req, day_conditions=conditions, weather_status=wstatus)
-        cands = build_candidates(log, req)
+        cands = build_candidates(log, req, conditions=conditions)
         ctx = RunContext(run_id=run_id, req=req, log=log, conditions=conditions, weather_status=wstatus,
                          candidates=cands, t0=t0, deadline_s=deadline_s)
         dec = decide(ctx)

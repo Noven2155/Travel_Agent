@@ -1,0 +1,400 @@
+{
+ "Chicago": {
+  "airports": [
+   "ORD"
+  ],
+  "center": "Loop",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 48,
+   "short_le12km": 31,
+   "short_central": 7,
+   "short_le12km_cap4": 21,
+   "km_p10_p50_p90": [
+    4.9,
+    9.7,
+    15.1
+   ],
+   "price_p10_p50_p90_le12": [
+    86.5,
+    114.5,
+    201.5
+   ],
+   "price_median_central": 128.2,
+   "price_median_outside": 111.7,
+   "min_price_central": 86.5,
+   "min_price_outside": 71.57,
+   "markets_le12": {
+    "Chicago": 31
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 1011,
+   "legs_per_day_median": 4.0,
+   "legs_per_route_date_median_when_any": 1.0,
+   "share_route_dates_ge2": 0.188,
+   "nonstop_share": 0.451,
+   "windows_3n_exact": 254,
+   "windows_3n_exact_ge4_flight_pairs": 15,
+   "windows_3n_exact_nonstop_mix": 124,
+   "windows_3n_flex1": 901,
+   "windows_3n_flex1_ge4_flight_pairs": 342
+  }
+ },
+ "New York": {
+  "airports": [
+   "JFK",
+   "LGA",
+   "EWR"
+  ],
+  "center": "Times Square",
+  "central_km": 6.0,
+  "lodging": {
+   "listings": 720,
+   "short_stay": 101,
+   "short_le12km": 31,
+   "short_central": 10,
+   "short_le12km_cap4": 24,
+   "km_p10_p50_p90": [
+    6.0,
+    15.6,
+    19.9
+   ],
+   "price_p10_p50_p90_le12": [
+    115.1,
+    197.5,
+    294.8
+   ],
+   "price_median_central": 198.0,
+   "price_median_outside": 197.5,
+   "min_price_central": 105.0,
+   "min_price_outside": 102.4,
+   "markets_le12": {
+    "Jersey City": 31
+   }
+  },
+  "flights": {
+   "origins": 13,
+   "legs_in": 2629,
+   "legs_per_day_median": 12.0,
+   "legs_per_route_date_median_when_any": 1.0,
+   "share_route_dates_ge2": 0.454,
+   "nonstop_share": 0.399,
+   "windows_3n_exact": 729,
+   "windows_3n_exact_ge4_flight_pairs": 246,
+   "windows_3n_exact_nonstop_mix": 461,
+   "windows_3n_flex1": 1487,
+   "windows_3n_flex1_ge4_flight_pairs": 1181
+  }
+ },
+ "Boston": {
+  "airports": [
+   "BOS"
+  ],
+  "center": "Boston Common",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 68,
+   "short_le12km": 65,
+   "short_central": 33,
+   "short_le12km_cap4": 57,
+   "km_p10_p50_p90": [
+    2.8,
+    5.0,
+    9.7
+   ],
+   "price_p10_p50_p90_le12": [
+    148.0,
+    271.0,
+    435.6
+   ],
+   "price_median_central": 290.0,
+   "price_median_outside": 262.0,
+   "min_price_central": 131.0,
+   "min_price_outside": 136.4,
+   "markets_le12": {
+    "Boston": 65
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 1061,
+   "legs_per_day_median": 5.0,
+   "legs_per_route_date_median_when_any": 1,
+   "share_route_dates_ge2": 0.2,
+   "nonstop_share": 0.406,
+   "windows_3n_exact": 254,
+   "windows_3n_exact_ge4_flight_pairs": 15,
+   "windows_3n_exact_nonstop_mix": 119,
+   "windows_3n_flex1": 974,
+   "windows_3n_flex1_ge4_flight_pairs": 383
+  }
+ },
+ "Los Angeles": {
+  "airports": [
+   "LAX"
+  ],
+  "center": "Downtown LA",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 25,
+   "short_le12km": 1,
+   "short_central": 0,
+   "short_le12km_cap4": 1,
+   "km_p10_p50_p90": [
+    15.1,
+    61.7,
+    74.3
+   ],
+   "price_p10_p50_p90_le12": [
+    70.0,
+    70.0,
+    70.0
+   ],
+   "price_median_central": null,
+   "price_median_outside": 70.0,
+   "min_price_central": null,
+   "min_price_outside": 70.0,
+   "markets_le12": {
+    "Los Angeles": 1
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 1546,
+   "legs_per_day_median": 7.0,
+   "legs_per_route_date_median_when_any": 1,
+   "share_route_dates_ge2": 0.282,
+   "nonstop_share": 0.266,
+   "windows_3n_exact": 361,
+   "windows_3n_exact_ge4_flight_pairs": 59,
+   "windows_3n_exact_nonstop_mix": 173,
+   "windows_3n_flex1": 1216,
+   "windows_3n_flex1_ge4_flight_pairs": 607
+  }
+ },
+ "San Francisco": {
+  "airports": [
+   "SFO"
+  ],
+  "center": "Union Square",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 54,
+   "short_le12km": 54,
+   "short_central": 28,
+   "short_le12km_cap4": 35,
+   "km_p10_p50_p90": [
+    0.5,
+    1.7,
+    8.2
+   ],
+   "price_p10_p50_p90_le12": [
+    95.0,
+    209.0,
+    342.0
+   ],
+   "price_median_central": 137.0,
+   "price_median_outside": 229.0,
+   "min_price_central": 87.3,
+   "min_price_outside": 121.0,
+   "markets_le12": {
+    "San Francisco": 54
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 1110,
+   "legs_per_day_median": 5.0,
+   "legs_per_route_date_median_when_any": 1,
+   "share_route_dates_ge2": 0.193,
+   "nonstop_share": 0.266,
+   "windows_3n_exact": 242,
+   "windows_3n_exact_ge4_flight_pairs": 20,
+   "windows_3n_exact_nonstop_mix": 88,
+   "windows_3n_flex1": 953,
+   "windows_3n_flex1_ge4_flight_pairs": 351
+  }
+ },
+ "Denver": {
+  "airports": [
+   "DEN"
+  ],
+  "center": "Civic Center",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 2,
+   "short_le12km": 1,
+   "short_central": 0,
+   "short_le12km_cap4": 0,
+   "km_p10_p50_p90": [
+    5.6,
+    21.5,
+    21.5
+   ],
+   "price_p10_p50_p90_le12": [
+    64.3,
+    64.3,
+    64.3
+   ],
+   "price_median_central": null,
+   "price_median_outside": 64.3,
+   "min_price_central": null,
+   "min_price_outside": 64.34,
+   "markets_le12": {
+    "Denver": 1
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 917,
+   "legs_per_day_median": 4.0,
+   "legs_per_route_date_median_when_any": 1,
+   "share_route_dates_ge2": 0.182,
+   "nonstop_share": 0.285,
+   "windows_3n_exact": 173,
+   "windows_3n_exact_ge4_flight_pairs": 13,
+   "windows_3n_exact_nonstop_mix": 74,
+   "windows_3n_flex1": 801,
+   "windows_3n_flex1_ge4_flight_pairs": 241
+  }
+ },
+ "Washington DC": {
+  "airports": [
+   "IAD"
+  ],
+  "center": "National Mall",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 80,
+   "short_le12km": 80,
+   "short_central": 29,
+   "short_le12km_cap4": 69,
+   "km_p10_p50_p90": [
+    3.9,
+    6.1,
+    8.1
+   ],
+   "price_p10_p50_p90_le12": [
+    87.5,
+    157.0,
+    328.0
+   ],
+   "price_median_central": 260.1,
+   "price_median_outside": 144.0,
+   "min_price_central": 100.0,
+   "min_price_outside": 71.0,
+   "markets_le12": {
+    "Washington, D.C.": 80
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 602,
+   "legs_per_day_median": 2.0,
+   "legs_per_route_date_median_when_any": 1,
+   "share_route_dates_ge2": 0.119,
+   "nonstop_share": 0.216,
+   "windows_3n_exact": 115,
+   "windows_3n_exact_ge4_flight_pairs": 6,
+   "windows_3n_exact_nonstop_mix": 28,
+   "windows_3n_flex1": 605,
+   "windows_3n_flex1_ge4_flight_pairs": 140
+  }
+ },
+ "Oakland": {
+  "airports": [
+   "OAK"
+  ],
+  "center": "Downtown Oakland",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 185,
+   "short_le12km": 184,
+   "short_central": 119,
+   "short_le12km_cap4": 136,
+   "km_p10_p50_p90": [
+    1.5,
+    4.1,
+    10.2
+   ],
+   "price_p10_p50_p90_le12": [
+    102.0,
+    218.0,
+    557.0
+   ],
+   "price_median_central": 221.7,
+   "price_median_outside": 201.2,
+   "min_price_central": 65.67,
+   "min_price_outside": 68.0,
+   "markets_le12": {
+    "Oakland": 184
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 638,
+   "legs_per_day_median": 3.0,
+   "legs_per_route_date_median_when_any": 1.0,
+   "share_route_dates_ge2": 0.141,
+   "nonstop_share": 0.014,
+   "windows_3n_exact": 105,
+   "windows_3n_exact_ge4_flight_pairs": 2,
+   "windows_3n_exact_nonstop_mix": 3,
+   "windows_3n_flex1": 545,
+   "windows_3n_flex1_ge4_flight_pairs": 105
+  }
+ },
+ "Dallas-Fort Worth": {
+  "airports": [
+   "DFW"
+  ],
+  "center": "Downtown Dallas",
+  "central_km": 5.0,
+  "lodging": {
+   "listings": 360,
+   "short_stay": 70,
+   "short_le12km": 50,
+   "short_central": 32,
+   "short_le12km_cap4": 33,
+   "km_p10_p50_p90": [
+    2.8,
+    5.4,
+    50.8
+   ],
+   "price_p10_p50_p90_le12": [
+    71.1,
+    85.0,
+    152.0
+   ],
+   "price_median_central": 88.8,
+   "price_median_outside": 83.5,
+   "min_price_central": 61.0,
+   "min_price_outside": 24.0,
+   "markets_le12": {
+    "Dallas": 50
+   }
+  },
+  "flights": {
+   "origins": 15,
+   "legs_in": 1190,
+   "legs_per_day_median": 5.0,
+   "legs_per_route_date_median_when_any": 1.0,
+   "share_route_dates_ge2": 0.226,
+   "nonstop_share": 0.301,
+   "windows_3n_exact": 240,
+   "windows_3n_exact_ge4_flight_pairs": 23,
+   "windows_3n_exact_nonstop_mix": 111,
+   "windows_3n_flex1": 924,
+   "windows_3n_flex1_ge4_flight_pairs": 348
+  }
+ }
+}

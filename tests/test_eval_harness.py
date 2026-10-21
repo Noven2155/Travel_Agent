@@ -4,7 +4,7 @@ from eval import run_eval, score
 
 
 def test_run_eval_and_score(tmp_path):
-    out = run_eval.main(["--system", "rules", "--split", "eval", "--city", "chicago", "--ids", "A01,B02,E02", "--out", str(tmp_path / "r")])
+    out = run_eval.main(["--system", "rules", "--cases", "v1", "--split", "eval", "--city", "chicago", "--ids", "A01,B02,E02", "--out", str(tmp_path / "r")])
     files = sorted(p.name for p in out.glob("*.json"))
     assert files == ["A01.json", "B02.json", "E02.json", "run_meta.json"]
     rec = json.loads((out / "A01.json").read_text())

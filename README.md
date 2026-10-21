@@ -44,6 +44,8 @@ python -m eval.run_eval --system multi  --split dev                     # C (ד�
 python -m eval.score eval/results/rules/<ts> [eval/results/single/<ts> eval/results/multi/<ts>]
 ```
 
+**ערכה v2 (ברירת המחדל):** ‏`eval/cases/eval_cases_v2.json` – הבקשות המתנגשות (B–D) נבנו מחדש כך שבכל אחת יש התנגשות אמיתית ומאומתת (אין חבילה שמקיימת את כל ההעדפות הרכות, ויש לפחות שתי אופציות פארטו שמוותרות על העדפות שונות). `score.py` מוסיף `soft_pref_satisfaction`, ‏`conflict_handling` ובדיקות איכות. הגרסה הישנה: `--cases v1`. פרטים: `eval/cases/FROZEN_v2.md` וסעיף 10 במסמך ההגדרה.
+
 כל בקשה נשמרת כ-JSON ב-`eval/results/<system>/<timestamp>/` (תוכנית, סטטוס, יומן כלים, `llm_calls`, טוקנים,
 `wall_time_s`, `rounds_used`, דוח בדיקות) ולצידה `run_meta.json` (קומיט, SHA256 של ערכת ההערכה). `score` מדפיס
 טבלת השוואה (שורה לכל מערכת) וכותב `comparison.md`, `comparison.csv`, `per_case.csv`.
@@ -88,7 +90,8 @@ Three trip planners compared on one frozen eval set (40 eval + 8 dev cases, Chic
 `call_id/source/license/data_date` and are logged per run, code `final_checks`, limits (3 rounds, 270 s), `RunResult`.
 
 - Setup: `pip install -r requirements.txt && pip install -e .`; copy `.env.example` to `.env` for B/C (free local Ollama model by default; free-tier provider optional).
-- Eval: `python -m eval.run_eval --system rules|single|multi --split eval|dev [--city chicago|nyc]`, then `python -m eval.score <dirs...>`.
+- Eval: `python -m eval.run_eval --system rules|single|multi --split eval|dev [--cases v2|v1] [--city chicago|nyc]`, then `python -m eval.score <dirs...>`.
+  v2 (default) has 24 verified true-conflict cases; scoring adds soft_pref_satisfaction, conflict_handling and plan-quality checks (see eval/cases/FROZEN_v2.md).
 - UI: `streamlit run app/streamlit_app.py`. Tests: `python -m pytest -q`.
 - Data: OpenStreetMap (ODbL), Wikivoyage (CC BY-SA), Open-Meteo (CC BY 4.0), Inside Airbnb (CC BY 4.0), Kaggle flights/cars. Synthetic place fields (rating, review_count, typical_visit_minutes, most price_level) are never used for ranking or grounding.
 - Places data: `data/places/chicago_places.csv` (579) and `data/places/nyc_places.csv` (616; attractions from all 5 boroughs, food from Manhattan only - NE Manhattan and Brooklyn food tiles could not be fetched from Overpass). © OpenStreetMap contributors (ODbL 1.0); Wikivoyage text CC BY-SA 4.0.

@@ -10,7 +10,10 @@ INVENTORY_PATH = DATA_DIR / "inventory.json"
 PLACES_DIR = DATA_DIR / "places"
 WEATHER_DIR = DATA_DIR / "weather"
 EVAL_DIR = REPO_ROOT / "eval"
-CASES_PATH = EVAL_DIR / "cases" / "eval_cases.json"
+CASES_PATH = EVAL_DIR / "cases" / "eval_cases.json"            # v1 (frozen, kept for history)
+CASES_PATH_V2 = EVAL_DIR / "cases" / "eval_cases_v2.json"      # v2 (true-conflict cases; default for run_eval)
+CASES_PATHS = {"v1": CASES_PATH, "v2": CASES_PATH_V2}
+FROZEN_FILES = {"v1": EVAL_DIR / "cases" / "FROZEN.sha256", "v2": EVAL_DIR / "cases" / "FROZEN_v2.sha256"}
 RESULTS_DIR = EVAL_DIR / "results"
 
 CITIES = {

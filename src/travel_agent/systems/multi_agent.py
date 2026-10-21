@@ -15,7 +15,7 @@ from pydantic import BaseModel
 
 from .. import config as C
 from ..checks import place_facts
-from ..models import CheckReport, ItineraryPlan, PackageDecision, PlaceShortlist, Status
+from ..models import CheckReport, ItineraryPlan, PackageDecision, PlaceShortlist, Status, effective_request
 from ..pipeline import day_windows, travel_mode
 from .agent_common import (PACKAGE_CHECKS, RULES_TEXT, SCHEDULE_CHECKS, account_usage, days_from_itinerary,
                            feedback_text, finish, grounding_guardrail, llm_or_error, package_from_decision,
@@ -162,8 +162,8 @@ def make_flow(ctx: RunContext):
         def itinerary(self) -> None:
             if self.state.outcome or self._deadline():
                 return
-            req = ctx.req
             pkg = package_from_decision(ctx, PackageDecision.model_validate(self.state.package))
+            req = effective_request(ctx.req, pkg)
             facts = place_facts(ctx.log)
             sl = PlaceShortlist.model_validate(self.state.shortlist)
             places = [dict(place_id=p.place_id, name=facts.get(p.place_id, {}).get("name"), category=facts.get(p.place_id, {}).get("category"),

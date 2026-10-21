@@ -6,6 +6,9 @@ Central metric: valid_plan_rate over D = eval cases in groups A-D whose oracle i
 places oracle not FAIL), restricted to the cases present in the run. valid_plan = status OK_PLAN and all
 final_checks pass and wall_time_s <= 300 and rounds_used <= 3. Also reported on the conflicting subset (groups
 B-D) with a Wilson 95% CI; group E as correct_refusal_rate; secondary metrics as in spec 6.2.
+v2 secondary metrics (eval/quality.py): soft_pref_satisfaction (cases with soft prefs), conflict_handling on the
+true-conflict cases (detected / acceptable sacrifice / explained), and plan-quality checks (no empty full day,
+opening-hour plausibility, interest relevance, no back-to-back duplicates). They never change valid_plan.
 Writes comparison.md / comparison.csv / per_case.csv to --out (default eval/reports/<timestamp>).
 """
 from __future__ import annotations
@@ -22,6 +25,7 @@ from typing import Any
 
 from . import __name__ as _pkg  # noqa: F401
 from travel_agent import config as C  # noqa: E402
+from .quality import QUALITY_CHECKS, conflict_handling, quality, soft_pref_satisfaction  # noqa: E402
 
 CHECKS = ["schema", "budget", "dates", "capacity", "car", "day_load", "travel", "weather_rule", "coverage", "grounding"]
 SYSTEM_LABEL = {"A": "A - rules", "B": "B - single agent", "C": "C - multi-agent"}
@@ -56,9 +60,12 @@ def is_valid(r: dict[str, Any]) -> bool:
             and r.get("rounds_used", 99) <= C.MAX_ROUNDS)
 
 
+SPLITS = {"eval"}          # --dev scores the dev split instead (threshold tuning only; never reported)
+
+
 def in_D(r: dict[str, Any]) -> bool:
     c = r["case"]
-    return (c["split"] == "eval" and c["group"] in "ABCD" and c["oracle_package_status"] == "FEASIBLE"
+    return (c["split"] in SPLITS and c["group"] in "ABCD" and c["oracle_package_status"] == "FEASIBLE"
             and c["oracle_places_status"] != "FAIL")
 
 
@@ -95,7 +102,7 @@ def summarize(meta: dict[str, Any], recs: list[dict[str, Any]]) -> dict[str, Any
     sysc = recs[0]["system"] if recs else "?"
     D = [r for r in recs if in_D(r)]
     Dc = [r for r in D if r["case"]["intended_conflict"]]
-    E = [r for r in recs if r["case"]["group"] == "E" and r["case"]["split"] == "eval"]
+    E = [r for r in recs if r["case"]["group"] == "E" and r["case"]["split"] in SPLITS]
     vD, vDc = sum(map(is_valid, D)), sum(map(is_valid, Dc))
     refusal = sum(1 for r in E if r["status"] == r["case"]["expected_status"] and not r.get("days"))
     e_status = sum(1 for r in E if r["status"] == r["case"]["expected_status"])
@@ -110,7 +117,20 @@ def summarize(meta: dict[str, Any], recs: list[dict[str, Any]]) -> dict[str, Any
     fail_hist = Counter(c for r in with_plan for c in CHECKS if check_passed(r, c) is False)
     q = [plan_quality(r) for r in D if r.get("days")]
     statuses = Counter(r["status"] for r in recs)
-    return dict(system=sysc, label=SYSTEM_LABEL.get(sysc, sysc), dir=meta.get("_dir", ""), n_cases=len(recs), city=meta.get("city", "?"),
+    # ---- v2 secondary metrics
+    sp = [x for x in (soft_pref_satisfaction(r) for r in D) if x is not None]
+    TC = [r for r in D if r["case"].get("true_conflict")]
+    ch = [conflict_handling(r) for r in TC]
+    qs = [quality(r) for r in D]
+    qs = [x for x in qs if x is not None]
+    q_hist = Counter(n for x in qs for n in x["failed"])
+    extra = dict(n_soft=len(sp), soft_pref_mean=statistics.mean(sp) if sp else float("nan"),
+                 n_tc=len(TC), ch_mean=statistics.mean(x["score"] for x in ch) if ch else float("nan"),
+                 ch_detected=sum(x["detected"] for x in ch), ch_acceptable=sum(x["acceptable"] for x in ch),
+                 ch_explained=sum(x["explained"] for x in ch), ch_full=sum(x["full"] for x in ch),
+                 n_quality=len(qs), quality_pass=sum(x["passed"] for x in qs), quality_hist=dict(q_hist),
+                 relevance_mean=statistics.mean(x["relevance_share"] for x in qs) if qs else float("nan"))
+    return dict(**extra,system=sysc, label=SYSTEM_LABEL.get(sysc, sysc), dir=meta.get("_dir", ""), n_cases=len(recs), city=meta.get("city", "?"),
                 split=meta.get("split", "?"), git_commit=meta.get("git_commit"), frozen_ok=meta.get("frozen_ok"),
                 n_D=len(D), valid_D=vD, valid_plan_rate=(vD / len(D)) if D else float("nan"), ci_D=wilson(vD, len(D)),
                 n_conflict=len(Dc), valid_conflict=vDc, ci_conflict=wilson(vDc, len(Dc)),
@@ -153,6 +173,22 @@ def render(rows: list[dict[str, Any]]) -> tuple[str, list[dict[str, Any]]]:
                              travel_min_per_day=round(s["travel_min_per_day"], 1), statuses=json.dumps(s["statuses"]),
                              fail_hist=json.dumps(s["fail_hist"]), dir=s["dir"]))
     md = "\n".join(lines)
+    hdr2 = ["system", "soft_pref_satisfaction (mean)", "conflict_handling (mean)", "detected", "acceptable sacrifice",
+            "explained", "full handling [Wilson 95%]", "quality pass (D plans)", "quality failures by check", "interest relevance (mean share)"]
+    md += "\n\nv2 secondary metrics (true-conflict cases = groups B-D of eval_cases_v2; valid_plan unchanged):\n\n"
+    md += "| " + " | ".join(hdr2) + " |\n|" + "---|" * len(hdr2) + "\n"
+    for s in rows:
+        md += "| " + " | ".join([s["label"], f"{s['soft_pref_mean']:.2f} (n={s['n_soft']})", f"{s['ch_mean']:.2f} (n={s['n_tc']})",
+                                  f"{s['ch_detected']}/{s['n_tc']}", f"{s['ch_acceptable']}/{s['n_tc']}", f"{s['ch_explained']}/{s['n_tc']}",
+                                  fmt_rate(s["ch_full"], s["n_tc"]), f"{s['quality_pass']}/{s['n_quality']}",
+                                  ", ".join(f"{k} {s['quality_hist'].get(k, 0)}" for k in QUALITY_CHECKS),
+                                  f"{s['relevance_mean']:.2f}"]) + " |\n"
+    for r_ in csv_rows:
+        s_ = next(x for x in rows if x["system"] == r_["system"] and x["dir"] == r_["dir"])
+        r_.update(soft_pref_mean=round(s_["soft_pref_mean"], 4), n_true_conflict=s_["n_tc"], conflict_handling_mean=round(s_["ch_mean"], 4),
+                  ch_detected=s_["ch_detected"], ch_acceptable=s_["ch_acceptable"], ch_explained=s_["ch_explained"], ch_full=s_["ch_full"],
+                  quality_pass=s_["quality_pass"], n_quality=s_["n_quality"], quality_hist=json.dumps(s_["quality_hist"]),
+                  relevance_mean=round(s_["relevance_mean"], 4))
     md += "\n\nFailure histogram (runs with a plan, by check) and status counts:\n\n"
     for s in rows:
         md += f"- {s['label']}: failures {s['fail_hist'] or '{}'}; statuses {s['statuses']}; plan quality on D: " \
@@ -166,12 +202,22 @@ def per_case_rows(recs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for r in recs:
         c = r["case"]
         cr = r.get("check_report") or {}
+        sp = soft_pref_satisfaction(r)
+        ch = conflict_handling(r) or {}
+        q = quality(r) or {}
         out.append(dict(system=r["system"], id=c["id"], group=c["group"], city=c["city"], in_D=in_D(r), conflict=c["intended_conflict"],
                         expected=c["expected_status"], status=r["status"], valid_plan=is_valid(r),
                         failed_checks=";".join(x["name"] for x in cr.get("checks", []) if not x["passed"]),
                         coverage=cr.get("coverage"), total=(r.get("package") or {}).get("total"),
                         oracle_cheapest=c.get("oracle_cheapest_total"), wall_time_s=r["wall_time_s"], llm_calls=r.get("llm_calls", 0),
-                        tokens=r.get("tokens_in", 0) + r.get("tokens_out", 0), rounds=r.get("rounds_used", 0), message=r.get("message", "")))
+                        tokens=r.get("tokens_in", 0) + r.get("tokens_out", 0), rounds=r.get("rounds_used", 0),
+                        soft_prefs=";".join(c.get("soft_prefs") or []), true_conflict=bool(c.get("true_conflict")),
+                        soft_pref_satisfaction=None if sp is None else round(sp, 3), sacrificed=";".join(ch.get("sacrificed") or []),
+                        acceptable_sacrifices=" | ".join("+".join(x) for x in c.get("acceptable_sacrifices") or []),
+                        ch_detected=ch.get("detected"), ch_acceptable=ch.get("acceptable"), ch_explained=ch.get("explained"),
+                        conflict_handling=ch.get("score"), quality_failed=";".join(q.get("failed", [])),
+                        quality_details=" || ".join(d for k in QUALITY_CHECKS for d in q.get(k, []))[:500],
+                        message=r.get("message", "")))
     return out
 
 
@@ -179,7 +225,10 @@ def main(argv: list[str] | None = None) -> str:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("dirs", nargs="+")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--dev", action="store_true", help="score the dev split (threshold tuning only)")
     a = ap.parse_args(argv)
+    SPLITS.clear()
+    SPLITS.add("dev" if a.dev else "eval")
     rows, cases = [], []
     for d in a.dirs:
         meta, recs = load_dir(Path(d))

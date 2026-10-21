@@ -39,7 +39,7 @@ DAY_COLORS = [[230, 25, 75], [60, 180, 75], [0, 130, 200], [245, 130, 48], [145,
 
 @st.cache_data
 def load_cases() -> list[dict]:
-    return json.loads(C.CASES_PATH.read_text())["cases"]
+    return json.loads((C.CASES_PATH_V2 if C.CASES_PATH_V2.exists() else C.CASES_PATH).read_text())["cases"]
 
 
 @st.cache_resource

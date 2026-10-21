@@ -23,7 +23,11 @@ RULES_TEXT = f"""Hard rules (checked in code after you answer):
 - Mode: with a car use 'drive', otherwise 'transit' (legs <= 1 km are always 'walk').
 - Weather: on a RAIN day only places with indoor == 'true' (unknown counts as outdoor); move outdoor places to a dry day or list them in dropped with reason WEATHER. On a HEAT day outdoor places only end by {C.HEAT_OUTDOOR_BEFORE} or start from {C.HEAT_OUTDOOR_FROM}. WIND is a note only. No weather text on OUT_OF_HORIZON days.
 - Coverage: at least {C.COVERAGE_MIN:.0%} of the interests must be covered by scheduled places' tool tags; zero places with an avoided tag.
-- Times are HH:MM local city time. Ratings do not exist (synthetic) - never mention them."""
+- Times are HH:MM local city time. Ratings do not exist (synthetic) - never mention them.
+- Soft preferences (request.soft_prefs: central, nonstop, exact_dates, dry_days, long_days, under_preferred_budget) may be
+  traded off; each candidate lists its sacrificed_prefs. If no candidate satisfies all of them, say so explicitly in
+  tradeoffs ("conflict: ..."), name the preference you sacrificed and why (with numbers), and prefer a package that
+  sacrifices as little as possible. With depart/return flex the trip dates are the dates of the chosen flights."""
 
 
 def llm_or_error(ctx: RunContext) -> Optional[Decision]:
@@ -38,8 +42,9 @@ def request_context(ctx: RunContext) -> dict[str, Any]:
     stay_pts = {}
     cands = []
     for i, c in enumerate(ctx.candidates):
-        w = day_windows(req, c["flight_out"], c["flight_back"])
-        cands.append(dict(rank=i + 1, refs=c["refs"], total=c["total"], price_lines=c["price_lines"], price_call_id=c["price_call_id"],
+        w = day_windows(req.with_dates(c["start_date"], c["end_date"]) if c.get("start_date") else req, c["flight_out"], c["flight_back"])
+        extra = {k: c[k] for k in ("start_date", "end_date", "nights", "sacrificed_prefs") if k in c}
+        cands.append(dict(rank=i + 1, **extra, refs=c["refs"], total=c["total"], price_lines=c["price_lines"], price_call_id=c["price_call_id"],
                           stay_km_to_center=c["km_to_center"], stay_lat=c["stay"]["lat"], stay_lon=c["stay"]["lon"],
                           stay_price_per_night=c["stay"]["price_per_night"], flight_out_arr=c["flight_out"]["arr"],
                           flight_back_dep=c["flight_back"]["dep"], stops=c["stops"], day_windows=w,
