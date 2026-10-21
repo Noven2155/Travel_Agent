@@ -83,7 +83,9 @@ def conflict_text(ctx: RunContext, cand: dict[str, Any], info: dict[str, Any]) -
     if info.get("conflict") is None:
         return []
     rain = P.rain_map(ctx.conditions)
-    rain_days = sorted(d for d, v in rain.items() if v)
+    s0 = cand.get("start_date", req.start_date.isoformat())
+    e0 = cand.get("end_date", req.end_date.isoformat())
+    rain_days = sorted(d for d, v in rain.items() if v and s0 <= d < e0)     # trip days of this package, departure day excluded
     sac = cand["sacrificed_prefs"]
     n = cand.get("n_within_budget")
     if not info["conflict"]:
