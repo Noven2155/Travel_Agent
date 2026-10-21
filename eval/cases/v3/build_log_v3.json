@@ -1,0 +1,156 @@
+{
+ "tested": 250,
+ "failed": {
+  "flight-time rule not binding": 27,
+  "prio1 not binding": 3,
+  "no package": 7,
+  "no conflict budget": 188,
+  "prio2 not binding": 1
+ },
+ "per_case": {
+  "G01": {
+   "windows_tried": 3,
+   "origin": "LGA",
+   "start": "2022-08-20",
+   "density": 66
+  },
+  "G02": {
+   "windows_tried": 4,
+   "origin": "LGA",
+   "start": "2022-06-05",
+   "density": 60
+  },
+  "G03": {
+   "windows_tried": 1,
+   "origin": "LAX",
+   "start": "2022-11-01",
+   "density": 270
+  },
+  "G04": {
+   "windows_tried": 1,
+   "origin": "LAX",
+   "start": "2022-08-25",
+   "density": 189
+  },
+  "F01": {
+   "windows_tried": 6,
+   "origin": "DFW",
+   "start": "2022-05-22",
+   "density": 51
+  },
+  "F02": {
+   "windows_tried": 1,
+   "origin": "MIA",
+   "start": "2022-08-09",
+   "density": 66
+  },
+  "F03": {
+   "windows_tried": 1,
+   "origin": "JFK",
+   "start": "2022-07-08",
+   "density": 90
+  },
+  "F04": {
+   "windows_tried": 75,
+   "origin": "EWR",
+   "start": "2022-09-26",
+   "density": 21
+  },
+  "F05": {
+   "windows_tried": 1,
+   "origin": "JFK",
+   "start": "2022-08-05",
+   "density": 60
+  },
+  "F06": {
+   "windows_tried": 1,
+   "origin": "LGA",
+   "start": "2022-07-18",
+   "density": 52
+  },
+  "F07": {
+   "windows_tried": 1,
+   "origin": "SFO",
+   "start": "2022-09-05",
+   "density": 52
+  },
+  "F08": {
+   "windows_tried": 1,
+   "origin": "JFK",
+   "start": "2022-08-26",
+   "density": 48
+  },
+  "F09": {
+   "windows_tried": 1,
+   "origin": "MIA",
+   "start": "2022-08-30",
+   "density": 42
+  },
+  "F10": {
+   "windows_tried": 23,
+   "origin": "LAX",
+   "start": "2022-09-08",
+   "density": 26
+  },
+  "F11": {
+   "windows_tried": 116,
+   "origin": "ORD",
+   "start": "2022-10-19",
+   "density": 48
+  },
+  "F12": {
+   "windows_tried": 1,
+   "origin": "LAX",
+   "start": "2022-08-14",
+   "density": 150
+  },
+  "F13": {
+   "windows_tried": 6,
+   "origin": "DEN",
+   "start": "2022-08-29",
+   "density": 189
+  },
+  "F14": {
+   "windows_tried": 1,
+   "origin": "ORD",
+   "start": "2022-08-23",
+   "density": 180
+  },
+  "F15": {
+   "windows_tried": 1,
+   "origin": "ORD",
+   "start": "2022-08-08",
+   "density": 216
+  },
+  "F16": {
+   "windows_tried": 1,
+   "origin": "DFW",
+   "start": "2022-09-04",
+   "density": 210
+  },
+  "F17": {
+   "windows_tried": 1,
+   "origin": "DFW",
+   "start": "2022-09-01",
+   "density": 180
+  },
+  "F18": {
+   "windows_tried": 1,
+   "origin": "MIA",
+   "start": "2022-07-08",
+   "density": 135
+  },
+  "F19": {
+   "windows_tried": 1,
+   "origin": "DFW",
+   "start": "2022-09-16",
+   "density": 160
+  },
+  "F20": {
+   "windows_tried": 1,
+   "origin": "DEN",
+   "start": "2022-08-16",
+   "density": 135
+  }
+ }
+}

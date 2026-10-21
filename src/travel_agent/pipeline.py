@@ -69,10 +69,15 @@ def _pair_groups(log: ToolLog, req: TripRequest, start: str, end: str, flight_ca
     if ("back", end) not in flight_cache:
         flight_cache[("back", end)] = T.search_flights(log, req.origin, airports, end, Tn, "back")["options"]
     outs, backs = flight_cache[("out", start)], flight_cache[("back", end)]
+    if req.no_early_flight_before:                       # v3: hard rule, both directions, local departure time
+        lim = hm_to_min(req.no_early_flight_before)
+        outs = [o for o in outs if hm_to_min(iso_local_hm(o["dep"])) >= lim]
+        backs = [b for b in backs if hm_to_min(iso_local_hm(b["dep"])) >= lim]
     stays = T.search_hotels(log, city, start, end, Tn, central=req.hotel_preference == "central")["options"]
     reasons = []
     if not outs:
-        reasons.append(f"no outbound flight {req.origin}->{'/'.join(airports)} landing on {start} with >= {Tn} seats")
+        reasons.append(f"no outbound flight {req.origin}->{'/'.join(airports)} landing on {start} with >= {Tn} seats"
+                       + (f" departing at/after {req.no_early_flight_before}" if req.no_early_flight_before else ""))
     if not backs:
         reasons.append(f"no return flight {'/'.join(airports)}->{req.origin} on {end} with >= {Tn} seats")
     if not stays:
@@ -184,8 +189,8 @@ def build_candidates(log: ToolLog, req: TripRequest, top_k: int = 5,
 
 # ----------------------------------------------------------------- day windows
 def day_windows(req: TripRequest, flight_out: dict[str, Any], flight_back: dict[str, Any]) -> dict[str, tuple[str, str]]:
-    """Local-time windows: full day 09:30-20:00; arrival day from landing + 90 min; departure day until take-off - 180 min."""
-    ds, de = hm_to_min(C.DAY_START), hm_to_min(C.DAY_END)
+    """Local-time windows: full day 09:30-20:00 (or the request's day_start / day_end); arrival day from landing + 90 min; departure day until take-off - 180 min."""
+    ds, de = hm_to_min(req.day_start or C.DAY_START), hm_to_min(req.day_end or C.DAY_END)
     out = {}
     for d in req.days:
         a, b = ds, de

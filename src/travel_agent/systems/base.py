@@ -11,12 +11,12 @@ from typing import Any, Callable, Optional
 
 from .. import config as C
 from ..checks import final_checks
-from ..models import (CheckReport, DayCondition, DayPlan, Dropped, Package, RunResult, Status, TripRequest,
+from ..models import (CheckReport, DayCondition, DayPlan, Dropped, FreeTextRequest, Package, RunResult, Status, TripRequest,
                       WeatherStatus, effective_request)
 from ..pipeline import StepOutcome, build_candidates, day_windows, intake, weather_step
 from ..tool_log import ToolLog
 
-SYSTEM_CODES = {"rules": "A", "rules_basic": "A", "single": "B", "multi": "C"}
+SYSTEM_CODES = {"rules": "A", "rules_basic": "A", "hybrid": "H", "single": "B", "multi": "C"}
 SYSTEM_VARIANTS = {"rules": "strong", "rules_basic": "basic"}   # two System A baselines (same code A)
 
 
@@ -66,8 +66,13 @@ def run_checks(ctx: RunContext, package: Optional[Package], days: list[DayPlan],
     return final_checks(ctx.log, ctx.req, package, days, dropped, ctx.conditions, windows)
 
 
+def is_free_text(raw: Any) -> bool:
+    return isinstance(raw, FreeTextRequest) or (isinstance(raw, dict) and bool(raw.get("request_text")) and "city" not in raw)
+
+
 def run_system(system: str, raw_request: Any, decide: Callable[[RunContext], Decision],
-               log_dir: Optional[Path] = None, deadline_s: float = C.DEADLINE_S) -> RunResult:
+               log_dir: Optional[Path] = None, deadline_s: float = C.DEADLINE_S, parser: Optional[Callable] = None) -> RunResult:
+    """parser: FreeTextRequest -> parsing.ParseResult; used only when the request is free text (eval v3)."""
     code = SYSTEM_CODES[system]
     run_id = f"{code}-{dt.datetime.now().strftime('%Y%m%dT%H%M%S')}-{uuid.uuid4().hex[:6]}"
     t0 = time.monotonic()
@@ -76,7 +81,18 @@ def run_system(system: str, raw_request: Any, decide: Callable[[RunContext], Dec
     base = dict(run_id=run_id, system=code, variant=SYSTEM_VARIANTS.get(system), request_id=rid)
     req: Optional[TripRequest] = None
     ctx: Optional[RunContext] = None
+    pr = None
     try:
+        if is_free_text(raw_request):
+            ft = raw_request if isinstance(raw_request, FreeTextRequest) else FreeTextRequest.model_validate(
+                {k: raw_request[k] for k in ("request_id", "request_text", "as_of") if k in raw_request})
+            if parser is None:
+                raise StepOutcome(Status.INVALID_REQUEST, f"system {system} has no free-text parser")
+            pr = parser(ft)
+            base.update(parser=pr.parser, parse_notes=pr.notes, parse_llm_calls=pr.llm_calls)
+            if pr.fields is None:
+                raise StepOutcome(Status.INVALID_REQUEST, "free-text request could not be parsed: " + pr.error)
+            raw_request = pr.fields
         req = intake(raw_request)
         conditions, wstatus = weather_step(log, req)
         base.update(request=req, day_conditions=conditions, weather_status=wstatus)
@@ -101,6 +117,10 @@ def run_system(system: str, raw_request: Any, decide: Callable[[RunContext], Dec
     result.wall_time_s = round(time.monotonic() - t0, 3)
     if ctx is not None:
         result.llm_calls, result.tokens_in, result.tokens_out = ctx.llm_calls, ctx.tokens_in, ctx.tokens_out
+    if pr is not None:              # the parse call(s) count for the system
+        result.llm_calls += pr.llm_calls
+        result.tokens_in += pr.tokens_in
+        result.tokens_out += pr.tokens_out
         if result.wall_time_s > deadline_s and result.status == Status.OK_PLAN:
             result.status = Status.TIMEOUT
     result.tool_log = log.dump()

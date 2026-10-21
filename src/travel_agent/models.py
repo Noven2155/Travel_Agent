@@ -31,6 +31,28 @@ Interest = Literal["food", "culture", "attractions", "nightlife", "family", "nat
 
 
 MAX_FLEX_NIGHTS_CHANGE = 1
+PRIORITY_KEYS = ("central", "nonstop", "exact_dates", "dry_days", "long_days", "under_preferred_budget", "price")
+_HM = r"^([01]\d|2[0-3]):[0-5]\d$"
+
+
+class BlockedWindow(BaseModel):
+    """A daily time window with no planned item (e.g. a child's nap, rest, prayer). Local city time."""
+    start: str = Field(pattern=_HM)
+    end: str = Field(pattern=_HM)
+    label: str = ""
+
+    @model_validator(mode="after")
+    def _order(self) -> "BlockedWindow":
+        if self.end <= self.start:
+            raise ValueError("blocked window end must be after start")
+        return self
+
+
+class FreeTextRequest(BaseModel):
+    """Eval v3: the request is given only as free text; a system-specific parser turns it into a TripRequest."""
+    request_id: str = "ADHOC"
+    request_text: str = Field(min_length=10)
+    as_of: dt.date
 
 
 class TripRequest(BaseModel):
@@ -53,6 +75,16 @@ class TripRequest(BaseModel):
     return_flex_days: int = Field(default=0, ge=0, le=1)     # return may leave end_date +- this many days
     soft_prefs: list[SoftPref] = Field(default_factory=list)  # preferences that may be traded off (see prefs.py)
     preferred_budget_usd: Optional[int] = Field(default=None, gt=0)   # soft target below the hard budget_usd
+    # ---- eval v3 generic fields (all optional; defaults = v2 behaviour)
+    request_text: Optional[str] = None                        # the original free-text request (v3), kept for the record
+    daily_blocked_windows: list[BlockedWindow] = Field(default_factory=list)   # no items inside (every trip day)
+    max_walk_minutes: Optional[int] = Field(default=None, ge=1, le=120)   # longest acceptable single walking leg
+    day_start: Optional[str] = Field(default=None, pattern=_HM)          # replaces config.DAY_START (09:30)
+    day_end: Optional[str] = Field(default=None, pattern=_HM)            # replaces config.DAY_END (20:00)
+    accessibility: bool = False                               # step-free needs (no data for it: systems must flag it)
+    no_early_flight_before: Optional[str] = Field(default=None, pattern=_HM)   # no flight departs before (local)
+    priority_weights: dict[str, float] = Field(default_factory=dict)     # e.g. {"central": 2} = location over price
+    unparsed_requirements: list[str] = Field(default_factory=list)       # understood but not mappable -> must be flagged
 
     @field_validator("origin")
     @classmethod
@@ -78,6 +110,11 @@ class TripRequest(BaseModel):
             raise ValueError("soft pref under_preferred_budget needs preferred_budget_usd")
         if self.has_flex and (self.end_date - self.start_date).days < 2:
             raise ValueError("date flexibility needs a trip of >= 2 nights")
+        bad = [k for k in self.priority_weights if k not in PRIORITY_KEYS]
+        if bad:
+            raise ValueError(f"unknown priority_weights keys {bad}; allowed {list(PRIORITY_KEYS)}")
+        if self.day_start and self.day_end and self.day_end <= self.day_start:
+            raise ValueError("day_end must be after day_start")
         return self
 
     @property
@@ -122,7 +159,8 @@ class TripRequest(BaseModel):
     def from_case(cls, case: dict[str, Any]) -> "TripRequest":
         keys = ["city", "origin", "start_date", "end_date", "travelers", "budget_usd", "wants_car", "pace",
                 "interests", "avoid", "hotel_preference", "as_of", "free_text", "depart_flex_days", "return_flex_days",
-                "soft_prefs", "preferred_budget_usd"]
+                "soft_prefs", "preferred_budget_usd", "request_text", "daily_blocked_windows", "max_walk_minutes", "day_start",
+                "day_end", "accessibility", "no_early_flight_before", "priority_weights", "unparsed_requirements"]
         return cls(request_id=case["id"], **{k: case[k] for k in keys if k in case})
 
 
@@ -324,8 +362,11 @@ class CheckReport(BaseModel):
 
 class RunResult(BaseModel):
     run_id: str
-    system: Literal["A", "B", "C"]
+    system: Literal["A", "H", "B", "C"]
     variant: Optional[str] = None       # System A: "strong" (rules, default) or "basic" (rules_basic)
+    parser: Optional[str] = None        # v3 free-text requests: "keyword" (rules) or "llm" (hybrid, B, C)
+    parse_notes: list[str] = Field(default_factory=list)
+    parse_llm_calls: int = 0            # included in llm_calls
     request_id: str
     status: Status
     message: str = ""

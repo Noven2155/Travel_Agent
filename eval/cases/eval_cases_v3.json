@@ -1,0 +1,2310 @@
+{
+ "meta": {
+  "version": "v3",
+  "segment": "free_text",
+  "built_with": "eval/cases/build_eval_cases_v3.py",
+  "seed": 20261031,
+  "specs": "eval/cases/v3_specs.py",
+  "min_feasible": 10,
+  "max_origin_use": 3,
+  "v2_file": "eval_cases_v2.json",
+  "v2_sha256": "948087e8a3221fd140568c64c562baa290f3608c499fc1c862db7345cece85f8",
+  "inventory_sha256": "39a0c9c2b2562062211d884af35cc73b3826926b0c56cb06ea5e428c87167319",
+  "visible_to_systems": [
+   "id",
+   "request_text",
+   "as_of"
+  ],
+  "note": "gold.* and oracle.* are hidden from the systems (run_eval passes only id, request_text and as_of)"
+ },
+ "cases": [
+  {
+   "id": "G01",
+   "split": "dev",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "direct",
+   "request_text": "Two of us from LaGuardia to Chicago, August 20-23, budget $1,200. No flights before 9am please. Keep 1-3pm free for a nap every day. Parks and museums.",
+   "as_of": "2022-07-30",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "LGA",
+     "start_date": "2022-08-20",
+     "end_date": "2022-08-23",
+     "travelers": 2,
+     "budget_usd": 1200,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "nature",
+      "culture"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-07-30",
+     "soft_prefs": [],
+     "no_early_flight_before": "09:00",
+     "daily_blocked_windows": [
+      {
+       "start": "13:00",
+       "end": "15:00",
+       "label": "nap"
+      }
+     ]
+    },
+    "key_requirements": [
+     {
+      "id": "G01-K1",
+      "checker": "no_flight_departure_before",
+      "params": {
+       "time": "09:00"
+      }
+     },
+     {
+      "id": "G01-K2",
+      "checker": "no_activity_in_window",
+      "params": {
+       "start": "13:00",
+       "end": "15:00"
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 66,
+    "n_feasible_packages": 22,
+    "cheapest_feasible": {
+     "total": 840.4,
+     "start_date": "2022-08-20",
+     "end_date": "2022-08-23",
+     "nights": 3,
+     "flight_out": "F1814",
+     "out_airport": "ORD",
+     "out_nonstop": true,
+     "out_arrival_local": "11:13",
+     "out_fare": 173.6,
+     "flight_back": "F3726",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "15:15",
+     "back_fare": 111.6,
+     "stay": "CHICAGO:50619453",
+     "stay_km_to_center": 4.64,
+     "stay_price": 90.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": 66,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "G02",
+   "split": "dev",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "indirect",
+   "request_text": "Me and my husband, flying in from LaGuardia, Chicago from the 5th to the 8th of June. We'd rather be close to downtown than save money. Up to $1,300. Food and art.",
+   "as_of": "2022-05-15",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "LGA",
+     "start_date": "2022-06-05",
+     "end_date": "2022-06-08",
+     "travelers": 2,
+     "budget_usd": 1300,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "culture",
+      "food"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-05-15",
+     "soft_prefs": [
+      "central"
+     ],
+     "priority_weights": {
+      "central": 2.0
+     }
+    },
+    "key_requirements": [
+     {
+      "id": "G02-K1",
+      "checker": "central_stay",
+      "params": {}
+     },
+     {
+      "id": "G02-K2",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1300
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 60,
+    "cheapest_keeping": 932.4,
+    "n_feasible_packages": 16,
+    "cheapest_feasible": {
+     "total": 915.9,
+     "start_date": "2022-06-05",
+     "end_date": "2022-06-08",
+     "nights": 3,
+     "flight_out": "F13095",
+     "out_airport": "ORD",
+     "out_nonstop": true,
+     "out_arrival_local": "14:08",
+     "out_fare": 193.6,
+     "flight_back": "F2822",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "09:43",
+     "back_fare": 137.6,
+     "stay": "CHICAGO:1134351668237383955",
+     "stay_km_to_center": 9.48,
+     "stay_price": 84.5,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "G03",
+   "split": "dev",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "direct",
+   "request_text": "Family of 3 from Los Angeles to NYC Nov 1 to Nov 4, max $1,600. No bars. The zoo, the aquarium and the classic sights.",
+   "as_of": "2022-10-11",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "LAX",
+     "start_date": "2022-11-01",
+     "end_date": "2022-11-04",
+     "travelers": 3,
+     "budget_usd": 1600,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "family",
+      "attractions"
+     ],
+     "avoid": [
+      "nightlife"
+     ],
+     "hotel_preference": "any",
+     "as_of": "2022-10-11",
+     "soft_prefs": []
+    },
+    "key_requirements": [
+     {
+      "id": "G03-K1",
+      "checker": "no_category",
+      "params": {
+       "categories": [
+        "bar",
+        "pub",
+        "nightclub"
+       ]
+      }
+     },
+     {
+      "id": "G03-K2",
+      "checker": "party_size",
+      "params": {
+       "n": 3
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 270,
+    "n_feasible_packages": 43,
+    "cheapest_feasible": {
+     "total": 1179.9,
+     "start_date": "2022-11-01",
+     "end_date": "2022-11-04",
+     "nights": 3,
+     "flight_out": "F3547",
+     "out_airport": "EWR",
+     "out_nonstop": true,
+     "out_arrival_local": "14:21",
+     "out_fare": 137.6,
+     "flight_back": "F1733",
+     "back_airport": "LGA",
+     "back_nonstop": false,
+     "back_departure_local": "11:10",
+     "back_fare": 140.6,
+     "stay": "JERSEY_CITY:32167689",
+     "stay_km_to_center": 5.8,
+     "stay_price": 115.1,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "G04",
+   "split": "dev",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "indirect",
+   "request_text": "Coming from Los Angeles to NYC leaving Thursday, August 25 and flying home Sunday, August 28 - it's me and two friends. We don't do early starts, nothing before 10 please, and we want good food near where we sleep. $2,300 cap. Shows at night would be great.",
+   "as_of": "2022-08-04",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "LAX",
+     "start_date": "2022-08-25",
+     "end_date": "2022-08-28",
+     "travelers": 3,
+     "budget_usd": 2300,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "food",
+      "shows"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-04",
+     "soft_prefs": [],
+     "day_start": "10:00"
+    },
+    "key_requirements": [
+     {
+      "id": "G04-K1",
+      "checker": "day_window",
+      "params": {
+       "start": "10:00"
+      }
+     },
+     {
+      "id": "G04-K2",
+      "checker": "evening_meal_within_km_of_lodging",
+      "params": {
+       "km": 1.5
+      }
+     },
+     {
+      "id": "G04-K3",
+      "checker": "party_size",
+      "params": {
+       "n": 3
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 189,
+    "n_feasible_packages": 57,
+    "cheapest_feasible": {
+     "total": 1635.6,
+     "start_date": "2022-08-25",
+     "end_date": "2022-08-28",
+     "nights": 3,
+     "flight_out": "F15177",
+     "out_airport": "LGA",
+     "out_nonstop": false,
+     "out_arrival_local": "23:44",
+     "out_fare": 298.6,
+     "flight_back": "F9621",
+     "back_airport": "JFK",
+     "back_nonstop": true,
+     "back_departure_local": "21:40",
+     "back_fare": 141.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F01",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "direct",
+   "request_text": "Hi! Two of us flying from Dallas to Chicago, May 22-25. Max budget $2,900 for flights and lodging. We love museums and good food. No flights before 9am please.",
+   "as_of": "2022-05-01",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "DFW",
+     "start_date": "2022-05-22",
+     "end_date": "2022-05-25",
+     "travelers": 2,
+     "budget_usd": 2900,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "culture",
+      "food"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-05-01",
+     "soft_prefs": [],
+     "no_early_flight_before": "09:00"
+    },
+    "key_requirements": [
+     {
+      "id": "F01-K1",
+      "checker": "no_flight_departure_before",
+      "params": {
+       "time": "09:00"
+      }
+     },
+     {
+      "id": "F01-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "museum",
+        "gallery"
+       ],
+       "min": 2
+      }
+     },
+     {
+      "id": "F01-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 2900
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 51,
+    "n_feasible_packages": 34,
+    "cheapest_feasible": {
+     "total": 2127.92,
+     "start_date": "2022-05-22",
+     "end_date": "2022-05-25",
+     "nights": 3,
+     "flight_out": "F13535",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "23:59",
+     "out_fare": 598.6,
+     "flight_back": "F7515",
+     "back_airport": "ORD",
+     "back_nonstop": true,
+     "back_departure_local": "20:35",
+     "back_fare": 338.61,
+     "stay": "CHICAGO:1134351668237383955",
+     "stay_km_to_center": 9.48,
+     "stay_price": 84.5,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": 51,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F02",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "indirect",
+   "request_text": "Me, my husband and our two little ones (4 and 6) want to see Chicago leaving Tuesday, August 9 and flying home Friday, August 12, coming from Miami. Our youngest still naps after lunch, so early afternoon until about three is hotel time. Parks, the zoo, kid stuff, nothing rushed. We'd like to keep it under $3,100 all in.",
+   "as_of": "2022-07-19",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "MIA",
+     "start_date": "2022-08-09",
+     "end_date": "2022-08-12",
+     "travelers": 4,
+     "budget_usd": 3100,
+     "wants_car": false,
+     "pace": "relaxed",
+     "interests": [
+      "family",
+      "nature"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-07-19",
+     "soft_prefs": [],
+     "daily_blocked_windows": [
+      {
+       "start": "13:00",
+       "end": "15:00",
+       "label": "nap"
+      }
+     ]
+    },
+    "key_requirements": [
+     {
+      "id": "F02-K1",
+      "checker": "no_activity_in_window",
+      "params": {
+       "start": "13:00",
+       "end": "15:00"
+      }
+     },
+     {
+      "id": "F02-K2",
+      "checker": "party_size",
+      "params": {
+       "n": 4
+      }
+     },
+     {
+      "id": "F02-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 3100
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 66,
+    "n_feasible_packages": 66,
+    "cheapest_feasible": {
+     "total": 2265.24,
+     "start_date": "2022-08-09",
+     "end_date": "2022-08-12",
+     "nights": 3,
+     "flight_out": "F3955",
+     "out_airport": "ORD",
+     "out_nonstop": true,
+     "out_arrival_local": "12:33",
+     "out_fare": 194.6,
+     "flight_back": "F250",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "20:30",
+     "back_fare": 298.21,
+     "stay": "CHICAGO:1177042184948176660",
+     "stay_km_to_center": 11.28,
+     "stay_price": 98.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F03",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "direct",
+   "request_text": "Solo trip to Chicago from JFK, Jul 8 to Jul 11. Budget $900. I want jazz, comedy and live music. Nothing before 11am - I'll be out late, so plan evenings until 11pm.",
+   "as_of": "2022-06-17",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "JFK",
+     "start_date": "2022-07-08",
+     "end_date": "2022-07-11",
+     "travelers": 1,
+     "budget_usd": 900,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "nightlife",
+      "shows"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-06-17",
+     "soft_prefs": [],
+     "day_start": "11:00",
+     "day_end": "23:00"
+    },
+    "key_requirements": [
+     {
+      "id": "F03-K1",
+      "checker": "day_window",
+      "params": {
+       "start": "11:00"
+      }
+     },
+     {
+      "id": "F03-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "bar",
+        "pub",
+        "nightclub",
+        "theatre",
+        "arts_centre"
+       ],
+       "min": 3
+      }
+     },
+     {
+      "id": "F03-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 900
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 90,
+    "n_feasible_packages": 26,
+    "cheapest_feasible": {
+     "total": 611.2,
+     "start_date": "2022-07-08",
+     "end_date": "2022-07-11",
+     "nights": 3,
+     "flight_out": "F4777",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "14:07",
+     "out_fare": 147.6,
+     "flight_back": "F2712",
+     "back_airport": "ORD",
+     "back_nonstop": true,
+     "back_departure_local": "15:57",
+     "back_fare": 193.6,
+     "stay": "CHICAGO:50619453",
+     "stay_km_to_center": 4.64,
+     "stay_price": 90.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F04",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "indirect",
+   "request_text": "My partner and I are heading to Chicago from Newark September 26-29, $1,510 tops. We'd like to land early and fly back late so we don't waste the first and last day - but being able to step out the door into the Loop matters more to us than flight times or saving a few bucks. Big sights and deep-dish.",
+   "as_of": "2022-09-05",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "EWR",
+     "start_date": "2022-09-26",
+     "end_date": "2022-09-29",
+     "travelers": 2,
+     "budget_usd": 1510,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "attractions",
+      "food"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-09-05",
+     "soft_prefs": [
+      "central",
+      "long_days"
+     ],
+     "priority_weights": {
+      "central": 2.0
+     }
+    },
+    "key_requirements": [
+     {
+      "id": "F04-K1",
+      "checker": "priority_respected",
+      "params": {
+       "pref": "central",
+       "acceptable_sacrifices": [
+        [
+         "long_days"
+        ]
+       ],
+       "soft_prefs": [
+        "central",
+        "long_days"
+       ]
+      }
+     },
+     {
+      "id": "F04-K2",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1510
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 21,
+    "true_conflict": {
+     "n_feasible_packages": 20,
+     "n_feasible_base_packages": 20,
+     "profiles": {
+      "central": 6,
+      "long_days": 2,
+      "central+long_days": 12
+     },
+     "pareto_front": [
+      [
+       "central"
+      ],
+      [
+       "long_days"
+      ]
+     ],
+     "pareto_options": [
+      {
+       "sacrifices": [
+        "central"
+       ],
+       "satisfies": [
+        "long_days"
+       ],
+       "n_packages": 6,
+       "cheapest": {
+        "total": 1145.21,
+        "start_date": "2022-09-26",
+        "end_date": "2022-09-29",
+        "nights": 3,
+        "flight_out": "F14057",
+        "out_airport": "ORD",
+        "out_nonstop": true,
+        "out_arrival_local": "09:33",
+        "out_fare": 243.6,
+        "flight_back": "F5826",
+        "back_airport": "ORD",
+        "back_nonstop": true,
+        "back_departure_local": "20:45",
+        "back_fare": 196.6,
+        "stay": "CHICAGO:49180775",
+        "stay_km_to_center": 6.89,
+        "stay_price": 88.27,
+        "car": null,
+        "car_daily_rate": null
+       }
+      },
+      {
+       "sacrifices": [
+        "long_days"
+       ],
+       "satisfies": [
+        "central"
+       ],
+       "n_packages": 2,
+       "cheapest": {
+        "total": 1386.92,
+        "start_date": "2022-09-26",
+        "end_date": "2022-09-29",
+        "nights": 3,
+        "flight_out": "F14057",
+        "out_airport": "ORD",
+        "out_nonstop": true,
+        "out_arrival_local": "09:33",
+        "out_fare": 243.6,
+        "flight_back": "F3925",
+        "back_airport": "ORD",
+        "back_nonstop": false,
+        "back_departure_local": "07:12",
+        "back_fare": 132.61,
+        "stay": "CHICAGO:1178920416305642194",
+        "stay_km_to_center": 4.33,
+        "stay_price": 211.5,
+        "car": null,
+        "car_daily_rate": null
+       }
+      }
+     ],
+     "acceptable_sacrifices": [
+      [
+       "central"
+      ],
+      [
+       "long_days"
+      ]
+     ],
+     "cheapest_feasible": {
+      "sacrifices": [
+       "central",
+       "long_days"
+      ],
+      "total": 1017.23,
+      "on_pareto_front": false
+     }
+    },
+    "n_feasible_packages": 20,
+    "cheapest_feasible": {
+     "total": 1017.23,
+     "start_date": "2022-09-26",
+     "end_date": "2022-09-29",
+     "nights": 3,
+     "flight_out": "F14057",
+     "out_airport": "ORD",
+     "out_nonstop": true,
+     "out_arrival_local": "09:33",
+     "out_fare": 243.6,
+     "flight_back": "F3925",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "07:12",
+     "back_fare": 132.61,
+     "stay": "CHICAGO:49180775",
+     "stay_km_to_center": 6.89,
+     "stay_price": 88.27,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F05",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "direct",
+   "request_text": "Three friends from JFK, Chicago August 5-8. We'll rent a car. Budget 3.9k. Food, bars and the lakefront - no museums at all, we don't care for them.",
+   "as_of": "2022-07-15",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "JFK",
+     "start_date": "2022-08-05",
+     "end_date": "2022-08-08",
+     "travelers": 3,
+     "budget_usd": 3900,
+     "wants_car": true,
+     "pace": "normal",
+     "interests": [
+      "food",
+      "nightlife",
+      "nature"
+     ],
+     "avoid": [
+      "culture"
+     ],
+     "hotel_preference": "any",
+     "as_of": "2022-07-15",
+     "soft_prefs": []
+    },
+    "key_requirements": [
+     {
+      "id": "F05-K1",
+      "checker": "car_included",
+      "params": {
+       "wanted": true
+      }
+     },
+     {
+      "id": "F05-K2",
+      "checker": "no_category",
+      "params": {
+       "categories": [
+        "museum",
+        "gallery"
+       ]
+      }
+     },
+     {
+      "id": "F05-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 3900
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 60,
+    "n_feasible_packages": 4777,
+    "cheapest_feasible": {
+     "total": 2829.2,
+     "start_date": "2022-08-05",
+     "end_date": "2022-08-08",
+     "nights": 3,
+     "flight_out": "F7070",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "18:00",
+     "out_fare": 507.2,
+     "flight_back": "F10434",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "19:59",
+     "back_fare": 307.2,
+     "stay": "CHICAGO:1177042184948176660",
+     "stay_km_to_center": 11.28,
+     "stay_price": 98.0,
+     "car": "C2573",
+     "car_daily_rate": 23.0
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F06",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "indirect",
+   "request_text": "I'm taking my mom to Chicago from LaGuardia, from the 18th to the 21st of July; $1,200 total. She gets around in a wheelchair these days. She loves art and the lakefront.",
+   "as_of": "2022-06-27",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "LGA",
+     "start_date": "2022-07-18",
+     "end_date": "2022-07-21",
+     "travelers": 2,
+     "budget_usd": 1200,
+     "wants_car": false,
+     "pace": "relaxed",
+     "interests": [
+      "culture",
+      "nature"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-06-27",
+     "soft_prefs": [],
+     "accessibility": true
+    },
+    "key_requirements": [
+     {
+      "id": "F06-K1",
+      "checker": "flag_unsupported",
+      "params": {
+       "topic": "accessibility",
+       "keywords": [
+        "wheelchair",
+        "accessib",
+        "step-free"
+       ]
+      }
+     },
+     {
+      "id": "F06-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "museum",
+        "gallery"
+       ],
+       "min": 1
+      }
+     },
+     {
+      "id": "F06-K3",
+      "checker": "party_size",
+      "params": {
+       "n": 2
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 52,
+    "n_feasible_packages": 42,
+    "cheapest_feasible": {
+     "total": 830.42,
+     "start_date": "2022-07-18",
+     "end_date": "2022-07-21",
+     "nights": 3,
+     "flight_out": "F8205",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "18:36",
+     "out_fare": 147.6,
+     "flight_back": "F10719",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "15:13",
+     "back_fare": 132.61,
+     "stay": "CHICAGO:50619453",
+     "stay_km_to_center": 4.64,
+     "stay_price": 90.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F07",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "direct",
+   "request_text": "We are two travelers from San Francisco to Chicago, Sep 5 to Sep 8, budget $1,600. We pray at midday, please keep 12:30-14:00 free every day. Interested in history, museums and the famous sights.",
+   "as_of": "2022-08-15",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "SFO",
+     "start_date": "2022-09-05",
+     "end_date": "2022-09-08",
+     "travelers": 2,
+     "budget_usd": 1600,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "culture",
+      "attractions"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-15",
+     "soft_prefs": [],
+     "daily_blocked_windows": [
+      {
+       "start": "12:30",
+       "end": "14:00",
+       "label": "prayer"
+      }
+     ]
+    },
+    "key_requirements": [
+     {
+      "id": "F07-K1",
+      "checker": "no_activity_in_window",
+      "params": {
+       "start": "12:30",
+       "end": "14:00"
+      }
+     },
+     {
+      "id": "F07-K2",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1600
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 52,
+    "n_feasible_packages": 46,
+    "cheapest_feasible": {
+     "total": 1142.4,
+     "start_date": "2022-09-05",
+     "end_date": "2022-09-08",
+     "nights": 3,
+     "flight_out": "F1939",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "14:50",
+     "out_fare": 228.6,
+     "flight_back": "F11596",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "10:57",
+     "back_fare": 207.6,
+     "stay": "CHICAGO:50619453",
+     "stay_km_to_center": 4.64,
+     "stay_price": 90.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F08",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "indirect",
+   "request_text": "Foodie couple from JFK, Chicago leaving Friday, August 26 and flying home Monday, August 29. We're vegetarian, and after dinner we like to stroll back to the apartment, so dinners should be a short walk from where we stay. Around $2,500, a gallery or two too.",
+   "as_of": "2022-08-05",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "JFK",
+     "start_date": "2022-08-26",
+     "end_date": "2022-08-29",
+     "travelers": 2,
+     "budget_usd": 2500,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "food",
+      "culture"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-05",
+     "soft_prefs": [],
+     "unparsed_requirements": [
+      "vegetarian",
+      "dinner near the lodging"
+     ]
+    },
+    "key_requirements": [
+     {
+      "id": "F08-K1",
+      "checker": "evening_meal_within_km_of_lodging",
+      "params": {
+       "km": 1.5
+      }
+     },
+     {
+      "id": "F08-K2",
+      "checker": "flag_unsupported",
+      "params": {
+       "topic": "vegetarian",
+       "keywords": [
+        "vegetarian",
+        "dietary"
+       ]
+      }
+     },
+     {
+      "id": "F08-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 2500
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 48,
+    "n_feasible_packages": 30,
+    "cheapest_feasible": {
+     "total": 1828.4,
+     "start_date": "2022-08-26",
+     "end_date": "2022-08-29",
+     "nights": 3,
+     "flight_out": "F14956",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "19:45",
+     "out_fare": 237.6,
+     "flight_back": "F9500",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "14:21",
+     "back_fare": 541.6,
+     "stay": "CHICAGO:50619453",
+     "stay_km_to_center": 4.64,
+     "stay_price": 90.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F09",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "direct",
+   "request_text": "Chicago August 30 - September 2 from Miami, 2 adults, $1,500 max. My knee is bad: no walking more than 10 minutes at a time. Museums and a show.",
+   "as_of": "2022-08-09",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "MIA",
+     "start_date": "2022-08-30",
+     "end_date": "2022-09-02",
+     "travelers": 2,
+     "budget_usd": 1500,
+     "wants_car": false,
+     "pace": "relaxed",
+     "interests": [
+      "culture",
+      "shows"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-09",
+     "soft_prefs": [],
+     "max_walk_minutes": 10
+    },
+    "key_requirements": [
+     {
+      "id": "F09-K1",
+      "checker": "max_walk_leg",
+      "params": {
+       "minutes": 10
+      }
+     },
+     {
+      "id": "F09-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "theatre",
+        "arts_centre"
+       ],
+       "min": 1
+      }
+     },
+     {
+      "id": "F09-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1500
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 42,
+    "n_feasible_packages": 37,
+    "cheapest_feasible": {
+     "total": 1057.44,
+     "start_date": "2022-08-30",
+     "end_date": "2022-09-02",
+     "nights": 3,
+     "flight_out": "F8996",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "14:15",
+     "out_fare": 176.11,
+     "flight_back": "F7896",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "13:26",
+     "back_fare": 217.61,
+     "stay": "CHICAGO:50619453",
+     "stay_km_to_center": 4.64,
+     "stay_price": 90.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F10",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "Chicago",
+   "phrasing_type": "indirect",
+   "request_text": "Looking for something cheap but nice in Chicago for the two of us, from the 8th to the 11th of September, from Los Angeles. We absolutely can't go over $2,400. I'm useless before my coffee, so no flights at the crack of dawn - nothing that leaves before 8.",
+   "as_of": "2022-08-18",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "Chicago",
+     "origin": "LAX",
+     "start_date": "2022-09-08",
+     "end_date": "2022-09-11",
+     "travelers": 2,
+     "budget_usd": 2400,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "attractions",
+      "food"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-18",
+     "soft_prefs": [],
+     "no_early_flight_before": "08:00"
+    },
+    "key_requirements": [
+     {
+      "id": "F10-K1",
+      "checker": "no_flight_departure_before",
+      "params": {
+       "time": "08:00"
+      }
+     },
+     {
+      "id": "F10-K2",
+      "checker": "budget_max",
+      "params": {
+       "usd": 2400
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 26,
+    "n_feasible_packages": 13,
+    "cheapest_feasible": {
+     "total": 1758.4,
+     "start_date": "2022-09-08",
+     "end_date": "2022-09-11",
+     "nights": 3,
+     "flight_out": "F5065",
+     "out_airport": "ORD",
+     "out_nonstop": false,
+     "out_arrival_local": "21:53",
+     "out_fare": 373.6,
+     "flight_back": "F9613",
+     "back_airport": "ORD",
+     "back_nonstop": false,
+     "back_departure_local": "09:27",
+     "back_fare": 370.6,
+     "stay": "CHICAGO:50619453",
+     "stay_km_to_center": 4.64,
+     "stay_price": 90.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": 26,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F11",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "direct",
+   "request_text": "Two adults from O'Hare to New York, October 19-22. Budget $1,340. We want nonstop flights and a central place to stay; if we can't have both, location matters more than price and flights. Broadway and museums.",
+   "as_of": "2022-09-28",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "ORD",
+     "start_date": "2022-10-19",
+     "end_date": "2022-10-22",
+     "travelers": 2,
+     "budget_usd": 1340,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "shows",
+      "culture"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-09-28",
+     "soft_prefs": [
+      "central",
+      "nonstop"
+     ],
+     "priority_weights": {
+      "central": 2.0
+     }
+    },
+    "key_requirements": [
+     {
+      "id": "F11-K1",
+      "checker": "priority_respected",
+      "params": {
+       "pref": "central",
+       "acceptable_sacrifices": [
+        [
+         "nonstop"
+        ]
+       ],
+       "soft_prefs": [
+        "central",
+        "nonstop"
+       ]
+      }
+     },
+     {
+      "id": "F11-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "theatre",
+        "arts_centre"
+       ],
+       "min": 1
+      }
+     },
+     {
+      "id": "F11-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1340
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 48,
+    "true_conflict": {
+     "n_feasible_packages": 24,
+     "n_feasible_base_packages": 24,
+     "profiles": {
+      "central": 5,
+      "nonstop": 2,
+      "central+nonstop": 17
+     },
+     "pareto_front": [
+      [
+       "central"
+      ],
+      [
+       "nonstop"
+      ]
+     ],
+     "pareto_options": [
+      {
+       "sacrifices": [
+        "central"
+       ],
+       "satisfies": [
+        "nonstop"
+       ],
+       "n_packages": 5,
+       "cheapest": {
+        "total": 1074.9,
+        "start_date": "2022-10-19",
+        "end_date": "2022-10-22",
+        "nights": 3,
+        "flight_out": "F5631",
+        "out_airport": "EWR",
+        "out_nonstop": true,
+        "out_arrival_local": "21:07",
+        "out_fare": 138.6,
+        "flight_back": "F9799",
+        "back_airport": "LGA",
+        "back_nonstop": true,
+        "back_departure_local": "06:30",
+        "back_fare": 102.6,
+        "stay": "JERSEY_CITY:1629812781490229115",
+        "stay_km_to_center": 7.09,
+        "stay_price": 197.5,
+        "car": null,
+        "car_daily_rate": null
+       }
+      },
+      {
+       "sacrifices": [
+        "nonstop"
+       ],
+       "satisfies": [
+        "central"
+       ],
+       "n_packages": 2,
+       "cheapest": {
+        "total": 1291.4,
+        "start_date": "2022-10-19",
+        "end_date": "2022-10-22",
+        "nights": 3,
+        "flight_out": "F2687",
+        "out_airport": "LGA",
+        "out_nonstop": false,
+        "out_arrival_local": "19:33",
+        "out_fare": 112.6,
+        "flight_back": "F9799",
+        "back_airport": "LGA",
+        "back_nonstop": true,
+        "back_departure_local": "06:30",
+        "back_fare": 102.6,
+        "stay": "JERSEY_CITY:1684995203635710418",
+        "stay_km_to_center": 4.92,
+        "stay_price": 287.0,
+        "car": null,
+        "car_daily_rate": null
+       }
+      }
+     ],
+     "acceptable_sacrifices": [
+      [
+       "central"
+      ],
+      [
+       "nonstop"
+      ]
+     ],
+     "cheapest_feasible": {
+      "sacrifices": [
+       "central",
+       "nonstop"
+      ],
+      "total": 1022.9,
+      "on_pareto_front": false
+     }
+    },
+    "n_feasible_packages": 24,
+    "cheapest_feasible": {
+     "total": 1022.9,
+     "start_date": "2022-10-19",
+     "end_date": "2022-10-22",
+     "nights": 3,
+     "flight_out": "F2687",
+     "out_airport": "LGA",
+     "out_nonstop": false,
+     "out_arrival_local": "19:33",
+     "out_fare": 112.6,
+     "flight_back": "F9799",
+     "back_airport": "LGA",
+     "back_nonstop": true,
+     "back_departure_local": "06:30",
+     "back_fare": 102.6,
+     "stay": "JERSEY_CITY:1629812781490229115",
+     "stay_km_to_center": 7.09,
+     "stay_price": 197.5,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F12",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "indirect",
+   "request_text": "We're a family of four (two kids under 5) visiting NYC from Los Angeles Aug 14 to Aug 17. The kids nap 1 to 3 every afternoon, and we're usually done by 6 pm. Max $3,500. Playgrounds, parks, animals.",
+   "as_of": "2022-07-24",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "LAX",
+     "start_date": "2022-08-14",
+     "end_date": "2022-08-17",
+     "travelers": 4,
+     "budget_usd": 3500,
+     "wants_car": false,
+     "pace": "relaxed",
+     "interests": [
+      "family",
+      "nature"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-07-24",
+     "soft_prefs": [],
+     "daily_blocked_windows": [
+      {
+       "start": "13:00",
+       "end": "15:00",
+       "label": "nap"
+      }
+     ],
+     "day_end": "18:00"
+    },
+    "key_requirements": [
+     {
+      "id": "F12-K1",
+      "checker": "no_activity_in_window",
+      "params": {
+       "start": "13:00",
+       "end": "15:00"
+      }
+     },
+     {
+      "id": "F12-K2",
+      "checker": "day_window",
+      "params": {
+       "end": "18:00"
+      }
+     },
+     {
+      "id": "F12-K3",
+      "checker": "party_size",
+      "params": {
+       "n": 4
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 150,
+    "n_feasible_packages": 24,
+    "cheapest_feasible": {
+     "total": 2523.8,
+     "start_date": "2022-08-14",
+     "end_date": "2022-08-17",
+     "nights": 3,
+     "flight_out": "F8559",
+     "out_airport": "EWR",
+     "out_nonstop": true,
+     "out_arrival_local": "14:55",
+     "out_fare": 313.6,
+     "flight_back": "F14940",
+     "back_airport": "JFK",
+     "back_nonstop": true,
+     "back_departure_local": "08:20",
+     "back_fare": 238.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F13",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "direct",
+   "request_text": "Just me, from Denver to New York August 29 - September 1, $1,500 budget. No flights before 10am. Galleries, museums, shopping and good coffee.",
+   "as_of": "2022-08-08",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "DEN",
+     "start_date": "2022-08-29",
+     "end_date": "2022-09-01",
+     "travelers": 1,
+     "budget_usd": 1500,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "culture",
+      "shopping",
+      "food"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-08",
+     "soft_prefs": [],
+     "no_early_flight_before": "10:00"
+    },
+    "key_requirements": [
+     {
+      "id": "F13-K1",
+      "checker": "no_flight_departure_before",
+      "params": {
+       "time": "10:00"
+      }
+     },
+     {
+      "id": "F13-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "museum",
+        "gallery"
+       ],
+       "min": 2
+      }
+     },
+     {
+      "id": "F13-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1500
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 189,
+    "n_feasible_packages": 16,
+    "cheapest_feasible": {
+     "total": 1065.8,
+     "start_date": "2022-08-29",
+     "end_date": "2022-09-01",
+     "nights": 3,
+     "flight_out": "F13853",
+     "out_airport": "JFK",
+     "out_nonstop": false,
+     "out_arrival_local": "23:59",
+     "out_fare": 597.2,
+     "flight_back": "F11026",
+     "back_airport": "LGA",
+     "back_nonstop": true,
+     "back_departure_local": "16:56",
+     "back_fare": 153.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": 189,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F14",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "indirect",
+   "request_text": "Three of us coming from O'Hare to Manhattan, from the 23rd to the 26th of August. We've had enough of museums for a lifetime - we want parks, food and the big landmarks instead. Keep it under $1,500.",
+   "as_of": "2022-08-02",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "ORD",
+     "start_date": "2022-08-23",
+     "end_date": "2022-08-26",
+     "travelers": 3,
+     "budget_usd": 1500,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "nature",
+      "food",
+      "attractions"
+     ],
+     "avoid": [
+      "culture"
+     ],
+     "hotel_preference": "any",
+     "as_of": "2022-08-02",
+     "soft_prefs": []
+    },
+    "key_requirements": [
+     {
+      "id": "F14-K1",
+      "checker": "no_category",
+      "params": {
+       "categories": [
+        "museum",
+        "gallery"
+       ]
+      }
+     },
+     {
+      "id": "F14-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "park"
+       ],
+       "min": 1
+      }
+     },
+     {
+      "id": "F14-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1500
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 180,
+    "n_feasible_packages": 35,
+    "cheapest_feasible": {
+     "total": 1065.6,
+     "start_date": "2022-08-23",
+     "end_date": "2022-08-26",
+     "nights": 3,
+     "flight_out": "F3726",
+     "out_airport": "LGA",
+     "out_nonstop": false,
+     "out_arrival_local": "23:13",
+     "out_fare": 111.6,
+     "flight_back": "F8522",
+     "back_airport": "EWR",
+     "back_nonstop": true,
+     "back_departure_local": "19:45",
+     "back_fare": 138.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F15",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "direct",
+   "request_text": "Two of us from O'Hare, New York Aug 8 to Aug 11, max $1,500. We'll rent a car. We'd love the zoo and a couple of big parks.",
+   "as_of": "2022-07-18",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "ORD",
+     "start_date": "2022-08-08",
+     "end_date": "2022-08-11",
+     "travelers": 2,
+     "budget_usd": 1500,
+     "wants_car": true,
+     "pace": "normal",
+     "interests": [
+      "family",
+      "nature"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-07-18",
+     "soft_prefs": []
+    },
+    "key_requirements": [
+     {
+      "id": "F15-K1",
+      "checker": "car_included",
+      "params": {
+       "wanted": true
+      }
+     },
+     {
+      "id": "F15-K2",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "zoo"
+       ],
+       "min": 1
+      }
+     },
+     {
+      "id": "F15-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1500
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 216,
+    "n_feasible_packages": 1450,
+    "cheapest_feasible": {
+     "total": 1077.42,
+     "start_date": "2022-08-08",
+     "end_date": "2022-08-11",
+     "nights": 3,
+     "flight_out": "F10379",
+     "out_airport": "LGA",
+     "out_nonstop": true,
+     "out_arrival_local": "15:34",
+     "out_fare": 168.61,
+     "flight_back": "F1812",
+     "back_airport": "LGA",
+     "back_nonstop": true,
+     "back_departure_local": "10:30",
+     "back_fare": 138.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": "C3716",
+     "car_daily_rate": 37.0
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F16",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "indirect",
+   "request_text": "Honeymoon in New York, leaving Sunday, September 4 and flying home Wednesday, September 7, flying from Dallas. We're not morning people at all, and we want dinners within walking distance of our hotel. Food and a show or two. $1,200 is the ceiling.",
+   "as_of": "2022-08-14",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "DFW",
+     "start_date": "2022-09-04",
+     "end_date": "2022-09-07",
+     "travelers": 2,
+     "budget_usd": 1200,
+     "wants_car": false,
+     "pace": "relaxed",
+     "interests": [
+      "food",
+      "shows"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-14",
+     "soft_prefs": [],
+     "day_start": "11:00",
+     "unparsed_requirements": [
+      "dinner near the lodging"
+     ]
+    },
+    "key_requirements": [
+     {
+      "id": "F16-K1",
+      "checker": "day_window",
+      "params": {
+       "start": "10:00"
+      }
+     },
+     {
+      "id": "F16-K2",
+      "checker": "evening_meal_within_km_of_lodging",
+      "params": {
+       "km": 1.5
+      }
+     },
+     {
+      "id": "F16-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1200
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 210,
+    "n_feasible_packages": 41,
+    "cheapest_feasible": {
+     "total": 837.4,
+     "start_date": "2022-09-04",
+     "end_date": "2022-09-07",
+     "nights": 3,
+     "flight_out": "F2097",
+     "out_airport": "LGA",
+     "out_nonstop": true,
+     "out_arrival_local": "16:46",
+     "out_fare": 148.6,
+     "flight_back": "F3071",
+     "back_airport": "JFK",
+     "back_nonstop": false,
+     "back_departure_local": "10:10",
+     "back_fare": 112.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F17",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "direct",
+   "request_text": "Two adults from Dallas to NYC September 1-4. Budget $1,400. It must be nonstop - I hate connections. Museums and food.",
+   "as_of": "2022-08-11",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "DFW",
+     "start_date": "2022-09-01",
+     "end_date": "2022-09-04",
+     "travelers": 2,
+     "budget_usd": 1400,
+     "wants_car": false,
+     "pace": "normal",
+     "interests": [
+      "culture",
+      "food"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-11",
+     "soft_prefs": [
+      "nonstop"
+     ],
+     "priority_weights": {
+      "nonstop": 2.0
+     }
+    },
+    "key_requirements": [
+     {
+      "id": "F17-K1",
+      "checker": "nonstop_flights",
+      "params": {}
+     },
+     {
+      "id": "F17-K2",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1400
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 180,
+    "cheapest_keeping": 1183.4,
+    "n_feasible_packages": 57,
+    "cheapest_feasible": {
+     "total": 956.42,
+     "start_date": "2022-09-01",
+     "end_date": "2022-09-04",
+     "nights": 3,
+     "flight_out": "F6318",
+     "out_airport": "JFK",
+     "out_nonstop": false,
+     "out_arrival_local": "19:29",
+     "out_fare": 219.61,
+     "flight_back": "F13283",
+     "back_airport": "EWR",
+     "back_nonstop": false,
+     "back_departure_local": "10:09",
+     "back_fare": 101.1,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F18",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "indirect",
+   "request_text": "Students on a tight budget, three of us from Miami, New York Jul 8 to Jul 11. Hard cap $1,600 - honestly whatever is cheapest that works, even if we sleep far out. Nightlife and cheap eats, we want to cram in a lot.",
+   "as_of": "2022-06-17",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "MIA",
+     "start_date": "2022-07-08",
+     "end_date": "2022-07-11",
+     "travelers": 3,
+     "budget_usd": 1600,
+     "wants_car": false,
+     "pace": "packed",
+     "interests": [
+      "nightlife",
+      "food"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-06-17",
+     "soft_prefs": [],
+     "priority_weights": {
+      "price": 2.0
+     }
+    },
+    "key_requirements": [
+     {
+      "id": "F18-K1",
+      "checker": "near_cheapest",
+      "params": {
+       "tolerance": 0.05,
+       "cheapest_total": 1173.6
+      }
+     },
+     {
+      "id": "F18-K2",
+      "checker": "party_size",
+      "params": {
+       "n": 3
+      }
+     },
+     {
+      "id": "F18-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1600
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 135,
+    "n_feasible_packages": 28,
+    "cheapest_feasible": {
+     "total": 1173.6,
+     "start_date": "2022-07-08",
+     "end_date": "2022-07-11",
+     "nights": 3,
+     "flight_out": "F12514",
+     "out_airport": "JFK",
+     "out_nonstop": true,
+     "out_arrival_local": "23:29",
+     "out_fare": 128.6,
+     "flight_back": "F14487",
+     "back_airport": "LGA",
+     "back_nonstop": false,
+     "back_departure_local": "06:00",
+     "back_fare": 157.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F19",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "direct",
+   "request_text": "Two seniors from Dallas visiting New York September 16-19. We rest every day from 2pm to 4pm, and we can't walk more than 15 minutes. Museums and a Broadway show. Budget $1,100.",
+   "as_of": "2022-08-26",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "DFW",
+     "start_date": "2022-09-16",
+     "end_date": "2022-09-19",
+     "travelers": 2,
+     "budget_usd": 1100,
+     "wants_car": false,
+     "pace": "relaxed",
+     "interests": [
+      "culture",
+      "shows"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-08-26",
+     "soft_prefs": [],
+     "daily_blocked_windows": [
+      {
+       "start": "14:00",
+       "end": "16:00",
+       "label": "rest"
+      }
+     ],
+     "max_walk_minutes": 15
+    },
+    "key_requirements": [
+     {
+      "id": "F19-K1",
+      "checker": "no_activity_in_window",
+      "params": {
+       "start": "14:00",
+       "end": "16:00"
+      }
+     },
+     {
+      "id": "F19-K2",
+      "checker": "max_walk_leg",
+      "params": {
+       "minutes": 15
+      }
+     },
+     {
+      "id": "F19-K3",
+      "checker": "min_count_category",
+      "params": {
+       "categories": [
+        "theatre",
+        "arts_centre"
+       ],
+       "min": 1
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 160,
+    "n_feasible_packages": 50,
+    "cheapest_feasible": {
+     "total": 777.4,
+     "start_date": "2022-09-16",
+     "end_date": "2022-09-19",
+     "nights": 3,
+     "flight_out": "F8728",
+     "out_airport": "LGA",
+     "out_nonstop": true,
+     "out_arrival_local": "10:37",
+     "out_fare": 128.6,
+     "flight_back": "F13231",
+     "back_airport": "LGA",
+     "back_nonstop": false,
+     "back_departure_local": "17:00",
+     "back_fare": 102.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  },
+  {
+   "id": "F20",
+   "split": "eval",
+   "group": "F",
+   "segment": "free_text",
+   "city": "New York",
+   "phrasing_type": "indirect",
+   "request_text": "My wife is in a wheelchair and keeps kosher; we're coming from Denver to New York leaving Tuesday, August 16 and flying home Friday, August 19 with about $1,400 to spend. History and culture are our thing.",
+   "as_of": "2022-07-26",
+   "expected_status": "OK_PLAN",
+   "gold": {
+    "request": {
+     "city": "New York",
+     "origin": "DEN",
+     "start_date": "2022-08-16",
+     "end_date": "2022-08-19",
+     "travelers": 2,
+     "budget_usd": 1400,
+     "wants_car": false,
+     "pace": "relaxed",
+     "interests": [
+      "culture",
+      "attractions"
+     ],
+     "avoid": [],
+     "hotel_preference": "any",
+     "as_of": "2022-07-26",
+     "soft_prefs": [],
+     "accessibility": true,
+     "unparsed_requirements": [
+      "kosher"
+     ]
+    },
+    "key_requirements": [
+     {
+      "id": "F20-K1",
+      "checker": "flag_unsupported",
+      "params": {
+       "topic": "accessibility",
+       "keywords": [
+        "wheelchair",
+        "accessib",
+        "step-free"
+       ]
+      }
+     },
+     {
+      "id": "F20-K2",
+      "checker": "flag_unsupported",
+      "params": {
+       "topic": "kosher",
+       "keywords": [
+        "kosher",
+        "dietary"
+       ]
+      }
+     },
+     {
+      "id": "F20-K3",
+      "checker": "budget_max",
+      "params": {
+       "usd": 1400
+      }
+     }
+    ]
+   },
+   "oracle": {
+    "route_window_density": 135,
+    "n_feasible_packages": 22,
+    "cheapest_feasible": {
+     "total": 975.4,
+     "start_date": "2022-08-16",
+     "end_date": "2022-08-19",
+     "nights": 3,
+     "flight_out": "F5669",
+     "out_airport": "JFK",
+     "out_nonstop": false,
+     "out_arrival_local": "21:39",
+     "out_fare": 127.6,
+     "flight_back": "F4314",
+     "back_airport": "EWR",
+     "back_nonstop": false,
+     "back_departure_local": "06:00",
+     "back_fare": 202.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_km_to_center": 5.61,
+     "stay_price": 105.0,
+     "car": null,
+     "car_daily_rate": null
+    },
+    "pipeline_agrees": true,
+    "n_packages_without_flight_rule": null,
+    "places_status": "PASS"
+   }
+  }
+ ]
+}

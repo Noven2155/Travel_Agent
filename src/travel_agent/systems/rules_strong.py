@@ -50,7 +50,12 @@ def choose_package(ctx: RunContext) -> tuple[dict[str, Any], dict[str, Any]]:
     sac = lambda c: tuple(c["sacrificed_prefs"])          # noqa: E731
     front = P.pareto_front(sac(c) for c in cands)
     on_front = [c for c in cands if sac(c) in front]
-    best = min(on_front, key=lambda c: (len(sac(c)), c["total"], c["refs"]["flight_out"], c["refs"]["stay"]))
+    w = req.priority_weights
+    cost = lambda c: sum(w.get(p, 1.0) for p in sac(c))   # noqa: E731 - v3 priority weights (default 1 each)
+    if w.get("price", 0) > 0 and all(w["price"] >= w.get(p, 1.0) for p in req.soft_prefs):
+        best = min(on_front, key=lambda c: (c["total"], len(sac(c)), c["refs"]["flight_out"], c["refs"]["stay"]))   # price first
+    else:
+        best = min(on_front, key=lambda c: (cost(c), len(sac(c)), c["total"], c["refs"]["flight_out"], c["refs"]["stay"]))
     alts = []
     for v in front:
         if v == sac(best):
@@ -94,7 +99,9 @@ def conflict_text(ctx: RunContext, cand: dict[str, Any], info: dict[str, Any]) -
     out = [f"Conflict detected: none of the {n} packages within the ${req.budget_usd} budget satisfies all soft preferences "
            f"({', '.join(req.soft_prefs)}).",
            "Trade-off: this plan gives up " + "; ".join(_pref_phrase(p, cand, req, rain_days) for p in sac)
-           + (" and keeps " + ", ".join(kept) if kept else "") + f" - total ${cand['total']:.2f} (fewest sacrificed preferences, then cheapest)."]
+           + (" and keeps " + ", ".join(kept) if kept else "") + f" - total ${cand['total']:.2f} ("
+           + ("priority weights " + ", ".join(f"{k}={v:g}" for k, v in req.priority_weights.items()) + ", then cheapest)." if req.priority_weights
+              else "fewest sacrificed preferences, then cheapest).")]
     for a in info.get("alternatives", [])[:2]:
         out.append("Alternative (also Pareto-optimal): give up " + "; ".join(_pref_phrase(p, a, req, rain_days) for p in a["sacrificed_prefs"])
                    + f" - total ${a['total']:.2f}.")
@@ -209,6 +216,10 @@ def build_days(ctx: RunContext, stay_ref: str, windows: dict[str, tuple[str, str
                     return None, "MEAL_CONFLICT"
                 if not dinner_done and start < DINNER_LATEST_START < end:
                     return None, "MEAL_CONFLICT"
+            if any(start < hm_to_min(b.end) and hm_to_min(b.start) < end for b in req.daily_blocked_windows):
+                return None, "BLOCKED"                  # v3: nap / rest / prayer windows stay free
+            if req.max_walk_minutes and leg["mode"] == "walk" and leg["minutes"] > req.max_walk_minutes:
+                return None, "WALK"
             if not plausible(p, spec(p), d, start, end):
                 return None, "CLOSED"
             it = dict(place_id=p["place_id"], name=p["name"], kind=kind, start=min_to_hm(start), end=min_to_hm(end),
@@ -291,6 +302,13 @@ def decide_rules_strong(ctx: RunContext) -> Decision:
     no_notable = [t for t in must if t not in relevant]
     if no_notable:
         tradeoffs.append("no notable place fitted for: " + ", ".join(no_notable))
+    if req.daily_blocked_windows:
+        tradeoffs.append("kept free every day: " + ", ".join(f"{b.start}-{b.end}" + (f" ({b.label})" if b.label else "")
+                                                            for b in req.daily_blocked_windows))
+    if req.accessibility:
+        tradeoffs.append("not handled: accessibility / step-free access - the places data has no step-free information")
+    for u in req.unparsed_requirements:
+        tradeoffs.append(f"not handled: {u}")
     if dropped:
         tradeoffs.append(f"{len(dropped)} must-see place(s) not scheduled (" + ", ".join(sorted({x.reason for x in dropped})) + ")")
     status = Status.OK_PLAN if report.all_passed else Status.CONFLICT_UNRESOLVED

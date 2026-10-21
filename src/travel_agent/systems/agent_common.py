@@ -27,7 +27,12 @@ RULES_TEXT = f"""Hard rules (checked in code after you answer):
 - Soft preferences (request.soft_prefs: central, nonstop, exact_dates, dry_days, long_days, under_preferred_budget) may be
   traded off; each candidate lists its sacrificed_prefs. If no candidate satisfies all of them, say so explicitly in
   tradeoffs ("conflict: ..."), name the preference you sacrificed and why (with numbers), and prefer a package that
-  sacrifices as little as possible. With depart/return flex the trip dates are the dates of the chosen flights."""
+  sacrifices as little as possible. With depart/return flex the trip dates are the dates of the chosen flights.
+- Optional request fields (honor them when set): priority_weights (higher = keep that preference first),
+  daily_blocked_windows (no item inside, every day), day_start / day_end (replace the default day window),
+  max_walk_minutes (no longer walking leg), no_early_flight_before (already applied to the candidates).
+  For accessibility=true and every entry of unparsed_requirements, write "not handled: ..." in tradeoffs
+  unless the plan really satisfies it."""
 
 
 def llm_or_error(ctx: RunContext) -> Optional[Decision]:

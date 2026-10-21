@@ -1,8 +1,10 @@
 """Run one system over the frozen eval (or dev) cases.
 
-    python -m eval.run_eval --system rules|rules_basic|single|multi --split eval|dev [--cases v2|v1] [--city chicago|nyc] [--ids A01,B02] [--out DIR]
+    python -m eval.run_eval --system rules|rules_basic|hybrid|single|multi --split eval|dev [--cases v2|v1|v3] [--city chicago|nyc] [--ids A01,B02] [--out DIR]
 
---cases selects the frozen case set (default v2 = eval_cases_v2.json with verified true conflicts; v1 kept for history).
+--cases selects the frozen case set (default v2 = eval_cases_v2.json with verified true conflicts; v1 kept for history;
+v3 = free-text segment: the system gets ONLY id, request_text and as_of; after the run the plan is re-checked with
+final_checks against the hidden gold request -> rec["gold_check_report"]; key requirements are scored by score_v3).
 
 Writes one JSON per case to eval/results/<system>/<timestamp>/<id>.json (RunResult incl. plan, status, tool log,
 llm_calls, tokens, wall_time_s, rounds) plus run_meta.json. Never calls an LLM for --system rules.
@@ -43,11 +45,24 @@ def git_commit() -> str:
         return "unknown"
 
 
+def gold_checks(res, case) -> dict | None:
+    """v3: re-run final_checks on the system's plan against the hidden gold request (same tool log)."""
+    from travel_agent.checks import final_checks
+    from travel_agent.tool_log import ToolLog
+    if res.package is None:
+        return None
+    gold = TripRequest.model_validate(dict(case["gold"]["request"], request_id=case["id"]))
+    log = ToolLog("gold")
+    log.entries = res.tool_log
+    rep = final_checks(log, gold, res.package, res.days, res.dropped, res.day_conditions)
+    return dict(all_passed=rep.all_passed, failures=rep.failures, checks=json.loads(rep.model_dump_json())["checks"])
+
+
 def main(argv: list[str] | None = None) -> Path:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--system", required=True, choices=["rules", "rules_basic", "single", "multi"])
+    ap.add_argument("--system", required=True, choices=["rules", "rules_basic", "hybrid", "single", "multi"])
     ap.add_argument("--split", default="eval", choices=["eval", "dev"])
-    ap.add_argument("--cases", default="v2", choices=["v1", "v2"], help="case set version (default v2)")
+    ap.add_argument("--cases", default="v2", choices=["v1", "v2", "v3"], help="case set version (default v2)")
     ap.add_argument("--city", default=None, help="chicago | nyc (default: both)")
     ap.add_argument("--ids", default=None, help="comma-separated case ids")
     ap.add_argument("--out", default=None, help="output directory (default eval/results/<system>/<timestamp>)")
@@ -82,6 +97,19 @@ def main(argv: list[str] | None = None) -> Path:
     if missing_places:
         print("NOTE:", meta["note"])
     for c in cases:
+        if a.cases == "v3":
+            res = run(a.system, dict(request_id=c["id"], request_text=c["request_text"], as_of=c["as_of"]))
+            res.tool_log_path = str((out / f"{c['id']}.json").relative_to(C.REPO_ROOT)) if out.is_relative_to(C.REPO_ROOT) else str(out / f"{c['id']}.json")
+            rec = json.loads(res.model_dump_json())
+            rec["case"] = {k: c[k] for k in ("id", "split", "group", "segment", "city", "phrasing_type", "request_text", "as_of", "expected_status")}
+            rec["case"]["cases_version"] = "v3"
+            rec["gold_check_report"] = gold_checks(res, c)
+            (out / f"{c['id']}.json").write_text(json.dumps(rec, ensure_ascii=False, separators=(",", ":"), default=str))
+            g = rec["gold_check_report"]
+            print(f"  {c['id']:4s} F {c['city'][:7]:7s} {c['phrasing_type']:8s} got={res.status.value:22s} "
+                  f"own_checks={'PASS' if res.all_checks_passed else 'FAIL/-'} gold_checks={'PASS' if g and g['all_passed'] else ('-' if g is None else 'FAIL:' + ','.join(g['failures']))} "
+                  f"llm={res.llm_calls}" + (f"  [{res.message[:80]}]" if res.message and res.status.value != 'OK_PLAN' else ""))
+            continue
         req = TripRequest.from_case(c)
         res = run(a.system, req)
         res.tool_log_path = str((out / f"{c['id']}.json").relative_to(C.REPO_ROOT)) if out.is_relative_to(C.REPO_ROOT) else str(out / f"{c['id']}.json")

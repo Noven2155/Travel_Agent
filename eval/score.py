@@ -28,7 +28,7 @@ from travel_agent import config as C  # noqa: E402
 from .quality import QUALITY_CHECKS, conflict_handling, quality, soft_pref_satisfaction  # noqa: E402
 
 CHECKS = ["schema", "budget", "dates", "capacity", "car", "day_load", "travel", "weather_rule", "coverage", "grounding"]
-SYSTEM_LABEL = {"A": "A - rules", "B": "B - single agent", "C": "C - multi-agent"}
+SYSTEM_LABEL = {"A": "A - rules", "H": "H - hybrid (LLM parser + strong rules)", "B": "B - single agent", "C": "C - multi-agent"}
 VARIANT_LABEL = {"basic": "A0 - rules basic", "strong": "A - rules strong"}   # runs without a variant = basic (before 2026-10-21 20:00)
 
 
