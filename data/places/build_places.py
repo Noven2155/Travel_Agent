@@ -21,6 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, "raw")
 os.makedirs(RAW, exist_ok=True)
 REFRESH = "--refresh" in sys.argv
+OFFLINE = "--offline" in sys.argv   # use only raw/ cache; missing optional pieces are skipped
 SEED = 42
 UA = "StudentTravelPlannerDataset/1.0 (educational CrewAI class project; low-volume, cached)"
 
@@ -50,6 +51,12 @@ CITIES = {
                      ("Staten Island", "^Staten Island$")],
         "optional_subareas": ["Bronx", "Staten Island"],
         "target_attr": 240, "target_food": 360,
+        # NYC only (Chicago file kept frozen as shipped): boost globally famous places,
+        # measured by number of multilingual name:xx tags, so e.g. Central Park / MoMA / Bronx Zoo
+        # are not crowded out by Wikivoyage-matched small venues.
+        "notability_boost": True,
+        "quota_override": {"zoo": .025, "aquarium": .015},  # NYC has 4-6 zoos (Bronx, Central Park, Prospect Park, Queens, SI)
+        "famous_first": 40,   # NYC only: top-40 wikidata attractions by # of name:xx tags go in first
         # food limited to Manhattan + Brooklyn to keep downloads modest
         "food_subareas": [("Manhattan", "^Manhattan$"), ("Brooklyn", "^Brooklyn$")],
         "wv_prefixes": ["Manhattan/", "Brooklyn/", "Queens/", "The Bronx/", "Staten Island/"],
@@ -67,6 +74,10 @@ def overpass(query, cache_name, attempts=8, optional=False):
     if os.path.exists(path) and not REFRESH:
         with open(path) as f:
             return json.load(f)
+    if OFFLINE:
+        if optional:
+            log(f"  OFFLINE: {cache_name} not cached -> skipped"); return None
+        raise RuntimeError(f"OFFLINE and {cache_name} not cached")
     last = None
     for attempt in range(attempts):
         for ep in OVERPASS_ENDPOINTS:
@@ -193,7 +204,9 @@ def fetch_osm(ckey, cfg):
             for ti, (s_, w_, n_, e_) in enumerate(tiles(bbs[nm])):
                 q = (hdr + f"area({ids[nm]})->.sa;" +
                      FOOD_TILE_BODY.format(s=s_, w=w_, n=n_, e=e_))
-                groups.append(("food", sub, overpass(q, f"{ckey}_{slug}_food_tile{ti}.json")))
+                d = overpass(q, f"{ckey}_{slug}_food_tile{ti}.json", attempts=4, optional=True)
+                if d is None: skipped.append(f"{sub} food tile{ti} {s_},{w_},{n_},{e_}"); continue
+                groups.append(("food", sub, d))
                 time.sleep(5)
     return b, places, groups, skipped
 
@@ -526,6 +539,8 @@ def build_city(ckey, cfg):
                             "wikipedia", "phone", "contact:phone", "addr:street", "addr:housenumber")
                 if t.get(k))
         s += 0.05 * min(len(t), 40) + (3 if t.get("wikidata") else 0) + (20 if "wv" in c else 0)
+        if cfg.get("notability_boost"):
+            s += 0.6 * min(sum(1 for k in t if k.startswith("name:")), 40)
         return s + rng_for(c["pid"]).random() * 0.5
     for c in cands.values():
         c["score"] = score(c)
@@ -539,11 +554,18 @@ def build_city(ckey, cfg):
         seen.setdefault(k, []).append(c); kept.append(c)
 
     # select with quotas
-    def pick(items, target, quotas):
+    def pick(items, target, quotas, famous=0):
         chosen, ids = [], set()
+        if famous:
+            cnt = {}
+            for c in items: cnt[norm_name(c["name"])] = cnt.get(norm_name(c["name"]), 0) + 1
+            fam = [c for c in items if c["t"].get("wikidata") and cnt[norm_name(c["name"])] <= 2]
+            fam.sort(key=lambda c: (-sum(1 for k in c["t"] if k.startswith("name:")), -c["score"]))
+            for c in fam[:famous]:
+                chosen.append(c); ids.add(c["pid"])
         wvs = [c for c in items if "wv" in c]
         cap_wv = int(target * 0.75)  # keep room for diversity
-        for c in wvs[:cap_wv]:
+        for c in [w for w in wvs if w["pid"] not in ids][:max(0, cap_wv - len(chosen))]:
             chosen.append(c); ids.add(c["pid"])
         for cat, share in quotas.items():
             have = sum(1 for c in chosen if c["cat"] == cat)
@@ -562,7 +584,7 @@ def build_city(ckey, cfg):
     sel = pick(attr, cfg.get("target_attr", TARGET_ATTR), {"museum": .16, "park": .14, "attraction": .13, "historic": .10,
                                    "theatre": .09, "gallery": .07, "viewpoint": .05, "shopping": .06,
                                    "arts_centre": .04, "activity": .05, "zoo": .01, "aquarium": .01,
-                                   "theme_park": .01})
+                                   "theme_park": .01, **cfg.get("quota_override", {})}, famous=cfg.get("famous_first", 0))
     sel += pick(food, cfg.get("target_food", TARGET_FOOD), {"restaurant": .58, "cafe": .18, "bar": .12, "fast_food": .09,
                                     "food_court": .03})
 

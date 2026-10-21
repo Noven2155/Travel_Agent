@@ -1,6 +1,6 @@
 # Travel Agent – צוות 8 · BIU DS23
 
-מערכת שמתכננת טיול קצר לשיקגו (ובהמשך ניו יורק) ומשווה בין שלוש מערכות על אותה ערכת הערכה:
+מערכת שמתכננת טיול קצר לשיקגו או לניו יורק ומשווה בין שלוש מערכות על אותה ערכת הערכה:
 **A** – baseline כללים דטרמיניסטי (בלי LLM), **B** – סוכן CrewAI יחיד עם כל הכלים, **C** – מולטי-אג'נט
 (מנהל טיול, סוכן מקומות, סוכן מסלול) ב-CrewAI Flow. המפרט הקובע: `system_definition_HE.md` (הגדרת שלוש המערכות וההערכה).
 
@@ -21,7 +21,7 @@
 | `src/travel_agent/systems/crew_tools.py` | עטיפת הכלים ככלי CrewAI (least privilege לכל סוכן) |
 | `eval/` | ערכת ההערכה המוקפאת (`cases/`), `run_eval.py`, `score.py`, תוצאות (`results/`) ודוחות (`reports/`) |
 | `app/streamlit_app.py` | ממשק: תכנון טיול + לוח הערכה |
-| `data/places/`, `data/weather/` | נתוני מקומות (שיקגו) ו-fixtures של מזג אוויר. שאר `data/` – הקטלוג הקיים (לא שונה) |
+| `data/places/`, `data/weather/` | נתוני מקומות (שיקגו וניו יורק) ו-fixtures של מזג אוויר. שאר `data/` – הקטלוג הקיים (לא שונה) |
 
 ## התקנה
 
@@ -72,7 +72,7 @@ python -m pytest -q
 
 ## מקורות נתונים וייחוס
 
-- **מקומות:** © OpenStreetMap contributors, ‏**ODbL 1.0**; תיאורים ודגל `in_wikivoyage` מ-Wikivoyage, ‏**CC BY-SA 4.0**.
+- **מקומות (שיקגו וניו יורק):** © OpenStreetMap contributors, ‏**ODbL 1.0**; תיאורים ודגל `in_wikivoyage` מ-Wikivoyage, ‏**CC BY-SA 4.0**. נשלף 2026-10-21. ב-NYC: אטרקציות מכל 5 הרובעים, אוכל ממנהטן בלבד (צפון-מזרח מנהטן וברוקלין חסרים עקב כשלי Overpass), ראו `data/places/README.md`.
 - **מזג אוויר:** Open-Meteo Historical Forecast API, ‏**CC BY 4.0** (נשלף פעם אחת, `data/weather/`).
 - **קטלוג (קיים, לא שונה):** טיסות – Kaggle dilwong/FlightPrices (מ-Expedia); לינה – Inside Airbnb, ‏**CC BY 4.0**; רכבים – Kaggle Cornell Car Rental. ראו `data/README.md`.
 - **שדות סינתטיים:** במקומות – `rating`, `review_count`, `typical_visit_minutes` ורוב `price_level` (seed 42, עמודת `synthetic_fields`). זמינות הלינה והרכבים בקטלוג סינתטית. קיבולת רכב היא אומדן לפי סוג רכב. הכלים לא מחזירים דירוג, ובדיקת העיגון נכשלת אם שדה סינתטי מופיע בתוכנית. `typical_visit_minutes` מסומן כאומדן.
@@ -88,7 +88,7 @@ Three trip planners compared on one frozen eval set (40 eval + 8 dev cases, Chic
 `call_id/source/license/data_date` and are logged per run, code `final_checks`, limits (3 rounds, 270 s), `RunResult`.
 
 - Setup: `pip install -r requirements.txt && pip install -e .`; copy `.env.example` to `.env` for B/C (free local Ollama model by default; free-tier provider optional).
-- Eval: `python -m eval.run_eval --system rules|single|multi --split eval|dev [--city chicago]`, then `python -m eval.score <dirs...>`.
+- Eval: `python -m eval.run_eval --system rules|single|multi --split eval|dev [--city chicago|nyc]`, then `python -m eval.score <dirs...>`.
 - UI: `streamlit run app/streamlit_app.py`. Tests: `python -m pytest -q`.
 - Data: OpenStreetMap (ODbL), Wikivoyage (CC BY-SA), Open-Meteo (CC BY 4.0), Inside Airbnb (CC BY 4.0), Kaggle flights/cars. Synthetic place fields (rating, review_count, typical_visit_minutes, most price_level) are never used for ranking or grounding.
-- New York places data is not available yet: NYC cases end as `NEEDS_DATA` after the package step until `data/places/nyc_places.csv` is added.
+- Places data: `data/places/chicago_places.csv` (579) and `data/places/nyc_places.csv` (616; attractions from all 5 boroughs, food from Manhattan only - NE Manhattan and Brooklyn food tiles could not be fetched from Overpass). © OpenStreetMap contributors (ODbL 1.0); Wikivoyage text CC BY-SA 4.0.

@@ -3,8 +3,8 @@
 | file | content |
 |---|---|
 | `chicago_places.csv` | 579 places in Chicago (restaurants, cafes, bars, museums, theatres, parks, attractions…) |
-| `build_places.py` | the script that built it (OpenStreetMap Overpass + Wikivoyage), kept for provenance |
-| `nyc_places.csv` | **not yet available** – being built by a separate process. Until it exists, New York cases end as `NEEDS_DATA` after the package step (the code checks for the file at run time; just drop the CSV here with the same columns). |
+| `nyc_places.csv` | 616 places in New York City (same columns). Attractions from all 5 boroughs; **food only from Manhattan** (Manhattan south of lat 40.781 + NW quadrant). NE Manhattan (East Harlem / north UES) and all Brooklyn food tiles could not be fetched (repeated Overpass 502/504/timeouts) and are missing. |
+| `build_places.py` | the script that built both files (OpenStreetMap Overpass + Wikivoyage), kept for provenance; `--offline` rebuilds from its raw cache |
 
 Sources and licenses
 - **OpenStreetMap** (names, categories, coordinates, opening_hours, website, address): © OpenStreetMap contributors, **ODbL 1.0** – https://www.openstreetmap.org/copyright
