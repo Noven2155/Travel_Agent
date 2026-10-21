@@ -1,0 +1,29 @@
+{
+ "source": "Open-Meteo Historical Forecast API (https://open-meteo.com/en/docs/historical-forecast-api)",
+ "license": "CC BY 4.0 (Open-Meteo, https://open-meteo.com/en/license)",
+ "retrieved_at": "2026-10-21T18:12:04+03:00",
+ "city": "New York",
+ "date": "2022-05-21",
+ "point": [
+  40.758,
+  -73.9855
+ ],
+ "request_url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=40.758&longitude=-73.9855&start_date=2022-04-17&end_date=2022-11-19&daily=precipitation_sum%2Cprecipitation_hours%2Capparent_temperature_max%2Cwind_gusts_10m_max%2Ctemperature_2m_max&timezone=auto",
+ "timezone": "America/New_York",
+ "daily_units": {
+  "time": "iso8601",
+  "precipitation_sum": "mm",
+  "precipitation_hours": "h",
+  "apparent_temperature_max": "\u00b0C",
+  "wind_gusts_10m_max": "km/h",
+  "temperature_2m_max": "\u00b0C"
+ },
+ "daily": {
+  "time": "2022-05-21",
+  "precipitation_sum": 0.0,
+  "precipitation_hours": 0.0,
+  "apparent_temperature_max": 35.9,
+  "wind_gusts_10m_max": 25.2,
+  "temperature_2m_max": 32.0
+ }
+}

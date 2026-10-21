@@ -1,0 +1,4404 @@
+{
+ "meta": {
+  "built_with": "build_eval_cases.py",
+  "seed": 20261030,
+  "inventory": "newdata/tourism_project_data_package/data/inventory.json",
+  "inventory_sha256": "see verification_report.json (39a0c9c2...)",
+  "catalog_dates": [
+   "2022-04-17",
+   "2022-11-19",
+   216
+  ],
+  "central_radius_km": {
+   "Chicago": 5.0,
+   "New York": 6.0
+  },
+  "city_centers": {
+   "Chicago": "Loop (State & Madison)",
+   "New York": "Times Square"
+  },
+  "max_car_travelers": 4,
+  "max_stay_km": 12.0,
+  "horizon_days": 7,
+  "weather_thresholds": {
+   "rain_mm": 5.0,
+   "rain_hours": 3.0,
+   "heat_c": 35.0,
+   "wind_kmh": 60.0
+  },
+  "weather_source": "Open-Meteo Historical Forecast API, CC BY 4.0, retrieved 2026-10-21 (weather_preview/)",
+  "places_available": {
+   "Chicago": true,
+   "New York": false
+  },
+  "vocab": [
+   "food",
+   "culture",
+   "attractions",
+   "nightlife",
+   "family",
+   "nature",
+   "shows",
+   "shopping",
+   "extreme/adventure"
+  ],
+  "slots_per_full_day": {
+   "relaxed": 2,
+   "normal": 3,
+   "packed": 5
+  },
+  "coverage_min": 0.75
+ },
+ "cases": [
+  {
+   "id": "A01",
+   "split": "eval",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "LGA",
+   "start_date": "2022-10-26",
+   "end_date": "2022-10-29",
+   "travelers": 1,
+   "budget_usd": 680,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-09-26",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-10-26": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-28": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-29": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 8,
+    "status": "FEASIBLE",
+    "cheapest_total": 419.91,
+    "combos_total": 8,
+    "cheapest": {
+     "flight_out": "F8790",
+     "out_airport": "ORD",
+     "out_fare": 102.6,
+     "out_nonstop": true,
+     "flight_back": "F257",
+     "back_airport": "ORD",
+     "back_fare": 102.6,
+     "stay": "CHICAGO:54167860",
+     "stay_market": "Chicago",
+     "stay_price": 71.57,
+     "stay_km_to_center": 5.5,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 3,
+    "budget_slack_pct": 61.9,
+    "share_combos_within_budget_pct": 37.5
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "food"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "A02",
+   "split": "eval",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "BOS",
+   "start_date": "2022-09-07",
+   "end_date": "2022-09-11",
+   "travelers": 2,
+   "budget_usd": 1920,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "nature",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-08-08",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-09-07": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-08": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-09": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-10": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-11": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, local food.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 4,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 13,
+    "n_cars": 114,
+    "status": "FEASIBLE",
+    "cheapest_total": 1199.42,
+    "combos_total": 1482,
+    "cheapest": {
+     "flight_out": "F3795",
+     "out_airport": "ORD",
+     "out_fare": 87.61,
+     "out_nonstop": false,
+     "flight_back": "F2640",
+     "back_airport": "ORD",
+     "back_fare": 274.6,
+     "stay": "CHICAGO:50619453",
+     "stay_market": "Chicago",
+     "stay_price": 90.0,
+     "stay_km_to_center": 4.6,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 5
+    },
+    "combos_within_budget": 1147,
+    "budget_slack_pct": 60.1,
+    "share_combos_within_budget_pct": 77.4
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 11,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "food"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 5,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "A03",
+   "split": "eval",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "LAX",
+   "start_date": "2022-06-09",
+   "end_date": "2022-06-12",
+   "travelers": 1,
+   "budget_usd": 1710,
+   "wants_car": false,
+   "pace": "packed",
+   "interests": [
+    "culture",
+    "attractions",
+    "shows"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-10",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-06-09": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-10": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-11": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-12": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, the classic sights, a show or concert.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 18,
+    "status": "FEASIBLE",
+    "cheapest_total": 1064.71,
+    "combos_total": 36,
+    "cheapest": {
+     "flight_out": "F7507",
+     "out_airport": "ORD",
+     "out_fare": 428.6,
+     "out_nonstop": true,
+     "flight_back": "F561",
+     "back_airport": "ORD",
+     "back_fare": 382.61,
+     "stay": "CHICAGO:1134351668237383955",
+     "stay_market": "Chicago",
+     "stay_price": 84.5,
+     "stay_km_to_center": 9.5,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 35,
+    "budget_slack_pct": 60.6,
+    "share_combos_within_budget_pct": 97.22
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 12,
+    "interests_needed": 3,
+    "coverable_interests": [
+     "culture",
+     "attractions",
+     "shows"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     },
+     "shows": {
+      "total": 44,
+      "indoor_true": 44,
+      "outdoor_or_unknown": 0
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "A04",
+   "split": "eval",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "IAD",
+   "start_date": "2022-08-18",
+   "end_date": "2022-08-21",
+   "travelers": 2,
+   "budget_usd": 2240,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "food",
+    "nightlife"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-08-16",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-08-18.json",
+    "data/weather/chicago_2022-08-19.json",
+    "data/weather/chicago_2022-08-20.json",
+    "data/weather/chicago_2022-08-21.json"
+   ],
+   "weather_expected": {
+    "2022-08-18": [
+     "NONE"
+    ],
+    "2022-08-19": [
+     "NONE"
+    ],
+    "2022-08-20": [
+     "RAIN"
+    ],
+    "2022-08-21": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like local food, bars in the evening.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 2,
+    "n_back_flights": 1,
+    "n_stays": 12,
+    "status": "FEASIBLE",
+    "cheapest_total": 1396.66,
+    "combos_total": 24,
+    "cheapest": {
+     "flight_out": "F14072",
+     "out_airport": "ORD",
+     "out_fare": 144.73,
+     "out_nonstop": true,
+     "flight_back": "F7167",
+     "back_airport": "ORD",
+     "back_fare": 418.6,
+     "stay": "CHICAGO:50619453",
+     "stay_market": "Chicago",
+     "stay_price": 90.0,
+     "stay_km_to_center": 4.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 24,
+    "budget_slack_pct": 60.4,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "food",
+     "nightlife"
+    ],
+    "per_interest": {
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     },
+     "nightlife": {
+      "total": 104,
+      "indoor_true": 104,
+      "outdoor_or_unknown": 0
+     }
+    },
+    "rain_days": [
+     "2022-08-20"
+    ],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "A05",
+   "split": "eval",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "MIA",
+   "start_date": "2022-07-17",
+   "end_date": "2022-07-21",
+   "travelers": 3,
+   "budget_usd": 6120,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "family",
+    "attractions"
+   ],
+   "avoid": [
+    "nightlife"
+   ],
+   "hotel_preference": "any",
+   "as_of": "2022-06-17",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-07-17": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-18": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-19": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-20": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-21": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like kid-friendly places, the classic sights; no bars.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 4,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 12,
+    "n_cars": 120,
+    "status": "FEASIBLE",
+    "cheapest_total": 3821.43,
+    "combos_total": 1440,
+    "cheapest": {
+     "flight_out": "F3657",
+     "out_airport": "ORD",
+     "out_fare": 565.21,
+     "out_nonstop": false,
+     "flight_back": "F13396",
+     "back_airport": "ORD",
+     "back_fare": 539.6,
+     "stay": "CHICAGO:1177042184948176660",
+     "stay_market": "Chicago",
+     "stay_price": 98.0,
+     "stay_km_to_center": 11.3,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 5
+    },
+    "combos_within_budget": 1428,
+    "budget_slack_pct": 60.1,
+    "share_combos_within_budget_pct": 99.17
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 11,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "family",
+     "attractions"
+    ],
+    "per_interest": {
+     "family": {
+      "total": 76,
+      "indoor_true": 36,
+      "outdoor_or_unknown": 40
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     }
+    },
+    "rain_days": [],
+    "dry_days": 5,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "A06",
+   "split": "eval",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "DFW",
+   "start_date": "2022-11-13",
+   "end_date": "2022-11-15",
+   "travelers": 1,
+   "budget_usd": 1000,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "culture"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-10-14",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-11-13": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-14": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-15": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 2,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 13,
+    "status": "FEASIBLE",
+    "cheapest_total": 623.34,
+    "combos_total": 13,
+    "cheapest": {
+     "flight_out": "F8509",
+     "out_airport": "ORD",
+     "out_fare": 308.6,
+     "out_nonstop": false,
+     "flight_back": "F3151",
+     "back_airport": "ORD",
+     "back_fare": 171.6,
+     "stay": "CHICAGO:54167860",
+     "stay_market": "Chicago",
+     "stay_price": 71.57,
+     "stay_km_to_center": 5.5,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 13,
+    "budget_slack_pct": 60.4,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 5,
+    "interests_needed": 1,
+    "coverable_interests": [
+     "culture"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     }
+    },
+    "rain_days": [],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "A07",
+   "split": "eval",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "DEN",
+   "start_date": "2022-05-02",
+   "end_date": "2022-05-05",
+   "travelers": 2,
+   "budget_usd": 2150,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "food",
+    "shopping"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-04-02",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-05-02": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-03": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-04": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-05": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like local food, some shopping; no packed days.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 18,
+    "status": "FEASIBLE",
+    "cheapest_total": 1339.9,
+    "combos_total": 18,
+    "cheapest": {
+     "flight_out": "F8877",
+     "out_airport": "ORD",
+     "out_fare": 298.6,
+     "out_nonstop": true,
+     "flight_back": "F6938",
+     "back_airport": "ORD",
+     "back_fare": 244.6,
+     "stay": "CHICAGO:1134351668237383955",
+     "stay_market": "Chicago",
+     "stay_price": 84.5,
+     "stay_km_to_center": 9.5,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 18,
+    "budget_slack_pct": 60.5,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 6,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "food",
+     "shopping"
+    ],
+    "per_interest": {
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     },
+     "shopping": {
+      "total": 13,
+      "indoor_true": 7,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "A08",
+   "split": "eval",
+   "group": "A",
+   "city": "New York",
+   "origin": "ORD",
+   "start_date": "2022-07-24",
+   "end_date": "2022-07-27",
+   "travelers": 1,
+   "budget_usd": 1450,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-06-24",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-07-24": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-25": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-26": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-27": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 8,
+    "status": "FEASIBLE",
+    "cheapest_total": 902.2,
+    "combos_total": 8,
+    "cheapest": {
+     "flight_out": "F2536",
+     "out_airport": "EWR",
+     "out_fare": 228.6,
+     "out_nonstop": true,
+     "flight_back": "F14229",
+     "back_airport": "EWR",
+     "back_fare": 358.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 7,
+    "budget_slack_pct": 60.7,
+    "share_combos_within_budget_pct": 87.5
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "A09",
+   "split": "eval",
+   "group": "A",
+   "city": "New York",
+   "origin": "DEN",
+   "start_date": "2022-10-25",
+   "end_date": "2022-10-29",
+   "travelers": 2,
+   "budget_usd": 3260,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "attractions",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-09-25",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-10-25": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-26": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-28": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-29": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like the classic sights, local food.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 4,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 7,
+    "n_cars": 159,
+    "status": "FEASIBLE",
+    "cheapest_total": 2032.0,
+    "combos_total": 1113,
+    "cheapest": {
+     "flight_out": "F11808",
+     "out_airport": "JFK",
+     "out_fare": 587.2,
+     "out_nonstop": false,
+     "flight_back": "F1248",
+     "back_airport": "JFK",
+     "back_fare": 98.6,
+     "stay": "JERSEY_CITY:32167689",
+     "stay_market": "Jersey City",
+     "stay_price": 115.1,
+     "stay_km_to_center": 5.8,
+     "car": "C1326",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 40.0,
+     "rental_days": 5
+    },
+    "combos_within_budget": 770,
+    "budget_slack_pct": 60.4,
+    "share_combos_within_budget_pct": 69.18
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "A10",
+   "split": "eval",
+   "group": "A",
+   "city": "New York",
+   "origin": "SFO",
+   "start_date": "2022-09-25",
+   "end_date": "2022-09-28",
+   "travelers": 2,
+   "budget_usd": 2940,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "shows",
+    "nightlife"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-09-23",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/nyc_2022-09-25.json",
+    "data/weather/nyc_2022-09-26.json",
+    "data/weather/nyc_2022-09-27.json",
+    "data/weather/nyc_2022-09-28.json"
+   ],
+   "weather_expected": {
+    "2022-09-25": [
+     "NONE"
+    ],
+    "2022-09-26": [
+     "NONE"
+    ],
+    "2022-09-27": [
+     "NONE"
+    ],
+    "2022-09-28": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like a show or concert, bars in the evening.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 7,
+    "status": "FEASIBLE",
+    "cheapest_total": 1831.57,
+    "combos_total": 14,
+    "cheapest": {
+     "flight_out": "F5038",
+     "out_airport": "EWR",
+     "out_fare": 408.6,
+     "out_nonstop": true,
+     "flight_back": "F4030",
+     "back_airport": "JFK",
+     "back_fare": 152.6,
+     "stay": "JERSEY_CITY:1579981359582604753",
+     "stay_market": "Jersey City",
+     "stay_price": 236.39,
+     "stay_km_to_center": 10.8,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 14,
+    "budget_slack_pct": 60.5,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "A11",
+   "split": "eval",
+   "group": "A",
+   "city": "New York",
+   "origin": "LAX",
+   "start_date": "2022-08-29",
+   "end_date": "2022-08-31",
+   "travelers": 1,
+   "budget_usd": 1070,
+   "wants_car": false,
+   "pace": "packed",
+   "interests": [
+    "culture",
+    "shopping",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-07-30",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-08-29": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-30": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-31": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, some shopping, local food.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 2,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 9,
+    "status": "FEASIBLE",
+    "cheapest_total": 664.22,
+    "combos_total": 9,
+    "cheapest": {
+     "flight_out": "F303",
+     "out_airport": "LGA",
+     "out_fare": 232.6,
+     "out_nonstop": false,
+     "flight_back": "F2802",
+     "back_airport": "LGA",
+     "back_fare": 221.62,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 8,
+    "budget_slack_pct": 61.1,
+    "share_combos_within_budget_pct": 88.89
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "A12",
+   "split": "eval",
+   "group": "A",
+   "city": "New York",
+   "origin": "MIA",
+   "start_date": "2022-05-26",
+   "end_date": "2022-05-29",
+   "travelers": 3,
+   "budget_usd": 1760,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "family",
+    "nature"
+   ],
+   "avoid": [
+    "nightlife"
+   ],
+   "hotel_preference": "any",
+   "as_of": "2022-04-26",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-05-26": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-28": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-29": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like kid-friendly places, parks and the waterfront; no bars.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 4,
+    "n_back_flights": 1,
+    "n_stays": 11,
+    "n_cars": 171,
+    "status": "FEASIBLE",
+    "cheapest_total": 1099.6,
+    "combos_total": 1881,
+    "cheapest": {
+     "flight_out": "F10589",
+     "out_airport": "JFK",
+     "out_fare": 83.6,
+     "out_nonstop": true,
+     "flight_back": "F7261",
+     "back_airport": "JFK",
+     "back_fare": 128.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": "C3716",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 37.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 908,
+    "budget_slack_pct": 60.1,
+    "share_combos_within_budget_pct": 48.27
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "B01",
+   "split": "eval",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "JFK",
+   "start_date": "2022-11-02",
+   "end_date": "2022-11-05",
+   "travelers": 2,
+   "budget_usd": 1660,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-10-03",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-11-02": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-03": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-04": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-05": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging + relaxed pace",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 1,
+    "status": "FEASIBLE",
+    "cheapest_total": 1591.9,
+    "combos_total": 1,
+    "cheapest": {
+     "flight_out": "F13018",
+     "out_airport": "ORD",
+     "out_fare": 257.6,
+     "out_nonstop": false,
+     "flight_back": "F10823",
+     "back_airport": "ORD",
+     "back_fare": 236.1,
+     "stay": "CHICAGO:1734590552908937418",
+     "stay_market": "Chicago",
+     "stay_price": 201.5,
+     "stay_km_to_center": 3.0,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 1,
+    "cheapest_total_without_central": 1202.11,
+    "budget_slack_pct": 4.3,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 6,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "food"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "B02",
+   "split": "eval",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "EWR",
+   "start_date": "2022-06-02",
+   "end_date": "2022-06-05",
+   "travelers": 1,
+   "budget_usd": 1180,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "food",
+    "nightlife"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-05-03",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-06-02": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-03": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-04": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-05": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like local food, bars in the evening.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 2,
+    "status": "FEASIBLE",
+    "cheapest_total": 1125.2,
+    "combos_total": 4,
+    "cheapest": {
+     "flight_out": "F2676",
+     "out_airport": "ORD",
+     "out_fare": 428.6,
+     "out_nonstop": false,
+     "flight_back": "F9587",
+     "back_airport": "ORD",
+     "back_fare": 162.6,
+     "stay": "CHICAGO:1739355625904475687",
+     "stay_market": "Chicago",
+     "stay_price": 178.0,
+     "stay_km_to_center": 5.0,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 1,
+    "cheapest_total_without_central": 856.01,
+    "budget_slack_pct": 4.9,
+    "share_combos_within_budget_pct": 25.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "food",
+     "nightlife"
+    ],
+    "per_interest": {
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     },
+     "nightlife": {
+      "total": 104,
+      "indoor_true": 104,
+      "outdoor_or_unknown": 0
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "B03",
+   "split": "eval",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "SFO",
+   "start_date": "2022-09-13",
+   "end_date": "2022-09-15",
+   "travelers": 2,
+   "budget_usd": 1240,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "culture",
+    "food",
+    "nature",
+    "shows"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-08-14",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-09-13": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-14": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-15": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food, parks and the waterfront, a show or concert; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "4 interests in 3 days at relaxed pace + tight budget (load vs coverage)",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 2,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 11,
+    "status": "FEASIBLE",
+    "cheapest_total": 1189.62,
+    "combos_total": 11,
+    "cheapest": {
+     "flight_out": "F3379",
+     "out_airport": "ORD",
+     "out_fare": 217.61,
+     "out_nonstop": false,
+     "flight_back": "F4048",
+     "back_airport": "ORD",
+     "back_fare": 287.2,
+     "stay": "CHICAGO:50619453",
+     "stay_market": "Chicago",
+     "stay_price": 90.0,
+     "stay_km_to_center": 4.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 5,
+    "budget_slack_pct": 4.2,
+    "share_combos_within_budget_pct": 45.45
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 4,
+    "interests_needed": 3,
+    "coverable_interests": [
+     "culture",
+     "food",
+     "nature",
+     "shows"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     },
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "shows": {
+      "total": 44,
+      "indoor_true": 44,
+      "outdoor_or_unknown": 0
+     }
+    },
+    "rain_days": [],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "B04",
+   "split": "eval",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "EWR",
+   "start_date": "2022-05-27",
+   "end_date": "2022-05-30",
+   "travelers": 2,
+   "budget_usd": 1690,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-04-27",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-05-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-28": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-29": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-30": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, the classic sights.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging + car",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 2,
+    "n_cars": 117,
+    "status": "FEASIBLE",
+    "cheapest_total": 1620.4,
+    "combos_total": 234,
+    "cheapest": {
+     "flight_out": "F5198",
+     "out_airport": "ORD",
+     "out_fare": 268.6,
+     "out_nonstop": true,
+     "flight_back": "F7048",
+     "back_airport": "ORD",
+     "back_fare": 228.6,
+     "stay": "CHICAGO:1739355625904475687",
+     "stay_market": "Chicago",
+     "stay_price": 178.0,
+     "stay_km_to_center": 5.0,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 36,
+    "cheapest_total_without_central": 1412.17,
+    "budget_slack_pct": 4.3,
+    "share_combos_within_budget_pct": 15.38
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "attractions"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "B05",
+   "split": "eval",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "BOS",
+   "start_date": "2022-10-10",
+   "end_date": "2022-10-14",
+   "travelers": 1,
+   "budget_usd": 1040,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "nature",
+    "food",
+    "culture"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-10-08",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-10-10.json",
+    "data/weather/chicago_2022-10-11.json",
+    "data/weather/chicago_2022-10-12.json",
+    "data/weather/chicago_2022-10-13.json",
+    "data/weather/chicago_2022-10-14.json"
+   ],
+   "weather_expected": {
+    "2022-10-10": [
+     "NONE"
+    ],
+    "2022-10-11": [
+     "RAIN",
+     "WIND"
+    ],
+    "2022-10-12": [
+     "RAIN",
+     "WIND"
+    ],
+    "2022-10-13": [
+     "NONE"
+    ],
+    "2022-10-14": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, local food, museums and galleries; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging + rain day vs outdoor interest",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 4,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 2,
+    "status": "FEASIBLE",
+    "cheapest_total": 998.79,
+    "combos_total": 4,
+    "cheapest": {
+     "flight_out": "F14504",
+     "out_airport": "ORD",
+     "out_fare": 275.19,
+     "out_nonstop": false,
+     "flight_back": "F3933",
+     "back_airport": "ORD",
+     "back_fare": 215.6,
+     "stay": "CHICAGO:1727989020368328902",
+     "stay_market": "Chicago",
+     "stay_price": 127.0,
+     "stay_km_to_center": 4.4,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 2,
+    "cheapest_total_without_central": 777.07,
+    "budget_slack_pct": 4.1,
+    "share_combos_within_budget_pct": 50.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 3,
+    "coverable_interests": [
+     "nature",
+     "food",
+     "culture"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     },
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     }
+    },
+    "rain_days": [
+     "2022-10-11",
+     "2022-10-12"
+    ],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "B06",
+   "split": "eval",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "JFK",
+   "start_date": "2022-07-31",
+   "end_date": "2022-08-03",
+   "travelers": 2,
+   "budget_usd": 1770,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "nature",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-07-29",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-07-31.json",
+    "data/weather/chicago_2022-08-01.json",
+    "data/weather/chicago_2022-08-02.json",
+    "data/weather/chicago_2022-08-03.json"
+   ],
+   "weather_expected": {
+    "2022-07-31": [
+     "NONE"
+    ],
+    "2022-08-01": [
+     "NONE"
+    ],
+    "2022-08-02": [
+     "NONE"
+    ],
+    "2022-08-03": [
+     "HEAT"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, the classic sights; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "tight budget + heat day vs outdoor interests at relaxed pace",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 14,
+    "status": "FEASIBLE",
+    "cheapest_total": 1700.38,
+    "combos_total": 14,
+    "cheapest": {
+     "flight_out": "F2061",
+     "out_airport": "ORD",
+     "out_fare": 233.6,
+     "out_nonstop": true,
+     "flight_back": "F5736",
+     "back_airport": "ORD",
+     "back_fare": 481.59,
+     "stay": "CHICAGO:50619453",
+     "stay_market": "Chicago",
+     "stay_price": 90.0,
+     "stay_km_to_center": 4.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 4,
+    "budget_slack_pct": 4.1,
+    "share_combos_within_budget_pct": 28.57
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 6,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "attractions"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "B07",
+   "split": "eval",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "DFW",
+   "start_date": "2022-08-23",
+   "end_date": "2022-08-26",
+   "travelers": 3,
+   "budget_usd": 1560,
+   "wants_car": true,
+   "pace": "relaxed",
+   "interests": [
+    "family",
+    "food"
+   ],
+   "avoid": [
+    "nightlife"
+   ],
+   "hotel_preference": "central",
+   "as_of": "2022-07-24",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-08-23": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-24": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-25": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-26": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like kid-friendly places, local food; no bars; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "3 travelers + car + central lodging + low budget",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 2,
+    "n_cars": 117,
+    "status": "FEASIBLE",
+    "cheapest_total": 1496.6,
+    "combos_total": 468,
+    "cheapest": {
+     "flight_out": "F13494",
+     "out_airport": "ORD",
+     "out_fare": 127.6,
+     "out_nonstop": false,
+     "flight_back": "F9791",
+     "back_airport": "ORD",
+     "back_fare": 162.6,
+     "stay": "CHICAGO:1739355625904475687",
+     "stay_market": "Chicago",
+     "stay_price": 178.0,
+     "stay_km_to_center": 5.0,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 26,
+    "cheapest_total_without_central": 1256.6,
+    "budget_slack_pct": 4.2,
+    "share_combos_within_budget_pct": 5.56
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 6,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "family",
+     "food"
+    ],
+    "per_interest": {
+     "family": {
+      "total": 76,
+      "indoor_true": 36,
+      "outdoor_or_unknown": 40
+     },
+     "food": {
+      "total": 296,
+      "indoor_true": 290,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "B08",
+   "split": "eval",
+   "group": "B",
+   "city": "New York",
+   "origin": "BOS",
+   "start_date": "2022-10-19",
+   "end_date": "2022-10-22",
+   "travelers": 1,
+   "budget_usd": 1200,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-09-19",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-10-19": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-20": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-21": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-22": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 3,
+    "n_back_flights": 1,
+    "n_stays": 1,
+    "status": "FEASIBLE",
+    "cheapest_total": 1146.21,
+    "combos_total": 3,
+    "cheapest": {
+     "flight_out": "F6425",
+     "out_airport": "EWR",
+     "out_fare": 83.6,
+     "out_nonstop": true,
+     "flight_back": "F8069",
+     "back_airport": "LGA",
+     "back_fare": 201.61,
+     "stay": "JERSEY_CITY:1684995203635710418",
+     "stay_market": "Jersey City",
+     "stay_price": 287.0,
+     "stay_km_to_center": 4.9,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 3,
+    "cheapest_total_without_central": 877.71,
+    "budget_slack_pct": 4.7,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "B09",
+   "split": "eval",
+   "group": "B",
+   "city": "New York",
+   "origin": "IAD",
+   "start_date": "2022-09-26",
+   "end_date": "2022-09-29",
+   "travelers": 2,
+   "budget_usd": 1880,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "shows",
+    "food",
+    "nightlife"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-08-27",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-09-26": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-28": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-29": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like a show or concert, local food, bars in the evening.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 3,
+    "n_back_flights": 1,
+    "n_stays": 3,
+    "status": "FEASIBLE",
+    "cheapest_total": 1798.8,
+    "combos_total": 9,
+    "cheapest": {
+     "flight_out": "F2382",
+     "out_airport": "EWR",
+     "out_fare": 315.69,
+     "out_nonstop": false,
+     "flight_back": "F11772",
+     "back_airport": "LGA",
+     "back_fare": 198.6,
+     "stay": "JERSEY_CITY:1752333247539403365",
+     "stay_market": "Jersey City",
+     "stay_price": 256.74,
+     "stay_km_to_center": 5.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 1,
+    "cheapest_total_without_central": 1477.59,
+    "budget_slack_pct": 4.5,
+    "share_combos_within_budget_pct": 11.11
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "B10",
+   "split": "eval",
+   "group": "B",
+   "city": "New York",
+   "origin": "DFW",
+   "start_date": "2022-06-06",
+   "end_date": "2022-06-08",
+   "travelers": 2,
+   "budget_usd": 2340,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "culture",
+    "food",
+    "shopping",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-07",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-06-06": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-07": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-08": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food, some shopping, the classic sights; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "4 interests in 3 days at relaxed pace + tight budget (load vs coverage)",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 2,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 12,
+    "status": "FEASIBLE",
+    "cheapest_total": 2246.78,
+    "combos_total": 12,
+    "cheapest": {
+     "flight_out": "F11439",
+     "out_airport": "JFK",
+     "out_fare": 396.69,
+     "out_nonstop": false,
+     "flight_back": "F14262",
+     "back_airport": "JFK",
+     "back_fare": 621.7,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 4,
+    "budget_slack_pct": 4.1,
+    "share_combos_within_budget_pct": 33.33
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "B11",
+   "split": "eval",
+   "group": "B",
+   "city": "New York",
+   "origin": "ORD",
+   "start_date": "2022-07-02",
+   "end_date": "2022-07-06",
+   "travelers": 2,
+   "budget_usd": 1470,
+   "wants_car": true,
+   "pace": "relaxed",
+   "interests": [
+    "attractions",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-06-02",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-07-02": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-03": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-04": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-05": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-06": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like the classic sights, local food; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging + car",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 4,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 4,
+    "n_cars": 173,
+    "status": "FEASIBLE",
+    "cheapest_total": 1413.4,
+    "combos_total": 692,
+    "cheapest": {
+     "flight_out": "F312",
+     "out_airport": "EWR",
+     "out_fare": 113.6,
+     "out_nonstop": true,
+     "flight_back": "F14725",
+     "back_airport": "EWR",
+     "back_fare": 158.6,
+     "stay": "JERSEY_CITY:1688601111045621228",
+     "stay_market": "Jersey City",
+     "stay_price": 171.0,
+     "stay_km_to_center": 5.4,
+     "car": "C3716",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 37.0,
+     "rental_days": 5
+    },
+    "combos_within_budget": 3,
+    "cheapest_total_without_central": 1206.2,
+    "budget_slack_pct": 4.0,
+    "share_combos_within_budget_pct": 0.43
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "B12",
+   "split": "eval",
+   "group": "B",
+   "city": "New York",
+   "origin": "OAK",
+   "start_date": "2022-07-04",
+   "end_date": "2022-07-07",
+   "travelers": 1,
+   "budget_usd": 1330,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "nature",
+    "culture"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-06-04",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-07-04": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-05": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-06": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-07": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, museums and galleries; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 4,
+    "status": "FEASIBLE",
+    "cheapest_total": 1273.2,
+    "combos_total": 4,
+    "cheapest": {
+     "flight_out": "F6889",
+     "out_airport": "JFK",
+     "out_fare": 431.6,
+     "out_nonstop": false,
+     "flight_back": "F8834",
+     "back_airport": "JFK",
+     "back_fare": 328.6,
+     "stay": "JERSEY_CITY:1688601111045621228",
+     "stay_market": "Jersey City",
+     "stay_price": 171.0,
+     "stay_km_to_center": 5.4,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 2,
+    "cheapest_total_without_central": 1117.8,
+    "budget_slack_pct": 4.5,
+    "share_combos_within_budget_pct": 50.0
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "C01",
+   "split": "eval",
+   "group": "C",
+   "city": "Chicago",
+   "origin": "OAK",
+   "start_date": "2022-08-19",
+   "end_date": "2022-08-22",
+   "travelers": 4,
+   "budget_usd": 4750,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "family",
+    "attractions"
+   ],
+   "avoid": [
+    "nightlife"
+   ],
+   "hotel_preference": "any",
+   "as_of": "2022-07-20",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-08-19": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-20": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-21": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-22": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like kid-friendly places, the classic sights; no bars.",
+   "intended_conflict": true,
+   "conflict_description": "4 travelers + car (estimated capacity) + tight budget",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 8,
+    "n_cars": 116,
+    "status": "FEASIBLE",
+    "cheapest_total": 4564.34,
+    "combos_total": 928,
+    "cheapest": {
+     "flight_out": "F6329",
+     "out_airport": "ORD",
+     "out_fare": 525.6,
+     "out_nonstop": false,
+     "flight_back": "F11864",
+     "back_airport": "ORD",
+     "back_fare": 518.61,
+     "stay": "CHICAGO:1445872886162159127",
+     "stay_market": "Chicago",
+     "stay_price": 98.5,
+     "stay_km_to_center": 10.7,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 179,
+    "cheapest_total_without_car": 4472.34,
+    "budget_slack_pct": 4.1,
+    "share_combos_within_budget_pct": 19.29
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "family",
+     "attractions"
+    ],
+    "per_interest": {
+     "family": {
+      "total": 76,
+      "indoor_true": 36,
+      "outdoor_or_unknown": 40
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "C02",
+   "split": "eval",
+   "group": "C",
+   "city": "Chicago",
+   "origin": "LAX",
+   "start_date": "2022-07-04",
+   "end_date": "2022-07-08",
+   "travelers": 3,
+   "budget_usd": 2540,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-06-04",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-07-04": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-05": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-06": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-07": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-07-08": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food.",
+   "intended_conflict": true,
+   "conflict_description": "car + central lodging + tight budget (car cost vs location)",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 4,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 3,
+    "n_cars": 119,
+    "status": "FEASIBLE",
+    "cheapest_total": 2440.6,
+    "combos_total": 357,
+    "cheapest": {
+     "flight_out": "F4426",
+     "out_airport": "ORD",
+     "out_fare": 312.6,
+     "out_nonstop": true,
+     "flight_back": "F13735",
+     "back_airport": "ORD",
+     "back_fare": 291.6,
+     "stay": "CHICAGO:1756517745731133496",
+     "stay_market": "Chicago",
+     "stay_price": 128.25,
+     "stay_km_to_center": 4.4,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 5
+    },
+    "combos_within_budget": 38,
+    "cheapest_total_without_car": 2325.6,
+    "budget_slack_pct": 4.1,
+    "share_combos_within_budget_pct": 10.64
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 11,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "food"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 5,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "C03",
+   "split": "eval",
+   "group": "C",
+   "city": "Chicago",
+   "origin": "IAD",
+   "start_date": "2022-04-28",
+   "end_date": "2022-05-01",
+   "travelers": 2,
+   "budget_usd": 1550,
+   "wants_car": true,
+   "pace": "relaxed",
+   "interests": [
+    "nature",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-04-26",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-04-28.json",
+    "data/weather/chicago_2022-04-29.json",
+    "data/weather/chicago_2022-04-30.json",
+    "data/weather/chicago_2022-05-01.json"
+   ],
+   "weather_expected": {
+    "2022-04-28": [
+     "NONE"
+    ],
+    "2022-04-29": [
+     "NONE"
+    ],
+    "2022-04-30": [
+     "RAIN"
+    ],
+    "2022-05-01": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, local food; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "car + tight budget + rain day vs nature",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 18,
+    "n_cars": 120,
+    "status": "FEASIBLE",
+    "cheapest_total": 1489.9,
+    "combos_total": 2160,
+    "cheapest": {
+     "flight_out": "F4831",
+     "out_airport": "ORD",
+     "out_fare": 183.6,
+     "out_nonstop": true,
+     "flight_back": "F3500",
+     "back_airport": "ORD",
+     "back_fare": 388.6,
+     "stay": "CHICAGO:1134351668237383955",
+     "stay_market": "Chicago",
+     "stay_price": 84.5,
+     "stay_km_to_center": 9.5,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 81,
+    "cheapest_total_without_car": 1397.9,
+    "budget_slack_pct": 4.0,
+    "share_combos_within_budget_pct": 3.75
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 6,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "food"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [
+     "2022-04-30"
+    ],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "C04",
+   "split": "eval",
+   "group": "C",
+   "city": "Chicago",
+   "origin": "MIA",
+   "start_date": "2022-10-28",
+   "end_date": "2022-10-30",
+   "travelers": 4,
+   "budget_usd": 1600,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "shows"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-09-28",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-10-28": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-29": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-30": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, a show or concert.",
+   "intended_conflict": true,
+   "conflict_description": "4 travelers + car + short trip + tight budget",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 2,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 2,
+    "n_cars": 121,
+    "status": "FEASIBLE",
+    "cheapest_total": 1532.94,
+    "combos_total": 242,
+    "cheapest": {
+     "flight_out": "F2806",
+     "out_airport": "ORD",
+     "out_fare": 157.6,
+     "out_nonstop": false,
+     "flight_back": "F9923",
+     "back_airport": "ORD",
+     "back_fare": 172.6,
+     "stay": "CHICAGO:54167860",
+     "stay_market": "Chicago",
+     "stay_price": 71.57,
+     "stay_km_to_center": 5.5,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 3
+    },
+    "combos_within_budget": 47,
+    "cheapest_total_without_car": 1463.94,
+    "budget_slack_pct": 4.4,
+    "share_combos_within_budget_pct": 19.42
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 5,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "shows"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "shows": {
+      "total": 44,
+      "indoor_true": 44,
+      "outdoor_or_unknown": 0
+     }
+    },
+    "rain_days": [],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "C05",
+   "split": "eval",
+   "group": "C",
+   "city": "New York",
+   "origin": "IAD",
+   "start_date": "2022-11-05",
+   "end_date": "2022-11-08",
+   "travelers": 4,
+   "budget_usd": 2200,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "attractions",
+    "family"
+   ],
+   "avoid": [
+    "nightlife"
+   ],
+   "hotel_preference": "any",
+   "as_of": "2022-10-06",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-11-05": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-06": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-07": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-08": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like the classic sights, kid-friendly places; no bars.",
+   "intended_conflict": true,
+   "conflict_description": "4 travelers + car + tight budget",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 11,
+    "n_cars": 173,
+    "status": "FEASIBLE",
+    "cheapest_total": 2106.4,
+    "combos_total": 1903,
+    "cheapest": {
+     "flight_out": "F13301",
+     "out_airport": "EWR",
+     "out_fare": 248.6,
+     "out_nonstop": false,
+     "flight_back": "F12153",
+     "back_airport": "EWR",
+     "back_fare": 148.6,
+     "stay": "JERSEY_CITY:1594317085332502270",
+     "stay_market": "Jersey City",
+     "stay_price": 119.2,
+     "stay_km_to_center": 6.5,
+     "car": "C1326",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 40.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 5,
+    "cheapest_total_without_car": 1946.4,
+    "budget_slack_pct": 4.4,
+    "share_combos_within_budget_pct": 0.26
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "C06",
+   "split": "eval",
+   "group": "C",
+   "city": "New York",
+   "origin": "SFO",
+   "start_date": "2022-04-27",
+   "end_date": "2022-04-30",
+   "travelers": 3,
+   "budget_usd": 2140,
+   "wants_car": true,
+   "pace": "relaxed",
+   "interests": [
+    "food",
+    "culture"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-03-28",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-04-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-04-28": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-04-29": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-04-30": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like local food, museums and galleries; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "car + central lodging + tight budget",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 6,
+    "n_cars": 173,
+    "status": "FEASIBLE",
+    "cheapest_total": 2049.4,
+    "combos_total": 1038,
+    "cheapest": {
+     "flight_out": "F1824",
+     "out_airport": "EWR",
+     "out_fare": 247.6,
+     "out_nonstop": false,
+     "flight_back": "F14944",
+     "back_airport": "EWR",
+     "back_fare": 277.2,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": "C1326",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 40.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 7,
+    "cheapest_total_without_car": 1889.4,
+    "budget_slack_pct": 4.4,
+    "share_combos_within_budget_pct": 0.67
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "D01",
+   "split": "eval",
+   "group": "D",
+   "city": "Chicago",
+   "origin": "LGA",
+   "start_date": "2022-05-05",
+   "end_date": "2022-05-08",
+   "travelers": 2,
+   "budget_usd": 1270,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "nature",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-03",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-05-05.json",
+    "data/weather/chicago_2022-05-06.json",
+    "data/weather/chicago_2022-05-07.json",
+    "data/weather/chicago_2022-05-08.json"
+   ],
+   "weather_expected": {
+    "2022-05-05": [
+     "RAIN"
+    ],
+    "2022-05-06": [
+     "RAIN"
+    ],
+    "2022-05-07": [
+     "NONE"
+    ],
+    "2022-05-08": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, the classic sights.",
+   "intended_conflict": true,
+   "conflict_description": "outdoor interests, >=2 rain days in forecast",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 17,
+    "status": "FEASIBLE",
+    "cheapest_total": 975.9,
+    "combos_total": 17,
+    "cheapest": {
+     "flight_out": "F7337",
+     "out_airport": "ORD",
+     "out_fare": 164.6,
+     "out_nonstop": true,
+     "flight_back": "F7367",
+     "back_airport": "ORD",
+     "back_fare": 196.6,
+     "stay": "CHICAGO:1134351668237383955",
+     "stay_market": "Chicago",
+     "stay_price": 84.5,
+     "stay_km_to_center": 9.5,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 12,
+    "budget_slack_pct": 30.1,
+    "share_combos_within_budget_pct": 70.59
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "attractions"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     }
+    },
+    "rain_days": [
+     "2022-05-05",
+     "2022-05-06"
+    ],
+    "dry_days": 2,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "D02",
+   "split": "eval",
+   "group": "D",
+   "city": "Chicago",
+   "origin": "OAK",
+   "start_date": "2022-07-15",
+   "end_date": "2022-07-19",
+   "travelers": 1,
+   "budget_usd": 2140,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "nature",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-07-13",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-07-15.json",
+    "data/weather/chicago_2022-07-16.json",
+    "data/weather/chicago_2022-07-17.json",
+    "data/weather/chicago_2022-07-18.json",
+    "data/weather/chicago_2022-07-19.json"
+   ],
+   "weather_expected": {
+    "2022-07-15": [
+     "RAIN"
+    ],
+    "2022-07-16": [
+     "NONE"
+    ],
+    "2022-07-17": [
+     "RAIN"
+    ],
+    "2022-07-18": [
+     "NONE"
+    ],
+    "2022-07-19": [
+     "HEAT"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, local food; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "nature at relaxed pace, >=2 rain days",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 4,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 12,
+    "status": "FEASIBLE",
+    "cheapest_total": 1638.7,
+    "combos_total": 24,
+    "cheapest": {
+     "flight_out": "F6464",
+     "out_airport": "ORD",
+     "out_fare": 753.1,
+     "out_nonstop": false,
+     "flight_back": "F3243",
+     "back_airport": "ORD",
+     "back_fare": 525.6,
+     "stay": "CHICAGO:50619453",
+     "stay_market": "Chicago",
+     "stay_price": 90.0,
+     "stay_km_to_center": 4.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 24,
+    "budget_slack_pct": 30.6,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "food"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [
+     "2022-07-15",
+     "2022-07-17"
+    ],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "D03",
+   "split": "eval",
+   "group": "D",
+   "city": "Chicago",
+   "origin": "DEN",
+   "start_date": "2022-08-24",
+   "end_date": "2022-08-27",
+   "travelers": 2,
+   "budget_usd": 1470,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "nature",
+    "family"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-08-22",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-08-24.json",
+    "data/weather/chicago_2022-08-25.json",
+    "data/weather/chicago_2022-08-26.json",
+    "data/weather/chicago_2022-08-27.json"
+   ],
+   "weather_expected": {
+    "2022-08-24": [
+     "NONE"
+    ],
+    "2022-08-25": [
+     "RAIN"
+    ],
+    "2022-08-26": [
+     "NONE"
+    ],
+    "2022-08-27": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, kid-friendly places.",
+   "intended_conflict": true,
+   "conflict_description": "nature + family outdoors, rain day, car",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 14,
+    "n_cars": 117,
+    "status": "FEASIBLE",
+    "cheapest_total": 1124.4,
+    "combos_total": 1638,
+    "cheapest": {
+     "flight_out": "F9058",
+     "out_airport": "ORD",
+     "out_fare": 127.6,
+     "out_nonstop": false,
+     "flight_back": "F8844",
+     "back_airport": "ORD",
+     "back_fare": 253.6,
+     "stay": "CHICAGO:50619453",
+     "stay_market": "Chicago",
+     "stay_price": 90.0,
+     "stay_km_to_center": 4.6,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 818,
+    "budget_slack_pct": 30.7,
+    "share_combos_within_budget_pct": 49.94
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "family"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "family": {
+      "total": 76,
+      "indoor_true": 36,
+      "outdoor_or_unknown": 40
+     }
+    },
+    "rain_days": [
+     "2022-08-25"
+    ],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "D04",
+   "split": "eval",
+   "group": "D",
+   "city": "Chicago",
+   "origin": "LAX",
+   "start_date": "2022-05-28",
+   "end_date": "2022-05-31",
+   "travelers": 1,
+   "budget_usd": 1330,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "nature",
+    "culture"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-26",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-05-28.json",
+    "data/weather/chicago_2022-05-29.json",
+    "data/weather/chicago_2022-05-30.json",
+    "data/weather/chicago_2022-05-31.json"
+   ],
+   "weather_expected": {
+    "2022-05-28": [
+     "NONE"
+    ],
+    "2022-05-29": [
+     "NONE"
+    ],
+    "2022-05-30": [
+     "NONE"
+    ],
+    "2022-05-31": [
+     "WIND"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, museums and galleries.",
+   "intended_conflict": true,
+   "conflict_description": "outdoor interest on a windy day (flag only)",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 6,
+    "status": "FEASIBLE",
+    "cheapest_total": 1020.97,
+    "combos_total": 12,
+    "cheapest": {
+     "flight_out": "F3045",
+     "out_airport": "ORD",
+     "out_fare": 352.6,
+     "out_nonstop": true,
+     "flight_back": "F9157",
+     "back_airport": "ORD",
+     "back_fare": 342.6,
+     "stay": "CHICAGO:1723292206589067318",
+     "stay_market": "Chicago",
+     "stay_price": 108.59,
+     "stay_km_to_center": 9.5,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 12,
+    "budget_slack_pct": 30.3,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "culture"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "D05",
+   "split": "eval",
+   "group": "D",
+   "city": "New York",
+   "origin": "DFW",
+   "start_date": "2022-05-18",
+   "end_date": "2022-05-21",
+   "travelers": 2,
+   "budget_usd": 1660,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "nature",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-16",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/nyc_2022-05-18.json",
+    "data/weather/nyc_2022-05-19.json",
+    "data/weather/nyc_2022-05-20.json",
+    "data/weather/nyc_2022-05-21.json"
+   ],
+   "weather_expected": {
+    "2022-05-18": [
+     "NONE"
+    ],
+    "2022-05-19": [
+     "RAIN"
+    ],
+    "2022-05-20": [
+     "RAIN"
+    ],
+    "2022-05-21": [
+     "HEAT"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, the classic sights.",
+   "intended_conflict": true,
+   "conflict_description": "outdoor interests, >=2 rain days",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 3,
+    "n_back_flights": 2,
+    "n_stays": 12,
+    "status": "FEASIBLE",
+    "cheapest_total": 1269.42,
+    "combos_total": 72,
+    "cheapest": {
+     "flight_out": "F5008",
+     "out_airport": "LGA",
+     "out_fare": 259.6,
+     "out_nonstop": true,
+     "flight_back": "F12770",
+     "back_airport": "LGA",
+     "back_fare": 217.61,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 33,
+    "budget_slack_pct": 30.8,
+    "share_combos_within_budget_pct": 45.83
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "D06",
+   "split": "eval",
+   "group": "D",
+   "city": "New York",
+   "origin": "DEN",
+   "start_date": "2022-06-14",
+   "end_date": "2022-06-17",
+   "travelers": 1,
+   "budget_usd": 1520,
+   "wants_car": true,
+   "pace": "relaxed",
+   "interests": [
+    "nature",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-06-12",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/nyc_2022-06-14.json",
+    "data/weather/nyc_2022-06-15.json",
+    "data/weather/nyc_2022-06-16.json",
+    "data/weather/nyc_2022-06-17.json"
+   ],
+   "weather_expected": {
+    "2022-06-14": [
+     "NONE"
+    ],
+    "2022-06-15": [
+     "NONE"
+    ],
+    "2022-06-16": [
+     "RAIN"
+    ],
+    "2022-06-17": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, local food; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "nature + car, rain day",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 12,
+    "n_cars": 176,
+    "status": "FEASIBLE",
+    "cheapest_total": 1162.7,
+    "combos_total": 2112,
+    "cheapest": {
+     "flight_out": "F1066",
+     "out_airport": "EWR",
+     "out_fare": 408.6,
+     "out_nonstop": false,
+     "flight_back": "F3183",
+     "back_airport": "EWR",
+     "back_fare": 291.1,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": "C3716",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 37.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 453,
+    "budget_slack_pct": 30.7,
+    "share_combos_within_budget_pct": 21.45
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "E01",
+   "split": "eval",
+   "group": "E",
+   "city": "Chicago",
+   "origin": "CLT",
+   "start_date": "2022-04-25",
+   "end_date": "2022-04-28",
+   "travelers": 1,
+   "budget_usd": 1500,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-03-26",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-04-25": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-04-26": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-04-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-04-28": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food.",
+   "intended_conflict": true,
+   "conflict_description": "origin CLT has outbound flights to Chicago but no return records in the catalog",
+   "expected_status": "NO_PACKAGE_IN_CATALOG",
+   "expected_reason": "no return flight ORD->CLT on 2022-04-28 for 1",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [
+     "no return flight ORD->CLT on 2022-04-28 for 1"
+    ],
+    "n_out_flights": 1,
+    "n_back_flights": 0,
+    "n_stays": 18,
+    "status": "NO_PACKAGE_IN_CATALOG"
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "food"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "E02",
+   "split": "eval",
+   "group": "E",
+   "city": "Chicago",
+   "origin": "SFO",
+   "start_date": "2022-06-18",
+   "end_date": "2022-06-21",
+   "travelers": 2,
+   "budget_usd": 1770,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-19",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-06-18": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-19": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-20": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-21": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food.",
+   "intended_conflict": true,
+   "conflict_description": "budget below the cheapest package in the catalog",
+   "expected_status": "NO_PACKAGE_IN_CATALOG",
+   "expected_reason": "budget 1770 below cheapest catalog package 2090.82",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [
+     "budget 1770 below cheapest catalog package 2090.82"
+    ],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 10,
+    "n_cars": 118,
+    "status": "NO_PACKAGE_IN_CATALOG",
+    "cheapest_total": 2090.82,
+    "combos_total": 1180,
+    "cheapest": {
+     "flight_out": "F3154",
+     "out_airport": "ORD",
+     "out_fare": 527.21,
+     "out_nonstop": false,
+     "flight_back": "F6576",
+     "back_airport": "ORD",
+     "back_fare": 337.2,
+     "stay": "CHICAGO:50619453",
+     "stay_market": "Chicago",
+     "stay_price": 90.0,
+     "stay_km_to_center": 4.6,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "food"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "E03",
+   "split": "eval",
+   "group": "E",
+   "city": "New York",
+   "origin": "MIA",
+   "start_date": "2022-08-05",
+   "end_date": "2022-08-08",
+   "travelers": 5,
+   "budget_usd": 4910,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "family",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-07-06",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-08-05": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-06": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-07": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-08-08": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like kid-friendly places, the classic sights.",
+   "intended_conflict": true,
+   "conflict_description": "5 travelers with a car; capacity is only estimated, MVP limit is 4",
+   "expected_status": "NEEDS_DATA",
+   "expected_reason": "car requested for 5 travelers; MVP supports <=4 (capacity is only an estimate)",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [
+     "car requested for 5 travelers; MVP supports <=4 (capacity is only an estimate)"
+    ],
+    "status": "NEEDS_DATA",
+    "same_trip_without_car": "FEASIBLE"
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "E04",
+   "split": "eval",
+   "group": "E",
+   "city": "New York",
+   "origin": "CLT",
+   "start_date": "2022-11-15",
+   "end_date": "2022-11-18",
+   "travelers": 2,
+   "budget_usd": 2500,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "shows"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-10-16",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-11-15": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-16": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-17": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-18": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, a show or concert.",
+   "intended_conflict": true,
+   "conflict_description": "origin CLT has outbound flights to New York but no return records in the catalog",
+   "expected_status": "NO_PACKAGE_IN_CATALOG",
+   "expected_reason": "no return flight JFK/LGA/EWR->CLT on 2022-11-18 for 2",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [
+     "no return flight JFK/LGA/EWR->CLT on 2022-11-18 for 2"
+    ],
+    "n_out_flights": 1,
+    "n_back_flights": 0,
+    "n_stays": 16,
+    "status": "NO_PACKAGE_IN_CATALOG"
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "V01",
+   "split": "dev",
+   "group": "A",
+   "city": "Chicago",
+   "origin": "LGA",
+   "start_date": "2022-09-17",
+   "end_date": "2022-09-20",
+   "travelers": 2,
+   "budget_usd": 1780,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-08-18",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-09-17": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-18": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-19": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-20": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, local food.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 1,
+    "status": "FEASIBLE",
+    "cheapest_total": 1112.4,
+    "combos_total": 1,
+    "cheapest": {
+     "flight_out": "F6749",
+     "out_airport": "ORD",
+     "out_fare": 138.6,
+     "out_nonstop": true,
+     "flight_back": "F3335",
+     "back_airport": "ORD",
+     "back_fare": 138.6,
+     "stay": "CHICAGO:1737184297592451593",
+     "stay_market": "Chicago",
+     "stay_price": 186.0,
+     "stay_km_to_center": 9.9,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 1,
+    "budget_slack_pct": 60.0,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "culture",
+     "food"
+    ],
+    "per_interest": {
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "V02",
+   "split": "dev",
+   "group": "B",
+   "city": "Chicago",
+   "origin": "BOS",
+   "start_date": "2022-09-25",
+   "end_date": "2022-09-28",
+   "travelers": 1,
+   "budget_usd": 1010,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "food",
+    "culture"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-08-26",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-09-25": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-26": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-27": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-09-28": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like local food, museums and galleries; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 1,
+    "status": "FEASIBLE",
+    "cheapest_total": 964.71,
+    "combos_total": 1,
+    "cheapest": {
+     "flight_out": "F12252",
+     "out_airport": "ORD",
+     "out_fare": 217.61,
+     "out_nonstop": false,
+     "flight_back": "F5999",
+     "back_airport": "ORD",
+     "back_fare": 112.6,
+     "stay": "CHICAGO:1178920416305642194",
+     "stay_market": "Chicago",
+     "stay_price": 211.5,
+     "stay_km_to_center": 4.3,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 1,
+    "cheapest_total_without_central": 595.71,
+    "budget_slack_pct": 4.7,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 6,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "food",
+     "culture"
+    ],
+    "per_interest": {
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     },
+     "culture": {
+      "total": 121,
+      "indoor_true": 97,
+      "outdoor_or_unknown": 24
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "V03",
+   "split": "dev",
+   "group": "C",
+   "city": "Chicago",
+   "origin": "DFW",
+   "start_date": "2022-11-12",
+   "end_date": "2022-11-15",
+   "travelers": 3,
+   "budget_usd": 1390,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "family",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-10-13",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-11-12": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-13": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-14": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-11-15": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like kid-friendly places, the classic sights.",
+   "intended_conflict": true,
+   "conflict_description": "car + tight budget",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 10,
+    "n_cars": 118,
+    "status": "FEASIBLE",
+    "cheapest_total": 1336.31,
+    "combos_total": 1180,
+    "cheapest": {
+     "flight_out": "F4983",
+     "out_airport": "ORD",
+     "out_fare": 171.6,
+     "out_nonstop": false,
+     "flight_back": "F3151",
+     "back_airport": "ORD",
+     "back_fare": 171.6,
+     "stay": "CHICAGO:54167860",
+     "stay_market": "Chicago",
+     "stay_price": 71.57,
+     "stay_km_to_center": 5.5,
+     "car": "C2573",
+     "car_type": "car",
+     "car_capacity_estimate": 4,
+     "car_daily_rate": 23.0,
+     "rental_days": 4
+    },
+    "combos_within_budget": 22,
+    "cheapest_total_without_car": 1244.31,
+    "budget_slack_pct": 4.0,
+    "share_combos_within_budget_pct": 1.86
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "family",
+     "attractions"
+    ],
+    "per_interest": {
+     "family": {
+      "total": 76,
+      "indoor_true": 36,
+      "outdoor_or_unknown": 40
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "V04",
+   "split": "dev",
+   "group": "D",
+   "city": "Chicago",
+   "origin": "MIA",
+   "start_date": "2022-10-04",
+   "end_date": "2022-10-07",
+   "travelers": 2,
+   "budget_usd": 1920,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "nature",
+    "attractions"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-10-02",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/chicago_2022-10-04.json",
+    "data/weather/chicago_2022-10-05.json",
+    "data/weather/chicago_2022-10-06.json",
+    "data/weather/chicago_2022-10-07.json"
+   ],
+   "weather_expected": {
+    "2022-10-04": [
+     "NONE"
+    ],
+    "2022-10-05": [
+     "NONE"
+    ],
+    "2022-10-06": [
+     "RAIN"
+    ],
+    "2022-10-07": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, the classic sights.",
+   "intended_conflict": true,
+   "conflict_description": "outdoor interests, rain day",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 3,
+    "status": "FEASIBLE",
+    "cheapest_total": 1471.9,
+    "combos_total": 3,
+    "cheapest": {
+     "flight_out": "F7577",
+     "out_airport": "ORD",
+     "out_fare": 308.6,
+     "out_nonstop": true,
+     "flight_back": "F13711",
+     "back_airport": "ORD",
+     "back_fare": 279.6,
+     "stay": "CHICAGO:1445872886162159127",
+     "stay_market": "Chicago",
+     "stay_price": 98.5,
+     "stay_km_to_center": 10.7,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 3,
+    "budget_slack_pct": 30.4,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "nature",
+     "attractions"
+    ],
+    "per_interest": {
+     "nature": {
+      "total": 49,
+      "indoor_true": 3,
+      "outdoor_or_unknown": 46
+     },
+     "attractions": {
+      "total": 106,
+      "indoor_true": 40,
+      "outdoor_or_unknown": 66
+     }
+    },
+    "rain_days": [
+     "2022-10-06"
+    ],
+    "dry_days": 3,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "V05",
+   "split": "dev",
+   "group": "E",
+   "city": "Chicago",
+   "origin": "JFK",
+   "start_date": "2022-06-07",
+   "end_date": "2022-06-10",
+   "travelers": 6,
+   "budget_usd": 7130,
+   "wants_car": true,
+   "pace": "normal",
+   "interests": [
+    "family",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-08",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-06-07": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-08": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-09": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-06-10": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like kid-friendly places, local food.",
+   "intended_conflict": true,
+   "conflict_description": "6 travelers with a car; capacity is only estimated, MVP limit is 4",
+   "expected_status": "NEEDS_DATA",
+   "expected_reason": "car requested for 6 travelers; MVP supports <=4 (capacity is only an estimate)",
+   "notes": "car capacity is an ESTIMATE by vehicle type (capacityEstimate), not verified seats",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [
+     "car requested for 6 travelers; MVP supports <=4 (capacity is only an estimate)"
+    ],
+    "status": "NEEDS_DATA",
+    "same_trip_without_car": "FEASIBLE"
+   },
+   "oracle_places": {
+    "status": "PASS",
+    "activity_slots_estimate": 8,
+    "interests_needed": 2,
+    "coverable_interests": [
+     "family",
+     "food"
+    ],
+    "per_interest": {
+     "family": {
+      "total": 76,
+      "indoor_true": 36,
+      "outdoor_or_unknown": 40
+     },
+     "food": {
+      "total": 365,
+      "indoor_true": 359,
+      "outdoor_or_unknown": 6
+     }
+    },
+    "rain_days": [],
+    "dry_days": 4,
+    "note": "necessary-condition check (slots + tag/indoor availability), not a full schedule; ratings not used"
+   }
+  },
+  {
+   "id": "V06",
+   "split": "dev",
+   "group": "A",
+   "city": "New York",
+   "origin": "LAX",
+   "start_date": "2022-04-30",
+   "end_date": "2022-05-03",
+   "travelers": 1,
+   "budget_usd": 1540,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "culture",
+    "shows"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-03-31",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-04-30": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-01": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-02": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-05-03": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like museums and galleries, a show or concert.",
+   "intended_conflict": false,
+   "conflict_description": "",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 2,
+    "n_stays": 12,
+    "status": "FEASIBLE",
+    "cheapest_total": 957.2,
+    "combos_total": 24,
+    "cheapest": {
+     "flight_out": "F15160",
+     "out_airport": "EWR",
+     "out_fare": 363.6,
+     "out_nonstop": true,
+     "flight_back": "F12964",
+     "back_airport": "JFK",
+     "back_fare": 278.6,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 21,
+    "budget_slack_pct": 60.9,
+    "share_combos_within_budget_pct": 87.5
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "V07",
+   "split": "dev",
+   "group": "B",
+   "city": "New York",
+   "origin": "BOS",
+   "start_date": "2022-10-23",
+   "end_date": "2022-10-26",
+   "travelers": 2,
+   "budget_usd": 1010,
+   "wants_car": false,
+   "pace": "relaxed",
+   "interests": [
+    "food",
+    "culture"
+   ],
+   "avoid": [],
+   "hotel_preference": "central",
+   "as_of": "2022-09-23",
+   "weather_fixture_needed": false,
+   "weather_fixture_files": [],
+   "weather_expected": {
+    "2022-10-23": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-24": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-25": [
+     "OUT_OF_HORIZON"
+    ],
+    "2022-10-26": [
+     "OUT_OF_HORIZON"
+    ]
+   },
+   "free_text": "I would like local food, museums and galleries; no packed days.",
+   "intended_conflict": true,
+   "conflict_description": "low budget + central lodging",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 2,
+    "status": "FEASIBLE",
+    "cheapest_total": 969.4,
+    "combos_total": 2,
+    "cheapest": {
+     "flight_out": "F5425",
+     "out_airport": "LGA",
+     "out_fare": 108.6,
+     "out_nonstop": true,
+     "flight_back": "F8572",
+     "back_airport": "LGA",
+     "back_fare": 98.6,
+     "stay": "JERSEY_CITY:1587393551660639936",
+     "stay_market": "Jersey City",
+     "stay_price": 185.0,
+     "stay_km_to_center": 5.2,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 1,
+    "cheapest_total_without_central": 772.0,
+    "budget_slack_pct": 4.2,
+    "share_combos_within_budget_pct": 50.0
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  },
+  {
+   "id": "V08",
+   "split": "dev",
+   "group": "D",
+   "city": "New York",
+   "origin": "OAK",
+   "start_date": "2022-05-30",
+   "end_date": "2022-06-02",
+   "travelers": 2,
+   "budget_usd": 4170,
+   "wants_car": false,
+   "pace": "normal",
+   "interests": [
+    "nature",
+    "food"
+   ],
+   "avoid": [],
+   "hotel_preference": "any",
+   "as_of": "2022-05-28",
+   "weather_fixture_needed": true,
+   "weather_fixture_files": [
+    "data/weather/nyc_2022-05-30.json",
+    "data/weather/nyc_2022-05-31.json",
+    "data/weather/nyc_2022-06-01.json",
+    "data/weather/nyc_2022-06-02.json"
+   ],
+   "weather_expected": {
+    "2022-05-30": [
+     "NONE"
+    ],
+    "2022-05-31": [
+     "HEAT"
+    ],
+    "2022-06-01": [
+     "RAIN"
+    ],
+    "2022-06-02": [
+     "NONE"
+    ]
+   },
+   "free_text": "I would like parks and the waterfront, local food.",
+   "intended_conflict": true,
+   "conflict_description": "outdoor interests, rain day",
+   "expected_status": "OK_PLAN",
+   "expected_reason": "",
+   "notes": "NYC lodging in catalog for short stays is Jersey City/Newark (EWR mapping); NYC-market listings require >=30 nights; place-dependent checks to be filled when places data exists",
+   "oracle_package": {
+    "nights": 3,
+    "reasons": [],
+    "n_out_flights": 1,
+    "n_back_flights": 1,
+    "n_stays": 12,
+    "status": "FEASIBLE",
+    "cheapest_total": 3203.58,
+    "combos_total": 12,
+    "cheapest": {
+     "flight_out": "F7730",
+     "out_airport": "LGA",
+     "out_fare": 827.09,
+     "out_nonstop": false,
+     "flight_back": "F3641",
+     "back_airport": "EWR",
+     "back_fare": 617.2,
+     "stay": "JERSEY_CITY:1076229137857560672",
+     "stay_market": "Jersey City",
+     "stay_price": 105.0,
+     "stay_km_to_center": 5.6,
+     "car": null,
+     "car_type": null,
+     "car_capacity_estimate": null,
+     "car_daily_rate": null,
+     "rental_days": null
+    },
+    "combos_within_budget": 12,
+    "budget_slack_pct": 30.2,
+    "share_combos_within_budget_pct": 100.0
+   },
+   "oracle_places": {
+    "status": "TO_BE_FILLED",
+    "reason": "nyc_places.csv not available yet"
+   }
+  }
+ ]
+}

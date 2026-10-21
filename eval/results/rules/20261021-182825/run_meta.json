@@ -1,0 +1,16 @@
+{
+ "system": "rules",
+ "split": "eval",
+ "city": "chicago",
+ "ids": null,
+ "started": "2026-10-21T18:28:25+03:00",
+ "git_commit": "a847120",
+ "cases_sha256": "f2bd63d99d8fd3c6958a081d2513e84bd31095890489e1fe55c731670b6a6fdc",
+ "frozen_sha256": "f2bd63d99d8fd3c6958a081d2513e84bd31095890489e1fe55c731670b6a6fdc",
+ "frozen_ok": true,
+ "n_cases": 24,
+ "weather_mode": "fixture",
+ "places_missing_for": [],
+ "note": "",
+ "finished": "2026-10-21T18:28:26+03:00"
+}
