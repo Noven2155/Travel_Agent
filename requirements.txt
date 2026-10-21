@@ -1,0 +1,13 @@
+# core (system A, harness, tests)
+pydantic>=2.7
+pandas>=2.0
+pytest>=8
+# systems B and C
+crewai>=1.15,<1.16
+# UI
+streamlit>=1.40
+pydeck>=0.9
+# optional: headless screenshot of the UI (python -m playwright install chromium)
+# playwright>=1.45
+# optional: free-tier providers routed through LiteLLM (e.g. groq/*)
+# litellm
