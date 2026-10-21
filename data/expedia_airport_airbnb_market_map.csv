@@ -1,0 +1,17 @@
+airport_code,flight_rows_in_sample,share_of_flight_rows,coverage_status,source_market,note
+ATL,1244,0.0622,not covered,,No corresponding city-level Inside Airbnb market in this build
+BOS,1457,0.0728,covered,Boston,Boston city market
+CLT,1272,0.0636,not covered,,No corresponding city-level Inside Airbnb market in this build
+DEN,1091,0.0546,covered,Denver,Denver city market
+DFW,1503,0.0751,covered,Dallas; Fort Worth,Dallas-Fort Worth metro components
+DTW,1117,0.0558,not covered,,No corresponding city-level Inside Airbnb market in this build
+EWR,983,0.0491,covered,Newark; Jersey City,New York metro components
+IAD,839,0.042,covered,"Washington, D.C.",Washington metro market
+JFK,1092,0.0546,covered,New York City,New York metro market
+LAX,2025,0.1013,covered,Los Angeles,Los Angeles city market
+LGA,1422,0.0711,covered,New York City,New York metro market
+MIA,1268,0.0634,regional proxy,Broward County,"Broward County is in South Florida, not Miami proper"
+OAK,879,0.044,covered,Oakland,Oakland city market
+ORD,1366,0.0683,covered,Chicago,Chicago city market
+PHL,1113,0.0556,not covered,,No corresponding city-level Inside Airbnb market in this build
+SFO,1329,0.0664,covered,San Francisco,San Francisco city market

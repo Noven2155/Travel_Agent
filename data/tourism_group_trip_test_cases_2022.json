@@ -1,0 +1,922 @@
+{
+  "dataset_id": "tourism_group_trip_test_cases_2022_v1",
+  "synthetic": true,
+  "purpose": "מקרי בדיקה לתיאום תאריכים קבוצתי ולבדיקת שיחה אדפטיבית מול בייסליין של כללים קבועים.",
+  "source_files": [
+    "traveler_calendars_demo_2022.json",
+    "expedia_flight_sample_20k.csv",
+    "cornell_car_rental_enriched.csv",
+    "car_availability_demo_2022.csv"
+  ],
+  "data_coverage": {
+    "calendar_start_date": "2022-01-01",
+    "calendar_end_date": "2022-12-31",
+    "flight_date_start": "2022-04-17",
+    "flight_date_end": "2022-11-19",
+    "january_april_handling": "לחלון ינואר–אפריל יש כיסוי טיסות רק מ-17 באפריל עד 30 באפריל 2022; תוצאה חלקית זו מסומנת בכל מקרה כזה."
+  },
+  "evaluation_scope": "התאריכים התואמים כאן נבדקו מול יומני הדמו בלבד ובכפוף לכך שתאריך היציאה מופיע בטווח תאריכי הטיסות. הם אינם הוכחה שקיימת חבילת טיסה הלוך-חזור ורכב פנוי בפועל.",
+  "rules": [
+    "ימי חסימה ביומן הם מגבלה קשיחה, כוללים את תאריך ההתחלה והסיום, ואסור לסוכן לשנות אותם.",
+    "משך הנסיעה נמדד בימים קלנדריים וכולל את יום היציאה ואת היום האחרון.",
+    "העדפה רכה או הרחבת חלון תאריכים משתנה רק לאחר אישור מפורש של המטייל/ת.",
+    "המועמדויות ביומן מחושבות לכל תאריך יציאה אפשרי; כל ימי הטיול חייבים להימצא בחלון המקובל ולהיות פנויים לכל המשתתפים."
+  ],
+  "season_interpretation_for_test_oracle": {
+    "summer_2022": [
+      "2022-06-01",
+      "2022-08-31"
+    ]
+  },
+  "traveler_calendar_dataset_id": "traveler_calendars_demo_2022_v1",
+  "scenarios": [
+    {
+      "scenario_id": "S01",
+      "test_type": "straightforward_broad_window",
+      "trip_duration_days": 3,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "מתישהו בקיץ 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "מתישהו בקיץ 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "מתישהו בקיץ 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "מתישהו בקיץ 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "מתישהו בקיץ 2022 מתאים לי."
+        }
+      ],
+      "initial_group_request": "אנחנו חמישה ורוצים לנסוע מתישהו בקיץ 2022. נסיעה של 3 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לתרגם את \"בקיץ\" לחלון שהוגדר במערכת (1 ביוני–31 באוגוסט 2022).",
+        "למצוא תאריכים שבהם כל חמשת היומנים פנויים.",
+        "לא להציג תאריך חסום כזמין."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [
+          "2022-06-06",
+          "2022-06-07",
+          "2022-06-19",
+          "2022-06-20",
+          "2022-06-21",
+          "2022-06-22",
+          "2022-06-23",
+          "2022-06-24",
+          "2022-06-25",
+          "2022-06-26",
+          "2022-06-27",
+          "2022-06-28",
+          "2022-07-17",
+          "2022-07-18",
+          "2022-07-19",
+          "2022-07-20",
+          "2022-07-21",
+          "2022-07-22",
+          "2022-08-08",
+          "2022-08-09",
+          "2022-08-23",
+          "2022-08-24",
+          "2022-08-25",
+          "2022-08-26",
+          "2022-08-27",
+          "2022-08-28",
+          "2022-08-29"
+        ],
+        "initial_calendar_compatible_start_count": 27
+      }
+    },
+    {
+      "scenario_id": "S02",
+      "test_type": "broad_window_with_calendar_blocks",
+      "trip_duration_days": 4,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "מבחינתי כל זמן מאמצע מאי עד אמצע יולי."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "מבחינתי כל זמן מאמצע מאי עד אמצע יולי."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "מבחינתי כל זמן מאמצע מאי עד אמצע יולי."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "מבחינתי כל זמן מאמצע מאי עד אמצע יולי."
+        }
+      ],
+      "initial_group_request": "אנחנו רוצים לצאת מתישהו מאמצע מאי עד אמצע יולי, לנסיעה של 4 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-05-15",
+            "2022-07-20"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-05-15",
+            "2022-07-20"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-05-15",
+            "2022-07-20"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-05-15",
+            "2022-07-20"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לשמור על גבולות חלון התאריכים של הקבוצה.",
+        "לבדוק כל יום של הנסיעה מול כל היומנים, כולל היום הראשון והאחרון."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [
+          "2022-05-15",
+          "2022-05-16",
+          "2022-05-23",
+          "2022-05-24",
+          "2022-05-25",
+          "2022-05-26",
+          "2022-06-06",
+          "2022-06-18",
+          "2022-06-19",
+          "2022-06-20",
+          "2022-06-21",
+          "2022-06-22",
+          "2022-06-23",
+          "2022-06-24",
+          "2022-06-25",
+          "2022-06-26",
+          "2022-06-27",
+          "2022-07-17"
+        ],
+        "initial_calendar_compatible_start_count": 18
+      }
+    },
+    {
+      "scenario_id": "S03",
+      "test_type": "late_summer_after_busy_periods",
+      "trip_duration_days": 3,
+      "traveler_statements": [
+        {
+          "traveler_id": "T02",
+          "initial_statement": "אחרי 15 באוגוסט עד סוף אוגוסט מתאים לי."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "אחרי 15 באוגוסט עד סוף אוגוסט מתאים לי."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "אחרי 15 באוגוסט עד סוף אוגוסט מתאים לי."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "אחרי 15 באוגוסט עד סוף אוגוסט מתאים לי."
+        }
+      ],
+      "initial_group_request": "אנחנו ארבעה, ורוצים לנסוע אחרי 15 באוגוסט ולפני סוף החודש. 3 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T02": [
+          [
+            "2022-08-15",
+            "2022-08-31"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-08-15",
+            "2022-08-31"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-08-15",
+            "2022-08-31"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-08-15",
+            "2022-08-31"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לזהות שתחילת החלון מתנגשת ביומנים של חלק מהקבוצה.",
+        "לחפש בהמשך החלון ולא לוותר על כל החלון בגלל התנגשות מוקדמת."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [
+          "2022-08-23",
+          "2022-08-24",
+          "2022-08-25",
+          "2022-08-26",
+          "2022-08-27",
+          "2022-08-28",
+          "2022-08-29"
+        ],
+        "initial_calendar_compatible_start_count": 7
+      }
+    },
+    {
+      "scenario_id": "S04",
+      "test_type": "partial_inventory_coverage_jan_apr",
+      "trip_duration_days": 3,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "כל זמן בין ינואר לאפריל 2022 יכול להתאים לי."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "כל זמן בין ינואר לאפריל 2022 יכול להתאים לי."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "כל זמן בין ינואר לאפריל 2022 יכול להתאים לי."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "כל זמן בין ינואר לאפריל 2022 יכול להתאים לי."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "כל זמן בין ינואר לאפריל 2022 יכול להתאים לי."
+        }
+      ],
+      "initial_group_request": "אנחנו רוצים לנסוע מתישהו בין ינואר לאפריל 2022, ל-3 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-01-01",
+            "2022-04-30"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-01-01",
+            "2022-04-30"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-01-01",
+            "2022-04-30"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-01-01",
+            "2022-04-30"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-01-01",
+            "2022-04-30"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לבדוק את חלון התאריכים הרחב מול הכיסוי בפועל של נתוני הטיסות.",
+        "לחפש טיסות רק בתאריכי הטיסה שקיימים בדאטה, 17–30 באפריל בתוך החלון הזה.",
+        "לציין שהחיפוש חלקי בגלל כיסוי הנתונים; לא להסיק שאין טיסות בינואר–16 באפריל."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [
+          "2022-04-24",
+          "2022-04-25"
+        ],
+        "initial_calendar_compatible_start_count": 2
+      }
+    },
+    {
+      "scenario_id": "S05",
+      "test_type": "disjoint_date_alternatives",
+      "trip_duration_days": 3,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "אני יכול/ה במאי או בספטמבר, לא בין לבין."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "אני יכול/ה במאי או בספטמבר, לא בין לבין."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "אני יכול/ה במאי או בספטמבר, לא בין לבין."
+        }
+      ],
+      "initial_group_request": "מאי או ספטמבר מתאימים לנו; אנחנו לא רוצים תאריך באמצע. נסיעה של 3 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-05-01",
+            "2022-05-31"
+          ],
+          [
+            "2022-09-01",
+            "2022-09-30"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-05-01",
+            "2022-05-31"
+          ],
+          [
+            "2022-09-01",
+            "2022-09-30"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-05-01",
+            "2022-05-31"
+          ],
+          [
+            "2022-09-01",
+            "2022-09-30"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לשמר שתי חלופות נפרדות: מאי וספטמבר.",
+        "לא לפרש את הבקשה כרצף רציף ממאי עד ספטמבר."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [
+          "2022-05-01",
+          "2022-05-02",
+          "2022-05-03",
+          "2022-05-04",
+          "2022-05-05",
+          "2022-05-06",
+          "2022-05-07",
+          "2022-05-15",
+          "2022-05-16",
+          "2022-05-17",
+          "2022-05-23",
+          "2022-05-24",
+          "2022-05-25",
+          "2022-05-26",
+          "2022-05-27",
+          "2022-09-01",
+          "2022-09-02",
+          "2022-09-24",
+          "2022-09-25",
+          "2022-09-26",
+          "2022-09-27",
+          "2022-09-28"
+        ],
+        "initial_calendar_compatible_start_count": 22
+      }
+    },
+    {
+      "scenario_id": "S06",
+      "test_type": "no_calendar_feasible_dates",
+      "trip_duration_days": 3,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "אני פנוי/ה בחלון 10–18 ביוני."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "אני פנוי/ה בחלון 10–18 ביוני."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "אני פנוי/ה בחלון 10–18 ביוני."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "אני פנוי/ה בחלון 10–18 ביוני."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "אני פנוי/ה בחלון 10–18 ביוני."
+        }
+      ],
+      "initial_group_request": "כולנו מכוונים ל-10 עד 18 ביוני 2022. נסיעה של 3 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-06-10",
+            "2022-06-18"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-06-10",
+            "2022-06-18"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-06-10",
+            "2022-06-18"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-06-10",
+            "2022-06-18"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-06-10",
+            "2022-06-18"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לזהות שאין חלון של 3 ימים שעומד גם ביומנים וגם בבקשת התאריכים.",
+        "לא לשנות או לעקוף ימים חסומים.",
+        "להציע לשאול את הקבוצה אם אפשר להרחיב את חלון הנסיעה, בלי לבצע את השינוי בעצמו."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [],
+        "initial_calendar_compatible_start_count": 0
+      }
+    },
+    {
+      "scenario_id": "S07",
+      "test_type": "consent_based_preference_negotiation",
+      "trip_duration_days": 3,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "אני יכולה לנסוע רק ביולי."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "אוגוסט הוא החודש המועדף עליי."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "כל זמן בקיץ מתאים לי."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "כל זמן בקיץ מתאים לי."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "כל זמן בקיץ מתאים לי."
+        }
+      ],
+      "initial_group_request": "יש לנו העדפות תאריכים שונות. מצאו חלון משותף, ואל תשנו העדפה בלי לשאול.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-07-01",
+            "2022-07-31"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-08-01",
+            "2022-08-31"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "להבחין שאין חפיפה בין ההעדפות הראשוניות של T01 ושל T02.",
+        "לשאול את T02 אם יש גמישות מעבר להעדפת אוגוסט.",
+        "להוסיף תאריכי יולי רק לאחר אישור מפורש; לא לשנות את יומן החסימות."
+      ],
+      "clarification_protocol": {
+        "trigger": "אין חלון משותף בין ההעדפות הראשוניות",
+        "ask_traveler_id": "T02",
+        "simulated_reply": "אם אוגוסט לא מסתדר לכולם, אני מאשר/ת גם נסיעה בין 17 ל-24 ביולי.",
+        "approved_window_to_add": [
+          [
+            "2022-07-17",
+            "2022-07-24"
+          ]
+        ]
+      },
+      "oracle_allowed_windows_after_approval": {
+        "T01": [
+          [
+            "2022-07-01",
+            "2022-07-31"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-08-01",
+            "2022-08-31"
+          ],
+          [
+            "2022-07-17",
+            "2022-07-24"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ]
+      },
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [],
+        "initial_calendar_compatible_start_count": 0,
+        "after_explicit_approval_start_dates": [
+          "2022-07-17",
+          "2022-07-18",
+          "2022-07-19",
+          "2022-07-20",
+          "2022-07-21",
+          "2022-07-22"
+        ],
+        "after_explicit_approval_start_count": 6
+      }
+    },
+    {
+      "scenario_id": "S08",
+      "test_type": "intersection_of_individual_broad_windows",
+      "trip_duration_days": 4,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "ממאי עד ספטמבר."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "מיוני עד אוקטובר."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "מתישהו בקיץ."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "בין יולי לספטמבר."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "בין 15 ביוני לסוף אוגוסט."
+        }
+      ],
+      "initial_group_request": "כל אחד מאיתנו הגדיר חלון רחב. מצאו את החפיפה לנסיעה של 4 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-05-01",
+            "2022-09-30"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-06-01",
+            "2022-10-31"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-06-01",
+            "2022-08-31"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-07-01",
+            "2022-09-30"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-06-15",
+            "2022-08-31"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לפרש כל חלון בנפרד ולחשב את החיתוך בין חמשת החלונות.",
+        "להציג רק תאריכים שנמצאים בחיתוך וגם פנויים ביומנים."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [
+          "2022-07-17",
+          "2022-07-18",
+          "2022-07-19",
+          "2022-07-20",
+          "2022-07-21",
+          "2022-08-08",
+          "2022-08-23",
+          "2022-08-24",
+          "2022-08-25",
+          "2022-08-26",
+          "2022-08-27",
+          "2022-08-28"
+        ],
+        "initial_calendar_compatible_start_count": 12
+      }
+    },
+    {
+      "scenario_id": "S09",
+      "test_type": "clarify_ambiguous_boundary",
+      "trip_duration_days": 3,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "לקראת סוף הקיץ נשמע טוב."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "לקראת סוף הקיץ נשמע טוב."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "לקראת סוף הקיץ נשמע טוב."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "לקראת סוף הקיץ נשמע טוב."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "לקראת סוף הקיץ נשמע טוב."
+        }
+      ],
+      "initial_group_request": "אנחנו רוצים לנסוע לקראת סוף הקיץ. נסיעה של 3 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [],
+        "T02": [],
+        "T03": [],
+        "T04": [],
+        "T05": []
+      },
+      "expected_agent_behavior": [
+        "לשאול שאלה קצרה כדי לברר מה נחשב \"סוף הקיץ\" עבור הקבוצה, או להציע פרשנות לאישור.",
+        "לא להציג גבול תאריכים שרירותי כאילו אושר."
+      ],
+      "clarification_protocol": {
+        "trigger": "הביטוי \"לקראת סוף הקיץ\" לא הוגדר מספרית",
+        "ask_group": "איזה טווח מתאים לכם — למשל אחרי 15 באוגוסט, כולל תחילת ספטמבר?",
+        "simulated_reply": "אחרי 15 באוגוסט ועד 15 בספטמבר מתאים לנו.",
+        "approved_window_to_add": [
+          [
+            "2022-08-15",
+            "2022-09-15"
+          ]
+        ]
+      },
+      "oracle_allowed_windows_after_clarification": {
+        "T01": [
+          [
+            "2022-08-15",
+            "2022-09-15"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-08-15",
+            "2022-09-15"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-08-15",
+            "2022-09-15"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-08-15",
+            "2022-09-15"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-08-15",
+            "2022-09-15"
+          ]
+        ]
+      },
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [],
+        "initial_calendar_compatible_start_count": 0,
+        "after_clarification_start_dates": [
+          "2022-08-23",
+          "2022-08-24",
+          "2022-08-25",
+          "2022-08-26",
+          "2022-08-27",
+          "2022-08-28",
+          "2022-08-29",
+          "2022-08-30",
+          "2022-08-31",
+          "2022-09-01",
+          "2022-09-02"
+        ],
+        "after_clarification_start_count": 11
+      }
+    },
+    {
+      "scenario_id": "S10",
+      "test_type": "longer_trip_across_autumn",
+      "trip_duration_days": 5,
+      "traveler_statements": [
+        {
+          "traveler_id": "T01",
+          "initial_statement": "בין ספטמבר לאמצע נובמבר 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T02",
+          "initial_statement": "בין ספטמבר לאמצע נובמבר 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T03",
+          "initial_statement": "בין ספטמבר לאמצע נובמבר 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T04",
+          "initial_statement": "בין ספטמבר לאמצע נובמבר 2022 מתאים לי."
+        },
+        {
+          "traveler_id": "T05",
+          "initial_statement": "בין ספטמבר לאמצע נובמבר 2022 מתאים לי."
+        }
+      ],
+      "initial_group_request": "אנחנו יכולים לצאת מתישהו בין ספטמבר לאמצע נובמבר. נסיעה של 5 ימים.",
+      "oracle_allowed_windows_by_traveler": {
+        "T01": [
+          [
+            "2022-09-01",
+            "2022-11-14"
+          ]
+        ],
+        "T02": [
+          [
+            "2022-09-01",
+            "2022-11-14"
+          ]
+        ],
+        "T03": [
+          [
+            "2022-09-01",
+            "2022-11-14"
+          ]
+        ],
+        "T04": [
+          [
+            "2022-09-01",
+            "2022-11-14"
+          ]
+        ],
+        "T05": [
+          [
+            "2022-09-01",
+            "2022-11-14"
+          ]
+        ]
+      },
+      "expected_agent_behavior": [
+        "לבדוק את כל חמשת ימי הנסיעה מול כל היומנים.",
+        "להציע תאריך רק אם כל ימי הטיול פנויים לכל המשתתפים."
+      ],
+      "calendar_oracle": {
+        "flight_departure_date_coverage_applied": {
+          "start_date": "2022-04-17",
+          "end_date": "2022-11-19"
+        },
+        "initial_calendar_compatible_start_dates": [
+          "2022-09-24",
+          "2022-09-25",
+          "2022-09-26",
+          "2022-09-27",
+          "2022-10-16",
+          "2022-10-17",
+          "2022-10-18",
+          "2022-10-19",
+          "2022-11-05"
+        ],
+        "initial_calendar_compatible_start_count": 9
+      }
+    }
+  ]
+}

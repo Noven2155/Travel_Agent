@@ -1,0 +1,186 @@
+{
+  "dataset_id": "traveler_calendars_demo_2022_v1",
+  "synthetic": true,
+  "calendar_year": 2022,
+  "calendar_coverage": {
+    "start_date": "2022-01-01",
+    "end_date": "2022-12-31"
+  },
+  "availability_rule": "Each unavailable period is inclusive. A proposed trip conflicts for a traveler if any trip day overlaps one of that traveler's unavailable periods. Dates outside these periods have no synthetic calendar block; they are not a real-world availability confirmation.",
+  "flight_data_coverage_note": "The linked Expedia flight sample contains flight dates from 2022-04-17 through 2022-11-19, so searches outside that date coverage may return no matching rows.",
+  "example_natural_language_windows": [
+    "מתישהו בקיץ 2022",
+    "בין ינואר לאפריל 2022"
+  ],
+  "travelers": [
+    {
+      "traveler_id": "T01",
+      "unavailable_periods": [
+        [
+          "2022-01-14",
+          "2022-01-16"
+        ],
+        [
+          "2022-03-03",
+          "2022-03-06"
+        ],
+        [
+          "2022-05-20",
+          "2022-05-22"
+        ],
+        [
+          "2022-06-10",
+          "2022-06-17"
+        ],
+        [
+          "2022-07-25",
+          "2022-07-31"
+        ],
+        [
+          "2022-09-12",
+          "2022-09-15"
+        ],
+        [
+          "2022-11-01",
+          "2022-11-04"
+        ]
+      ]
+    },
+    {
+      "traveler_id": "T02",
+      "unavailable_periods": [
+        [
+          "2022-01-25",
+          "2022-01-29"
+        ],
+        [
+          "2022-03-10",
+          "2022-03-12"
+        ],
+        [
+          "2022-04-28",
+          "2022-05-02"
+        ],
+        [
+          "2022-06-01",
+          "2022-06-05"
+        ],
+        [
+          "2022-07-08",
+          "2022-07-14"
+        ],
+        [
+          "2022-08-12",
+          "2022-08-19"
+        ],
+        [
+          "2022-10-02",
+          "2022-10-06"
+        ],
+        [
+          "2022-11-15",
+          "2022-11-18"
+        ]
+      ]
+    },
+    {
+      "traveler_id": "T03",
+      "unavailable_periods": [
+        [
+          "2022-02-02",
+          "2022-02-05"
+        ],
+        [
+          "2022-03-20",
+          "2022-03-25"
+        ],
+        [
+          "2022-05-10",
+          "2022-05-14"
+        ],
+        [
+          "2022-06-12",
+          "2022-06-18"
+        ],
+        [
+          "2022-08-15",
+          "2022-08-22"
+        ],
+        [
+          "2022-09-05",
+          "2022-09-09"
+        ],
+        [
+          "2022-11-10",
+          "2022-11-16"
+        ]
+      ]
+    },
+    {
+      "traveler_id": "T04",
+      "unavailable_periods": [
+        [
+          "2022-01-05",
+          "2022-01-10"
+        ],
+        [
+          "2022-04-17",
+          "2022-04-23"
+        ],
+        [
+          "2022-05-30",
+          "2022-06-03"
+        ],
+        [
+          "2022-07-10",
+          "2022-07-16"
+        ],
+        [
+          "2022-08-01",
+          "2022-08-07"
+        ],
+        [
+          "2022-09-18",
+          "2022-09-23"
+        ],
+        [
+          "2022-10-24",
+          "2022-10-30"
+        ]
+      ]
+    },
+    {
+      "traveler_id": "T05",
+      "unavailable_periods": [
+        [
+          "2022-02-12",
+          "2022-02-17"
+        ],
+        [
+          "2022-03-01",
+          "2022-03-06"
+        ],
+        [
+          "2022-04-30",
+          "2022-05-04"
+        ],
+        [
+          "2022-06-10",
+          "2022-06-16"
+        ],
+        [
+          "2022-07-01",
+          "2022-07-05"
+        ],
+        [
+          "2022-08-14",
+          "2022-08-20"
+        ],
+        [
+          "2022-10-10",
+          "2022-10-15"
+        ]
+      ]
+    }
+  ]
+}

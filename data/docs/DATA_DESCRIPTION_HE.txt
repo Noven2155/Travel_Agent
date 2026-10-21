@@ -1,0 +1,466 @@
+תיעוד הנתונים בפרויקט תיאום טיול קבוצתי
+
+מקורות מידע מבנה הקבצים וההתאמות להדגמה
+
+עודכן ונבדק ב־21 באוקטובר 2026
+
+המסמך מיועד לחברות ולחברי צוות הפרויקט. הוא מסביר אילו נתונים נמצאים בחבילת העבודה, מאיפה הגיע כל סוג מידע, אילו שדות נוספו בפרויקט וכיצד מחברים את הקבצים לחיפוש חופשה קבוצתית.
+
+החבילה משלבת נתוני טיסות היסטוריים, פרטי דירות Airbnb ונתוני רכבים עם זמינות ויומנים שנוצרו להדגמה. היא מאפשרת לחפש ולהעריך חבילות על בסיס נתונים קיימים; אין בה מלאי הזמנות חי.
+
+קבוצת נתונים | מה קיים בחבילת העבודה
+טיסות | 20,000  רשומות חיפוש או הצעת טיסה משנת  2022,  עם  27  שדות.
+דירות | 138,837  נכסים מ־ 13  שווקים בארצות הברית, עם  98  שדות; צילומי מקור מספטמבר  2026.
+זמינות דירות | 17,477,737  רשומות של נכס ותאריך, שהותאמו ל־ 216  תאריכי טיסה בשנת  2022.
+רכבים | 5,851  רשומות עם  23  שדות, ולצדן  27,354  טווחי אי זמינות מדומים.
+מטיילים ובדיקות | יומנים מדומים של חמישה מטיילים ועשרה תרחישי בדיקה סינתטיים.
+קטלוג האפליקציה | 15,254  רשומות טיסה,  3,960  נכסי לינה ו־ 1,651  רכבים בקובץ  inventory.json.
+
+
+
+איך לקרוא את מקור המידע
+
+מידע מהמקור הוא שדה שהועתק ממאגר חיצוני. מידע מעובד הוא ערך שנוקה, הומר או חובר לשדה אחר. אומדן הוא ערך שהוסק מכלל בקוד, למשל קיבולת רכב. מידע מדומה הוא ערך שנוצר לצורך ההדגמה, למשל יום חסום ביומן. הסיווגים מפורטים בהמשך ליד השדות הרלוונטיים.
+
+היקפי הנתונים במסמך מתייחסים לחבילה המתוקנת. שני קובצי Airbnb הדחוסים הוחלפו בעותקים המלאים ונבדקה תקינותם. תוכן inventory.json לא שונה בתיקון האריזה.
+
+מפת הקבצים בחבילת הנתונים
+
+כל הקבצים הבאים נמצאים תחת תיקיית data בתוך חבילת tourism_project_data_package.zip. סיומת csv.gz מציינת קובץ CSV דחוס ב־GZIP, שאפשר לקרוא ישירות באמצעות pandas או לחלץ לפני קריאה.
+
+expedia_flight_sample_20k.csv
+
+20,000 רשומות טיסה מתוך משפחת נתוני Flight Prices שנאספו מאתר Expedia ופורסמו ב־Kaggle.
+
+airbnb_flight_destination_markets_full_listings_2026.csv.gz
+
+138,837 רשומות נכסים מ־Inside Airbnb, כולל עמודות המקור ושמונה שדות שנוספו בפרויקט.
+
+airbnb_flight_destination_markets_availability_2022_synthetic.csv.gz
+
+זמינות דירות ומגבלות שהייה מלוחות Inside Airbnb, לאחר העתקת דפוסי הזמן לתאריכי ההדגמה ב־2022.
+
+cornell_car_rental_enriched.csv
+
+5,851 רשומות רכב עם שדות המקור, מזהה הדגמה ושדות תיאור של אומדנים וזמינות.
+
+car_availability_demo_2022.csv
+
+טווחי אי זמינות שנוצרו בפרויקט ומקושרים לרכב באמצעות מזהה ההדגמה.
+
+traveler_calendars_demo_2022.json
+
+חמישה יומנים סינתטיים עם טווחי ימים חסומים בשנת 2022.
+
+tourism_group_trip_test_cases_2022.json
+
+עשרה תרחישים עם בקשת קבוצה, אילוצים, התנהגות צפויה ותוצאות בדיקת יומנים.
+
+airbnb_destination_source_manifest.csv
+
+13 רשומות מקור: שוק, תאריך צילום, קישורי הורדה, ספירות וכיסוי לוח השנה.
+
+expedia_airport_airbnb_market_map.csv
+
+16 קודי שדות תעופה, היקף הופעתם בדגימת הטיסות ומיפוי לשווקי הלינה.
+
+inventory.json
+
+קטלוג מצומצם ומנורמל שנבנה מהקבצים לעיל ומשמש את פעולת החיפוש המחוברת.
+
+תיעוד וקוד נלווים
+
+README_HE.md בשורש החבילה מסכם את התכולה. docs/airbnb_destination_dataset_README.md מתאר את מקור הלינה וההתאמה לשנת 2022. סקריפט ההכנה prepare_full_airbnb_markets.py שמור בנפרד בקובצי הפרויקט ואינו כלול בתוך ה־ZIP הזה.
+
+נתוני הטיסות ומקור השדות
+
+expedia_flight_sample_20k.csv
+
+המקור הציבורי המזוהה הוא Flight Prices של dilwong ב־Kaggle, ולצדו מאגר הקוד FlightPrices של אותו מפרסם. לפי תיעוד המפרסם, נאספו הצעות לטיסות בכיוון אחד מאתר Expedia. השדות והכיסוי של המדגם המקומי תואמים לתיעוד זה. קישורים מופיעים בפרק המקורות.
+
+יחידת הרשומה היא תצפית על הצעת טיסה, ולא הזמנה שבוצעה. searchDate הוא יום איסוף ההצעה; flightDate הוא יום הטיסה. במדגם המקומי ימי האיסוף הם 16 באפריל עד 5 באוקטובר 2022, ואילו ימי הטיסה הם 17 באפריל עד 19 בנובמבר 2022.
+
+שדות בקובץ | משמעות ומקור
+legId, searchDate, flightDate | מזהה מסלול ותאריכי איסוף וטיסה מתוך המקור.
+startingAirport, destinationAirport | קודי  IATA  של המוצא והיעד מתוך המקור.
+fareBasisCode, isBasicEconomy, isRefundable | מאפייני התעריף מתוך המקור. אין כאן בדיקת תנאי כרטיס עדכנית.
+travelDuration, elapsedDays, isNonStop | משך הנסיעה, הפרש ימים ודגל טיסה ישירה כפי שפורסמו במקור.
+baseFare, totalFare | מחיר בדולר. לפי תיעוד המפרסם,  totalFare  כולל את המסים והחיובים שדווחו בהצעה; אין להוסיף אותם שוב אוטומטית.
+seatsRemaining, totalTravelDistance | מספר מושבים מדווח ומרחק כולל במיילים. אלו נתוני צילום ההצעה ההיסטורית.
+segmentsDepartureTimeEpochSeconds, segmentsDepartureTimeRaw, segmentsArrivalTimeEpochSeconds, segmentsArrivalTimeRaw | זמני המקטעים בפורמט  Unix  ובפורמט  ISO  עם היסט אזור זמן.
+segmentsArrivalAirportCode, segmentsDepartureAirportCode, segmentsAirlineName, segmentsAirlineCode | שדות התעופה וחברות התעופה של כל מקטע.
+segmentsEquipmentDescription, segmentsDurationInSeconds, segmentsDistance, segmentsCabinCode | סוג המטוס, משך מקטע בשניות, מרחק ומחלקת שירות.
+
+
+
+כל 27 השדות לעיל הם שדות ממשפחת נתוני המקור. במחרוזות המקטעים, המפריד || מפריד בין המקטעים של אותה נסיעה. הלוך וחזור נבנים בפרויקט מחיבור שתי רשומות נפרדות, ולא מהצעת הלוך וחזור אחת.
+
+מה השתנה בדרך לקטלוג
+
+בקטלוג נשמרו 15,254 רשומות שהיעד שלהן מכוסה במיפוי הלינה, כולל השימוש האזורי ב־MIA. שדות נבחרים קיבלו שמות קצרים והומרו לטיפוסים מתאימים. תאריכי הטיסות לא הורחבו ולא הוזזו לשנה אחרת.
+
+במדגם יש 19,930 ערכי legId שונים מתוך 20,000 רשומות. לכן legId לבדו אינו מפתח ייחודי לתצפית. הקטלוג אינו שומר את legId המקורי; מזהי F המופיעים בכלי החיפוש נגזרים ממיקום הרשומה בקטלוג. תיעוד שיטת הדגימה והזרע של מדגם 20,000 הרשומות אינו כלול בחבילה.
+
+נתוני הדירות ומקור השדות
+
+airbnb_flight_destination_markets_full_listings_2026.csv.gz
+
+המקור הוא קובצי listings.csv.gz של Inside Airbnb עבור 13 ערים או אזורים בארצות הברית. הקבצים צולמו בין 14 ל־28 בספטמבר 2026. המניפסט שומר קישור מדויק לכל צילום ותאריך; הטבלה בפרק הכיסוי מאפשרת להגיע לכל קובץ מקור.
+
+הקובץ המאוחד כולל 138,837 רשומות ו־98 עמודות. 90 עמודות הגיעו מקובצי הנכסים, ושמונה נוספו בסקריפט הפרויקט. הרשומות נשמרו בקובץ המלא גם כשהנכס אינו מתאים לקבוצה או כשחסר מחיר. סך המועמדים הראשוני ללינה קבוצתית הוא 81,089.
+
+שדה שנוסף בפרויקט | איך נוצר המידע
+listing_id | נרמול של  id  המקורי למחרוזת מזהה, כולל הסרת סיומת מספרית מיותרת אם הופיעה.
+listing_key | חיבור סימון השוק למזהה הנכס, למשל  BOSTON:3781.  זהו מפתח פרויקט.
+source_market, market_snapshot_date | שם השוק ותאריך הצילום מרשימת מקורות מפורשת בסקריפט.
+matched_airport_codes, market_match_type | שיוך גאוגרפי שהוגדר בפרויקט בין השוק לשדות התעופה, כולל הבחנה בקירוב אזורי.
+nightly_price_usd_current_snapshot | ניקוי מספרי של  price;  אם חסר, נעשה שימוש ב־ price_quote_price_per_night.
+is_group_stay_candidate | דגל מחושב:  room_type  הוא  Entire home/apt,  מחיר חיובי וקיבולת של לפחות אדם אחד. זו בדיקת מועמדות ראשונית בלבד.
+
+
+
+המידע מהמקור שמשמש לתכנון
+
+שם הנכס מגיע מ־name; קיבולת מ־accommodates; מיטות וחדרים מ־beds ו־bedrooms; סוג לינה מ־room_type ו־property_type; מיקום מ־latitude ו־longitude; ודירוג מ־review_scores_rating. שדות אלה אינם ציונים שהסוכנים יצרו.
+
+בין שדות המקור נמצאים גם תיאורי נכס, תמונות, מידע על מארחים, מתקנים, ביקורות, מגבלות שהייה ונתוני מחיר. רשימת 90 שדות המקור מפורטת בנספח, לפי קבוצות מידע.
+
+איך לפרש את המחיר
+
+זהו מחיר שנשמר בצילום 2026, ולעתים מקורו בציטוט מחיר לתקופת שהייה מסוימת המתועדת בשדות price_quote. בחיפוש ההדגמה משתמשים במחיר אחיד ללילה ומכפילים במספר הלילות. אין כאן מחיר היסטורי של 2022 או פנייה למארח עבור התאריכים המבוקשים.
+
+לפי המניפסט לא הוסרו בפועל מזהי נכסים כפולים באיחוד הנוכחי. סקריפט ההכנה כולל בכל זאת כלל שמסיר מזהים שכבר הופיעו בשוק קודם.
+
+זמינות הדירות וההתאמה לשנת ההדגמה
+
+airbnb_flight_destination_markets_availability_2022_synthetic.csv.gz
+
+המקור לערכי הזמינות ולמגבלות השהייה הוא calendar.csv.gz של אותם 13 שווקים ב־Inside Airbnb. בפרויקט הועתקו ערכים מימי לוח המקור לתאריכי טיסה בשנת 2022. לפיכך כל הרשומות מסומנות כזמינות מדומה ביחס לשנת היעד.
+
+יחידת הרשומה היא נכס ותאריך. בקובץ המלא יש 17,477,737 רשומות ו־14 שדות. הוא כולל רק נכסים שעברו את סימון המועמדות הראשוני ורק את 216 תאריכי הטיסה הייחודיים שבמדגם.
+
+שדות | מקור או חישוב
+listing_id, listing_key | קישור למזהה הנכס ולמפתח הפרויקט בקובץ הנכסים.
+source_market, matched_airport_codes, market_snapshot_date | פרטי המקור והשיוך מהגדרות השוק בפרויקט.
+date | תאריך היעד בשנת  2022  מתוך רשימת תאריכי הטיסות במדגם.
+source_template_date | תאריך לוח המקור שממנו הועתקו ערכי הזמינות ומגבלות השהייה.
+available | ערך הזמינות מלוח המקור, לאחר המרה לערך בוליאני. הוא מדומה עבור תאריך  2022.
+minimum_nights, maximum_nights | מגבלות שהייה מלוח המקור ביום ששימש כתבנית.
+nightly_price_usd_current_snapshot | מחיר מקובץ הנכסים המאוחד; אינו מחיר יומי משתנה מתוך לוח הזמינות.
+weekday, is_weekend_us | חישוב לפי תאריך היעד. סוף שבוע מוגדר כשבת או ראשון.
+availability_is_synthetic | דגל שהוגדר בפרויקט כ־ True  בכל הרשומות.
+
+
+
+כלל בחירת תאריך המקור
+
+לכל תאריך יעד ב־2022 מחפשים בלוח המקור תאריכים באותו חודש ובאותו יום בשבוע, ובוחרים את הקרוב ביותר ביום בחודש. כך נשמרים דפוסי העונה וימי השבוע. הסקריפט כולל גם מסלול גיבוי של התאמה באותו חודש בלבד אם אין יום שבוע מתאים, ומדפיס אזהרה במקרה כזה; לוג האזהרות אינו חלק מהחבילה.
+
+לדוגמה, רשומת BOSTON:3781 ל־19 בספטמבר 2022 משתמשת ב־21 בספטמבר 2026 כיום מקור. ערך הזמינות שם הוא False. זו העתקה של דפוס לוח, ולא ראיה שהדירה הייתה תפוסה ב־2022.
+
+כיסוי חסר
+
+מספר הצירופים הצפוי הוא 17,515,224; 37,487 צירופים חסרים, ולכן הכיסוי הוא כ־99.79%. זוג נכס ותאריך שלא מופיע בקובץ הוא מידע לא ידוע. בחיפוש אין להמיר אותו אוטומטית לפנוי או לתפוס. יש לבדוק כל לילה בנפרד ואת מגבלות המינימום והמקסימום.
+
+נתוני הרכבים והזמינות המדומה
+
+cornell_car_rental_enriched.csv
+
+המאגר הציבורי התואם לשם, למבנה ולהיקף הוא Cornell Car Rental Dataset ב־Kaggle, בכתובת המפרסם kushleshkumar. בחבילת הפרויקט נשמר הקובץ המעובד, עם 5,851 רשומות ו־23 שדות. אין בחבילה לוג הורדה או תיאור מלא של האיסוף הראשוני; גם תאריך המחירים המקוריים אינו מתועד.
+
+שדות שמקורם ברשומת הרכב | מה הם מתארים
+fuelType, vehicle.make, vehicle.model, vehicle.type, vehicle.year | דלק, יצרן, דגם, קטגוריה ושנת דגם. שנת הדגם אינה שנת המחיר.
+location.city, location.country, location.state, location.latitude, location.longitude | מיקום הרכב כפי שנרשם במקור. הוא אינו התחייבות לאיסוף משדה התעופה.
+rate.daily | התעריף היומי הרשום במקור. בפרויקט הוא משמש אומדן מחיר בדולר, ללא המרה למחירי  2022.
+rating, renterTripsTaken, reviewCount | דירוג, מספר נסיעות ומספר ביקורות מתוך הרשומה.
+owner.id | מזהה בעלים מתוך המקור. הוא אינו מזהה ייחודי לרכב.
+
+
+
+שדה שנוסף בפרויקט | מקור הערך ומשמעותו
+demo_vehicle_listing_id | מזהה הדגמה לקישור קובץ הרכבים עם לוח אי הזמינות; אינו מזהה ספק מאומת.
+vehicle_size_proxy, vehicle_size_basis | תיאור גודל משוער לפי  vehicle.type,  עם הסבר שהמידות ומספר המושבים אינם מופיעים במקור.
+passenger_capacity_estimate | שדה נוסף שנותר ריק בכל  5,851  הרשומות בקובץ זה. אין להשתמש בו כקיבולת מאומתת.
+source_availability_status, availability_basis | טקסט תיעודי המציין שאין במקור לוח מלאי לפי תאריך.
+demo_availability_calendar_file, demo_availability_note | הפניה לקובץ הזמינות המדומה והסבר על אופיו.
+
+
+
+קיבולת רכב בקטלוג האפליקציה
+
+השדה capacityEstimate בקובץ inventory.json הוא אומדן נפרד. בקטלוג הנוכחי נצפו הכללים הבאים: car ו־truck עם 4 מושבים, suv עם 5, minivan עם 7 ו־van עם 8. אלו הנחות חישוב לפי סוג רכב, ולא מספרי מושבים שהתקבלו מהמקור.
+
+לוח אי הזמינות
+
+car_availability_demo_2022.csv
+
+הקובץ נוצר בפרויקט וכולל 27,354 טווחי אי זמינות עבור 5,851 מזהי הדגמה. שדותיו הם demo_vehicle_listing_id, unavailable_from, unavailable_through, availability_source, scenario_id ו־scenario_rule. תאריכי ההתחלה והסיום כלולים בטווח.
+
+availability_source מסומן synthetic_demo, ו־scenario_id מתעד את תרחיש ההדגמה. מחוץ לטווחי החסימה הרכב נחשב זמין לצורך ההדגמה בלבד. המזהה של תרחיש המחולל נשמר, אך סקריפט יצירת הלוח אינו כלול בחבילת הנתונים.
+
+היומנים תרחישי הבדיקה וקובצי המיפוי
+
+יומני המטיילים
+
+traveler_calendars_demo_2022.json
+
+זהו מידע סינתטי שנוצר בפרויקט, ללא חיבור ל־Google Calendar או ליומן של אדם אמיתי. הקובץ כולל חמישה מזהים T01 עד T05 וכיסוי מ־1 בינואר עד 31 בדצמבר 2022. לכל מזהה יש unavailable_periods עם זוגות של תאריכי התחלה וסיום.
+
+כל יום בטווח חסימה הוא אילוץ קשיח. תאריך שמחוץ לטווחים אינו חסום ביומן המדומה, אך אינו אישור של מטיילת אמיתית. השדות dataset_id, synthetic, calendar_year ו־calendar_coverage מתעדים את גרסת המידע ואת אופי ההדגמה. אין להסיק שמות או העדפות פרטיות של משתתפות מהמסכים על סמך מזהי היומן האלה.
+
+תרחישי בדיקה
+
+tourism_group_trip_test_cases_2022.json
+
+זהו קובץ סינתטי הכולל עשרה תרחישים. הוא משלב בקשות קבוצה, אמירות בשפה טבעית, חלונות תאריכים, משך נסיעה, הפניות ליומנים, expected_agent_behavior ו־calendar_oracle. תוצאות ה־oracle הן חישוב של התאמה ליומנים ולכיסוי תאריכי היציאה; הן אינן אישור שקיימת חבילה מלאה עם לינה ורכב.
+
+בקובץ הבדיקות משך הנסיעה מוגדר בימים קלנדריים, כולל היום הראשון והאחרון. בחיפוש שבממשק הקלט הוא מספר לילות. לכן נסיעה של שלושה ימים תתאים בדרך כלל לשני לילות; חייבים לבצע את ההמרה במפורש.
+
+מיפוי בין שדות התעופה לשווקי לינה
+
+expedia_airport_airbnb_market_map.csv
+
+קובץ זה נוצר בסקריפט הפרויקט. יש בו 16 שורות ושישה שדות: airport_code, flight_rows_in_sample, share_of_flight_rows, coverage_status, source_market ו־note. הספירות והחלק היחסי מחושבים מדגימת הטיסות; שיוך השוק וסטטוס הכיסוי הוגדרו בפרויקט.
+
+מניפסט המקורות
+
+airbnb_destination_source_manifest.csv
+
+קובץ תיעודי שנוצר במהלך עיבוד הלינה, עם 13 שורות ו־13 שדות. source_market, snapshot_date, matched_airport_codes ו־match_type מתעדים את בחירת המקורות; listings_url ו־calendar_url שומרים את קישורי ההורדה המקוריים.
+
+listing_rows, group_candidate_rows, duplicates_removed ו־synthetic_availability_rows הם ספירות העיבוד. expected_availability_rows, missing_calendar_rows ו־availability_row_coverage מתעדים את הכיסוי. זהו המקור למעקב אחרי כל צילום שוק, ולא מאגר לינה עצמאי.
+
+הקטלוג המשולב שבו משתמש החיפוש
+
+inventory.json
+
+זהו קובץ JSON מעובד שנבנה בפרויקט, ולא מאגר חיצוני נוסף. הוא כולל version, sourceRange, dates, originAirports, destinations, flights, stays, cars, מפתחות אינדקס לפי שדה תעופה ו־dataNotes. רשימת dates מכילה 216 תאריכים; אין להסיק שכל יום בטווח sourceRange מכוסה.
+
+הקטלוג מצמצם את הקבצים הגדולים לרשומות ולשדות הדרושים ל־POC. דגימת הלינה כוללת 3,960 נכסים; תיעוד מפורט של מדיניות בחירת מדגם זה אינו מצורף לחבילת הנתונים. במאגר הרכב נבחרו 1,651 רשומות עם מחיר חיובי ועד כ־65 קילומטר משדה תעופה נתמך.
+
+מיפוי שדות הטיסות
+
+שדות בקטלוג | המקור בקובץ הטיסות
+date, origin, destination | flightDate, startingAirport, destinationAirport.
+fare, seats, duration, nonstop | totalFare, seatsRemaining, travelDuration, isNonStop.
+departure, arrival, arrivalDate | זמן היציאה הראשון וזמן ההגעה האחרון בשדות המקטעים; תאריך ההגעה נגזר מזמן ההגעה האחרון.
+airline | נגזר משדה  segmentsAirlineName  בתהליך הנרמול; פרטי המקטעים המלאים נמצאים ב־ CSV.
+
+
+
+מיפוי שדות הדירות
+
+שדות בקטלוג | מקור או עיבוד
+key, listingId, airportCodes, market | listing_key, listing_id, matched_airport_codes, source_market.  קודי שדות התעופה מומרים לרשימה.
+title, propertyType, roomType | name, property_type, room_type  בקובץ הנכסים.
+capacity, bedrooms, beds, rating | accommodates, bedrooms, beds, review_scores_rating  לאחר המרה מספרית.
+price, minNights, maxNights, lat, lon | המחיר המנוקה, מגבלות השהייה הבסיסיות ו־ latitude, longitude  בקובץ הנכסים.
+availabilityPacked, minNightsPacked, maxNightsPacked | אריזה של הזמינות ומגבלות השהייה היומיות מקובץ לוח השנה המדומה, לפי סדר  dates  בקטלוג.
+
+
+
+האריזה היא ב־Base64. הזמינות תופסת שתי סיביות לכל תאריך, בסדר הסיביות הנמוך קודם: 0 מציין לא ידוע, 1 לא זמין ו־2 זמין. מגבלות הלילות ארוזות כמספרים שלמים לא מסומנים בני 16 סיביות בסדר little endian. שינוי המיקום של תאריך בלי לבנות מחדש את השדות הארוזים ישבש את הזמינות.
+
+מיפוי שדות הרכבים
+
+שדות בקטלוג | מקור או עיבוד
+id, city, state, make, model, type | מזהה ההדגמה ושדות  location  ו־ vehicle  מקובץ הרכבים.
+dailyRate, rating, trips | rate.daily, rating, renterTripsTaken  לאחר המרה.
+sizeProxy, capacityEstimate, capacityBasis | תיאור הגודל בקובץ המעובד ואומדן קיבולת לפי קטגוריית הרכב.
+airportCodes, distanceKm | שיוך שחושב בפרויקט לפי קואורדינטות הרכב ונקודת שדה התעופה. זהו קירוב גאוגרפי, לא מרחק נסיעה בכביש.
+blackouts | טווחי אי הזמינות מקובץ  car_availability_demo_2022.csv  לפי מזהה ההדגמה.
+
+
+
+נקודות הציון של שדות התעופה והשיוך האזורי הן נתוני תצורה שנוספו בפרויקט. בחבילת הנתונים אין אסמכתה נפרדת למקור קואורדינטות שדות התעופה.
+
+כיסוי גאוגרפי וקישורי המקור של הלינה
+
+הטבלה מבוססת על המניפסט בחבילה. כל קישור מפנה לצילום המקור השמור בכתובת המתועדת: קובץ נכסים וקובץ לוח שנה. מספרי הנכסים הם של הקובץ המלא לפני צמצום לקטלוג האפליקציה.
+
+שוק מקור | קוד יעד | צילום מקור | נכסים | קישורים
+Boston | BOS | 2026-09-19 | 4,368 | קובץ נכסים   |   לוח שנה
+Broward County | MIA | 2026-09-22 | 17,630 | קובץ נכסים   |   לוח שנה
+Chicago | ORD | 2026-09-19 | 8,695 | קובץ נכסים   |   לוח שנה
+Dallas | DFW | 2026-09-19 | 6,436 | קובץ נכסים   |   לוח שנה
+Denver | DEN | 2026-09-25 | 4,955 | קובץ נכסים   |   לוח שנה
+Fort Worth | DFW | 2026-09-17 | 2,431 | קובץ נכסים   |   לוח שנה
+Jersey City | EWR | 2026-09-21 | 2,330 | קובץ נכסים   |   לוח שנה
+Los Angeles | LAX | 2026-09-14 | 43,781 | קובץ נכסים   |   לוח שנה
+New York City | JFK;LGA | 2026-09-14 | 29,918 | קובץ נכסים   |   לוח שנה
+Newark | EWR | 2026-09-28 | 1,908 | קובץ נכסים   |   לוח שנה
+Oakland | OAK | 2026-09-20 | 2,074 | קובץ נכסים   |   לוח שנה
+San Francisco | SFO | 2026-09-14 | 7,405 | קובץ נכסים   |   לוח שנה
+Washington, D.C. | IAD | 2026-09-19 | 6,906 | קובץ נכסים   |   לוח שנה
+
+
+
+DFW מחבר את Dallas ואת Fort Worth; EWR מחבר את Newark ואת Jersey City; JFK ו־LGA משתמשים בשוק New York City. זהו שיוך שנקבע בפרויקט ואינו אישור שכל נכס סמוך לשדה הנבחר.
+
+MIA משתמש ב־Broward County כקירוב אזורי בדרום פלורידה, ולא בעיר מיאמי עצמה. הקודים ATL, CLT, DTW ו־PHL מופיעים במדגם הטיסות אך אינם מכוסים בלינה בחבילה זו.
+
+הקובץ המלא מייצג את 13 השווקים האלה. הוא אינו קובץ של שיקגו בלבד ואינו קובץ של כלל נכסי ארצות הברית. אין בחבילה מאגר מלונות נפרד; כל נתוני הלינה הם נכסי Airbnb.
+
+עקיבות מגבלות ונתונים שהמערכת מייצרת
+
+איך מחברים את הנתונים
+
+טיסות מחוברות לפי מוצא, יעד ותאריך. נכסים מתחברים ללוח הזמינות באמצעות listing_key או listing_id יחד עם השוק. רכבים מתחברים לטווחי אי הזמינות באמצעות demo_vehicle_listing_id. התאמת שדות התעופה יוצרת את החיבור בין שלושת הרכיבים, אך זמינות כל רכיב נבדקת בנפרד.
+
+מחיר החבילה מחושב משתי הצעות הטיסה כפול מספר המטיילים, מחיר הדירה כפול מספר הלילות ותעריף הרכב כפול מספר ימי ההשכרה. במימוש הנוכחי ימי ההשכרה הם מספר הלילות ועוד יום. תוספות שלא קיימות בשדות המקור, כגון ניקיון או ביטוח רכב, אינן מחושבות בנפרד.
+
+מה ידוע ומה דורש פרשנות
+
+הטיסות הן מ־2022, פרטי הלינה ומחיריה מצילומי 2026, ומחירי הרכב אינם מתוארכים. התאמת תאריכי הלינה אינה הופכת את מחירי 2026 למחירים היסטוריים. אין בחבילה נתוני ביקוש, ביטולי הזמנות או עסקאות של קבוצות מטיילים.
+
+ימים חסרים בלוח לינה נשארים לא ידועים. קיבולת רכב היא אומדן; כמות מושבים מדווחת בטיסה אינה התחייבות חיה של חברת התעופה. המועמדות הראשונית לדירה אינה מספיקה לקבוצה: בפועל צריך לבדוק קיבולת, מיטות, כל לילה ומגבלות שהייה.
+
+הדגימה של הטיסות, בחירת 3,960 נכסי הקטלוג, מקור נקודות שדות התעופה וקוד מחולל חסימות הרכב אינם מתועדים במלואם בחבילה. קישורי המקור של 13 שווקי Airbnb מתועדים במפורש. אלו הבדלים ברמת העקיבות, ולא סיבה להשלים מידע חסר בהשערה.
+
+מה נוצר בזמן שימוש במערכת
+
+בקשות חיפוש, מועמדויות לחבילות, פירוט מחירים ועקבות פעולות נוצרות על ידי הקוד על בסיס הקטלוג. במימוש המקומי הן נשמרות ב־SQLite; באתר המתארח הן נשמרות כקובצי JSON באחסון הפרטי של השרת. אלו תוצרי הרצה ולא נתוני מקור מהספקים.
+
+הסכמות, החלטות משא ומתן, אישורי הזמנה מדומים ותוכן המסלול בתרחיש הממשק הם נתוני הדגמה נפרדים. בחבילת הדאטא אין מאגר מאומת של אטרקציות או מופעים. פעולת החיפוש המחוברת אינה מפעילה מודל שפה ואינה מבצעת הזמנה אמיתית.
+
+מה נבדק בתיעוד הנוכחי
+
+נספרו מחדש רשומות הטיסות, הרכבים, חסימות הרכב וקובצי המיפוי. הקובץ המלא של נכסי Airbnb נקרא כ־CSV ונמצאו 138,837 רשומות ו־81,089 מועמדים. קובץ הזמינות המלא נקרא עד סופו ונמצאו 17,477,737 רשומות; בשני קובצי GZIP הושלמה בדיקת התקינות עד סוף הזרם.
+
+ב־21 באוקטובר 2026 תוקנה אריזת ה־ZIP, לאחר שהתברר שהעותקים של שני קובצי Airbnb בתוכה נחתכו. הם הוחלפו בקבצים המלאים השמורים. בדיקת ה־ZIP עברה ונבדק שהקטלוג עצמו נשאר זהה. המסמך מתאר את החבילה לאחר תיקון זה.
+
+SHA256 של inventory.json
+
+39a0c9c2b2562062211d884af35cc73b3826926b0c56cb06ea5e428c87167319
+
+SHA256 של חבילת הנתונים המתוקנת
+
+185b46105c404c7acba2ed347dbbbb2ee25676b09205eba7e94e34dc5eea5b9f
+
+מקורות ותיעוד נלווה
+
+הקישורים הציבוריים הבאים מזהים את מקורות הנתונים ואת מילוני השדות. פרטי העיבודים בפרויקט נלקחו מהקבצים, מהמניפסט, מסקריפט ההכנה ומתיעוד כלי החיפוש.
+
+Flight Prices ב־Kaggle
+
+עמוד משפחת נתוני הטיסות שנאספו מאתר Expedia.
+
+FlightPrices קוד ותיעוד המפרסם
+
+תיעוד 27 השדות, יחידות המחירים, תאריכי האיסוף ומפריד מקטעי הטיסה.
+
+Cornell Car Rental Dataset ב־Kaggle
+
+עמוד המאגר הציבורי התואם לקובץ הרכבים בשם ובהיקף; תהליך האיסוף המקורי אינו מתועד בחבילת הפרויקט.
+
+Inside Airbnb Get the Data
+
+דף הורדת צילומי הנכסים ולוחות השנה. קישורי 13 הצילומים המסוימים מופיעים בטבלת הכיסוי.
+
+רישיון CC BY 4.0
+
+הרישיון שאליו מפנה Inside Airbnb בדף הנתונים. בחבילת הפרויקט אין עותק של תנאי רישיון מאגרי Kaggle.
+
+קובצי התיעוד שעליהם נשען המסמך
+
+README_HE.md
+
+תקציר החבילה והיקפי הנתונים.
+
+docs/airbnb_destination_dataset_README.md
+
+הכיסוי, תאריכי המקור, ההתאמה ל־2022 והייחוס ל־Inside Airbnb.
+
+data/airbnb_destination_source_manifest.csv
+
+קישורי המקור לפי שוק, ספירות העיבוד וכיסוי הזמינות.
+
+prepare_full_airbnb_markets.py
+
+סקריפט הפרויקט שמאחד נכסים, מוסיף שדות ויוצר את לוח הזמינות המדומה; נשמר בנפרד.
+
+backend/catalog.py, worker/hosted-catalogue.mjs
+
+כללי החיפוש והחישוב של הגרסה המקומית והאתר, בהתאמה; אלה קובצי קוד של האפליקציה.
+
+תאריך בדיקת הקישורים הראשיים והקבצים הוא 21 באוקטובר 2026. קישורי קובצי העיר הם הכתובות ההיסטוריות שנשמרו במניפסט; הם אינם הצעת מלאי עדכנית.
+
+נספח שדות המקור בקובץ נכסי הלינה
+
+בקובץ הנכסים יש 98 עמודות. שמונת שדות הפרויקט תוארו בפרק הלינה. 90 השדות הנותרים מגיעים מקובצי listings של Inside Airbnb ומפורטים כאן במלואם לפי קבוצות. נוכחות שדה אינה מבטיחה שהוא מלא בכל רשומה או בכל עיר.
+
+זיהוי הנכס ותיאורו
+
+id, listing_url, scrape_id, last_scraped, source, name, description, neighborhood_overview, picture_url
+
+מזהי המקור, תאריך האיסוף, טקסט תיאור וקישורי הנכס והתמונה.
+
+פרטי המארח
+
+host_id, host_url, host_profile_id, host_profile_url, host_name, host_since, hosts_time_as_user_years, hosts_time_as_user_months, hosts_time_as_host_years, hosts_time_as_host_months, host_location, host_about, host_response_time, host_response_rate, host_acceptance_rate, host_is_superhost, host_thumbnail_url, host_picture_url, host_neighbourhood, host_listings_count, host_total_listings_count, host_verifications, host_has_profile_pic, host_identity_verified, calculated_host_listings_count, calculated_host_listings_count_entire_homes, calculated_host_listings_count_private_rooms, calculated_host_listings_count_shared_rooms
+
+זהות המארח, פרופיל, מאפייני פעילות, אימות ומספר נכסים. אלו נתוני המקור; הם אינם נדרשים להעברה לסוכנים לצורך חיפוש החבילה.
+
+מיקום ומאפייני הנכס
+
+neighbourhood, neighbourhood_cleansed, neighbourhood_group_cleansed, latitude, longitude, property_type, room_type, accommodates, bathrooms, bathrooms_text, bedrooms, beds, amenities, license
+
+שכונה, קואורדינטות, סוג חדר, קיבולת, חדרים, מיטות, מתקנים ורישוי כפי שנרשמו במקור.
+
+מחירים וציטוטי מחיר
+
+price, price_quote_checkin_date, price_quote_checkout_date, price_quote_total_price, price_quote_price_per_night, price_quote_raw
+
+מחיר ושדות הצעת מחיר, כולל תאריכי ההצעה ופירוט גולמי כאשר הוא קיים.
+
+הגבלות שהייה ולוח זמינות
+
+minimum_nights, maximum_nights, minimum_minimum_nights, maximum_minimum_nights, minimum_maximum_nights, maximum_maximum_nights, minimum_nights_avg_ntm, maximum_nights_avg_ntm, calendar_updated, has_availability, availability_30, availability_60, availability_90, availability_365, calendar_last_scraped, availability_eoy, instant_bookable
+
+מינימום ומקסימום לילות, מאפייני לוח, אומדני זמינות מצטברים ואפשרות הזמנה מיידית במקור.
+
+ביקורות וציונים
+
+number_of_reviews, number_of_reviews_ltm, number_of_reviews_l30d, number_of_reviews_ly, first_review, last_review, review_scores_rating, review_scores_accuracy, review_scores_cleanliness, review_scores_checkin, review_scores_communication, review_scores_location, review_scores_value, reviews_per_month
+
+כמויות ביקורות, תאריכים, ציוני דירוג וקצב ביקורות.
+
+אומדנים שמקורם במאגר החיצוני
+
+estimated_occupancy_l365d, estimated_revenue_l365d
+
+אומדני תפוסה והכנסה שסופקו בתוך נתוני Inside Airbnb. אלו אינם מודלי ניבוי שאומנו בפרויקט.
+
+
+קישורי המקור המופיעים במסמך
+https://data.insideairbnb.com/united-states/ma/boston/2026-09-19/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/ma/boston/2026-09-19/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/fl/broward-county/2026-09-22/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/fl/broward-county/2026-09-22/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/il/chicago/2026-09-19/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/il/chicago/2026-09-19/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/tx/dallas/2026-09-19/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/tx/dallas/2026-09-19/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/co/denver/2026-09-25/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/co/denver/2026-09-25/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/tx/fort-worth/2026-09-17/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/tx/fort-worth/2026-09-17/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/nj/jersey-city/2026-09-21/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/nj/jersey-city/2026-09-21/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/ca/los-angeles/2026-09-14/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/ca/los-angeles/2026-09-14/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/ny/new-york-city/2026-09-14/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/ny/new-york-city/2026-09-14/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/nj/newark/2026-09-28/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/nj/newark/2026-09-28/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/ca/oakland/2026-09-20/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/ca/oakland/2026-09-20/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/ca/san-francisco/2026-09-14/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/ca/san-francisco/2026-09-14/data/calendar.csv.gz
+https://data.insideairbnb.com/united-states/dc/washington-dc/2026-09-19/data/listings.csv.gz
+https://data.insideairbnb.com/united-states/dc/washington-dc/2026-09-19/data/calendar.csv.gz
+https://www.kaggle.com/datasets/dilwong/flightprices
+https://github.com/dilwong/FlightPrices
+https://www.kaggle.com/datasets/kushleshkumar/cornell-car-rental-dataset
+https://insideairbnb.com/get-the-data/
+https://creativecommons.org/licenses/by/4.0/

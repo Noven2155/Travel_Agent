@@ -1,0 +1,29 @@
+{
+  "checked_on": "2026-10-21",
+  "data_archive": "tourism_project_data_package.zip",
+  "data_archive_bytes": 212946675,
+  "data_archive_sha256": "185b46105c404c7acba2ed347dbbbb2ee25676b09205eba7e94e34dc5eea5b9f",
+  "inventory_sha256": "39a0c9c2b2562062211d884af35cc73b3826926b0c56cb06ea5e428c87167319",
+  "inventory_unchanged_by_repair": true,
+  "zip_crc_check": "passed",
+  "counts": {
+    "expedia_flight_sample_20k.csv": 20000,
+    "cornell_car_rental_enriched.csv": 5851,
+    "car_availability_demo_2022.csv": 27354,
+    "airbnb_flight_destination_markets_full_listings_2026.csv.gz": 138837,
+    "airbnb_flight_destination_markets_availability_2022_synthetic.csv.gz": 17477737
+  },
+  "gzip_checks": {
+    "airbnb_flight_destination_markets_full_listings_2026.csv.gz": {
+      "sha256": "79ebeed046cd1b8ae469005360790248a801501807bfb383e424d31aec6a3a1a",
+      "compressed_bytes": 84385395,
+      "gzip_crc_verified": true
+    },
+    "airbnb_flight_destination_markets_availability_2022_synthetic.csv.gz": {
+      "sha256": "bd9133ce5e76d501ef3dd66a36cd4383b0a5350ac9303e55b2a1ecf0c4869fe0",
+      "compressed_bytes": 125036208,
+      "gzip_crc_verified": true
+    }
+  },
+  "documentation_pages": 12
+}
