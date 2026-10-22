@@ -103,6 +103,7 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 
 - אפיון וארכיטקטורה: `docs/spec/Travel_Architecture_and_Plan_HE.md` (+ `.svg`)
 - מסמכי בוני הסוכנים: `docs/agent_specs/` (Markdown + Word)
+- מסמך העברה וסטטוס עדכני (22.10.2026, מהדרייב): `docs/Travel_Project_Handoff_HE.txt` — סעיף 15 הוא תמונת המצב העדכנית
 - עיצוב ומוצר: `docs/DESIGN.md`, `docs/PRODUCT.md`, הנחיות לסוכני קוד: `docs/AGENTS.md`
 - הפעלת Streamlit: `docs/README_STREAMLIT_HE.md`
 - ארכיון (היקף קודם, לרקע בלבד): `docs/archive/`
