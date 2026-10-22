@@ -289,7 +289,7 @@ Fixture יומי נקודתי: `daily` עם `precipitation_sum`, `precipitation_
 2. C הסתיים בעבר ב־timeout ב־270.29 שניות; ללא טלמטריה פעילה אין לדעת איזה agent/קריאה חסמו. אחרי התיקון יש לבדוק אירועים לפי agent, משך כל קריאה, סבבים, retries ו־pending tools.
 3. הבחירה האחרונה שנדונה למודל הייתה Gemini Flash-Lite, אך הקוד שנקרא בתיקיית הפרויקט מגדיר ברירת מחדל מקומית `ollama/qwen2.5:7b-instruct`, ומאפשר `gemini/*` דרך משתני סביבה. לא נמצאה הוכחה שהבחירה החדשה נשמרה/פעילה במהדורת הפרויקט העדכנית. צריך להכריע מודל וספק בפועל ולוודא מזהה נתמך, API key, מכסה ותאימות CrewAI.
 4. מחברת Colab הפעילה, מחברת 2, אפליקציית Streamlit ותיקיית `project` אינם אותו נתיב. יש לבחור מקור אמת אחד, לוודא איזו גרסה הצוות מפעיל, ואז לעדכן manifest/README/מחברת בהתאם. לא לערוך עותק שגוי.
-5. `README_STREAMLIT_HE.md` מתעד ש־Colab/Gemini אמיתי דורשים בדיקה בחשבון. `RELEASE_MANIFEST.json` של הפרויקט החדש מתעד `real_model_tested: false`.
+5. `README_STREAMLIT_HE.md` מתעד ש־Colab/Gemini אמיתי דורשים בדיקה בחשבון. `RELEASE_MANIFEST.json` של הפרויקט החדש (כיום ב־`archive/release/`) מתעד `real_model_tested: false`.
 6. הנתונים היסטוריים/חלקם סינתטיים. אין להציג אותם כמחירים/זמינות נוכחיים.
 
 ## 9. תוכנית עבודה עד 30.10.2026

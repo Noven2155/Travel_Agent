@@ -26,9 +26,10 @@ frontend/                ממשק React + TypeScript בעברית (RTL)
 web/                     scenarios.json + recorded_baseline.json — מקור יחיד לתרחישי ההדגמה
 streamlit_app.py         כניסה לממשק Streamlit (גם streamlit/app.py ל־Community Cloud)
 notebooks/               מחברות Colab (Streamlit — המסלול המומלץ; ומחברת ההשוואה הוותיקה)
-scripts/                 הפעלה, בניית תרחישים, smoke, אריזה, עזרי מחברת
+scripts/                 הפעלה, בניית תרחישים, smoke, עזרי מחברת
 data/                    קטלוג העבודה, מקומות, מזג אוויר וקובצי מקור
-docs/                    אפיון, מסמכי בוני הסוכנים, עיצוב, ארכיון
+docs/                    אפיון, מסמכי בוני הסוכנים, עיצוב
+archive/                 חומרים מהיקף קודם / שאינם בשימוש (לא נקראים בקוד או בבדיקות)
 travel_files_manifest.json  גודל ו־SHA-256 של קובצי הדרייב שמהם סונכרן המאגר (רשומת שלמות)
 ```
 
@@ -105,7 +106,7 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 - מסמכי בוני הסוכנים: `docs/agent_specs/` (Markdown + Word)
 - עיצוב ומוצר: `docs/DESIGN.md`, `docs/PRODUCT.md`, הנחיות לסוכני קוד: `docs/AGENTS.md`
 - הפעלת Streamlit: `docs/README_STREAMLIT_HE.md`
-- ארכיון (היקף קודם, לרקע בלבד): `docs/archive/`
+- ארכיון (היקף קודם וקבצים שאינם בשימוש, לרקע בלבד): `archive/` — ראו `archive/README.md`
 
 ---
 
