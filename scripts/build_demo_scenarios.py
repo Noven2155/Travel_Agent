@@ -12,8 +12,10 @@ base = dict(city='Chicago', origin='LGA', start_date='2022-08-20', end_date='202
 specs = [
  ('S01', 'חופשה שאפשר לסגור', 'בקשה סגורה', 'ארבע מטיילות, חבילה עם רכב ומסלול תרבות ואוכל.', {},
   'אנחנו ארבע מטיילות. נצא מ-LGA לשיקגו ב-20 באוגוסט 2022 ונחזור ב-23 באוגוסט. התקציב הכולל לטיסות, דירה ורכב הוא 3,000 דולר. נרצה תרבות ואוכל, בקצב רגיל.', 'feasible'),
- ('S02', 'כשהתקציב לא מספיק', 'בקשה סגורה', 'אותם תאריכים; התקציב נמוך מהחבילה הזולה ביותר.', {'budget_usd':950,'wants_car':False},
-  'אנחנו ארבע מטיילות מ-LGA לשיקגו, מ-20 עד 23 באוגוסט 2022. התקציב הכולל לטיסות ולינה הוא 950 דולר ואי אפשר לחרוג ממנו. לא צריך רכב. נרצה תרבות ואוכל בקצב רגיל.', 'no_package'),
+ # S02 (22.10.2026): budget raised 950 -> 1,275, just under the cheapest catalog package ($1,294.80). web/scenarios.json also carries
+ # hand-written verification fields (Hebrew reason, minimum_catalog_price_usd, budget_gap_usd, reverify_before_benchmark) that this script does not emit.
+ ('S02', 'תקציב סמוך לגבול', 'אי־היתכנות תקציבית גבולית', 'התקציב נמוך מעט מהמחיר הזול ביותר המתועד לחבילה מתאימה. נבחן זיהוי של מגבלת התקציב והסבר מדויק של הפער.', {'budget_usd':1275,'wants_car':False},
+  'תכננו טיול לשיקגו לארבעה נוסעים בין 20 ל־23 באוגוסט 2022. התקציב הכולל הוא 1,275 דולר, ללא רכב. מצאו חבילה מתאימה; אם אין כזו בקטלוג, הסבירו מהו הפער מול האפשרות הזולה ביותר.', 'no_package'),
  ('S03', 'מיקום או טיסה ישירה', 'בקשה גמישה', 'יש חלופות, אבל אין חבילה שמגשימה את שתי ההעדפות יחד.',
   dict(city='New York',origin='LAX',start_date='2022-10-20',end_date='2022-10-23',budget_usd=4500,wants_car=False,
        pace='relaxed',soft_prefs=['central','nonstop'],priority_weights={'central':3,'nonstop':1},as_of='2022-10-01'),

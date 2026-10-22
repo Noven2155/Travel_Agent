@@ -104,6 +104,7 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 
 - אפיון וארכיטקטורה: `docs/spec/Travel_Architecture_and_Plan_HE.md` (+ `.svg`)
 - מסמכי בוני הסוכנים: `docs/agent_specs/` (Markdown + Word)
+- מסמך העברה וסטטוס (עודכן 22.10.2026): `docs/Travel_Project_Handoff_HE.md` — סעיף 15 הוא מקור האמת לסטטוס; סעיפים 10–14 היסטוריים
 - עיצוב ומוצר: `docs/DESIGN.md`, `docs/PRODUCT.md`, הנחיות לסוכני קוד: `docs/AGENTS.md`
 - הפעלת Streamlit: `docs/README_STREAMLIT_HE.md`
 - ארכיון (היקף קודם וקבצים שאינם בשימוש, לרקע בלבד): `archive/` — ראו `archive/README.md`
