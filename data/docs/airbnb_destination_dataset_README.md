@@ -3,7 +3,7 @@
 ## Files
 
 - `airbnb_flight_destination_markets_full_listings_2026.csv.gz` contains all listing rows and detailed source columns from 13 city snapshots. Added fields include listing ID/key, source market and snapshot date, matching airport codes, match type, current snapshot price, and `is_group_stay_candidate`.
-- `airbnb_flight_destination_markets_availability_2022_synthetic.csv.gz` contains synthetic availability for group-stay candidates, for each distinct 2022 `flightDate` in the Expedia sample.
+- `airbnb_flight_destination_markets_availability_2022_synthetic.csv.gz` contains synthetic availability (in this repository it is split into `..._synthetic_part1.csv.gz` and `..._synthetic_part2.csv.gz` because of GitHub's 100MB limit; see `data/README.md`) for group-stay candidates, for each distinct 2022 `flightDate` in the Expedia sample.
 - `expedia_airport_airbnb_market_map.csv` shows airport coverage and gaps.
 - `airbnb_destination_source_manifest.csv` records all source markets, snapshot dates, URLs, and row counts.
 
