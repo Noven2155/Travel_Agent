@@ -28,7 +28,7 @@ streamlit_app.py         כניסה לממשק Streamlit (גם streamlit/app.py 
 notebooks/               מחברות Colab (Streamlit — המסלול המומלץ; ומחברת ההשוואה הוותיקה)
 scripts/                 הפעלה, בניית תרחישים, smoke, אריזה, עזרי מחברת
 data/                    קטלוג העבודה, מקומות, מזג אוויר וקובצי מקור
-docs/                    אפיון, מסמכי בוני הסוכנים, עיצוב, סטטוס, הערכה, ארכיון
+docs/                    אפיון, מסמכי בוני הסוכנים, עיצוב, ארכיון
 travel_files_manifest.json  גודל ו־SHA-256 של קובצי הדרייב שמהם סונכרן המאגר (רשומת שלמות)
 ```
 
@@ -101,7 +101,6 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 
 - אפיון וארכיטקטורה: `docs/spec/Travel_Architecture_and_Plan_HE.md` (+ `.svg`)
 - מסמכי בוני הסוכנים: `docs/agent_specs/` (Markdown + Word)
-- סטטוס והחלטות: `docs/STATUS_HE.md` · הערכה: `docs/eval_v2_HE.md`, `docs/eval_v3_freetext_HE.md`
 - עיצוב ומוצר: `docs/DESIGN.md`, `docs/PRODUCT.md`, הנחיות לסוכני קוד: `docs/AGENTS.md`
 - הפעלת Streamlit: `docs/README_STREAMLIT_HE.md`
 - ארכיון (היקף קודם, לרקע בלבד): `docs/archive/`
