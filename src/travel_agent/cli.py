@@ -13,10 +13,10 @@ from .systems import run
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--case", required=True, help="eval/dev case id, e.g. A01")
-    ap.add_argument("--system", default="rules", choices=["rules", "single", "multi"])
+    ap.add_argument("--system", default="rules", choices=["rules", "rules_basic", "hybrid", "single", "multi"])
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
-    case = next(c for c in json.loads(C.CASES_PATH.read_text())["cases"] if c["id"] == a.case)
+    case = next(c for c in json.loads((C.CASES_PATH_V2 if C.CASES_PATH_V2.exists() else C.CASES_PATH).read_text())["cases"] if c["id"] == a.case)
     r = run(a.system, TripRequest.from_case(case))
     print(r.model_dump_json(indent=1) if a.json else render_markdown(r))
 

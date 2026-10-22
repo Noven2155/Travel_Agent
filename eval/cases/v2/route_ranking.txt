@@ -1,0 +1,52 @@
+per city (T=2):
+  Chicago {'windows_with_pkg_exact': 692, 'windows_exact_ge20': 231, 'windows_exact_ge20_with_central': 228, 'windows_flex_ge50': 584, 'packages_exact_total': 11825, 'packages_flex1_total': 92022}
+  New York {'windows_with_pkg_exact': 2121, 'windows_exact_ge20': 1088, 'windows_exact_ge20_with_central': 1071, 'windows_flex_ge50': 2612, 'packages_exact_total': 62988, 'packages_flex1_total': 501679}
+  Boston {'windows_with_pkg_exact': 692, 'windows_exact_ge20': 596, 'windows_exact_ge20_with_central': 596, 'windows_flex_ge50': 1441, 'packages_exact_total': 27715, 'packages_flex1_total': 225906}
+  San Francisco {'windows_with_pkg_exact': 661, 'windows_exact_ge20': 466, 'windows_exact_ge20_with_central': 455, 'windows_flex_ge50': 1270, 'packages_exact_total': 24050, 'packages_flex1_total': 189053}
+  Washington DC {'windows_with_pkg_exact': 382, 'windows_exact_ge20': 342, 'windows_exact_ge20_with_central': 341, 'windows_flex_ge50': 887, 'packages_exact_total': 18232, 'packages_flex1_total': 141716}
+  Dallas-Fort Worth {'windows_with_pkg_exact': 713, 'windows_exact_ge20': 650, 'windows_exact_ge20_with_central': 650, 'windows_flex_ge50': 1616, 'packages_exact_total': 32954, 'packages_flex1_total': 260899}
+  Oakland {'windows_with_pkg_exact': 327, 'windows_exact_ge20': 306, 'windows_exact_ge20_with_central': 306, 'windows_flex_ge50': 1334, 'packages_exact_total': 25959, 'packages_flex1_total': 208941}
+
+top routes by total exact packages over all windows (origin, city, windows>0, pk_exact, pk_flex1, best window):
+  ['LAX', 'New York', 346, 14094, 110566, 270]
+  ['ORD', 'New York', 290, 11002, 87103, 225]
+  ['DFW', 'New York', 259, 8149, 65676, 210]
+  ['LGA', 'Dallas-Fort Worth', 126, 6908, 55163, 210]
+  ['LAX', 'Dallas-Fort Worth', 117, 6650, 52042, 270]
+  ['DEN', 'New York', 254, 6550, 52685, 180]
+  ['LGA', 'Washington DC', 112, 6508, 52377, 344]
+  ['BOS', 'New York', 263, 6353, 51101, 108]
+  ['DFW', 'Oakland', 69, 6225, 52069, 444]
+  ['IAD', 'New York', 225, 6090, 47918, 162]
+  ['SFO', 'New York', 218, 4905, 40204, 160]
+  ['MIA', 'New York', 200, 4715, 38022, 135]
+  ['BOS', 'Dallas-Fort Worth', 85, 4520, 36238, 280]
+  ['BOS', 'San Francisco', 106, 4229, 33366, 198]
+  ['MIA', 'Boston', 97, 4227, 35388, 243]
+  ['LGA', 'Oakland', 52, 4026, 33056, 162]
+  ['ORD', 'Boston', 91, 3981, 32579, 168]
+  ['LAX', 'Boston', 99, 3834, 31070, 168]
+  ['MIA', 'Dallas-Fort Worth', 89, 3747, 29518, 192]
+  ['BOS', 'Oakland', 38, 3746, 29849, 228]
+
+top windows:
+  {'city': 'Oakland', 'origin': 'DFW', 'start': '2022-08-21', 'end': '2022-08-25', 'n_out': 2, 'n_back': 3, 'n_stays': 74, 'n_stays_central': 50, 'packages_exact': 444, 'packages_flex1': 1321}
+  {'city': 'Washington DC', 'origin': 'LGA', 'start': '2022-09-09', 'end': '2022-09-13', 'n_out': 2, 'n_back': 4, 'n_stays': 43, 'n_stays_central': 17, 'packages_exact': 344, 'packages_flex1': 847}
+  {'city': 'Oakland', 'origin': 'DFW', 'start': '2022-08-23', 'end': '2022-08-25', 'n_out': 2, 'n_back': 3, 'n_stays': 55, 'n_stays_central': 40, 'packages_exact': 330, 'packages_flex1': 1223}
+  {'city': 'Washington DC', 'origin': 'LGA', 'start': '2022-07-21', 'end': '2022-07-24', 'n_out': 2, 'n_back': 4, 'n_stays': 38, 'n_stays_central': 11, 'packages_exact': 304, 'packages_flex1': 585}
+  {'city': 'Dallas-Fort Worth', 'origin': 'BOS', 'start': '2022-09-01', 'end': '2022-09-05', 'n_out': 2, 'n_back': 4, 'n_stays': 35, 'n_stays_central': 24, 'packages_exact': 280, 'packages_flex1': 830}
+  {'city': 'Oakland', 'origin': 'DFW', 'start': '2022-08-23', 'end': '2022-08-26', 'n_out': 2, 'n_back': 2, 'n_stays': 68, 'n_stays_central': 48, 'packages_exact': 272, 'packages_flex1': 1169}
+  {'city': 'Dallas-Fort Worth', 'origin': 'LAX', 'start': '2022-10-03', 'end': '2022-10-05', 'n_out': 3, 'n_back': 3, 'n_stays': 30, 'n_stays_central': 19, 'packages_exact': 270, 'packages_flex1': 1020}
+  {'city': 'Dallas-Fort Worth', 'origin': 'LAX', 'start': '2022-10-03', 'end': '2022-10-06', 'n_out': 3, 'n_back': 3, 'n_stays': 30, 'n_stays_central': 19, 'packages_exact': 270, 'packages_flex1': 966}
+  {'city': 'New York', 'origin': 'LAX', 'start': '2022-11-01', 'end': '2022-11-04', 'n_out': 3, 'n_back': 6, 'n_stays': 15, 'n_stays_central': 5, 'packages_exact': 270, 'packages_flex1': 473}
+  {'city': 'Oakland', 'origin': 'MIA', 'start': '2022-08-02', 'end': '2022-08-05', 'n_out': 2, 'n_back': 2, 'n_stays': 67, 'n_stays_central': 47, 'packages_exact': 268, 'packages_flex1': 268}
+  {'city': 'Dallas-Fort Worth', 'origin': 'LAX', 'start': '2022-10-04', 'end': '2022-10-06', 'n_out': 3, 'n_back': 3, 'n_stays': 29, 'n_stays_central': 20, 'packages_exact': 261, 'packages_flex1': 801}
+  {'city': 'San Francisco', 'origin': 'ORD', 'start': '2022-09-08', 'end': '2022-09-12', 'n_out': 4, 'n_back': 2, 'n_stays': 32, 'n_stays_central': 24, 'packages_exact': 256, 'packages_flex1': 436}
+  {'city': 'Dallas-Fort Worth', 'origin': 'BOS', 'start': '2022-08-06', 'end': '2022-08-09', 'n_out': 2, 'n_back': 4, 'n_stays': 31, 'n_stays_central': 21, 'packages_exact': 248, 'packages_flex1': 454}
+  {'city': 'Boston', 'origin': 'MIA', 'start': '2022-08-04', 'end': '2022-08-07', 'n_out': 3, 'n_back': 3, 'n_stays': 27, 'n_stays_central': 14, 'packages_exact': 243, 'packages_flex1': 597}
+  {'city': 'Boston', 'origin': 'LGA', 'start': '2022-08-21', 'end': '2022-08-25', 'n_out': 2, 'n_back': 4, 'n_stays': 30, 'n_stays_central': 15, 'packages_exact': 240, 'packages_flex1': 913}
+  {'city': 'Washington DC', 'origin': 'LGA', 'start': '2022-08-04', 'end': '2022-08-08', 'n_out': 3, 'n_back': 2, 'n_stays': 40, 'n_stays_central': 15, 'packages_exact': 240, 'packages_flex1': 322}
+  {'city': 'Oakland', 'origin': 'BOS', 'start': '2022-09-02', 'end': '2022-09-06', 'n_out': 3, 'n_back': 1, 'n_stays': 76, 'n_stays_central': 51, 'packages_exact': 228, 'packages_flex1': 381}
+  {'city': 'New York', 'origin': 'ORD', 'start': '2022-08-23', 'end': '2022-08-26', 'n_out': 5, 'n_back': 5, 'n_stays': 9, 'n_stays_central': 6, 'packages_exact': 225, 'packages_flex1': 862}
+  {'city': 'Washington DC', 'origin': 'LAX', 'start': '2022-08-08', 'end': '2022-08-10', 'n_out': 2, 'n_back': 4, 'n_stays': 28, 'n_stays_central': 11, 'packages_exact': 224, 'packages_flex1': 335}
+  {'city': 'Oakland', 'origin': 'DFW', 'start': '2022-08-24', 'end': '2022-08-26', 'n_out': 2, 'n_back': 2, 'n_stays': 55, 'n_stays_central': 40, 'packages_exact': 220, 'packages_flex1': 822}

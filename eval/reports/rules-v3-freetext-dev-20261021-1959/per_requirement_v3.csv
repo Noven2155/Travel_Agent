@@ -1,0 +1,10 @@
+system,case,city,phrasing_type,requirement,checker,outcome,detail
+A - rules (keyword parser + strong rules),G01,Chicago,direct,G01-K1,no_flight_departure_before,met,"departures ['09:30', '15:15']"
+A - rules (keyword parser + strong rules),G01,Chicago,direct,G01-K2,no_activity_in_window,met,free
+A - rules (keyword parser + strong rules),G02,Chicago,indirect,G02-K1,central_stay,met,4.64 km
+A - rules (keyword parser + strong rules),G02,Chicago,indirect,G02-K2,budget_max,met,total 932.4 vs 1300
+A - rules (keyword parser + strong rules),G03,New York,direct,G03-K1,no_category,met,none
+A - rules (keyword parser + strong rules),G03,New York,direct,G03-K2,party_size,met,priced for 3
+A - rules (keyword parser + strong rules),G04,New York,indirect,G04-K1,day_window,met,inside
+A - rules (keyword parser + strong rules),G04,New York,indirect,G04-K2,evening_meal_within_km_of_lodging,flagged,"dinner km [5.56, 5.64, 5.37]"
+A - rules (keyword parser + strong rules),G04,New York,indirect,G04-K3,party_size,met,priced for 3

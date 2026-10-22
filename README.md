@@ -1,94 +1,118 @@
-# Travel Agent – צוות 8 · BIU DS23
+# Travel Agent — השוואת שלוש מערכות לתכנון טיול קבוצתי
 
-מערכת שמתכננת טיול קצר לשיקגו או לניו יורק ומשווה בין שלוש מערכות על אותה ערכת הערכה:
-**A** – baseline כללים דטרמיניסטי (בלי LLM), **B** – סוכן CrewAI יחיד עם כל הכלים, **C** – מולטי-אג'נט
-(מנהל טיול, סוכן מקומות, סוכן מסלול) ב-CrewAI Flow. המפרט הקובע: `system_definition_HE.md` (הגדרת שלוש המערכות וההערכה).
+פרויקט גמר, קורס Agentic AI · BIU DS23 · צוות 8 · CrewAI 1.15.
 
-> ההבדל היחיד בין המערכות הוא מי מקבל את ההחלטות. הקלט (`TripRequest`), הכלים, הבדיקות בקוד (`final_checks`),
-> המגבלות (3 סבבים, דדליין 270 שניות), הפלט (`RunResult`) וקודי הסטטוס – זהים.
+המערכת משלבת טיסות, לינה, רכב ותוכנית יומית לטיול קצר של קבוצה (ארבע מטיילות בתרחישי ההדגמה), תוך כיבוד תקציב, תאריכים, גודל קבוצה והעדפות. היא גם מזהה מצב שבו אין חבילה מתאימה ומציעה פשרה מותרת. ההיקף הנוכחי: שיקגו וניו יורק. זו מערכת המלצה ומחקר השוואתי קטן — **אין הזמנות ואין תשלומים אמיתיים**.
 
-## מבנה
+## שלוש המערכות
 
-| נתיב | תוכן |
-|---|---|
-| `src/travel_agent/models.py` | מודלי Pydantic: `TripRequest`, `PackageDecision`, `PlaceShortlist`, `ItineraryPlan`, `CheckReport`, `RunResult`, סטטוסים |
-| `src/travel_agent/tools.py` | כלים דטרמיניסטיים מעל קבצים מקומיים: `search_flights`, `search_hotels`, `search_cars`, `calculate_price`, `rank_packages`, `search_places`, `get_place_details`, `get_travel_time`, `check_day_load`, `get_forecast`. כל פלט כולל `call_id/source/license/data_date` ונרשם ביומן הריצה |
-| `src/travel_agent/pipeline.py` | צעדי ה-Flow המשותפים: intake → ask_car → weather_step → build_candidates |
-| `src/travel_agent/checks.py` | `final_checks`: budget, dates, capacity, car, day_load, travel, weather_rule (rain_handled), coverage, grounding, schema |
-| `src/travel_agent/systems/rules.py` | מערכת A |
-| `src/travel_agent/systems/single_agent.py` | מערכת B – `Flow` עם `@start/@listen/@router`, סוכן `TripPlanner` אחד, `Agent.kickoff(response_format=TripPlan)` |
-| `src/travel_agent/systems/multi_agent.py` | מערכת C – `Flow` עם trip_manager → check_package (router) → places → itinerary → final_checks (router), `Task(output_pydantic=…)` + guardrail |
-| `src/travel_agent/systems/crew_tools.py` | עטיפת הכלים ככלי CrewAI (least privilege לכל סוכן) |
-| `eval/` | ערכת ההערכה המוקפאת (`cases/`), `run_eval.py`, `score.py`, תוצאות (`results/`) ודוחות (`reports/`) |
-| `app/streamlit_app.py` | ממשק: תכנון טיול + לוח הערכה |
-| `data/places/`, `data/weather/` | נתוני מקומות (שיקגו וניו יורק) ו-fixtures של מזג אוויר. שאר `data/` – הקטלוג הקיים (לא שונה) |
+| | מערכת | תיאור |
+|---|---|---|
+| A | קוד דטרמיניסטי (`rules`, `rules_strong`) | חיפוש, חישוב עלויות, דירוג לפי כללים והעדפות, פשרות במסגרת הגמישות. ללא LLM. בייסליין אמיתי, לא מוחלש. |
+| B | סוכן יחיד ב־CrewAI | מתכנן אחד עם כל הכלים המשותפים. |
+| C | שלושה סוכנים ב־CrewAI Flow | Trip Manager (חבילה) → Places (מקומות) → Itinerary (מסלול), עם נתב בקוד שמחזיר רק את הסוכן האחראי לכשל. |
 
-## התקנה
+כל המערכות משתמשות באותם נתונים, כלים, אילוצים ובדיקות סיום (`final_checks`), עד 3 סבבים ו־270 שניות לכל מערכת. B ו־C משתמשות באותו מודל ובאותן הגדרות. סטטוסים: `OK_PLAN`, `NO_PACKAGE_IN_CATALOG`, `CONFLICT_UNRESOLVED`, `NEEDS_DATA`, `INVALID_REQUEST`, `TECHNICAL_ERROR`, `TIMEOUT`.
 
-```bash
-python3 -m venv .venv && . .venv/bin/activate
-pip install -r requirements.txt && pip install -e .
-cp .env.example .env        # רק עבור B/C; A לא צריכה LLM
+## מבנה המאגר
+
+```
+src/travel_agent/        ליבת Python: מודלים, כלים, בדיקות, מערכות A/B/C, comparison.py, api.py, Streamlit, ניטור
+  systems/               rules, rules_strong, single_agent (B), multi_agent (C)
+  parsing/               פענוח בקשה בטקסט חופשי (כללים / LLM)
+eval/                    ערכות הערכה v1/v2/v3, ניקוד, judge, דוחות (eval/reports)
+tests/                   pytest (מודל מדומה רק בתוך הבדיקות)
+frontend/                ממשק React + TypeScript בעברית (RTL)
+web/                     scenarios.json + recorded_baseline.json — מקור יחיד לתרחישי ההדגמה
+streamlit_app.py         כניסה לממשק Streamlit (גם streamlit/app.py ל־Community Cloud)
+notebooks/               מחברות Colab (Streamlit — המסלול המומלץ; ומחברת ההשוואה הוותיקה)
+scripts/                 הפעלה, בניית תרחישים, smoke, אריזה, עזרי מחברת
+data/                    קטלוג העבודה, מקומות, מזג אוויר וקובצי מקור
+docs/                    אפיון, מסמכי בוני הסוכנים, עיצוב, ארכיון
+travel_files_manifest.json  גודל ו־SHA-256 של קובצי הדרייב שמהם סונכרן המאגר (רשומת שלמות)
 ```
 
-LLM עבור B/C (בחינם בלבד): ברירת המחדל היא מודל מקומי דרך Ollama (`ollama pull qwen2.5:7b-instruct`).
-אפשרות נוספת: ספק עם שכבה חינמית (Gemini דרך AI Studio, או Groq דרך LiteLLM) – ראו `.env.example`.
-`temperature=0`, אותו מודל ל-B ול-C. מפתחות לא נכנסים לגיט. בלי LLM זמין, B ו-C מחזירות `TECHNICAL_ERROR` עם הסבר, וההרצה ממשיכה.
+## הפעלה
 
-## הרצת ההערכה
+### 1. Google Colab (מומלץ)
 
-```bash
-python -m eval.run_eval --system rules  --split eval --city chicago     # A, בלי LLM, ~1 שנייה
-python -m eval.run_eval --system single --split dev                     # B (דורש LLM)
-python -m eval.run_eval --system multi  --split dev                     # C (דורש LLM)
-python -m eval.score eval/results/rules/<ts> [eval/results/single/<ts> eval/results/multi/<ts>]
-```
+1. פתחי את `notebooks/travel_streamlit_colab.ipynb` ב־Colab (File → Open notebook → GitHub).
+2. ב־Secrets שמרי `GEMINI_API_KEY` והפעילי Notebook access. המפתח לא מודפס ולא נשמר בקוד או בתוצאות.
+3. Runtime → Run all. כברירת מחדל המחברת משבטת את המאגר (`SOURCE_MODE = "github"`); `SOURCE_MODE = "drive"` טוען מתיקיית `My Drive/travel` (מבנה `project/` + `data/`).
+4. בתא האחרון נפתח ממשק Streamlit: בחרי תרחיש ולחצי **הרץ השוואה**. מנוע הקוד (A) פועל גם בלי מפתח.
 
-כל בקשה נשמרת כ-JSON ב-`eval/results/<system>/<timestamp>/` (תוכנית, סטטוס, יומן כלים, `llm_calls`, טוקנים,
-`wall_time_s`, `rounds_used`, דוח בדיקות) ולצידה `run_meta.json` (קומיט, SHA256 של ערכת ההערכה). `score` מדפיס
-טבלת השוואה (שורה לכל מערכת) וכותב `comparison.md`, `comparison.csv`, `per_case.csv`.
+המחברת `notebooks/travel_comparison_colab.ipynb` היא המסלול הוותיק (ipywidgets) ונשמרה לתאימות.
 
-מדד מרכזי: `valid_plan = OK_PLAN ∧ all(final_checks) ∧ wall_time_s ≤ 300 ∧ rounds_used ≤ 3`, ו-`valid_plan_rate`
-על D (בקשות A–D שה-oracle אישר), עם תת-קבוצת הבקשות המתנגשות (B–D) ורווח סמך Wilson 95%. קבוצה E מדווחת כ-`correct_refusal`.
+### 2. Streamlit מקומי
 
-## הרצת הממשק
+נדרש Python 3.10–3.13 (נבדק על 3.12/3.13).
 
 ```bash
-streamlit run app/streamlit_app.py
+python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements-streamlit.txt
+python -m streamlit run streamlit_app.py               # או: sh start_streamlit.sh  /  START_STREAMLIT.bat
 ```
 
-(א) **תכנון טיול** – טופס `TripRequest` או בחירת בקשת eval, בחירת מערכת, ותצוגה של החבילה, מסלול יומי עם מפה,
-מזג אוויר עם מקור, "על מה ויתרנו", דוח בדיקות ויומן קריאות הכלים. (ב) **לוח הערכה** – טעינת תיקיות תוצאות,
-טבלת השוואה, סינון לפי קבוצה ועיר, ופירוט לכל בקשה. צילום מסך: `docs/ui_screenshot.png`.
+### 3. React + API
 
-## בדיקות
+```bash
+python -m pip install -e ".[agents,api,dev]"
+python scripts/start.py          # FastAPI על 8025 + ממשק; --dev מפעיל Vite על 5173
+```
+
+`frontend/dist` אינו נשמר במאגר. בהפעלה הראשונה `scripts/start.py` מתקין את תלויות הממשק ומריץ את שרת הפיתוח. לבנייה ידנית (Node.js 20+):
+
+```bash
+cd frontend && npm install && npm run build   # prebuild מעתיק את web/scenarios.json ו־recorded_baseline.json ל־public/
+```
+
+### מודל
+
+העתיקי `.env.example` ל־`.env` והגדירי `LLM_MODEL` ומפתח (Gemini/OpenAI/Ollama), או הגדירי דרך הממשק. אין להכניס מפתחות לקוד או ל־Git (`.env` ו־`.streamlit/secrets.toml` ב־`.gitignore`).
+
+### בדיקות והערכה
 
 ```bash
 python -m pytest -q
+python scripts/smoke_comparison.py                 # הרצת API מלאה ללא מודל
+python -m eval.run_eval --help                     # הערכה; תוצאות גולמיות ב־eval/results (לא נשמרות במאגר), דוחות ב־eval/reports
 ```
 
-כולל: כלים, בדיקות `final_checks` (כל בדיקה נבדקת גם בכשל מכוון), smoke test של A על בקשות שיקגו, בדיקת ההרנס,
-ובדיקות חיווט של ה-Flow של B ו-C עם LLM מדומה (`tests/fake_llm.py`, כולל מסלול replan דרך ה-router).
+## נתונים — מקור ומגבלות
 
-## מקורות נתונים וייחוס
+**תיאור מלא של כל קובץ נתונים (היקף, עמודות, מקור, מה סינתטי, מי משתמש בו): [`data/README.md`](data/README.md).**
 
-- **מקומות (שיקגו וניו יורק):** © OpenStreetMap contributors, ‏**ODbL 1.0**; תיאורים ודגל `in_wikivoyage` מ-Wikivoyage, ‏**CC BY-SA 4.0**. נשלף 2026-10-21. ב-NYC: אטרקציות מכל 5 הרובעים, אוכל ממנהטן בלבד (צפון-מזרח מנהטן וברוקלין חסרים עקב כשלי Overpass), ראו `data/places/README.md`.
-- **מזג אוויר:** Open-Meteo Historical Forecast API, ‏**CC BY 4.0** (נשלף פעם אחת, `data/weather/`).
-- **קטלוג (קיים, לא שונה):** טיסות – Kaggle dilwong/FlightPrices (מ-Expedia); לינה – Inside Airbnb, ‏**CC BY 4.0**; רכבים – Kaggle Cornell Car Rental. ראו `data/README.md`.
-- **שדות סינתטיים:** במקומות – `rating`, `review_count`, `typical_visit_minutes` ורוב `price_level` (seed 42, עמודת `synthetic_fields`). זמינות הלינה והרכבים בקטלוג סינתטית. קיבולת רכב היא אומדן לפי סוג רכב. הכלים לא מחזירים דירוג, ובדיקת העיגון נכשלת אם שדה סינתטי מופיע בתוכנית. `typical_visit_minutes` מסומן כאומדן.
-- אין שימוש ב-API בתשלום. אין הזמנות אמיתיות.
+קטלוג העבודה: `data/inventory.json` — 15,254 טיסות בכיוון אחד, 3,960 נכסי לינה, 1,651 רכבים, 216 תאריכים (17.4–19.11.2022; SHA-256 `39a0c9c2…7319`). `data/flights.csv`, `stays.csv`, `cars.csv` הם יצוא מלא של הקטלוג לעיון; המערכות קוראות את `inventory.json`.
+
+- **טיסות**: Kaggle dilwong/FlightPrices (Expedia), הצעות היסטוריות בכיוון אחד, 17.4–19.11.2022.
+- **לינה**: Inside Airbnb, צילום ספטמבר 2026 (מחירים); **הזמינות ל־2022 מדומה**. בניו יורק הלינה הקצרה בטווח 12 ק״מ היא בג'רזי סיטי בלבד.
+- **רכב**: Cornell Car Rental (Kaggle); מחיר יומי מהמקור, **קיבולת אומדן וזמינות מדומה**.
+- **מקומות**: OpenStreetMap/Overpass + Wikivoyage — שיקגו 579, ניו יורק 616 (האוכל בניו יורק ממנהטן בלבד). **`rating`, `review_count`, `typical_visit_minutes` ורוב `price_level` סינתטיים** ואינם מוחזרים מהכלים.
+- **מזג אוויר**: fixtures מקומיים של Open-Meteo (`data/weather`): 54 קבצים יומיים לתרחישי ההערכה וקובץ עונה לכל עיר.
+- קובצי המקור (raw), שהקטלוג נבנה מהם ושאינם נקראים בקוד: Expedia, Airbnb (`*.csv.gz`; קובץ הזמינות מפוצל לשני חלקים מתחת ל־100MB) ו־Cornell. תיעודם: `data/README.md`, `data/docs/`.
+
+מחיר חבילה אינו עלות מלאה של טיול (ללא עמלות ניקיון/ביטוח וכו'). זמני מעבר ומשכי ביקור עשויים להיות אומדנים.
+
+## סטטוס ובעיות ידועות (22.10.2026)
+
+- **B ו־C טרם הושלמו מקצה לקצה מול Gemini.** בהרצה האחרונה בסביבת Colab, B הסתיימה ב־`TECHNICAL_ERROR` ו־C ב־`TIMEOUT`; הסיבה טרם אובחנה. נוסף ניטור (`monitoring.py`, `events.py`) והוספו ניסיונות חוזרים לשגיאות ספק זמניות, אך אין להניח שהבעיה נפתרה. יתרון למולטי־אייג'נט הוא השערה לבדיקה, לא תוצאה.
+- **`tests/test_checks.py::test_weather_rule_rain_day_outdoor`** דווחה במסמך ההעברה כנכשלת בהרצה ממוקדת (ציפייה לפריט `dropped` עם `reason=WEATHER`, כשהבייסליין בוחר מראש פעילות פנים). בגרסה שבמאגר הבדיקה מריצה את `rules_basic` ועוברת; בהרצה על הענף הזה כל 115 הבדיקות עברו. יש לוודא שוב בסביבת Colab.
+- הממשק הישן `app/streamlit_app.py` הוסר לטובת `streamlit_app.py` החדש.
+
+## מסמכים
+
+- אפיון וארכיטקטורה: `docs/spec/Travel_Architecture_and_Plan_HE.md` (+ `.svg`)
+- מסמכי בוני הסוכנים: `docs/agent_specs/` (Markdown + Word)
+- עיצוב ומוצר: `docs/DESIGN.md`, `docs/PRODUCT.md`, הנחיות לסוכני קוד: `docs/AGENTS.md`
+- הפעלת Streamlit: `docs/README_STREAMLIT_HE.md`
+- ארכיון (היקף קודם, לרקע בלבד): `docs/archive/`
 
 ---
 
 ## English summary
 
-Three trip planners compared on one frozen eval set (40 eval + 8 dev cases, Chicago + New York):
-**A** deterministic rules (no LLM), **B** a single CrewAI agent with all tools, **C** a CrewAI multi-agent Flow
-(Trip Manager, Places, Itinerary). Shared: `TripRequest` input, deterministic local-file tools that return
-`call_id/source/license/data_date` and are logged per run, code `final_checks`, limits (3 rounds, 270 s), `RunResult`.
+Final project (Agentic AI course, BIU DS23 team 8). Compares three planners for a short group trip (Chicago / New York) on the same data, tools and checks: **A** deterministic rules, **B** one CrewAI agent, **C** a three-agent CrewAI Flow (Trip Manager → Places → Itinerary). No real bookings.
 
-- Setup: `pip install -r requirements.txt && pip install -e .`; copy `.env.example` to `.env` for B/C (free local Ollama model by default; free-tier provider optional).
-- Eval: `python -m eval.run_eval --system rules|single|multi --split eval|dev [--city chicago|nyc]`, then `python -m eval.score <dirs...>`.
-- UI: `streamlit run app/streamlit_app.py`. Tests: `python -m pytest -q`.
-- Data: OpenStreetMap (ODbL), Wikivoyage (CC BY-SA), Open-Meteo (CC BY 4.0), Inside Airbnb (CC BY 4.0), Kaggle flights/cars. Synthetic place fields (rating, review_count, typical_visit_minutes, most price_level) are never used for ranking or grounding.
-- Places data: `data/places/chicago_places.csv` (579) and `data/places/nyc_places.csv` (616; attractions from all 5 boroughs, food from Manhattan only - NE Manhattan and Brooklyn food tiles could not be fetched from Overpass). © OpenStreetMap contributors (ODbL 1.0); Wikivoyage text CC BY-SA 4.0.
+Run: Colab (`notebooks/travel_streamlit_colab.ipynb`, key from Colab Secrets `GEMINI_API_KEY`), local Streamlit (`streamlit run streamlit_app.py`), or React + FastAPI (`python scripts/start.py`; `frontend/dist` is not committed, `npm run build` regenerates it). Tests: `python -m pytest -q`.
+
+Known issues: B/C have not yet completed an end-to-end run with Gemini (last Colab run: B `TECHNICAL_ERROR`, C `TIMEOUT`, root cause not yet diagnosed). Availability and car capacity in the data are synthetic/estimated. See `docs/` for the specification and agent-builder documents.

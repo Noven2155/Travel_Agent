@@ -1,13 +1,14 @@
 """System A - deterministic rules baseline (spec section 2). No LLM, no replan."""
 from __future__ import annotations
 
+import dataclasses
 import datetime as dt
 from typing import Any, Optional
 
 from .. import config as C
 from .. import tools as T
 from ..data_access import is_open
-from ..models import DayPlan, Dropped, Item, Status
+from ..models import DayPlan, Dropped, Item, Status, effective_request
 from ..pipeline import StepOutcome, day_windows, travel_mode
 from ..timeutil import hm_to_min, min_to_hm
 from .base import Decision, RunContext, package_from_candidate, run_checks
@@ -220,14 +221,15 @@ def slots(ctx: RunContext, windows: dict[str, tuple[str, str]]) -> tuple[int, in
 
 
 def decide_rules(ctx: RunContext) -> Decision:
-    req = ctx.req
     cand = ctx.candidates[0]                       # cheapest valid package (rank_packages order)
     pkg = package_from_candidate(cand)
+    req = effective_request(ctx.req, pkg)          # with date flexibility: the dates of the chosen flights
+    sctx = dataclasses.replace(ctx, req=req) if req is not ctx.req else ctx
     windows = day_windows(req, cand["flight_out"], cand["flight_back"])
-    n_act, n_meal = slots(ctx, windows)
-    acts, meals, hours = select_places(ctx, cand["stay"], n_act, n_meal)
-    days, dropped = schedule(ctx, cand["refs"]["stay"], windows, acts, meals, hours)
-    ground_travel(ctx, days)
+    n_act, n_meal = slots(sctx, windows)
+    acts, meals, hours = select_places(sctx, cand["stay"], n_act, n_meal)
+    days, dropped = schedule(sctx, cand["refs"]["stay"], windows, acts, meals, hours)
+    ground_travel(sctx, days)
     report = run_checks(ctx, pkg, days, dropped)
     tradeoffs = []
     covered = set()

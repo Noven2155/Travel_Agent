@@ -1,0 +1,2 @@
+system,n,valid_plan_gold,valid_direct,valid_indirect,met,flagged,ignored,score_all,score_direct,score_indirect,parse_accuracy,llm_calls_mean,tokens_mean,time_mean_s
+A - rules (keyword parser + strong rules),4,"4/4 = 1.00 [0.51, 1.00]","2/2 = 1.00 [0.34, 1.00]","2/2 = 1.00 [0.34, 1.00]",8,1,0,0.9167,1.0,0.8334,1.0,0,0,0.069

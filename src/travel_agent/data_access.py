@@ -86,7 +86,7 @@ def get_catalog() -> Catalog:
 
 # ----------------------------------------------------------------- places
 PLACE_FIELDS_PUBLIC = ["place_id", "name", "category", "subcategory", "tags", "indoor", "lat", "lon", "neighborhood",
-                       "in_wikivoyage", "typical_visit_minutes", "source", "license"]
+                       "in_wikivoyage", "has_wikidata", "typical_visit_minutes", "source", "license"]
 SYNTHETIC_NEVER_EXPOSED = ["rating", "review_count", "price_level"]
 
 

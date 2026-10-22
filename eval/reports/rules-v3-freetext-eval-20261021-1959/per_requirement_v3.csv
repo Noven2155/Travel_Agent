@@ -1,0 +1,57 @@
+system,case,city,phrasing_type,requirement,checker,outcome,detail
+A - rules (keyword parser + strong rules),F01,Chicago,direct,F01-K1,no_flight_departure_before,met,"departures ['17:05', '20:35']"
+A - rules (keyword parser + strong rules),F01,Chicago,direct,F01-K2,min_count_category,met,"5 of ['museum', 'gallery'] (need 2)"
+A - rules (keyword parser + strong rules),F01,Chicago,direct,F01-K3,budget_max,met,total 2127.92 vs 2900
+A - rules (keyword parser + strong rules),F02,Chicago,indirect,F02-K1,no_activity_in_window,met,free
+A - rules (keyword parser + strong rules),F02,Chicago,indirect,F02-K2,party_size,ignored,priced for 2
+A - rules (keyword parser + strong rules),F02,Chicago,indirect,F02-K3,budget_max,met,total 1255.62 vs 3100
+A - rules (keyword parser + strong rules),F03,Chicago,direct,F03-K1,day_window,met,inside
+A - rules (keyword parser + strong rules),F03,Chicago,direct,F03-K2,min_count_category,met,"7 of ['bar', 'pub', 'nightclub', 'theatre', 'arts_centre'] (need 3)"
+A - rules (keyword parser + strong rules),F03,Chicago,direct,F03-K3,budget_max,met,total 611.2 vs 900
+A - rules (keyword parser + strong rules),F04,Chicago,indirect,F04-K1,priority_respected,ignored,sacrificed ['central']; ok = [['long_days']]
+A - rules (keyword parser + strong rules),F04,Chicago,indirect,F04-K2,budget_max,met,total 1145.21 vs 1510
+A - rules (keyword parser + strong rules),F05,Chicago,direct,F05-K1,car_included,met,car=True
+A - rules (keyword parser + strong rules),F05,Chicago,direct,F05-K2,no_category,met,none
+A - rules (keyword parser + strong rules),F05,Chicago,direct,F05-K3,budget_max,met,total 2829.2 vs 3900
+A - rules (keyword parser + strong rules),F06,Chicago,indirect,F06-K1,flag_unsupported,met,can only be met by flagging
+A - rules (keyword parser + strong rules),F06,Chicago,indirect,F06-K2,min_count_category,met,"3 of ['museum', 'gallery'] (need 1)"
+A - rules (keyword parser + strong rules),F06,Chicago,indirect,F06-K3,party_size,met,priced for 2
+A - rules (keyword parser + strong rules),F07,Chicago,direct,F07-K1,no_activity_in_window,met,free
+A - rules (keyword parser + strong rules),F07,Chicago,direct,F07-K2,budget_max,met,total 1142.4 vs 1600
+A - rules (keyword parser + strong rules),F08,Chicago,indirect,F08-K1,evening_meal_within_km_of_lodging,ignored,no dinner scheduled
+A - rules (keyword parser + strong rules),F08,Chicago,indirect,F08-K2,flag_unsupported,met,can only be met by flagging
+A - rules (keyword parser + strong rules),F08,Chicago,indirect,F08-K3,budget_max,met,total 1828.4 vs 2500
+A - rules (keyword parser + strong rules),F09,Chicago,direct,F09-K1,max_walk_leg,met,ok
+A - rules (keyword parser + strong rules),F09,Chicago,direct,F09-K2,min_count_category,met,"5 of ['theatre', 'arts_centre'] (need 1)"
+A - rules (keyword parser + strong rules),F09,Chicago,direct,F09-K3,budget_max,met,total 1057.44 vs 1500
+A - rules (keyword parser + strong rules),F10,Chicago,indirect,F10-K1,no_flight_departure_before,ignored,"departures ['13:20', '05:00']"
+A - rules (keyword parser + strong rules),F10,Chicago,indirect,F10-K2,budget_max,met,total 1758.4 vs 2400
+A - rules (keyword parser + strong rules),F11,New York,direct,F11-K1,priority_respected,met,sacrificed ['nonstop']; ok = [['nonstop']]
+A - rules (keyword parser + strong rules),F11,New York,direct,F11-K2,min_count_category,met,"4 of ['theatre', 'arts_centre'] (need 1)"
+A - rules (keyword parser + strong rules),F11,New York,direct,F11-K3,budget_max,met,total 1291.4 vs 1340
+A - rules (keyword parser + strong rules),F12,New York,indirect,F12-K1,no_activity_in_window,ignored,2022-08-15 12:48-14:03; 2022-08-15 14:12-15:52; 2022-08-16 10:41-13:26; 2022-08-16 13:41-15:11
+A - rules (keyword parser + strong rules),F12,New York,indirect,F12-K2,day_window,met,inside
+A - rules (keyword parser + strong rules),F12,New York,indirect,F12-K3,party_size,met,priced for 4
+A - rules (keyword parser + strong rules),F13,New York,direct,F13-K1,no_flight_departure_before,met,"departures ['10:05', '16:56']"
+A - rules (keyword parser + strong rules),F13,New York,direct,F13-K2,min_count_category,met,"6 of ['museum', 'gallery'] (need 2)"
+A - rules (keyword parser + strong rules),F13,New York,direct,F13-K3,budget_max,met,total 1065.8 vs 1500
+A - rules (keyword parser + strong rules),F14,New York,indirect,F14-K1,no_category,ignored,"Intrepid Museum, Museum of Sex, New York City Fire Museum, Rubin Museum of Art"
+A - rules (keyword parser + strong rules),F14,New York,indirect,F14-K2,min_count_category,ignored,0 of ['park'] (need 1)
+A - rules (keyword parser + strong rules),F14,New York,indirect,F14-K3,budget_max,met,total 1065.6 vs 1500
+A - rules (keyword parser + strong rules),F15,New York,direct,F15-K1,car_included,met,car=True
+A - rules (keyword parser + strong rules),F15,New York,direct,F15-K2,min_count_category,met,3 of ['zoo'] (need 1)
+A - rules (keyword parser + strong rules),F15,New York,direct,F15-K3,budget_max,met,total 1077.42 vs 1500
+A - rules (keyword parser + strong rules),F16,New York,indirect,F16-K1,day_window,met,inside
+A - rules (keyword parser + strong rules),F16,New York,indirect,F16-K2,evening_meal_within_km_of_lodging,ignored,"dinner km [4.03, 5.56]"
+A - rules (keyword parser + strong rules),F16,New York,indirect,F16-K3,budget_max,met,total 837.4 vs 1200
+A - rules (keyword parser + strong rules),F17,New York,direct,F17-K1,nonstop_flights,met,nonstop
+A - rules (keyword parser + strong rules),F17,New York,direct,F17-K2,budget_max,met,total 1183.4 vs 1400
+A - rules (keyword parser + strong rules),F18,New York,indirect,F18-K1,near_cheapest,met,total 1173.6 vs cheapest 1173.6
+A - rules (keyword parser + strong rules),F18,New York,indirect,F18-K2,party_size,met,priced for 3
+A - rules (keyword parser + strong rules),F18,New York,indirect,F18-K3,budget_max,met,total 1173.6 vs 1600
+A - rules (keyword parser + strong rules),F19,New York,direct,F19-K1,no_activity_in_window,met,free
+A - rules (keyword parser + strong rules),F19,New York,direct,F19-K2,max_walk_leg,met,ok
+A - rules (keyword parser + strong rules),F19,New York,direct,F19-K3,min_count_category,met,"6 of ['theatre', 'arts_centre'] (need 1)"
+A - rules (keyword parser + strong rules),F20,New York,indirect,F20-K1,flag_unsupported,met,can only be met by flagging
+A - rules (keyword parser + strong rules),F20,New York,indirect,F20-K2,flag_unsupported,met,can only be met by flagging
+A - rules (keyword parser + strong rules),F20,New York,indirect,F20-K3,budget_max,met,total 975.4 vs 1400

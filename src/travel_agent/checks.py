@@ -11,7 +11,7 @@ from typing import Any, Optional
 from pydantic import ValidationError
 
 from . import config as C
-from .models import CheckReport, CheckResult, DayCondition, DayPlan, Dropped, Package, TripRequest
+from .models import CheckReport, CheckResult, DayCondition, DayPlan, Dropped, Package, TripRequest, effective_request
 from .timeutil import hm_to_min, iso_local_hm
 from .tool_log import ToolLog
 from .tools import day_load_violations
@@ -59,6 +59,8 @@ def final_checks(log: ToolLog, req: TripRequest, package: Optional[Package], day
                  dropped: list[Dropped], conditions: list[DayCondition],
                  windows: Optional[dict[str, tuple[str, str]]] = None) -> CheckReport:
     res: list[CheckResult] = []
+    req0 = req
+    req = effective_request(req0, package)   # with date flexibility: dates of the chosen flights (if within the flex window)
     facts = place_facts(log)
     flights = _options(log, "search_flights")
     stays = _options(log, "search_hotels")
@@ -110,10 +112,11 @@ def final_checks(log: ToolLog, req: TripRequest, package: Optional[Package], day
             det.append("flight refs not found in search_flights outputs")
         else:
             s, e = req.start_date.isoformat(), req.end_date.isoformat()
+            flex = f" (allowed flex: depart +-{req0.depart_flex_days}, return +-{req0.return_flex_days} days)" if req0.has_flex else ""
             if fo["date"] != s or fo["arrival_date"] != s:
-                det.append(f"outbound must depart and land on {s} (got {fo['date']} / {fo['arrival_date']})")
+                det.append(f"outbound must depart and land on {s} (got {fo['date']} / {fo['arrival_date']}){flex}")
             if fb["date"] != e:
-                det.append(f"return must depart on {e} (got {fb['date']})")
+                det.append(f"return must depart on {e} (got {fb['date']}){flex}")
             if fo["origin"] != req.origin or fb["destination"] != req.origin:
                 det.append("flights do not connect the requested origin")
             if fo["destination"] not in C.CITIES[req.city]["airports"] or fb["origin"] not in C.CITIES[req.city]["airports"]:

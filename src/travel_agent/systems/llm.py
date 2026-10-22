@@ -91,6 +91,8 @@ def make_llm(role: str = "default"):
                               timeout=s["timeout"])
     if s["base_url"] and s["model"].startswith("ollama"):
         kw["base_url"] = s["base_url"].rstrip("/") + ("" if s["base_url"].rstrip("/").endswith("/v1") else "/v1")
+    elif s["base_url"]:
+        kw["base_url"] = s["base_url"]
     return LLM(**kw)
 
 

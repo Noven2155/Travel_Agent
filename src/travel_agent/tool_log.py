@@ -5,27 +5,40 @@ from __future__ import annotations
 import datetime as dt
 import json
 import threading
+import time
 from pathlib import Path
 from typing import Any, Optional
 
 
 class ToolLog:
     def __init__(self, run_id: str):
+        from .events import sink
+        self.progress = sink.get()
         self.run_id = run_id
         self.entries: list[dict[str, Any]] = []
         self._lock = threading.Lock()
         self._n = 0
+        self._starts = {}
         self.actor: str = "code"          # who is calling: code / agent name (set by the systems)
 
     def new_call_id(self, tool: str) -> str:
         with self._lock:
             self._n += 1
-            return f"{tool}#{self._n:03d}"
+            call_id = f"{tool}#{self._n:03d}"
+            self._starts[call_id] = time.monotonic()
+        if self.progress:
+            self.progress(dict(kind="tool_start", actor=self.actor, tool=tool, call_id=call_id))
+        return call_id
 
     def record(self, call_id: str, tool: str, args: dict[str, Any], output: dict[str, Any]) -> None:
         with self._lock:
+            started = self._starts.pop(call_id, None)
+            duration = round(time.monotonic() - started, 4) if started is not None else None
             self.entries.append(dict(call_id=call_id, tool=tool, actor=self.actor, args=args,
-                                     ts=dt.datetime.now().isoformat(timespec="milliseconds"), output=output))
+                                     ts=dt.datetime.now().isoformat(timespec="milliseconds"), output=output, duration_s=duration))
+        if self.progress:
+            self.progress(dict(kind="tool", actor=self.actor, tool=tool, call_id=call_id,
+                               status=output.get("status", "OK"), duration_s=duration))
 
     def get(self, call_id: Optional[str]) -> Optional[dict[str, Any]]:
         if not call_id:

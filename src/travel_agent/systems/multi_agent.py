@@ -9,13 +9,14 @@ Limits: max_rounds=3 in total, internal deadline 270 s -> TIMEOUT with the best 
 from __future__ import annotations
 
 import json
+import time
 from typing import Any, Optional
 
 from pydantic import BaseModel
 
 from .. import config as C
 from ..checks import place_facts
-from ..models import CheckReport, ItineraryPlan, PackageDecision, PlaceShortlist, Status
+from ..models import CheckReport, ItineraryPlan, PackageDecision, PlaceShortlist, Status, effective_request
 from ..pipeline import day_windows, travel_mode
 from .agent_common import (PACKAGE_CHECKS, RULES_TEXT, SCHEDULE_CHECKS, account_usage, days_from_itinerary,
                            feedback_text, finish, grounding_guardrail, llm_or_error, package_from_decision,
@@ -23,6 +24,20 @@ from .agent_common import (PACKAGE_CHECKS, RULES_TEXT, SCHEDULE_CHECKS, account_
 from .base import Decision, RunContext, run_checks
 from .crew_tools import make_tools
 from .llm import make_llm, usage_of
+from ..events import emit
+
+
+def _retryable_provider_error(exc: Exception) -> bool:
+    status = getattr(exc, "status_code", None) or getattr(exc, "status", None)
+    if status in (408, 429, 500, 502, 503, 504):
+        return True
+    message = str(exc).lower()
+    return any(token in message for token in (
+        "503", "429", "500", "502", "504", "unavailable",
+        "resource_exhausted", "rate limit", "too many requests",
+        "temporarily unavailable", "timed out", "timeout",
+        "connection reset", "connection error",
+    ))
 
 AGENTS = {
     "trip_manager": dict(
@@ -62,6 +77,7 @@ def run_agent(ctx: RunContext, llm, name: str, description: str) -> Any:
     """One agent = one Task with output_pydantic + code guardrail (guardrail_max_retries=1), run as a one-task Crew."""
     from crewai import Agent, Crew, Process, Task
     spec = AGENTS[name]
+    emit("agent", actor=name, stage=name)
     ctx.log.actor = name
     agent = Agent(role=spec["role"], goal=spec["goal"], backstory=spec["backstory"], tools=make_tools(ctx.log, spec["tools"]),
                   llm=llm, allow_delegation=False, max_iter=spec["max_iter"],
@@ -71,13 +87,22 @@ def run_agent(ctx: RunContext, llm, name: str, description: str) -> Any:
     before = usage_of(llm)
     last = None
     try:
-        for _attempt in range(2):                # one retry on technical failure
+        for _attempt in range(2):
+            if _attempt:
+                if not _retryable_provider_error(last) or ctx.time_left() < 5:
+                    break
+                delay = min(2.0, max(0.0, ctx.time_left() - 3.0))
+                emit("retry", actor=name, attempt=_attempt + 1,
+                     error=f"{type(last).__name__}; transient provider error; retrying after {delay:.1f}s")
+                time.sleep(delay)
             try:
                 out = Crew(agents=[agent], tasks=[task], process=Process.sequential, verbose=False).kickoff()
                 obj = out.pydantic if getattr(out, "pydantic", None) is not None else spec["output"].model_validate_json(out.raw)
                 return obj
             except Exception as e:  # noqa: BLE001
                 last = e
+                if _attempt or not _retryable_provider_error(e):
+                    break
         raise RuntimeError(f"{name} failed: {type(last).__name__}: {last}")
     finally:
         account_usage(ctx, llm, before)
@@ -162,8 +187,8 @@ def make_flow(ctx: RunContext):
         def itinerary(self) -> None:
             if self.state.outcome or self._deadline():
                 return
-            req = ctx.req
             pkg = package_from_decision(ctx, PackageDecision.model_validate(self.state.package))
+            req = effective_request(ctx.req, pkg)
             facts = place_facts(ctx.log)
             sl = PlaceShortlist.model_validate(self.state.shortlist)
             places = [dict(place_id=p.place_id, name=facts.get(p.place_id, {}).get("name"), category=facts.get(p.place_id, {}).get("category"),
@@ -204,6 +229,10 @@ def make_flow(ctx: RunContext):
             self.state.rounds += 1
             failed = set(rep.failures)
             if failed & set(PACKAGE_CHECKS) or it.cannot_reason == "HOTEL_TOO_FAR":
+                # A new lodging/date choice invalidates both dependent products.
+                self.state.need_places = True
+                self.state.shortlist = None
+                self.state.itinerary = None
                 self.state.feedback["trip_manager"] = feedback_text(rep, self.state.package)
                 return "to_manager"
             if "coverage" in failed and self.state.places_reruns < 1:
