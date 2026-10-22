@@ -107,7 +107,7 @@ def test_coverage_and_avoid(cases):
 
 
 def test_weather_rule_rain_day_outdoor(cases):
-    r = run("rules", TripRequest.from_case(cases["D01"]))     # 2 rain days
+    r = run("rules_basic", TripRequest.from_case(cases["D01"]))     # 2 rain days (basic rules drop outdoor places)
     assert r.status.value == "OK_PLAN"
     rain_day = next(d for d in r.days if "RAIN" in d.flags)
     # find an outdoor place returned by the tools and put it on the rain day

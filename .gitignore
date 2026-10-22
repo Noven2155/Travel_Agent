@@ -7,3 +7,14 @@ __pycache__/
 .env
 .streamlit/secrets.toml
 eval/results/*/scratch*/
+runtime/
+frontend/node_modules/
+frontend/dist/
+frontend/runtime/
+.impeccable/review/
+# repo sync (2026-10-22): raw eval runs are reproducible; commit reports only
+eval/results/
+# generated from web/ by `npm run predev/prebuild` (web/ is the single source)
+frontend/public/scenarios.json
+frontend/public/recorded_baseline.json
+.ipynb_checkpoints/

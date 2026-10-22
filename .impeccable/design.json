@@ -1,0 +1,545 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T19:35:30.044538+00:00",
+  "title": "Design System: Travel Comparison Studio",
+  "extensions": {
+    "colorMeta": {
+      "navy": {
+        "role": "primary",
+        "displayName": "Navy",
+        "tonalRamp": [
+          "oklch(15.0% 0.0553 247.98)",
+          "oklch(26.4% 0.0553 247.98)",
+          "oklch(37.9% 0.0553 247.98)",
+          "oklch(49.3% 0.0553 247.98)",
+          "oklch(60.7% 0.0553 247.98)",
+          "oklch(72.1% 0.0553 247.98)",
+          "oklch(83.6% 0.0553 247.98)",
+          "oklch(95.0% 0.0553 247.98)"
+        ]
+      },
+      "blue": {
+        "role": "primary",
+        "displayName": "Blue",
+        "tonalRamp": [
+          "oklch(15.0% 0.1859 262.97)",
+          "oklch(26.4% 0.1859 262.97)",
+          "oklch(37.9% 0.1859 262.97)",
+          "oklch(49.3% 0.1859 262.97)",
+          "oklch(60.7% 0.1859 262.97)",
+          "oklch(72.1% 0.1859 262.97)",
+          "oklch(83.6% 0.1859 262.97)",
+          "oklch(95.0% 0.1859 262.97)"
+        ]
+      },
+      "blue-hover": {
+        "role": "primary",
+        "displayName": "Blue hover",
+        "tonalRamp": [
+          "oklch(15.0% 0.1685 262.63)",
+          "oklch(26.4% 0.1685 262.63)",
+          "oklch(37.9% 0.1685 262.63)",
+          "oklch(49.3% 0.1685 262.63)",
+          "oklch(60.7% 0.1685 262.63)",
+          "oklch(72.1% 0.1685 262.63)",
+          "oklch(83.6% 0.1685 262.63)",
+          "oklch(95.0% 0.1685 262.63)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "White",
+        "tonalRamp": [
+          "oklch(15.0% 0.0000 0.00)",
+          "oklch(26.4% 0.0000 0.00)",
+          "oklch(37.9% 0.0000 0.00)",
+          "oklch(49.3% 0.0000 0.00)",
+          "oklch(60.7% 0.0000 0.00)",
+          "oklch(72.1% 0.0000 0.00)",
+          "oklch(83.6% 0.0000 0.00)",
+          "oklch(95.0% 0.0000 0.00)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15.0% 0.0316 248.41)",
+          "oklch(26.4% 0.0316 248.41)",
+          "oklch(37.9% 0.0316 248.41)",
+          "oklch(49.3% 0.0316 248.41)",
+          "oklch(60.7% 0.0316 248.41)",
+          "oklch(72.1% 0.0316 248.41)",
+          "oklch(83.6% 0.0316 248.41)",
+          "oklch(95.0% 0.0316 248.41)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15.0% 0.0139 247.98)",
+          "oklch(26.4% 0.0139 247.98)",
+          "oklch(37.9% 0.0139 247.98)",
+          "oklch(49.3% 0.0139 247.98)",
+          "oklch(60.7% 0.0139 247.98)",
+          "oklch(72.1% 0.0139 247.98)",
+          "oklch(83.6% 0.0139 247.98)",
+          "oklch(95.0% 0.0139 247.98)"
+        ]
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "Soft",
+        "tonalRamp": [
+          "oklch(15.0% 0.0051 247.88)",
+          "oklch(26.4% 0.0051 247.88)",
+          "oklch(37.9% 0.0051 247.88)",
+          "oklch(49.3% 0.0051 247.88)",
+          "oklch(60.7% 0.0051 247.88)",
+          "oklch(72.1% 0.0051 247.88)",
+          "oklch(83.6% 0.0051 247.88)",
+          "oklch(95.0% 0.0051 247.88)"
+        ]
+      },
+      "rail": {
+        "role": "neutral",
+        "displayName": "Rail",
+        "tonalRamp": [
+          "oklch(15.0% 0.0051 247.88)",
+          "oklch(26.4% 0.0051 247.88)",
+          "oklch(37.9% 0.0051 247.88)",
+          "oklch(49.3% 0.0051 247.88)",
+          "oklch(60.7% 0.0051 247.88)",
+          "oklch(72.1% 0.0051 247.88)",
+          "oklch(83.6% 0.0051 247.88)",
+          "oklch(95.0% 0.0051 247.88)"
+        ]
+      },
+      "nav-active": {
+        "role": "neutral",
+        "displayName": "Nav active",
+        "tonalRamp": [
+          "oklch(15.0% 0.0161 262.75)",
+          "oklch(26.4% 0.0161 262.75)",
+          "oklch(37.9% 0.0161 262.75)",
+          "oklch(49.3% 0.0161 262.75)",
+          "oklch(60.7% 0.0161 262.75)",
+          "oklch(72.1% 0.0161 262.75)",
+          "oklch(83.6% 0.0161 262.75)",
+          "oklch(95.0% 0.0161 262.75)"
+        ]
+      },
+      "nav-hover": {
+        "role": "neutral",
+        "displayName": "Nav hover",
+        "tonalRamp": [
+          "oklch(15.0% 0.0114 252.09)",
+          "oklch(26.4% 0.0114 252.09)",
+          "oklch(37.9% 0.0114 252.09)",
+          "oklch(49.3% 0.0114 252.09)",
+          "oklch(60.7% 0.0114 252.09)",
+          "oklch(72.1% 0.0114 252.09)",
+          "oklch(83.6% 0.0114 252.09)",
+          "oklch(95.0% 0.0114 252.09)"
+        ]
+      },
+      "working-bg": {
+        "role": "neutral",
+        "displayName": "Working bg",
+        "tonalRamp": [
+          "oklch(15.0% 0.0144 264.50)",
+          "oklch(26.4% 0.0144 264.50)",
+          "oklch(37.9% 0.0144 264.50)",
+          "oklch(49.3% 0.0144 264.50)",
+          "oklch(60.7% 0.0144 264.50)",
+          "oklch(72.1% 0.0144 264.50)",
+          "oklch(83.6% 0.0144 264.50)",
+          "oklch(95.0% 0.0144 264.50)"
+        ]
+      },
+      "input-border": {
+        "role": "neutral",
+        "displayName": "Input border",
+        "tonalRamp": [
+          "oklch(15.0% 0.0211 248.07)",
+          "oklch(26.4% 0.0211 248.07)",
+          "oklch(37.9% 0.0211 248.07)",
+          "oklch(49.3% 0.0211 248.07)",
+          "oklch(60.7% 0.0211 248.07)",
+          "oklch(72.1% 0.0211 248.07)",
+          "oklch(83.6% 0.0211 248.07)",
+          "oklch(95.0% 0.0211 248.07)"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus",
+        "tonalRamp": [
+          "oklch(15.0% 0.1157 265.34)",
+          "oklch(26.4% 0.1157 265.34)",
+          "oklch(37.9% 0.1157 265.34)",
+          "oklch(49.3% 0.1157 265.34)",
+          "oklch(60.7% 0.1157 265.34)",
+          "oklch(72.1% 0.1157 265.34)",
+          "oklch(83.6% 0.1157 265.34)",
+          "oklch(95.0% 0.1157 265.34)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "tonalRamp": [
+          "oklch(15.0% 0.0057 264.53)",
+          "oklch(26.4% 0.0057 264.53)",
+          "oklch(37.9% 0.0057 264.53)",
+          "oklch(49.3% 0.0057 264.53)",
+          "oklch(60.7% 0.0057 264.53)",
+          "oklch(72.1% 0.0057 264.53)",
+          "oklch(83.6% 0.0057 264.53)",
+          "oklch(95.0% 0.0057 264.53)"
+        ]
+      },
+      "button-pale": {
+        "role": "neutral",
+        "displayName": "Button pale",
+        "tonalRamp": [
+          "oklch(15.0% 0.0242 267.93)",
+          "oklch(26.4% 0.0242 267.93)",
+          "oklch(37.9% 0.0242 267.93)",
+          "oklch(49.3% 0.0242 267.93)",
+          "oklch(60.7% 0.0242 267.93)",
+          "oklch(72.1% 0.0242 267.93)",
+          "oklch(83.6% 0.0242 267.93)",
+          "oklch(95.0% 0.0242 267.93)"
+        ]
+      },
+      "green": {
+        "role": "semantic",
+        "displayName": "Green",
+        "tonalRamp": [
+          "oklch(15.0% 0.0827 168.01)",
+          "oklch(26.4% 0.0827 168.01)",
+          "oklch(37.9% 0.0827 168.01)",
+          "oklch(49.3% 0.0827 168.01)",
+          "oklch(60.7% 0.0827 168.01)",
+          "oklch(72.1% 0.0827 168.01)",
+          "oklch(83.6% 0.0827 168.01)",
+          "oklch(95.0% 0.0827 168.01)"
+        ]
+      },
+      "success-bg": {
+        "role": "semantic",
+        "displayName": "Success bg",
+        "tonalRamp": [
+          "oklch(15.0% 0.0107 158.85)",
+          "oklch(26.4% 0.0107 158.85)",
+          "oklch(37.9% 0.0107 158.85)",
+          "oklch(49.3% 0.0107 158.85)",
+          "oklch(60.7% 0.0107 158.85)",
+          "oklch(72.1% 0.0107 158.85)",
+          "oklch(83.6% 0.0107 158.85)",
+          "oklch(95.0% 0.0107 158.85)"
+        ]
+      },
+      "amber": {
+        "role": "semantic",
+        "displayName": "Amber",
+        "tonalRamp": [
+          "oklch(15.0% 0.1017 70.44)",
+          "oklch(26.4% 0.1017 70.44)",
+          "oklch(37.9% 0.1017 70.44)",
+          "oklch(49.3% 0.1017 70.44)",
+          "oklch(60.7% 0.1017 70.44)",
+          "oklch(72.1% 0.1017 70.44)",
+          "oklch(83.6% 0.1017 70.44)",
+          "oklch(95.0% 0.1017 70.44)"
+        ]
+      },
+      "pending-bg": {
+        "role": "semantic",
+        "displayName": "Pending bg",
+        "tonalRamp": [
+          "oklch(15.0% 0.0167 88.00)",
+          "oklch(26.4% 0.0167 88.00)",
+          "oklch(37.9% 0.0167 88.00)",
+          "oklch(49.3% 0.0167 88.00)",
+          "oklch(60.7% 0.0167 88.00)",
+          "oklch(72.1% 0.0167 88.00)",
+          "oklch(83.6% 0.0167 88.00)",
+          "oklch(95.0% 0.0167 88.00)"
+        ]
+      },
+      "offline-bg": {
+        "role": "semantic",
+        "displayName": "Offline bg",
+        "tonalRamp": [
+          "oklch(15.0% 0.0126 86.83)",
+          "oklch(26.4% 0.0126 86.83)",
+          "oklch(37.9% 0.0126 86.83)",
+          "oklch(49.3% 0.0126 86.83)",
+          "oklch(60.7% 0.0126 86.83)",
+          "oklch(72.1% 0.0126 86.83)",
+          "oklch(83.6% 0.0126 86.83)",
+          "oklch(95.0% 0.0126 86.83)"
+        ]
+      },
+      "offline-text": {
+        "role": "semantic",
+        "displayName": "Offline text",
+        "tonalRamp": [
+          "oklch(15.0% 0.0852 75.43)",
+          "oklch(26.4% 0.0852 75.43)",
+          "oklch(37.9% 0.0852 75.43)",
+          "oklch(49.3% 0.0852 75.43)",
+          "oklch(60.7% 0.0852 75.43)",
+          "oklch(72.1% 0.0852 75.43)",
+          "oklch(83.6% 0.0852 75.43)",
+          "oklch(95.0% 0.0852 75.43)"
+        ]
+      },
+      "error-bg": {
+        "role": "semantic",
+        "displayName": "Error bg",
+        "tonalRamp": [
+          "oklch(15.0% 0.0143 28.01)",
+          "oklch(26.4% 0.0143 28.01)",
+          "oklch(37.9% 0.0143 28.01)",
+          "oklch(49.3% 0.0143 28.01)",
+          "oklch(60.7% 0.0143 28.01)",
+          "oklch(72.1% 0.0143 28.01)",
+          "oklch(83.6% 0.0143 28.01)",
+          "oklch(95.0% 0.0143 28.01)"
+        ]
+      },
+      "error-text": {
+        "role": "semantic",
+        "displayName": "Error text",
+        "tonalRamp": [
+          "oklch(15.0% 0.1368 28.41)",
+          "oklch(26.4% 0.1368 28.41)",
+          "oklch(37.9% 0.1368 28.41)",
+          "oklch(49.3% 0.1368 28.41)",
+          "oklch(60.7% 0.1368 28.41)",
+          "oklch(72.1% 0.1368 28.41)",
+          "oklch(83.6% 0.1368 28.41)",
+          "oklch(95.0% 0.1368 28.41)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page heading."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Result-column headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Root text and paragraphs."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form and navigation labels."
+      },
+      "result-metric": {
+        "displayName": "Result metric",
+        "purpose": "Prices and measured engine times; tabular numerals."
+      },
+      "action": {
+        "displayName": "Action",
+        "purpose": "Main run-action text."
+      },
+      "compact": {
+        "displayName": "Compact",
+        "purpose": "Compact controls and result tabs."
+      },
+      "note": {
+        "displayName": "Note",
+        "purpose": "Supporting request and measurement text."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "spinner",
+        "value": "spin 1s linear infinite",
+        "purpose": "Running icon; rotate to 360deg."
+      },
+      {
+        "name": "progress-sweep",
+        "value": "progress 1.7s cubic-bezier(.16,1,.3,1) infinite",
+        "purpose": "Progress pseudo-element moves from translateX(110%) to translateX(-330%)."
+      },
+      {
+        "name": "results-scroll",
+        "value": "scrollIntoView({behavior:\"smooth\",block:\"start\"})",
+        "purpose": "Results are brought into view after a comparison starts."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}",
+        "purpose": "The authored CSS motion preference override; the scroll interaction was not visually verified."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-min",
+        "value": "1600px",
+        "condition": "min-width"
+      },
+      {
+        "name": "compact-max",
+        "value": "1180px",
+        "condition": "max-width"
+      },
+      {
+        "name": "stacked-max",
+        "value": "850px",
+        "condition": "max-width"
+      },
+      {
+        "name": "phone-max",
+        "value": "540px",
+        "condition": "max-width"
+      }
+    ],
+    "focus": {
+      "value": "outline:3px solid #91b3ff;outline-offset:3px",
+      "purpose": "Shared focus-visible treatment on buttons, links, inputs, textareas, selects and summary elements."
+    },
+    "disabled": {
+      "selector": "button:disabled",
+      "value": "cursor:not-allowed;opacity:.48"
+    },
+    "extraction": {
+      "sources": [
+        "PRODUCT.md",
+        "AGENTS.md",
+        "frontend/src/App.tsx",
+        "frontend/src/styles.css"
+      ],
+      "selectedReference": "../tourism_react_studio/design/selected-direction.png",
+      "desktopCapture": ".impeccable/review/desktop.jpg",
+      "desktopViewport": "1363x936",
+      "desktopInspected": true,
+      "phoneCssPresent": true,
+      "phoneViewportCaptureAvailable": false,
+      "tonalRampStatus": "Generated OKLCH preview ramps only; not implemented palette tokens. Normative colors live in DESIGN.md frontmatter.",
+      "previewStatus": "Static extracts of implemented components. No framework runtime is required; interactive state changes remain in the React application."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary run action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The shared comparison action; blue hover and the common keyboard outline.",
+      "html": "<button class=\"ds-run\" dir=\"rtl\">הרץ השוואה</button>",
+      "css": ".ds-run{font-family:Noto,Arial,sans-serif;display:flex;align-items:center;justify-content:center;gap:14px;min-height:54px;min-width:217px;padding:0 28px;border:0;background:var(--blue,#2559cb);color:#fff;border-radius:6px;font-weight:700;font-size:15px;cursor:pointer}.ds-run:hover:not(:disabled){background:#1746aa}.ds-run:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}.ds-run:disabled{opacity:.48;cursor:not-allowed}"
+    },
+    {
+      "name": "Small solid action",
+      "kind": "button",
+      "refersTo": "button-small-primary",
+      "description": "Compact model configuration action.",
+      "html": "<button class=\"ds-small\" dir=\"rtl\">הגדרת מודל</button>",
+      "css": ".ds-small{font-family:Noto,Arial,sans-serif;background:var(--blue,#2559cb);color:#fff;border:0;border-radius:6px;padding:9px 16px;font-size:12px;cursor:pointer}.ds-small:hover:not(:disabled){background:#1746aa}.ds-small:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}.ds-small:disabled{opacity:.48;cursor:not-allowed}"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "A secondary disclosure action with no filled container.",
+      "html": "<button class=\"ds-text\" dir=\"rtl\">עריכת שדות החיפוש</button>",
+      "css": ".ds-text{font-family:Noto,Arial,sans-serif;color:var(--blue,#2559cb);background:transparent;border:0;font-size:12px;display:flex;align-items:center;gap:7px;padding:8px 0;cursor:pointer}.ds-text:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}.ds-text:disabled{opacity:.48;cursor:not-allowed}"
+    },
+    {
+      "name": "Pale connection action",
+      "kind": "button",
+      "refersTo": "button-pale",
+      "description": "Inline action beside the service-address field.",
+      "html": "<button class=\"ds-pale\" dir=\"rtl\">התחברות</button>",
+      "css": ".ds-pale{font-family:Noto,Arial,sans-serif;background:#e3eafb;border:0;border-radius:6px;color:var(--blue,#2559cb);padding:9px 15px;font-size:12px;cursor:pointer}.ds-pale:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}.ds-pale:disabled{opacity:.48;cursor:not-allowed}"
+    },
+    {
+      "name": "Text field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Shared white field and above-field label.",
+      "html": "<label class=\"ds-field\" dir=\"rtl\">כתובת שירות Python<input dir=\"ltr\" placeholder=\"ריק = אותו שרת\"></label>",
+      "css": ".ds-field{font-family:Noto,Arial,sans-serif;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--navy,#102b43)}.ds-field input{font-family:Noto,Arial,sans-serif;font-size:14px;border:1px solid #c9d5e1;border-radius:6px;background:#fff;color:var(--navy,#102b43);padding:10px 12px;min-width:0;max-width:100%;caret-color:var(--blue,#2559cb)}.ds-field input::placeholder{color:#647486}.ds-field input:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}"
+    },
+    {
+      "name": "Request textarea",
+      "kind": "input",
+      "refersTo": "textarea",
+      "description": "The shared request editor; phone sizing remains in the app stylesheet.",
+      "html": "<label class=\"ds-request\" dir=\"rtl\">הבקשה במילים שלהן<textarea rows=\"3\">חופשה משותפת לארבע מטיילות</textarea></label>",
+      "css": ".ds-request{font-family:Noto,Arial,sans-serif;display:flex;flex-direction:column;gap:9px;font-size:13px;font-weight:700;color:var(--navy,#102b43)}.ds-request textarea{font-family:Noto,Arial,sans-serif;font-weight:400;font-size:15px;line-height:1.9;resize:vertical;width:100%;min-height:120px;border:1px solid #c9d5e1;border-radius:6px;background:#fff;color:var(--navy,#102b43);padding:16px 18px;caret-color:var(--blue,#2559cb)}.ds-request textarea:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}"
+    },
+    {
+      "name": "Right-rail navigation",
+      "kind": "nav",
+      "refersTo": "navigation-active",
+      "description": "Active comparison entry and a neighboring rail action.",
+      "html": "<nav class=\"ds-nav\" dir=\"rtl\" aria-label=\"ניווט\"><a href=\"#\" class=\"ds-nav-active\">השוואת מערכות</a><button>הרצות קודמות</button></nav>",
+      "css": ".ds-nav{font-family:Noto,Arial,sans-serif;display:flex;flex-direction:column;gap:8px;padding:18px;background:#f5f8fb;width:192px;color:var(--navy,#102b43)}.ds-nav a,.ds-nav button{font-family:Noto,Arial,sans-serif;display:flex;align-items:center;gap:11px;padding:15px 12px;text-align:right;white-space:nowrap;font-size:13px;min-height:50px;color:inherit;text-decoration:none;border:0;background:transparent;cursor:pointer}.ds-nav .ds-nav-active{color:var(--blue,#2559cb);background:#eaf0fb;font-weight:700;border-radius:6px}.ds-nav button:hover{background:#eaf0f7;border-radius:6px}.ds-nav a:hover{text-decoration:underline;text-underline-offset:4px}.ds-nav a:focus-visible,.ds-nav button:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}"
+    },
+    {
+      "name": "Interest tag",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Noninteractive request metadata.",
+      "html": "<span class=\"ds-chip\" dir=\"rtl\">תרבות</span>",
+      "css": ".ds-chip{font-family:Noto,Arial,sans-serif;display:inline-block;background:var(--soft,#f4f7fa);color:var(--navy,#102b43);padding:5px 9px;font-size:11px;border-radius:4px}"
+    },
+    {
+      "name": "Result column",
+      "kind": "card",
+      "refersTo": "results-container",
+      "description": "A column extract showing the shared frame, letter and semantic state strip.",
+      "html": "<article class=\"ds-result\" dir=\"rtl\"><header><span class=\"ds-letter\">A</span><div><h2>קוד</h2><p>כללים, חיפוש ודירוג</p></div></header><div class=\"ds-status\">תוכנית תקינה</div><div class=\"ds-result-body\"><span>מחיר החבילה</span><strong dir=\"ltr\">$1,386.80</strong></div></article>",
+      "css": ".ds-result{font-family:Noto,Arial,sans-serif;border:1px solid var(--line,#dce4ec);border-radius:12px;overflow:hidden;background:#fff;color:var(--navy,#102b43);max-width:380px}.ds-result header{display:flex;align-items:center;gap:11px;padding:21px 20px}.ds-result h2{margin:0;font-size:20px;font-weight:700}.ds-result p{margin:2px 0 0;font-size:11px;color:var(--muted,#617181);line-height:1.85}.ds-letter{width:28px;height:30px;display:grid;place-items:center;font-size:12px;color:var(--blue,#2559cb);background:#edf2fc;border-radius:4px}.ds-status{background:#eff7f2;color:var(--green,#267058);padding:10px 20px;min-height:39px;font-size:12px}.ds-result-body{padding:22px 20px 20px}.ds-result-body span{display:block;color:var(--muted,#617181);font-size:11px;margin-bottom:7px}.ds-result-body strong{display:block;font-size:24px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums;letter-spacing:-.02em;text-align:right}"
+    },
+    {
+      "name": "Result tabs",
+      "kind": "nav",
+      "refersTo": "tab-active",
+      "description": "Underlined tabs for the result details.",
+      "html": "<div class=\"ds-tabs\" dir=\"rtl\" role=\"tablist\" aria-label=\"תוצאות קוד\"><button role=\"tab\" aria-selected=\"true\" class=\"ds-tab-active\">חבילה</button><button role=\"tab\" aria-selected=\"false\">מסלול</button><button role=\"tab\" aria-selected=\"false\">בדיקות ולוג</button></div>",
+      "css": ".ds-tabs{font-family:Noto,Arial,sans-serif;display:flex;gap:15px;padding:0 20px;border-bottom:1px solid var(--line,#dce4ec);color:var(--navy,#102b43)}.ds-tabs button{font-family:Noto,Arial,sans-serif;padding:11px 0;font-size:12px;border:0;border-bottom:2px solid transparent;background:transparent;white-space:nowrap;color:inherit;cursor:pointer}.ds-tabs .ds-tab-active{color:var(--blue,#2559cb);border-bottom-color:var(--blue,#2559cb);font-weight:700}.ds-tabs button:focus-visible{outline:3px solid var(--focus,#91b3ff);outline-offset:3px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Open white workspace",
+    "overview": "The confirmed direction is an open white React workspace, navy typography, restrained blue and a narrow right navigation rail. This document records the implemented system; it extends the selected visual direction without introducing another visual identity. The confirmed anti-reference is a dense, generic AI dashboard.\n\nWhitespace, thin dividers and grouped content establish hierarchy. The current comparison surface uses one shared request and a primary run action, with package, itinerary and evidence details inside result tabs. This describes the implemented surface rather than requiring every future screen to repeat its composition.",
+    "keyCharacteristics": [
+      "White workspace with navy text and restrained blue actions.",
+      "A narrow pale right rail in the desktop layout.",
+      "Flat surfaces separated by strokes, spacing and pale status fills.",
+      "Hebrew RTL content with explicit LTR treatment for routes, prices and technical values."
+    ],
+    "rules": [],
+    "dos": [
+      "Do preserve the confirmed white, navy and restrained-blue direction.",
+      "Do use the shared Noto family, the existing weight contrast and the documented role sizes.",
+      "Do distinguish active, working, success, pending and error states using the existing colors and text labels.",
+      "Do keep RTL layout and preserve explicit LTR direction for routes, prices and technical values.",
+      "Do use borders and spacing to group content and reserve pale fills for the existing navigation, state and utility roles.",
+      "Do keep the primary task visible and use existing tabs and disclosures for supporting detail."
+    ],
+    "donts": [
+      "Don't replace this interface with a dense generic AI dashboard.",
+      "Don't add gradients, glass effects or shadows as if they were established parts of this system.",
+      "Don't turn all white sections into separate filled cards.",
+      "Don't present the phone layout as visually verified until a phone viewport capture has been inspected."
+    ]
+  }
+}

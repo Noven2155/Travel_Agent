@@ -1,0 +1,499 @@
+{
+ "candidates_tested": 71,
+ "passed": 29,
+ "failed": 42,
+ "fail_reasons": {
+  "fewer than 20 feasible packages": 42
+ },
+ "no_budget_design": 6275,
+ "per_case": {
+  "B01": {
+   "candidates_tested": 2,
+   "window_density": 21,
+   "prefs_used": [
+    "central",
+    "long_days"
+   ]
+  },
+  "B02": {
+   "candidates_tested": 11,
+   "window_density": 71,
+   "prefs_used": [
+    "central",
+    "long_days"
+   ]
+  },
+  "B03": {
+   "candidates_tested": 1,
+   "window_density": 26,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "B04": {
+   "candidates_tested": 12,
+   "window_density": 54,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "B05": {
+   "candidates_tested": 2,
+   "window_density": 128,
+   "prefs_used": [
+    "central",
+    "exact_dates"
+   ]
+  },
+  "B06": {
+   "candidates_tested": 2,
+   "window_density": 30,
+   "prefs_used": [
+    "central",
+    "nonstop"
+   ]
+  },
+  "B07": {
+   "candidates_tested": 1,
+   "window_density": 72,
+   "prefs_used": [
+    "central",
+    "nonstop"
+   ]
+  },
+  "B08": {
+   "candidates_tested": 5,
+   "window_density": 160,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "B09": {
+   "candidates_tested": 1,
+   "window_density": 120,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "B10": {
+   "candidates_tested": 1,
+   "window_density": 192,
+   "prefs_used": [
+    "central",
+    "under_preferred_budget"
+   ]
+  },
+  "B11": {
+   "candidates_tested": 1,
+   "window_density": 240,
+   "prefs_used": [
+    "central",
+    "exact_dates"
+   ]
+  },
+  "B12": {
+   "candidates_tested": 1,
+   "window_density": 108,
+   "prefs_used": [
+    "central",
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "C01": {
+   "candidates_tested": 1,
+   "window_density": 33,
+   "prefs_used": [
+    "central",
+    "nonstop"
+   ]
+  },
+  "C02": {
+   "candidates_tested": 1,
+   "window_density": 39,
+   "prefs_used": [
+    "central",
+    "long_days"
+   ]
+  },
+  "C03": {
+   "candidates_tested": 1,
+   "window_density": 20,
+   "prefs_used": [
+    "central",
+    "under_preferred_budget"
+   ]
+  },
+  "C04": {
+   "candidates_tested": 1,
+   "window_density": 60,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "C05": {
+   "candidates_tested": 1,
+   "window_density": 81,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "C06": {
+   "candidates_tested": 1,
+   "window_density": 50,
+   "prefs_used": [
+    "central",
+    "under_preferred_budget"
+   ]
+  },
+  "D01": {
+   "candidates_tested": 1,
+   "window_density": 140,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates"
+   ]
+  },
+  "D02": {
+   "candidates_tested": 1,
+   "window_density": 150,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates",
+    "nonstop"
+   ]
+  },
+  "D03": {
+   "candidates_tested": 1,
+   "window_density": 105,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates"
+   ]
+  },
+  "D04": {
+   "candidates_tested": 1,
+   "window_density": 791,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates"
+   ]
+  },
+  "D05": {
+   "candidates_tested": 1,
+   "window_density": 657,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates",
+    "central"
+   ]
+  },
+  "D06": {
+   "candidates_tested": 1,
+   "window_density": 436,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates"
+   ]
+  },
+  "V02": {
+   "candidates_tested": 11,
+   "window_density": 214,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "V03": {
+   "candidates_tested": 1,
+   "window_density": 20,
+   "prefs_used": [
+    "central",
+    "long_days"
+   ]
+  },
+  "V04": {
+   "candidates_tested": 1,
+   "window_density": 86,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates"
+   ]
+  },
+  "V07": {
+   "candidates_tested": 5,
+   "window_density": 72,
+   "prefs_used": [
+    "nonstop",
+    "long_days"
+   ]
+  },
+  "V08": {
+   "candidates_tested": 1,
+   "window_density": 424,
+   "prefs_used": [
+    "dry_days",
+    "exact_dates"
+   ]
+  }
+ },
+ "v1_conflicting_retest": {
+  "n": 29,
+  "passed": 0,
+  "per_case": {
+   "B01": {
+    "n_feasible_v1_hard": 1,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 1,
+     "central+long_days+nonstop": 10
+    }
+   },
+   "B02": {
+    "n_feasible_v1_hard": 1,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 1,
+     "central+long_days+nonstop": 11
+    }
+   },
+   "B03": {
+    "n_feasible_v1_hard": 5,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 5
+    }
+   },
+   "B04": {
+    "n_feasible_v1_hard": 36,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days)",
+    "profiles": {
+     "long_days": 1,
+     "central+long_days": 4
+    }
+   },
+   "B05": {
+    "n_feasible_v1_hard": 2,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 2,
+     "central+long_days+nonstop": 2
+    }
+   },
+   "B06": {
+    "n_feasible_v1_hard": 4,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 4
+    }
+   },
+   "B07": {
+    "n_feasible_v1_hard": 26,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (nonstop)",
+    "profiles": {
+     "nonstop": 1,
+     "central+nonstop": 9,
+     "central+long_days+nonstop": 5
+    }
+   },
+   "B08": {
+    "n_feasible_v1_hard": 3,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 3,
+     "central+long_days+nonstop": 17
+    }
+   },
+   "B09": {
+    "n_feasible_v1_hard": 1,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 1,
+     "central+long_days+nonstop": 6
+    }
+   },
+   "B10": {
+    "n_feasible_v1_hard": 4,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 4
+    }
+   },
+   "B11": {
+    "n_feasible_v1_hard": 3,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days)",
+    "profiles": {
+     "long_days": 2,
+     "central+long_days": 3
+    }
+   },
+   "B12": {
+    "n_feasible_v1_hard": 2,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 2,
+     "central+long_days+nonstop": 3
+    }
+   },
+   "C01": {
+    "n_feasible_v1_hard": 179,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 3
+    }
+   },
+   "C02": {
+    "n_feasible_v1_hard": 38,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days)",
+    "profiles": {
+     "long_days": 1,
+     "central+long_days": 5
+    }
+   },
+   "C03": {
+    "n_feasible_v1_hard": 81,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days)",
+    "profiles": {
+     "long_days": 6
+    }
+   },
+   "C04": {
+    "n_feasible_v1_hard": 47,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 1
+    }
+   },
+   "C05": {
+    "n_feasible_v1_hard": 5,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 1
+    }
+   },
+   "C06": {
+    "n_feasible_v1_hard": 7,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 2,
+     "central+long_days+nonstop": 1
+    }
+   },
+   "D01": {
+    "n_feasible_v1_hard": 12,
+    "passed": false,
+    "reason": "(i) failed: a feasible package satisfies every soft preference",
+    "profiles": {
+     "none": 12
+    }
+   },
+   "D02": {
+    "n_feasible_v1_hard": 24,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 24
+    }
+   },
+   "D03": {
+    "n_feasible_v1_hard": 818,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 14
+    }
+   },
+   "D04": {
+    "n_feasible_v1_hard": 12,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days)",
+    "profiles": {
+     "long_days": 6,
+     "long_days+nonstop": 6
+    }
+   },
+   "D05": {
+    "n_feasible_v1_hard": 33,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 33
+    }
+   },
+   "D06": {
+    "n_feasible_v1_hard": 453,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 9
+    }
+   },
+   "V02": {
+    "n_feasible_v1_hard": 1,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 1,
+     "central+long_days+nonstop": 3
+    }
+   },
+   "V03": {
+    "n_feasible_v1_hard": 22,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 1
+    }
+   },
+   "V04": {
+    "n_feasible_v1_hard": 3,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 3
+    }
+   },
+   "V07": {
+    "n_feasible_v1_hard": 1,
+    "passed": false,
+    "reason": "(i) failed: a feasible package satisfies every soft preference",
+    "profiles": {
+     "none": 1,
+     "central": 1
+    }
+   },
+   "V08": {
+    "n_feasible_v1_hard": 12,
+    "passed": false,
+    "reason": "(ii) failed: only one Pareto-optimal sacrifice profile (long_days+nonstop)",
+    "profiles": {
+     "long_days+nonstop": 12
+    }
+   }
+  }
+ }
+}

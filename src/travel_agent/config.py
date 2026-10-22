@@ -10,7 +10,12 @@ INVENTORY_PATH = DATA_DIR / "inventory.json"
 PLACES_DIR = DATA_DIR / "places"
 WEATHER_DIR = DATA_DIR / "weather"
 EVAL_DIR = REPO_ROOT / "eval"
-CASES_PATH = EVAL_DIR / "cases" / "eval_cases.json"
+CASES_PATH = EVAL_DIR / "cases" / "eval_cases.json"            # v1 (frozen, kept for history)
+CASES_PATH_V2 = EVAL_DIR / "cases" / "eval_cases_v2.json"      # v2 (true-conflict cases; default for run_eval)
+CASES_PATH_V3 = EVAL_DIR / "cases" / "eval_cases_v3.json"      # v3 (free-text segment, additive; systems see only the text)
+CASES_PATHS = {"v1": CASES_PATH, "v2": CASES_PATH_V2, "v3": CASES_PATH_V3}
+FROZEN_FILES = {"v1": EVAL_DIR / "cases" / "FROZEN.sha256", "v2": EVAL_DIR / "cases" / "FROZEN_v2.sha256",
+                "v3": EVAL_DIR / "cases" / "FROZEN_v3.sha256"}
 RESULTS_DIR = EVAL_DIR / "results"
 
 CITIES = {
@@ -49,6 +54,23 @@ DEPARTURE_BUFFER_MIN = 180            # items only before take-off - 180 min
 LUNCH_WINDOW = ("11:30", "14:30")
 DINNER_WINDOW = ("17:30", "20:00")
 MEAL_MINUTES = 60                     # fixed meal duration (team decision, not from data)
+
+# System A strong (rules): plausible visiting hours by OSM category, used only when a place has no parseable
+# opening_hours (real OSM hours always win). Team decision from common opening patterns; bars / nightlife evenings only.
+TYPE_HOURS = {
+    "bar": ("16:00", "26:00"), "pub": ("16:00", "26:00"), "nightclub": ("20:00", "28:00"),
+    "theatre": ("12:00", "23:59"),
+    "museum": ("09:00", "18:00"), "gallery": ("10:00", "18:00"), "arts_centre": ("09:00", "22:00"),
+    "park": ("06:00", "21:30"), "viewpoint": ("06:00", "22:00"), "zoo": ("09:00", "18:00"), "aquarium": ("09:00", "18:00"),
+    "restaurant": ("11:00", "23:00"), "cafe": ("07:00", "19:00"), "fast_food": ("10:00", "23:00"), "food_court": ("10:00", "21:00"),
+    "shopping": ("10:00", "21:00"),
+}
+# the categories that best represent an interest (a "core" match); notable = in Wikivoyage and has a Wikidata item
+INTEREST_CORE_CATEGORIES = {
+    "culture": {"museum", "gallery"}, "nature": {"park", "viewpoint", "zoo"}, "shows": {"theatre", "arts_centre"},
+    "attractions": {"attraction", "viewpoint", "aquarium", "zoo", "museum", "historic", "theme_park"},
+    "family": {"zoo", "aquarium", "theme_park", "museum"}, "nightlife": {"bar", "pub", "nightclub"}, "shopping": {"shopping"},
+}
 
 # travel-time estimate (spec 1.3): haversine x 1.3 / speed + overhead
 DETOUR_FACTOR = 1.3

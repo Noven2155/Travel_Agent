@@ -1,0 +1,300 @@
+[
+  {
+    "id": "S01",
+    "states": {
+      "rules": "OK_PLAN",
+      "single": "TECHNICAL_ERROR",
+      "multi": "TECHNICAL_ERROR"
+    },
+    "metrics": {
+      "rules": {
+        "valid_plan": true,
+        "time_s": 0.369,
+        "rounds": 1,
+        "checks_passed": 10,
+        "checks_total": 10,
+        "interests_coverage": 1.0,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": 1386.8,
+        "tool_calls": 141,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "single": {
+        "valid_plan": false,
+        "time_s": 0.213,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 11,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "multi": {
+        "valid_plan": false,
+        "time_s": 0.179,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 11,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      }
+    }
+  },
+  {
+    "id": "S02",
+    "states": {
+      "rules": "NO_PACKAGE_IN_CATALOG",
+      "single": "NO_PACKAGE_IN_CATALOG",
+      "multi": "NO_PACKAGE_IN_CATALOG"
+    },
+    "metrics": {
+      "rules": {
+        "valid_plan": false,
+        "time_s": 0.21,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 4,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "single": {
+        "valid_plan": false,
+        "time_s": 0.173,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 4,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "multi": {
+        "valid_plan": false,
+        "time_s": 0.152,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 4,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      }
+    }
+  },
+  {
+    "id": "S03",
+    "states": {
+      "rules": "OK_PLAN",
+      "single": "TECHNICAL_ERROR",
+      "multi": "TECHNICAL_ERROR"
+    },
+    "metrics": {
+      "rules": {
+        "valid_plan": true,
+        "time_s": 0.275,
+        "rounds": 1,
+        "checks_passed": 10,
+        "checks_total": 10,
+        "interests_coverage": 1.0,
+        "soft_satisfaction": 0.75,
+        "soft_preferences": {
+          "central": true,
+          "nonstop": false
+        },
+        "package_usd": 4035.8,
+        "tool_calls": 120,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "single": {
+        "valid_plan": false,
+        "time_s": 0.179,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 12,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "multi": {
+        "valid_plan": false,
+        "time_s": 0.178,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 12,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      }
+    }
+  },
+  {
+    "id": "S04",
+    "states": {
+      "rules": "OK_PLAN",
+      "single": "TECHNICAL_ERROR",
+      "multi": "TECHNICAL_ERROR"
+    },
+    "metrics": {
+      "rules": {
+        "valid_plan": true,
+        "time_s": 0.319,
+        "rounds": 1,
+        "checks_passed": 10,
+        "checks_total": 10,
+        "interests_coverage": 1.0,
+        "soft_satisfaction": 0.75,
+        "soft_preferences": {
+          "dry_days": true,
+          "exact_dates": false
+        },
+        "package_usd": 3781.2,
+        "tool_calls": 101,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "single": {
+        "valid_plan": false,
+        "time_s": 0.171,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 22,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      },
+      "multi": {
+        "valid_plan": false,
+        "time_s": 0.186,
+        "rounds": 0,
+        "checks_passed": 0,
+        "checks_total": 0,
+        "interests_coverage": null,
+        "soft_satisfaction": null,
+        "soft_preferences": {},
+        "package_usd": null,
+        "tool_calls": 22,
+        "llm_calls": 0,
+        "tokens_in": 0,
+        "tokens_out": 0,
+        "estimated_llm_cost_usd": 0,
+        "cost_basis": "not_configured",
+        "notes": [
+          "Travel time and visit duration are estimates.",
+          "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+        ]
+      }
+    }
+  }
+]

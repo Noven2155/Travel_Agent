@@ -1,0 +1,2 @@
+system,n,valid_plan_gold,valid_direct,valid_indirect,met,flagged,ignored,score_all,score_direct,score_indirect,parse_accuracy,llm_calls_mean,tokens_mean,time_mean_s
+A - rules (keyword parser + strong rules),20,"9/20 = 0.45 [0.26, 0.66]","7/10 = 0.70 [0.40, 0.89]","2/10 = 0.20 [0.06, 0.51]",48,0,8,0.85,1.0,0.7,0.9929,0,0,0.04

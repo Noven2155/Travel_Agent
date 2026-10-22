@@ -26,7 +26,33 @@ class WeatherStatus(str, Enum):
     UNAVAILABLE = "UNAVAILABLE"
 
 
+SoftPref = Literal["central", "nonstop", "exact_dates", "dry_days", "long_days", "under_preferred_budget"]
 Interest = Literal["food", "culture", "attractions", "nightlife", "family", "nature", "shows", "shopping", "extreme/adventure"]
+
+
+MAX_FLEX_NIGHTS_CHANGE = 1
+PRIORITY_KEYS = ("central", "nonstop", "exact_dates", "dry_days", "long_days", "under_preferred_budget", "price")
+_HM = r"^([01]\d|2[0-3]):[0-5]\d$"
+
+
+class BlockedWindow(BaseModel):
+    """A daily time window with no planned item (e.g. a child's nap, rest, prayer). Local city time."""
+    start: str = Field(pattern=_HM)
+    end: str = Field(pattern=_HM)
+    label: str = ""
+
+    @model_validator(mode="after")
+    def _order(self) -> "BlockedWindow":
+        if self.end <= self.start:
+            raise ValueError("blocked window end must be after start")
+        return self
+
+
+class FreeTextRequest(BaseModel):
+    """Eval v3: the request is given only as free text; a system-specific parser turns it into a TripRequest."""
+    request_id: str = "ADHOC"
+    request_text: str = Field(min_length=10)
+    as_of: dt.date
 
 
 class TripRequest(BaseModel):
@@ -44,6 +70,21 @@ class TripRequest(BaseModel):
     hotel_preference: Literal["any", "central"] = "any"
     as_of: dt.date
     free_text: Optional[str] = None
+    # ---- eval v2 extensions (all optional; defaults reproduce v1 behaviour exactly)
+    depart_flex_days: int = Field(default=0, ge=0, le=1)     # outbound may leave start_date +- this many days
+    return_flex_days: int = Field(default=0, ge=0, le=1)     # return may leave end_date +- this many days
+    soft_prefs: list[SoftPref] = Field(default_factory=list)  # preferences that may be traded off (see prefs.py)
+    preferred_budget_usd: Optional[int] = Field(default=None, gt=0)   # soft target below the hard budget_usd
+    # ---- eval v3 generic fields (all optional; defaults = v2 behaviour)
+    request_text: Optional[str] = None                        # the original free-text request (v3), kept for the record
+    daily_blocked_windows: list[BlockedWindow] = Field(default_factory=list)   # no items inside (every trip day)
+    max_walk_minutes: Optional[int] = Field(default=None, ge=1, le=120)   # longest acceptable single walking leg
+    day_start: Optional[str] = Field(default=None, pattern=_HM)          # replaces config.DAY_START (09:30)
+    day_end: Optional[str] = Field(default=None, pattern=_HM)            # replaces config.DAY_END (20:00)
+    accessibility: bool = False                               # step-free needs (no data for it: systems must flag it)
+    no_early_flight_before: Optional[str] = Field(default=None, pattern=_HM)   # no flight departs before (local)
+    priority_weights: dict[str, float] = Field(default_factory=dict)     # e.g. {"central": 2} = location over price
+    unparsed_requirements: list[str] = Field(default_factory=list)       # understood but not mappable -> must be flagged
 
     @field_validator("origin")
     @classmethod
@@ -61,7 +102,50 @@ class TripRequest(BaseModel):
             raise ValueError("avoid must be disjoint from interests")
         if len(set(self.interests)) != len(self.interests):
             raise ValueError("duplicate interests")
+        if len(set(self.soft_prefs)) != len(self.soft_prefs):
+            raise ValueError("duplicate soft_prefs")
+        if self.preferred_budget_usd is not None and self.preferred_budget_usd > self.budget_usd:
+            raise ValueError("preferred_budget_usd must be <= budget_usd")
+        if "under_preferred_budget" in self.soft_prefs and self.preferred_budget_usd is None:
+            raise ValueError("soft pref under_preferred_budget needs preferred_budget_usd")
+        if self.has_flex and (self.end_date - self.start_date).days < 2:
+            raise ValueError("date flexibility needs a trip of >= 2 nights")
+        bad = [k for k in self.priority_weights if k not in PRIORITY_KEYS]
+        if bad:
+            raise ValueError(f"unknown priority_weights keys {bad}; allowed {list(PRIORITY_KEYS)}")
+        if self.day_start and self.day_end and self.day_end <= self.day_start:
+            raise ValueError("day_end must be after day_start")
         return self
+
+    @property
+    def has_flex(self) -> bool:
+        return bool(self.depart_flex_days or self.return_flex_days)
+
+    def date_pairs(self) -> list[tuple[dt.date, dt.date]]:
+        """All (start, end) pairs allowed by the flex fields; the requested pair first. Each end moves by at most its
+        flex, and the trip length changes by at most MAX_FLEX_NIGHTS_CHANGE night (a shift, not a different trip)."""
+        lo, hi = dt.date.fromisoformat(CATALOG_FIRST), dt.date.fromisoformat(CATALOG_LAST)
+        pairs = [(self.start_date, self.end_date)]
+        for a in range(-self.depart_flex_days, self.depart_flex_days + 1):
+            for b in range(-self.return_flex_days, self.return_flex_days + 1):
+                s, e = self.start_date + dt.timedelta(a), self.end_date + dt.timedelta(b)
+                if (s, e) not in pairs and lo <= s and e <= hi and (e - s).days >= 1 and \
+                        abs((e - s).days - self.nights) <= MAX_FLEX_NIGHTS_CHANGE:
+                    pairs.append((s, e))
+        return pairs
+
+    def with_dates(self, start: str | dt.date, end: str | dt.date) -> "TripRequest":
+        s = dt.date.fromisoformat(start) if isinstance(start, str) else start
+        e = dt.date.fromisoformat(end) if isinstance(end, str) else end
+        if (s, e) == (self.start_date, self.end_date):
+            return self
+        return self.model_copy(update=dict(start_date=s, end_date=e))
+
+    def all_dates(self) -> list[dt.date]:
+        """Every date any allowed (start, end) pair can touch (for the weather step)."""
+        s0 = self.start_date - dt.timedelta(self.depart_flex_days)
+        e0 = self.end_date + dt.timedelta(self.return_flex_days)
+        return [s0 + dt.timedelta(i) for i in range((e0 - s0).days + 1)]
 
     @property
     def nights(self) -> int:
@@ -74,7 +158,9 @@ class TripRequest(BaseModel):
     @classmethod
     def from_case(cls, case: dict[str, Any]) -> "TripRequest":
         keys = ["city", "origin", "start_date", "end_date", "travelers", "budget_usd", "wants_car", "pace",
-                "interests", "avoid", "hotel_preference", "as_of", "free_text"]
+                "interests", "avoid", "hotel_preference", "as_of", "free_text", "depart_flex_days", "return_flex_days",
+                "soft_prefs", "preferred_budget_usd", "request_text", "daily_blocked_windows", "max_walk_minutes", "day_start",
+                "day_end", "accessibility", "no_early_flight_before", "priority_weights", "unparsed_requirements"]
         return cls(request_id=case["id"], **{k: case[k] for k in keys if k in case})
 
 
@@ -137,6 +223,7 @@ class PlaceSummary(BaseModel):
     lon: float
     neighborhood: str = ""
     in_wikivoyage: bool = False
+    has_wikidata: bool = False
     typical_visit_minutes: int
     typical_visit_minutes_basis: Literal["estimate"] = "estimate"
     source: str
@@ -235,6 +322,21 @@ class Package(BaseModel):
     fees_complete: bool = False
 
 
+def effective_request(req: TripRequest, package: Optional["Package"]) -> TripRequest:
+    """With date flexibility the trip dates are those of the chosen flights (if they are within the flex window);
+    otherwise the request itself. Used by final_checks and the schedulers."""
+    if package is None or not req.has_flex or not package.flight_out or not package.flight_back:
+        return req
+    s, e = package.flight_out.get("date"), package.flight_back.get("date")
+    try:
+        sd, ed = dt.date.fromisoformat(s), dt.date.fromisoformat(e)
+    except (TypeError, ValueError):
+        return req
+    if (sd, ed) in req.date_pairs():
+        return req.with_dates(sd, ed)
+    return req
+
+
 class CheckResult(BaseModel):
     name: str
     passed: bool
@@ -260,11 +362,16 @@ class CheckReport(BaseModel):
 
 class RunResult(BaseModel):
     run_id: str
-    system: Literal["A", "B", "C"]
+    system: Literal["A", "H", "B", "C"]
+    variant: Optional[str] = None       # System A: "strong" (rules, default) or "basic" (rules_basic)
+    parser: Optional[str] = None        # v3 free-text requests: "keyword" (rules) or "llm" (hybrid, B, C)
+    parse_notes: list[str] = Field(default_factory=list)
+    parse_llm_calls: int = 0            # included in llm_calls
     request_id: str
     status: Status
     message: str = ""
     request: Optional[TripRequest] = None
+    parsed_request: Optional[TripRequest] = None   # retained for a free-text intake audit against approved input
     package: Optional[Package] = None
     candidates: list[dict[str, Any]] = Field(default_factory=list)
     days: list[DayPlan] = Field(default_factory=list)

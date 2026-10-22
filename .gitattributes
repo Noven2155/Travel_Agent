@@ -1,0 +1,14 @@
+# Normalize text files to LF in the repository.
+* text=auto eol=lf
+# Keep data and CSV bytes exactly as produced (SHA-256 recorded in travel_files_manifest.json / FROZEN*.sha256).
+*.csv -text
+data/** -text
+*.gz binary
+*.ttf binary
+*.png binary
+*.jpeg binary
+*.jpg binary
+*.docx binary
+*.bat text eol=crlf
+# Integrity record: keep exact bytes so its SHA-256 matches the notebook check.
+travel_files_manifest.json -text

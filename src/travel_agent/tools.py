@@ -190,7 +190,7 @@ def place_summary(r: dict[str, str]) -> dict[str, Any]:
     return dict(place_id=r["place_id"], name=clean_text(r["name"], 80), category=r["category"],
                 tags=[t for t in r["tags"].split(";") if t], indoor=r["indoor"] if r["indoor"] in ("true", "false") else "unknown",
                 lat=float(r["lat"]), lon=float(r["lon"]), neighborhood=clean_text(r.get("neighborhood", ""), 60),
-                in_wikivoyage=r.get("in_wikivoyage") == "true", typical_visit_minutes=int(float(r["typical_visit_minutes"] or 60)),
+                in_wikivoyage=r.get("in_wikivoyage") == "true", has_wikidata=bool(r.get("wikidata")), typical_visit_minutes=int(float(r["typical_visit_minutes"] or 60)),
                 typical_visit_minutes_basis="estimate", source=r["source"], license=r["license"])
 
 

@@ -1,0 +1,242 @@
+[
+  {
+    "id": "S01",
+    "title": "חופשה שאפשר לסגור",
+    "kind": "בקשה סגורה",
+    "description": "ארבע מטיילות, חבילה עם רכב ומסלול תרבות ואוכל.",
+    "request_text": "אנחנו ארבע מטיילות. נצא מ-LGA לשיקגו ב-20 באוגוסט 2022 ונחזור ב-23 באוגוסט. התקציב הכולל לטיסות, דירה ורכב הוא 3,000 דולר. נרצה תרבות ואוכל, בקצב רגיל.",
+    "request": {
+      "request_id": "S01",
+      "city": "Chicago",
+      "origin": "LGA",
+      "start_date": "2022-08-20",
+      "end_date": "2022-08-23",
+      "travelers": 4,
+      "budget_usd": 3000,
+      "wants_car": true,
+      "pace": "normal",
+      "interests": [
+        "culture",
+        "food"
+      ],
+      "avoid": [],
+      "hotel_preference": "any",
+      "as_of": "2022-08-01",
+      "free_text": "אנחנו ארבע מטיילות. נצא מ-LGA לשיקגו ב-20 באוגוסט 2022 ונחזור ב-23 באוגוסט. התקציב הכולל לטיסות, דירה ורכב הוא 3,000 דולר. נרצה תרבות ואוכל, בקצב רגיל.",
+      "depart_flex_days": 0,
+      "return_flex_days": 0,
+      "soft_prefs": [],
+      "preferred_budget_usd": null,
+      "request_text": null,
+      "daily_blocked_windows": [],
+      "max_walk_minutes": null,
+      "day_start": null,
+      "day_end": null,
+      "accessibility": false,
+      "no_early_flight_before": null,
+      "priority_weights": {},
+      "unparsed_requirements": []
+    },
+    "expected": "feasible",
+    "verification": {
+      "verified": true,
+      "catalog_sha256": "39a0c9c2b2562062211d884af35cc73b3826926b0c56cb06ea5e428c87167319",
+      "feasible_packages": 4098,
+      "preference_profiles": [
+        []
+      ],
+      "baseline_status": "OK_PLAN",
+      "baseline_price": 1386.8,
+      "reason": "",
+      "feasibility_only": true,
+      "note": "Catalog verification is not a prediction of agent success."
+    }
+  },
+  {
+    "id": "S02",
+    "title": "כשהתקציב לא מספיק",
+    "kind": "בקשה סגורה",
+    "description": "אותם תאריכים; התקציב נמוך מהחבילה הזולה ביותר.",
+    "request_text": "אנחנו ארבע מטיילות מ-LGA לשיקגו, מ-20 עד 23 באוגוסט 2022. התקציב הכולל לטיסות ולינה הוא 950 דולר ואי אפשר לחרוג ממנו. לא צריך רכב. נרצה תרבות ואוכל בקצב רגיל.",
+    "request": {
+      "request_id": "S02",
+      "city": "Chicago",
+      "origin": "LGA",
+      "start_date": "2022-08-20",
+      "end_date": "2022-08-23",
+      "travelers": 4,
+      "budget_usd": 950,
+      "wants_car": false,
+      "pace": "normal",
+      "interests": [
+        "culture",
+        "food"
+      ],
+      "avoid": [],
+      "hotel_preference": "any",
+      "as_of": "2022-08-01",
+      "free_text": "אנחנו ארבע מטיילות מ-LGA לשיקגו, מ-20 עד 23 באוגוסט 2022. התקציב הכולל לטיסות ולינה הוא 950 דולר ואי אפשר לחרוג ממנו. לא צריך רכב. נרצה תרבות ואוכל בקצב רגיל.",
+      "depart_flex_days": 0,
+      "return_flex_days": 0,
+      "soft_prefs": [],
+      "preferred_budget_usd": null,
+      "request_text": null,
+      "daily_blocked_windows": [],
+      "max_walk_minutes": null,
+      "day_start": null,
+      "day_end": null,
+      "accessibility": false,
+      "no_early_flight_before": null,
+      "priority_weights": {},
+      "unparsed_requirements": []
+    },
+    "expected": "no_package",
+    "verification": {
+      "verified": true,
+      "catalog_sha256": "39a0c9c2b2562062211d884af35cc73b3826926b0c56cb06ea5e428c87167319",
+      "feasible_packages": 0,
+      "preference_profiles": [],
+      "baseline_status": "NO_PACKAGE_IN_CATALOG",
+      "baseline_price": null,
+      "reason": "budget 950 below the cheapest catalog package 1294.80",
+      "feasibility_only": true,
+      "note": "Catalog verification is not a prediction of agent success."
+    }
+  },
+  {
+    "id": "S03",
+    "title": "מיקום או טיסה ישירה",
+    "kind": "בקשה גמישה",
+    "description": "יש חלופות, אבל אין חבילה שמגשימה את שתי ההעדפות יחד.",
+    "request_text": "אנחנו ארבע מטיילות מ-LAX לניו יורק, מ-20 עד 23 באוקטובר 2022. תקרה קשיחה של 4,500 דולר לטיסות ולינה, בלי רכב. נרצה תרבות ואוכל בקצב רגוע. דירה עד 6 ק״מ מטיימס סקוור חשובה לנו פי שלושה מטיסה ישירה. אם צריך, נסכים לעצירה כדי לשמור על המיקום.",
+    "request": {
+      "request_id": "S03",
+      "city": "New York",
+      "origin": "LAX",
+      "start_date": "2022-10-20",
+      "end_date": "2022-10-23",
+      "travelers": 4,
+      "budget_usd": 4500,
+      "wants_car": false,
+      "pace": "relaxed",
+      "interests": [
+        "culture",
+        "food"
+      ],
+      "avoid": [],
+      "hotel_preference": "any",
+      "as_of": "2022-10-01",
+      "free_text": "אנחנו ארבע מטיילות מ-LAX לניו יורק, מ-20 עד 23 באוקטובר 2022. תקרה קשיחה של 4,500 דולר לטיסות ולינה, בלי רכב. נרצה תרבות ואוכל בקצב רגוע. דירה עד 6 ק״מ מטיימס סקוור חשובה לנו פי שלושה מטיסה ישירה. אם צריך, נסכים לעצירה כדי לשמור על המיקום.",
+      "depart_flex_days": 0,
+      "return_flex_days": 0,
+      "soft_prefs": [
+        "central",
+        "nonstop"
+      ],
+      "preferred_budget_usd": null,
+      "request_text": null,
+      "daily_blocked_windows": [],
+      "max_walk_minutes": null,
+      "day_start": null,
+      "day_end": null,
+      "accessibility": false,
+      "no_early_flight_before": null,
+      "priority_weights": {
+        "central": 3.0,
+        "nonstop": 1.0
+      },
+      "unparsed_requirements": []
+    },
+    "expected": "compromise",
+    "verification": {
+      "verified": true,
+      "catalog_sha256": "39a0c9c2b2562062211d884af35cc73b3826926b0c56cb06ea5e428c87167319",
+      "feasible_packages": 15,
+      "preference_profiles": [
+        [
+          "central",
+          "nonstop"
+        ],
+        [
+          "central"
+        ],
+        [
+          "nonstop"
+        ]
+      ],
+      "baseline_status": "OK_PLAN",
+      "baseline_price": 4035.8,
+      "reason": "",
+      "feasibility_only": true,
+      "note": "Catalog verification is not a prediction of agent success."
+    }
+  },
+  {
+    "id": "S04",
+    "title": "להזיז יום בשביל הטבע",
+    "kind": "בקשה גמישה",
+    "description": "אפשר להקדים או לאחר ביום; יש פשרה בין התאריך לבין ימים יבשים.",
+    "request_text": "אנחנו ארבע מטיילות מ-JFK לשיקגו. מעדיפות 24 עד 27 ביולי 2022, אבל אפשר להזיז כל קצה ביום אחד ולשנות את האורך לכל היותר בלילה אחד. תקציב קשיח 4,000 דולר, בלי רכב. טבע ואטרקציות בקצב רגוע. ימים יבשים חשובים לנו פי שלושה משמירת התאריך המקורי. אפשר להחליף פעילות אם צריך.",
+    "request": {
+      "request_id": "S04",
+      "city": "Chicago",
+      "origin": "JFK",
+      "start_date": "2022-07-24",
+      "end_date": "2022-07-27",
+      "travelers": 4,
+      "budget_usd": 4000,
+      "wants_car": false,
+      "pace": "relaxed",
+      "interests": [
+        "nature",
+        "attractions"
+      ],
+      "avoid": [],
+      "hotel_preference": "any",
+      "as_of": "2022-07-22",
+      "free_text": "אנחנו ארבע מטיילות מ-JFK לשיקגו. מעדיפות 24 עד 27 ביולי 2022, אבל אפשר להזיז כל קצה ביום אחד ולשנות את האורך לכל היותר בלילה אחד. תקציב קשיח 4,000 דולר, בלי רכב. טבע ואטרקציות בקצב רגוע. ימים יבשים חשובים לנו פי שלושה משמירת התאריך המקורי. אפשר להחליף פעילות אם צריך.",
+      "depart_flex_days": 1,
+      "return_flex_days": 1,
+      "soft_prefs": [
+        "dry_days",
+        "exact_dates"
+      ],
+      "preferred_budget_usd": null,
+      "request_text": null,
+      "daily_blocked_windows": [],
+      "max_walk_minutes": null,
+      "day_start": null,
+      "day_end": null,
+      "accessibility": false,
+      "no_early_flight_before": null,
+      "priority_weights": {
+        "dry_days": 3.0,
+        "exact_dates": 1.0
+      },
+      "unparsed_requirements": []
+    },
+    "expected": "compromise",
+    "verification": {
+      "verified": true,
+      "catalog_sha256": "39a0c9c2b2562062211d884af35cc73b3826926b0c56cb06ea5e428c87167319",
+      "feasible_packages": 66,
+      "preference_profiles": [
+        [
+          "dry_days",
+          "exact_dates"
+        ],
+        [
+          "dry_days"
+        ],
+        [
+          "exact_dates"
+        ]
+      ],
+      "baseline_status": "OK_PLAN",
+      "baseline_price": 3781.2,
+      "reason": "",
+      "feasibility_only": true,
+      "note": "Catalog verification is not a prediction of agent success."
+    }
+  }
+]
