@@ -33,6 +33,33 @@ def _retryable_provider_error(exc: Exception) -> bool:
         "connection reset", "connection error",
     ))
 
+def _is_grounding_guardrail_failure(exc: Exception) -> bool:
+    """Distinguish model grounding failures from provider and infrastructure errors."""
+    message = str(exc).lower()
+    return "guardrail" in message and "grounding errors" in message
+
+
+def _grounding_retry_feedback(ctx: RunContext, error: Exception) -> str:
+    """Give the planner only evidence from this run, never invented replacement IDs."""
+    places = place_facts(ctx.log)
+    travel = [
+        {"call_id": entry["call_id"], "pairs": entry["args"].get("pairs", []),
+         "mode": entry["args"].get("mode"), "output": entry["output"]}
+        for entry in ctx.log.by_tool("get_travel_time")
+    ]
+    return (
+        "Your last response FAILED the grounding guardrail and MUST NOT be reused as valid evidence. "
+        + str(error)[:1200]
+        + "\\nValid place IDs returned in this run: " + json.dumps(sorted(places))
+        + "\\nValid get_travel_time calls from this run: " + json.dumps(travel, default=str)
+        + "\\nIf the required places are absent, call search_places and get_place_details. "
+        "For each scheduled leg without a matching travel result, call get_travel_time. "
+        "Copy the actual tool call_id from this run into travel_call_id; never fabricate "
+        "place IDs or call IDs such as PL_001 or get_travel_time#002. "
+        "Return a complete grounded TripPlan and preserve previously correct fields."
+    )
+
+
 ROLE = "Trip planner for one traveler or a small party in Chicago or New York"
 GOAL = ("Return one plan, package and daily schedule, that passes every code check: within budget, the requested pace, "
         "the weather rule and preference coverage, using only facts returned by the tools")
@@ -49,6 +76,7 @@ class BState(BaseModel):
     report: Optional[dict[str, Any]] = None
     outcome: str = ""
     message: str = ""
+    grounding_retry_needed: bool = False
 
 
 def build_agent(ctx: RunContext, llm, time_left: float):
@@ -78,6 +106,7 @@ def make_flow(ctx: RunContext):
                 self.state.outcome, self.state.message = "timeout", "deadline reached before the agent call"
                 return
             self.state.round += 1
+            self.state.grounding_retry_needed = False
             emit("agent", actor="TripPlanner", round=self.state.round, stage="planning")
             ctx.log.actor = "TripPlanner"
             prompt = ("Plan this trip. Choose one of the top-5 candidate packages (or search for another and price it), "
@@ -85,7 +114,7 @@ def make_flow(ctx: RunContext):
                       "check_day_load. Return the TripPlan JSON.\n\n" + RULES_TEXT + "\n\nCONTEXT:\n" +
                       json.dumps(request_context(ctx), default=str))
             if self.state.feedback:
-                prompt = ("Repair the previous TripPlan in the SAME run. Preserve fields that already passed. "
+                prompt = ("Repair or rebuild a complete TripPlan in the SAME run. Preserve fields that already passed. "
                           "Reuse logged facts and call_ids; do not repeat catalog searches just to retrieve them again. "
                           "For OUT_OF_HORIZON set weather_note=null on every item. "
                           "Return the complete corrected TripPlan.\n\n" + RULES_TEXT + "\n\nCONTEXT:\n" +
@@ -115,7 +144,15 @@ def make_flow(ctx: RunContext):
                         break
             account_usage(ctx, llm, before)
             if last_err is not None:
-                self.state.outcome, self.state.message = "error", f"agent failed: {type(last_err).__name__}: {last_err}"
+                if (_is_grounding_guardrail_failure(last_err) and
+                        self.state.round < C.MAX_ROUNDS and ctx.time_left() >= 15):
+                    self.state.feedback = _grounding_retry_feedback(ctx, last_err)
+                    self.state.grounding_retry_needed = True
+                    emit("check", actor="TripPlanner", round=self.state.round,
+                         passed=False, failures=["grounding"], stage="guardrail")
+                else:
+                    self.state.outcome, self.state.message = (
+                        "error", f"agent failed: {type(last_err).__name__}: {last_err}")
 
         @start()
         def plan_round(self) -> None:
@@ -128,6 +165,11 @@ def make_flow(ctx: RunContext):
         @router(or_(plan_round, replan_round))
         def check_and_route(self) -> str:
             if self.state.outcome:
+                return "stop"
+            if self.state.grounding_retry_needed:
+                return "replan"
+            if self.state.plan is None:
+                self.state.outcome, self.state.message = "error", "Planner returned no validated TripPlan"
                 return "stop"
             plan = TripPlan.model_validate(self.state.plan)
             pkg = package_from_decision(ctx, plan.package)
