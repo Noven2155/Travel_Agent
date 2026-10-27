@@ -89,6 +89,16 @@ def make_llm(role: str = "default"):
     s = settings()
     kw: dict[str, Any] = dict(model=s["model"], temperature=s["temperature"], max_tokens=s["max_tokens"], seed=s["seed"],
                               timeout=s["timeout"])
+    if s["model"].split("/", 1)[0] in ("gemini", "google"):
+        from .gemini import ConfiguredGeminiCompletion
+        return ConfiguredGeminiCompletion(
+            model=s["model"].split("/", 1)[1], provider="gemini",
+            temperature=s["temperature"], max_tokens=s["max_tokens"],
+            max_output_tokens=s["max_tokens"], seed=s["seed"],
+            api_key=os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"),
+            client_params={"http_options": {"timeout": int(s["timeout"] * 1000)}},
+            thinking_config={"include_thoughts": False},
+        )
     if s["base_url"] and s["model"].startswith("ollama"):
         kw["base_url"] = s["base_url"].rstrip("/") + ("" if s["base_url"].rstrip("/").endswith("/v1") else "/v1")
     elif s["base_url"]:

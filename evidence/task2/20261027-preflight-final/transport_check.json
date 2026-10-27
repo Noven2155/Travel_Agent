@@ -1,0 +1,19 @@
+{
+  "verification_type": "OFFLINE_CONFIGURATION_INSPECTION",
+  "model_calls_made": false,
+  "crewai_version": "1.15.30",
+  "before": {
+    "requested_max_tokens": 2048,
+    "effective_max_output_tokens": null,
+    "requested_seed": 42,
+    "effective_seed": null,
+    "client_http_timeout": null
+  },
+  "after_tested": {
+    "max_output_tokens": 8192,
+    "seed": 42,
+    "temperature": 0,
+    "client_http_timeout_ms": 60000
+  },
+  "historical_root_cause_established": false
+}

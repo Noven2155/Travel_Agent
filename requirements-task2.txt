@@ -1,0 +1,5 @@
+# Tested native Gemini adapter versions for task 2; full resolved versions are exported per run.
+-e .[agents,dev]
+crewai[google-genai]==1.15.30
+google-genai==1.65.0
+pydantic==2.12.5

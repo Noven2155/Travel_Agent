@@ -1,0 +1,12 @@
+{
+  "verification_type": "LOCAL_ONLY",
+  "model_calls_made": false,
+  "tests_passed": 123,
+  "warnings": 185,
+  "suite_exit_code": 0,
+  "api_smoke_exit_code": 0,
+  "api_smoke_note": "Unconfigured local model; B/C technical errors are expected. No Gemini calls were made.",
+  "base_main_commit": "0ee529555dfb92c0389e0b0ff096fab42b7ba126",
+  "historical_gemini_failures_root_cause": "not established",
+  "notebook_verification": "code cells compiled; not executed in Colab"
+}
