@@ -1,3 +1,5 @@
+<div dir="rtl" align="right">
+
 # ארכיטקטורת Travel Comparison Studio ותוכנית עבודה עד 30.10.2026
 
 **עודכן:** 27.10.2026 — קיבוע שלושה סוכנים וחלוקת אחריות לפי [דף הצוות](../TEAM_SCOPE_HE.md)  
@@ -17,7 +19,7 @@ Travel Comparison Studio משווה שלוש דרכים לתכנון אותה ח
 ## 2. רכיבי המוצר וההרצה
 
 | רכיב | מיקום | אחריות |
-|---|---|---|
+|---:|---:|---:|
 | ממשק React/TypeScript בעברית | `frontend/src/` | הזנת בקשה, בחירת תרחיש, הרצת השוואה, שלוש תוצאות, מסלול/פשרות/בדיקות/יומן, מדדים והורדת JSON |
 | API | `src/travel_agent/api.py` | health, קטלוג ותרחישים, פתיחת והשגת השוואה, היסטוריה, יצוא JSON, תצורת מודל בזיכרון |
 | מתזמר השוואה | `src/travel_agent/comparison.py` | מריץ A/B/C בתהליכים מבודדים, מצב מקביל להצגה או מבודד למדידה, deadline של 270 שניות, SQLite לאירועים ולתוצאות |
@@ -76,13 +78,15 @@ Travel Comparison Studio משווה שלוש דרכים לתכנון אותה ח
 ### C — שלושה סוכנים
 
 | מערכת ותפקיד | הצדקה | פלט קיים |
-|---|---|---|
+|---:|---:|---:|
 | B TripPlanner | מרכז את כל החלטות התכנון כדי לבדוק אם סוכן אחד עם כל הכלים מספיק להפקת תוכנית תקינה. | TripPlan |
 | C trip_manager מנהל טיול | בוחר טיסות, לינה ורכב ומנמק פשרות, משום שהחלטות החבילה מחייבות איזון משותף בין מחיר, תאריכים ומיקום. | PackageDecision |
 | C places מקומות | בוחר אטרקציות ומסעדות לפי ההעדפות ומיקום הלינה כדי לרכז את התאמת התוכן ואת מקורות המידע. | PlaceShortlist |
 | C itinerary מסלול | משבץ מקומות לימים ולשעות לפי נסיעות, קצב ומזג אוויר כדי לרכז את בדיקת האפשרות לבצע את התוכנית. | ItineraryPlan |
 
 אותה מטרה נבחנת מול B באמצעות חלוקת החלטות לחבילה, מקומות ותזמון. לא הוכח עדיין שהחלוקה משפרת תוצאות. ה־Flow רץ בסדר תלוי־תוצר: מנהל טיול בוחר לינה, places מתאים מקומות סביב הלינה, ו־itinerary מתזמן אותם.
+
+<div dir="ltr" align="left">
 
 ```mermaid
 flowchart TD
@@ -97,6 +101,8 @@ flowchart TD
   V -->|"תזמון נסיעות או מזג אוויר"| I
 ```
 
+</div>
+
 בדיקות החבילה והבדיקות הסופיות הן קוד. מנהל הטיול אינו GM נוסף ואינו מנתב בעצמו את יתר הסוכנים. קוד מחזיר כשל חבילה או HOTEL_TOO_FAR למנהל הטיול, כשל כיסוי למקומות לכל היותר פעם אחת, וכשל תזמון למסלול. החלפת חבילה מחייבת חידוש מקומות ומסלול. guardrail מאפשר ניסיון חוזר של אותו סוכן על כשל מקור או סכמה. מגבלת שלושת הסבבים היא כוללת; ניסיונות ספק ו־guardrail נמדדים בתוך תקציב 270 השניות.
 
 הכלים המורשים והסכמות המדויקות מפורטים ב[מפרטי שלושת הסוכנים](../agent_specs/README.md). [התרשים התפעולי](Travel_Architecture_Visual_HE.svg) מציג את המבנה המאושר.
@@ -108,7 +114,7 @@ flowchart TD
 ### א. בקשה משותפת — TripRequest
 
 | שדה | טיפוס | חובה/ברירת מחדל | משמעות/מקור |
-|---|---|---|---|
+|---:|---:|---:|---:|
 | request_id | string | ברירת מחדל ADHOC | מזהה הבקשה/תרחיש |
 | city | enum: Chicago, New York | חובה | עיר היעד |
 | origin | string, 3 תווים | חובה; נשמר uppercase | קוד שדה תעופה מוצא |
@@ -136,7 +142,7 @@ flowchart TD
 ### ב. ארטיפקטים קיימים לסוכנים
 
 | חוזה | שדות מדויקים | שימוש |
-|---|---|---|
+|---:|---:|---:|
 | PackageDecision | flight_out_ref:string; flight_back_ref:string; hotel_ref:string; car_ref:string?; price_call_id:string; total_price:float; tradeoffs:list[string]=[]; relaxed_constraint:string?; rationale:string (עד 600 תווים) | פלט מומחה חבילות קיים. refs מצביעים לאפשרויות כלי, והמחיר חייב להגיע מ־calculate_price |
 | PlaceChoice | place_id:string; category:string=""; indoor:string="unknown"; est_duration_min:int=60; matched_prefs:list[string]=[]; reason:string=""; source_call_id:string="" | פריט ברשימה נבחרת |
 | PlaceShortlist | places:list[PlaceChoice]; uncovered_prefs:list[string]=[] | פלט מומחה מקומות קיים |
@@ -149,7 +155,7 @@ flowchart TD
 ### ג. קלט ופלט לכל תפקיד ב־C
 
 | סוכן | ההקשר המועבר כיום למשימה | פלט |
-|---|---|---|
+|---:|---:|---:|
 | trip_manager | request, nights, top5_candidates, city_airports, כללים ומשוב מתיקון קודם אם קיים | PackageDecision |
 | places | city, interests, avoid, free_text, pace, days, rain_days, lodging עם ref ו־lat/lon, כללים ומשוב אם קיים | PlaceShortlist |
 | itinerary | pace, travel_mode, lodging_ref, day_windows, weather, places, interests, כללים ומשוב אם קיים | ItineraryPlan |
@@ -159,7 +165,7 @@ flowchart TD
 ### ד. טיפוסי אפשרויות ו־metadata של כלים
 
 | טיפוס | שדות |
-|---|---|
+|---:|---:|
 | FlightOption | ref, origin, destination, date, arrival_date, dep, arr, fare, stops, duration, seats, airline? |
 | StayOption | ref, title, market, price_per_night, km_to_center, lat, lon, capacity, min_nights, max_nights, central |
 | CarOption | ref, airport, make, model, vehicle_type, daily_rate, rental_days, estimated_capacity, capacity_basis="estimate" |
@@ -184,7 +190,7 @@ flowchart TD
 ### inventory.json — מבנה נדרש לפי Catalog
 
 | נתיב/רשומה | מפתחות שהקוד קורא | הערות אימות |
-|---|---|---|
+|---:|---:|---:|
 | root | dates[], flights[], stays[], staysByAirport{}, cars[], carsByAirport{}, originAirports[], dataNotes? | dates הוא ציר הזמן לפענוח זמינות; dataNotes אופציונלי |
 | flights[] | origin, destination, date, arrivalDate, departure, arrival, fare, seats; nonstop?, duration?, airline? | הקוד מוסיף ref מסוג F{index}; seats<=0 מסונן. FlightOption מחזיר ref/origin/destination/date/arrival_date/dep/arr/fare/stops/duration/seats/airline |
 | stays[] | key, market, title?, price, lat, lon, capacity, availabilityPacked, minNightsPacked, maxNightsPacked | packed arrays מקודדים ביחס ל־dates; title עובר ניקוי/קיטוע. stay ref הוא key |
@@ -222,7 +228,7 @@ Fixture יומי נקודתי: `daily` עם `precipitation_sum`, `precipitation_
 כל כלי מחזיר JSON-serializable עם `call_id`, `source`, `license`, `data_date` ומתעד `args` ו־`output` ביומן הכלים. ה־LLM אינו מקבל שדות סינתטיים `rating`, `review_count`, `price_level`.
 
 | כלי | מה הוא קורא/מקבל | מה הוא מחזיר |
-|---|---|---|
+|---:|---:|---:|
 | `search_flights` | origin, airports, date, min_seats, direction; `inventory.json` | טיסות חד-כיווניות, fare לנוסע, עצירות, זמנים, מושבים ומקור |
 | `search_hotels` | city, check-in/out, guests, central; מלאי, זמינות/מינימום לילות מקודדים | אפשרויות העומדות בקיבולת/תאריכים/מרחק ומחיר ללילה |
 | `search_cars` | airport, start/end, travelers; מלאי רכב | רכב/מחיר ליום/ימי השכרה; קיבולת מוערכת, מעל 4 נוסעים חסר מידע |
@@ -284,15 +290,15 @@ Fixture יומי נקודתי: `daily` עם `precipitation_sum`, `precipitation_
 
 ההיקף והשיבוץ נקבעים ב[דף הצוות](../TEAM_SCOPE_HE.md). חלוקת האחריות נעשתה שרירותית לבקשת רן; ניתן להעביר משימה בתיאום.
 
-| תחום | אחראי/ת | בודק/ת נוסף/ת | אחריות |
-|---|---|---|---|
-| מוצר ותיעוד | רן | גלית | היקף, תיעוד, תוצרים למרצה וריכוז המשימות |
-| סוכנים ואינטגרציה | גלית | דניאל | B, זרימת C, ממשקים, סבבים ותקציב זמן |
-| נתונים וכלים | שמואל | גלית | קטלוג, כלי חיפוש וחישוב, מקורות ואומדנים |
-| מודלים והערכה | דניאל | שמואל | A, הגדרות ההשוואה, בדיקות ודוחות |
-| C מנהל טיול | גלית | רן | חבילת טיסות ולינה ורכב לפי צורך, תמחור ופשרות |
-| C מקומות | שמואל | דניאל | אטרקציות ומסעדות, התאמה להעדפות ומקורות |
-| C מסלול | דניאל | גלית | ימים ושעות, נסיעות, עומס ומזג אוויר |
+| תחום | אחראי/ת | אחריות |
+|---:|---:|---:|
+| מוצר ותיעוד | רן | היקף, תיעוד, תוצרים למרצה וריכוז המשימות |
+| סוכנים ואינטגרציה | גלית | B, זרימת C, ממשקים, סבבים ותקציב זמן |
+| נתונים וכלים | שמואל | קטלוג, כלי חיפוש וחישוב, מקורות ואומדנים |
+| מודלים והערכה | דניאל | A, הגדרות ההשוואה, בדיקות ודוחות |
+| C מנהל טיול | גלית | חבילת טיסות ולינה ורכב לפי צורך, תמחור ופשרות |
+| C מקומות | שמואל | אטרקציות ומסעדות, התאמה להעדפות ומקורות |
+| C מסלול | דניאל | ימים ושעות, נסיעות, עומס ומזג אוויר |
 
 ב־27.10 מקבעים תיעוד והיקף. משימות ההמשך הן ייצוב הרצה קיימת, הוכחת טיפול בהתנגשות והשוואת A/B/C. אין משימת מימוש GM או מבקר איכותני. פירוט הממשקים של שלושת הסוכנים הקיימים נמצא ב[מפרטי הסוכנים](../agent_specs/README.md).
 
@@ -324,7 +330,7 @@ Fixture יומי נקודתי: `daily` עם `precipitation_sum`, `precipitation_
 הטבלה מפרידה בין טכנולוגיות שזוהו במסמכי הפרויקט לבין פרטי סביבה שעדיין צריך לאמת בקובצי התלויות ובמהדורה הפעילה. שמות קבצים ומודולים אינם מספיקים כדי לקבוע גרסה או פקודת הפעלה, ולכן אין להשלים אותם בהשערה.
 
 | שכבה | טכנולוגיה/רכיב שזוהו | שימוש | מה עדיין צריך לקבע ולאמת |
-|---|---|---|---|
+|---:|---:|---:|---:|
 | ממשק משתמש | React ו־TypeScript | ממשק השוואת A/B/C בעברית, תוצאות, מדדים והיסטוריה | גרסאות Node ו־React, מנהל חבילות, פקודת build/dev, מקור האמת מול Streamlit |
 | API ושרת | Python; API בפרויקט תחת `src/travel_agent/api.py` | קבלת בקשות, הרצות, תוצאות והיסטוריה | מסגרת ה־API המדויקת, גרסת Python, שרת ASGI/WSGI ופקודת הפעלה |
 | תזמור סוכנים | CrewAI ו־Flow | סוכן יחיד ב־B וזרימת סוכנים ב־C | גרסת CrewAI, תלותי agent/tool, מבנה ההפעלה והגדרות timeout בפועל |
@@ -369,3 +375,5 @@ Fixture יומי נקודתי: `daily` עם `precipitation_sum`, `precipitation_
 עדכון S02 הוא שינוי נתונים/קלט בלבד; הוא אינו משנה את חלוקת A/B/C. S05 בוחן אילוצים שכבר מופיעים בחוזה `TripRequest`, אך קיום שדה בסכמה אינו מבטיח שכל מערכת אוכפת אותו. לכן הוא נשאר מחוץ לסט הפעיל עד בדיקה בקוד ובוולידטורים.
 
 עדכון היקף 27.10: C המאושר כולל שלושה סוכנים בלבד: trip_manager, places, itinerary. GM נוסף ומבקר איכותני אינם נכללים בהיקף לקראת 30.10. המחברת מפעילה את המימוש הקיים; עדכון התיעוד אינו משנה את קוד הסוכנים ואינו הוכחה להרצה חיה.
+
+</div>

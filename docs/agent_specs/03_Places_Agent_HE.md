@@ -1,6 +1,8 @@
+<div dir="rtl" align="right">
+
 # מפרט סוכן המקומות
 
-עודכן ב־27.10.2026. תפקיד פעיל ב־C בשם places. אחראי: שמואל. בודק נוסף: דניאל. ההיקף המחייב מפורט ב[דף הצוות](../TEAM_SCOPE_HE.md).
+עודכן ב־27.10.2026. תפקיד פעיל ב־C בשם places. אחראי: שמואל. ההיקף המחייב מפורט ב[דף הצוות](../TEAM_SCOPE_HE.md).
 
 ## אחריות והצדקה
 
@@ -21,6 +23,8 @@ city, interests, avoid, free_text, pace, מספר ימים ב־days, rain_days �
 
 הקטע הבא מועתק מ־models.py. פרטי המקור המלאים נשארים ביומן הכלים; אין להחליף את השדות במבנה חדש של evidence או fit_reason.
 
+<div dir="ltr" align="left">
+
 ```python
 class PlaceChoice(BaseModel):
     place_id: str
@@ -36,6 +40,8 @@ class PlaceShortlist(BaseModel):
     uncovered_prefs: list[str] = Field(default_factory=list)
 ```
 
+</div>
+
 ## בדיקות וניתוב
 
 ההנחיה היא לבחור 8 עד 12 מקומות המכסים interests ומכבדים avoid. בימי גשם יש לכלול חלופות פנים. כל place_id ו־source_call_id צריכים להפנות למקור כלי קיים. כשל coverage יכול להחזיר את הסוכן פעם אחת; כל חזרה כפופה למגבלת הסבבים והזמן הכוללת.
@@ -43,3 +49,5 @@ class PlaceShortlist(BaseModel):
 ## מגבלות ומצב אימות
 
 max_iter=4 ועד 60 שניות להפעלה, בכפוף לזמן שנותר. דירוגים וביקורות סינתטיים אינם נחשפים לסוכנים. אין להמציא שעות פתיחה או לייחס ודאות למידע חסר. אטרקציות ומסעדות נכללות באותו סוכן קיים. אין להציג הנחיית prompt כאילו הוכחה בבדיקת הרצה חיה.
+
+</div>

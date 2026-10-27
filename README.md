@@ -1,3 +1,5 @@
+<div dir="rtl" align="right">
+
 # Travel Agent — השוואת שלוש מערכות לתכנון טיול קבוצתי
 
 פרויקט גמר, קורס Agentic AI · BIU DS23 · צוות 8 · CrewAI 1.15.
@@ -7,7 +9,7 @@
 ## שלוש המערכות
 
 | | מערכת | תיאור |
-|---|---|---|
+|---:|---:|---:|
 | A | קוד דטרמיניסטי (`rules`, `rules_strong`) | חיפוש, חישוב עלויות, דירוג לפי כללים והעדפות, פשרות במסגרת הגמישות. ללא LLM. בייסליין אמיתי, לא מוחלש. |
 | B | סוכן יחיד ב־CrewAI | מתכנן אחד עם כל הכלים המשותפים. |
 | C | שלושה סוכנים ב־CrewAI Flow | Trip Manager (חבילה) → Places (מקומות) → Itinerary (מסלול), עם נתב בקוד שמחזיר רק את הסוכן האחראי לכשל. |
@@ -15,6 +17,8 @@
 כל המערכות משתמשות באותם נתונים, כלים, אילוצים ובדיקות סיום (`final_checks`), עד 3 סבבים ו־270 שניות לכל מערכת. B ו־C משתמשות באותו מודל ובאותן הגדרות. סטטוסים: `OK_PLAN`, `NO_PACKAGE_IN_CATALOG`, `CONFLICT_UNRESOLVED`, `NEEDS_DATA`, `INVALID_REQUEST`, `TECHNICAL_ERROR`, `TIMEOUT`.
 
 ## מבנה המאגר
+
+<div dir="ltr" align="left">
 
 ```
 src/travel_agent/        ליבת Python: מודלים, כלים, בדיקות, מערכות A/B/C, comparison.py, api.py, Streamlit, ניטור
@@ -33,6 +37,8 @@ archive/                 חומרים מהיקף קודם / שאינם בשימ�
 travel_files_manifest.json  גודל ו־SHA-256 של קובצי הדרייב שמהם סונכרן המאגר (רשומת שלמות)
 ```
 
+</div>
+
 ## הפעלה
 
 ### 1. Google Colab (מומלץ)
@@ -48,24 +54,36 @@ travel_files_manifest.json  גודל ו־SHA-256 של קובצי הדרייב ש
 
 נדרש Python 3.10–3.13 (נבדק על 3.12/3.13).
 
+<div dir="ltr" align="left">
+
 ```bash
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements-streamlit.txt
 python -m streamlit run streamlit_app.py               # או: sh start_streamlit.sh  /  START_STREAMLIT.bat
 ```
 
+</div>
+
 ### 3. React + API
+
+<div dir="ltr" align="left">
 
 ```bash
 python -m pip install -e ".[agents,api,dev]"
 python scripts/start.py          # FastAPI על 8025 + ממשק; --dev מפעיל Vite על 5173
 ```
 
+</div>
+
 `frontend/dist` אינו נשמר במאגר. בהפעלה הראשונה `scripts/start.py` מתקין את תלויות הממשק ומריץ את שרת הפיתוח. לבנייה ידנית (Node.js 20+):
+
+<div dir="ltr" align="left">
 
 ```bash
 cd frontend && npm install && npm run build   # prebuild מעתיק את web/scenarios.json ו־recorded_baseline.json ל־public/
 ```
+
+</div>
 
 ### מודל
 
@@ -73,11 +91,15 @@ cd frontend && npm install && npm run build   # prebuild מעתיק את web/sce
 
 ### בדיקות והערכה
 
+<div dir="ltr" align="left">
+
 ```bash
 python -m pytest -q
 python scripts/smoke_comparison.py                 # הרצת API מלאה ללא מודל
 python -m eval.run_eval --help                     # הערכה; תוצאות גולמיות ב־eval/results (לא נשמרות במאגר), דוחות ב־eval/reports
 ```
+
+</div>
 
 ## נתונים — מקור ומגבלות
 
@@ -112,6 +134,8 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 - ארכיון (היקף קודם וקבצים שאינם בשימוש, לרקע בלבד): `archive/` — ראו `archive/README.md`
 
 ---
+
+</div>
 
 ## English summary
 
