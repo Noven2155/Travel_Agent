@@ -34,9 +34,11 @@ class ToolLog:
         with self._lock:
             started = self._starts.pop(call_id, None)
             duration = round(time.monotonic() - started, 4) if started is not None else None
-            self.entries.append(dict(call_id=call_id, tool=tool, actor=self.actor, args=args,
-                                     ts=dt.datetime.now().isoformat(timespec="milliseconds"), output=output, duration_s=duration))
+            entry = dict(call_id=call_id, tool=tool, actor=self.actor, args=args,
+                         ts=dt.datetime.now().isoformat(timespec="milliseconds"), output=output, duration_s=duration)
+            self.entries.append(entry)
         if self.progress:
+            self.progress(dict(kind="tool_record", run_id=self.run_id, entry=entry))
             self.progress(dict(kind="tool", actor=self.actor, tool=tool, call_id=call_id,
                                status=output.get("status", "OK"), duration_s=duration))
 

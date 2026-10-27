@@ -118,9 +118,10 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 
 ## סטטוס ובעיות ידועות (27.10.2026)
 
-- **משימה 2 — הרצה ראשונה אמיתית:** C הסתיימה ב־`OK_PLAN` בסבב אחד וב־74.906 שניות; עשר בדיקות התוכנית עברו. B הסתיימה ב־`TECHNICAL_ERROR` עקב מכסת Gemini של בקשות לדקה (`429`). נוספו בקרת קצב משותפת והמתנה לפי תשובת הספק, וגם המחברת הראשית עודכנה. **התיקון טרם אומת בהרצה אמיתית חדשה ומשימה 2 עדיין פתוחה.** [דוח מפורט, חריגות וראיות](docs/TASK2_FIRST_RUN_HE.md) · [מחברת B/C ממוקדת](https://colab.research.google.com/github/Noven2155/Travel_Agent/blob/main/notebooks/travel_task2_bc_colab.ipynb).
-- בבדיקה ידנית של C נמצאו ארוחות באורך 75–90 דקות מול הנחיה של 60 דקות; בדיקות הקוד הקיימות לא אוכפות זאת. כל הימים בתרחיש היו מחוץ לטווח תחזית מזג האוויר. אין להסיק מהרצה יחידה יתרון איכותי למערכת מסוימת.
-- בדיקות ההכנה הראשוניות מסומנות `NOT_RUN`; ראיות Colab האמיתיות נשמרו בנפרד. מפתחות אינם נשמרים במאגר.
+- **משימה 2 — שתי הרצות אמיתיות:** C הצליחה בשתיהן (`OK_PLAN`; 74.906 ו־106.076 שניות; עשר בדיקות התוכנית עברו). B נעצרה תחילה במכסת Gemini (`429`), ובניסיון השני בגבול 270 השניות לאחר כשלים בבדיקות התוכנית. בניסיון השני לא נצפו שגיאות 429. **משימה 2 עדיין פתוחה.** [הדוח העדכני, החריגות והראיות](docs/TASK2_SECOND_RUN_HE.md) · [הדוח הראשון](docs/TASK2_FIRST_RUN_HE.md).
+- עודכנו הפלט המובנה ומשוב התיקון של B, וכן שמירת פלטים חלקיים ומונים בעת עצירה. גם המחברת הראשית משתמשת בתיקונים. **139 בדיקות מקומיות עברו; התיקונים האחרונים טרם אומתו מול Gemini.** [מחברת B/C ממוקדת](https://colab.research.google.com/github/Noven2155/Travel_Agent/blob/main/notebooks/travel_task2_bc_colab.ipynb).
+- בייצוא הישן של TIMEOUT הופיעו מונים מאופסים ושדות זיהוי חסרים. יומן הניסיון השני מוכיח 28 תשובות מודל ב־B; פגם הדיווח תוקן בקוד. הראיות המקוריות נשמרו ללא שינוי.
+- ב־C נמצאו ארוחות באורך 75–90 דקות מול הנחיה של 60 דקות; הבדיקות הקיימות לא אוכפות זאת. כל ימי התרחיש היו מחוץ לטווח התחזית. אין להסיק מכך יתרון איכותי כללי למערכת מסוימת.
 
 ## מסמכים
 
@@ -143,4 +144,4 @@ Final project (Agentic AI course, BIU DS23 team 8). Compares three planners for 
 
 Run: Colab (`notebooks/travel_streamlit_colab.ipynb`, key from Colab Secrets `GEMINI_API_KEY`), local Streamlit (`streamlit run streamlit_app.py`), or React + FastAPI (`python scripts/start.py`; `frontend/dist` is not committed, `npm run build` regenerates it). Tests: `python -m pytest -q`.
 
-Live task-2 result: C completed with `OK_PLAN` and passed the current code checks; B failed with Gemini RPM quota errors (429). Shared pacing, provider-delay retries and the main notebook were updated; a new real run is still required. Manual review found meal-duration exceptions not enforced by current checks. Availability and car capacity in the data are synthetic/estimated. See `docs/` for the specification and agent-builder documents.
+Live task-2 results: C passed current code checks in two real Gemini runs; B first hit RPM quota errors and then reached the 270-second deadline after validation failures. B's structured output, repair context and interruption evidence were updated. The latest changes and the main notebook still require real-model verification. Meal-duration exceptions remain outside current validator coverage. See [README_EN.md](README_EN.md) for the English guide.

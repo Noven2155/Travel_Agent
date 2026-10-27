@@ -58,12 +58,13 @@ Current proof settings: Gemini `gemini-3.1-flash-lite`, temperature 0, seed 42, 
 
 ### Status — October 27, 2026
 
-- **First real run:** C returned `OK_PLAN` in one round and 74.906 seconds; all 10 existing plan checks passed. B stopped with `TECHNICAL_ERROR` after Gemini returned request-quota errors (`429`).
-- Shared pacing and provider-delay retries were added, and the main notebook was updated. **A new real B/C run and real verification of the main notebook are still pending. Task 2 remains open.**
-- Manual review found meals lasting 75–90 minutes despite the 60-minute instruction. Existing validators did not detect this. All scenario dates were outside the weather forecast horizon, so the run does not verify rainy-day scheduling.
-- **134 local tests passed.** Scripted LLM and simulated SDK tests are local checks, not evidence of successful Gemini execution. No general quality or speed advantage has been established.
+- **Two real runs:** C returned `OK_PLAN` in one round both times (74.906 and 106.076 seconds); all 10 existing plan checks passed. B first stopped on request-quota errors (429), then reached the 270-second deadline after plan-validation failures. No 429 errors were observed in the second run.
+- B now uses a single-agent structured Task/Crew path, full repair feedback and logged evidence. Interrupted runs retain draft plans, tool logs and observed counters. The main notebook uses this shared runtime. **The latest changes still require real-model verification. Task 2 remains open.**
+- The old timeout export zeroed B's counters and omitted identity fields, despite the second run containing 28 completed model responses. Original evidence is retained; the reporting defect is fixed for future runs.
+- Manual review found meals lasting 75–90 minutes despite the 60-minute instruction. Existing validators did not detect this. All scenario dates were outside the forecast horizon; rainy-day scheduling was not verified.
+- **139 local tests passed.** Scripted LLM and simulated SDK/process tests are local checks. They do not prove Gemini success, and no general quality or speed advantage has been established.
 
-See the [first-run report](docs/TASK2_FIRST_RUN_HE.md) and [saved evidence](evidence/task2/20261027T134959Z/) for details. The report is in Hebrew; execution records are JSON.
+See the [latest report](docs/TASK2_SECOND_RUN_HE.md), [first-run report](docs/TASK2_FIRST_RUN_HE.md) and [second-run evidence](evidence/task2/20261027T141444Z/). Reports are in Hebrew; execution records are JSON.
 
 ## Data and limitations
 

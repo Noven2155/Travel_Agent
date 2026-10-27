@@ -21,7 +21,7 @@ RULES_TEXT = f"""Hard rules (checked in code after you answer):
 - Pace limits per day (activities excluding meals / hours incl. meals / travel minutes): {json.dumps(C.DAY_LOAD)}; arrival and departure day: at most 1 activity; at most {C.MAX_MEALS_PER_DAY} meals per day (kind='meal', {C.MEAL_MINUTES} min).
 - Travel: call get_travel_time once per day with the legs [from_id, to_id] (first leg starts at the lodging ref); copy minutes, mode and call_id into travel_min, mode, travel_call_id. An item starts no earlier than previous end + travel_min.
 - Mode: with a car use 'drive', otherwise 'transit' (legs <= 1 km are always 'walk').
-- Weather: on a RAIN day only places with indoor == 'true' (unknown counts as outdoor); move outdoor places to a dry day or list them in dropped with reason WEATHER. On a HEAT day outdoor places only end by {C.HEAT_OUTDOOR_BEFORE} or start from {C.HEAT_OUTDOOR_FROM}. WIND is a note only. No weather text on OUT_OF_HORIZON days.
+- Weather: on a RAIN day only places with indoor == 'true' (unknown counts as outdoor); move outdoor places to a dry day or list them in dropped with reason WEATHER. On a HEAT day outdoor places only end by {C.HEAT_OUTDOOR_BEFORE} or start from {C.HEAT_OUTDOOR_FROM}. WIND is a note only. On OUT_OF_HORIZON days set every item's weather_note to JSON null, not a string such as 'no forecast'. Do not drop a place for WEATHER without a RAIN day.
 - Coverage: at least {C.COVERAGE_MIN:.0%} of the interests must be covered by scheduled places' tool tags; zero places with an avoided tag.
 - Times are HH:MM local city time. Ratings do not exist (synthetic) - never mention them.
 - Soft preferences (request.soft_prefs: central, nonstop, exact_dates, dry_days, long_days, under_preferred_budget) may be
@@ -99,13 +99,14 @@ def package_report(ctx: RunContext, pkg: Package) -> CheckReport:
     return CheckReport(checks=keep)
 
 
-def feedback_text(report: CheckReport, previous: Any) -> str:
+def feedback_text(report: CheckReport, previous: Any, max_chars: Optional[int] = 6000) -> str:
     lines = ["The previous plan FAILED these code checks:"]
     for c in report.checks:
         if not c.passed:
             lines.append(f"- {c.name}: " + "; ".join(c.details[:6]))
     lines.append("Previous output (fix only what failed, keep call_ids from the tools):")
-    lines.append(json.dumps(previous, default=str)[:6000])
+    serialized = json.dumps(previous, default=str)
+    lines.append(serialized if max_chars is None else serialized[:max_chars])
     return "\n".join(lines)
 
 

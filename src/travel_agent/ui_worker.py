@@ -26,6 +26,8 @@ def main():
         slot = dict(state="running", started_at=comparison.utc_now(), events=[])
         last_sent = [0.]
         def observe(event):
+            if event.get("kind") in ("checkpoint", "tool_record"):
+                return
             slot["events"].append(dict(ts=comparison.utc_now(), **event))
             if event.get("stage"): slot["stage"] = event["stage"]
             if time.monotonic() - last_sent[0] > .3:

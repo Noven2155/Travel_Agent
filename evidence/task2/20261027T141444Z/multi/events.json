@@ -1,0 +1,518 @@
+[
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "initializing_agents",
+    "ts": "2026-10-27T14:19:26.586768+00:00"
+  },
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "intake",
+    "ts": "2026-10-27T14:19:35.035134+00:00"
+  },
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "catalog",
+    "ts": "2026-10-27T14:19:35.959930+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "get_forecast",
+    "call_id": "get_forecast#001",
+    "ts": "2026-10-27T14:19:35.960228+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "get_forecast",
+    "call_id": "get_forecast#001",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:19:35.960311+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#002",
+    "ts": "2026-10-27T14:19:35.960616+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#002",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:19:35.960693+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#003",
+    "ts": "2026-10-27T14:19:35.960750+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#003",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:19:35.960792+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_hotels",
+    "call_id": "search_hotels#004",
+    "ts": "2026-10-27T14:19:35.992965+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_hotels",
+    "call_id": "search_hotels#004",
+    "status": "OK",
+    "duration_s": 0.0002,
+    "ts": "2026-10-27T14:19:35.993145+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_cars",
+    "call_id": "search_cars#005",
+    "ts": "2026-10-27T14:19:35.994007+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_cars",
+    "call_id": "search_cars#005",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:19:35.994147+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "rank_packages",
+    "call_id": "rank_packages#006",
+    "ts": "2026-10-27T14:19:36.066159+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "rank_packages",
+    "call_id": "rank_packages#006",
+    "status": "OK",
+    "duration_s": 0.0002,
+    "ts": "2026-10-27T14:19:36.066383+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#007",
+    "ts": "2026-10-27T14:19:36.066699+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#007",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:19:36.066766+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#008",
+    "ts": "2026-10-27T14:19:36.066858+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#008",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:19:36.066954+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#009",
+    "ts": "2026-10-27T14:19:36.067043+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#009",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:19:36.067078+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#010",
+    "ts": "2026-10-27T14:19:36.067199+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#010",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:19:36.067294+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#011",
+    "ts": "2026-10-27T14:19:36.067369+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#011",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:19:36.067402+00:00"
+  },
+  {
+    "kind": "candidates",
+    "actor": "code",
+    "count": 4098,
+    "retained": 5,
+    "ts": "2026-10-27T14:19:36.068094+00:00"
+  },
+  {
+    "kind": "agent",
+    "actor": "trip_manager",
+    "stage": "trip_manager",
+    "ts": "2026-10-27T14:19:42.351908+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip manager who builds the package",
+    "call_id": "045def9e-945d-42b3-ac71-57c8def71177",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:19:42.475703+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip manager who builds the package",
+    "call_id": "045def9e-945d-42b3-ac71-57c8def71177",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:19:56.183015+00:00",
+    "error": "Google Gemini API error: 503 - This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "usage": {}
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip manager who builds the package",
+    "call_id": "6ac84405-68de-4368-a793-39fb66efd647",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:19:56.231566+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip manager who builds the package",
+    "call_id": "6ac84405-68de-4368-a793-39fb66efd647",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:34.125068+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 267,
+      "total_tokens": 5315
+    }
+  },
+  {
+    "kind": "agent",
+    "actor": "places",
+    "stage": "places",
+    "ts": "2026-10-27T14:20:34.176749+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Local guide who matches places to preferences",
+    "call_id": "67f8033a-5120-49e7-ab27-4e6bf0e2529e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:34.237787+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Local guide who matches places to preferences",
+    "call_id": "67f8033a-5120-49e7-ab27-4e6bf0e2529e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:35.175493+00:00",
+    "error": "Google Gemini API error: 503 - This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "usage": {}
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 4.08,
+    "ts": "2026-10-27T14:20:35.198625+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Local guide who matches places to preferences",
+    "call_id": "e1668452-6c5c-4e69-8e2c-c9517b316763",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:39.289418+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Local guide who matches places to preferences",
+    "call_id": "e1668452-6c5c-4e69-8e2c-c9517b316763",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:40.116769+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 2597
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "places",
+    "tool": "search_places",
+    "call_id": "search_places#012",
+    "ts": "2026-10-27T14:20:40.136034+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "places",
+    "tool": "search_places",
+    "call_id": "search_places#012",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:20:40.136193+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 4.095,
+    "ts": "2026-10-27T14:20:40.234922+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Local guide who matches places to preferences",
+    "call_id": "5b43d641-7f59-438e-971b-67a2eebc01c6",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:44.339825+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Local guide who matches places to preferences",
+    "call_id": "5b43d641-7f59-438e-971b-67a2eebc01c6",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:51.043288+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 865,
+      "total_tokens": 6258
+    }
+  },
+  {
+    "kind": "agent",
+    "actor": "itinerary",
+    "stage": "itinerary",
+    "ts": "2026-10-27T14:20:51.082465+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Scheduler who balances days",
+    "call_id": "152eef6f-7e86-46d7-87d1-30397715e10b",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:51.139958+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Scheduler who balances days",
+    "call_id": "152eef6f-7e86-46d7-87d1-30397715e10b",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:53.572708+00:00",
+    "error": "Google Gemini API error: 503 - This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "usage": {}
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 2.584,
+    "ts": "2026-10-27T14:20:53.598241+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Scheduler who balances days",
+    "call_id": "77c38651-4cb1-446c-aab3-6a77ada1d30b",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:56.192732+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Scheduler who balances days",
+    "call_id": "77c38651-4cb1-446c-aab3-6a77ada1d30b",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:20:58.332653+00:00",
+    "error": "Google Gemini API error: 503 - This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "usage": {}
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 2.871,
+    "ts": "2026-10-27T14:20:58.361578+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Scheduler who balances days",
+    "call_id": "c5637c05-7923-472b-b329-bbfbbe900102",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:21:01.242680+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Scheduler who balances days",
+    "call_id": "c5637c05-7923-472b-b329-bbfbbe900102",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:21:07.191217+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 1059,
+      "total_tokens": 4366
+    }
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Scheduler who balances days",
+    "call_id": "f5880e0a-a6e8-4d9a-86c7-401035e8990f",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:21:07.232462+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Scheduler who balances days",
+    "call_id": "f5880e0a-a6e8-4d9a-86c7-401035e8990f",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:21:13.361481+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 221,
+      "total_tokens": 4758
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "itinerary",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#013",
+    "ts": "2026-10-27T14:21:13.368718+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "itinerary",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#013",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:21:13.368827+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "itinerary",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#014",
+    "ts": "2026-10-27T14:21:13.369704+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "itinerary",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#014",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:21:13.369819+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "itinerary",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#015",
+    "ts": "2026-10-27T14:21:13.372305+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "itinerary",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#015",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:21:13.372369+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Scheduler who balances days",
+    "call_id": "36e841e7-8d6f-4429-aeeb-9fa23f893334",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:21:13.646170+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Scheduler who balances days",
+    "call_id": "36e841e7-8d6f-4429-aeeb-9fa23f893334",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:21:21.021774+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 1076,
+      "total_tokens": 6519
+    }
+  },
+  {
+    "kind": "checks",
+    "actor": "code",
+    "failures": [],
+    "passed": true,
+    "ts": "2026-10-27T14:21:21.068805+00:00"
+  }
+]

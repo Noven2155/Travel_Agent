@@ -95,8 +95,10 @@ def progress(slot, now=None, deadline_s=270):
     if terminal: action = "ההרצה הסתיימה"
     error = (slot.get("result") or {}).get("message") or slot.get("error") or (errors[-1] if errors else "")
     usages = [c.get("usage", {}) for c in calls.values() if c.get("usage")]
-    input_tokens = sum(u.get("prompt_tokens", u.get("input_tokens", 0)) or 0 for u in usages)
-    output_tokens = sum(u.get("completion_tokens", u.get("output_tokens", 0)) or 0 for u in usages)
+    inputs = [u.get("prompt_tokens", u.get("input_tokens")) for u in usages]
+    outputs = [u.get("completion_tokens", u.get("output_tokens")) for u in usages]
+    input_tokens = sum(inputs) if inputs and all(v is not None for v in inputs) else None
+    output_tokens = sum(outputs) if outputs and all(v is not None for v in outputs) else None
     return redact(dict(state=slot.get("state"), actor=slot.get("actor"), stage=slot.get("stage"), events=len(events),
         result_status=(slot.get("result") or {}).get("status"),
         elapsed_s=elapsed, remaining_s=max(0, deadline_s - elapsed) if elapsed is not None and not terminal else None,

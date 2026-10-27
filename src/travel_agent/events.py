@@ -11,6 +11,15 @@ def emit(kind: str, actor: str = "code", **data) -> None:
         callback(dict(kind=kind, actor=actor, **data))
 
 
+def public_usage(usage):
+    """Normalize provider token-count names without exporting model content."""
+    aliases = {"prompt_tokens": ("prompt_tokens", "input_tokens", "prompt_token_count"),
+               "completion_tokens": ("completion_tokens", "output_tokens", "candidates_token_count"),
+               "total_tokens": ("total_tokens", "total_token_count")}
+    return {name: usage[key] for name, keys in aliases.items()
+            for key in [next((k for k in keys if usage.get(k) is not None), None)] if key is not None}
+
+
 def install_llm_progress():
     """Listen to SDK call boundaries, including failures; exclude all model content."""
     callback = sink.get()
@@ -25,7 +34,7 @@ def install_llm_progress():
                 call_id=str(event.call_id), model=getattr(event, "model", None),
                 ts=event.timestamp.isoformat(),
                 error=str(getattr(event, "error", ""))[:4000],
-                usage={k: v for k, v in usage.items() if k in ("prompt_tokens", "completion_tokens", "input_tokens", "output_tokens", "total_tokens")}))
+                usage=public_usage(usage)))
         crewai_event_bus.on(event_type)(handler)
     for event_type, kind in ((LLMCallStartedEvent, "llm_start"), (LLMCallCompletedEvent, "llm_end"), (LLMCallFailedEvent, "llm_error")):
         register(event_type, kind)

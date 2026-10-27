@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "checks": null,
+  "same_approved_input": false,
+  "system_matches": false,
+  "real_model_calls_observed": false,
+  "within_limits": false,
+  "output_validation_error": "ValidationError: 3 validation errors for RunResult\nrun_id\n  Field required [type=missing, input_value={'status': 'TIMEOUT', 'me...rsed_requirements': []}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nsystem\n  Field required [type=missing, input_value={'status': 'TIMEOUT', 'me...rsed_requirements': []}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing\nrequest_id\n  Field required [type=missing, input_value={'status': 'TIMEOUT', 'me...rsed_requirements': []}}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing",
+  "failed_checks": []
+}

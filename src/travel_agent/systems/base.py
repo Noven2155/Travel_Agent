@@ -30,6 +30,7 @@ class RunContext:
     weather_status: WeatherStatus
     candidates: list[dict[str, Any]]
     t0: float
+    system: str = ""
     deadline_s: float = C.DEADLINE_S
     llm_calls: int = 0
     tokens_in: int = 0
@@ -61,11 +62,22 @@ def package_from_candidate(c: dict[str, Any]) -> Package:
                    flight_out=c["flight_out"], flight_back=c["flight_back"], stay=c["stay"], car=c.get("car"))
 
 
-def run_checks(ctx: RunContext, package: Optional[Package], days: list[DayPlan], dropped: list[Dropped]) -> CheckReport:
+def run_checks(ctx: RunContext, package: Optional[Package], days: list[DayPlan], dropped: list[Dropped],
+               rounds_used: int = 1) -> CheckReport:
     eff = effective_request(ctx.req, package)
     windows = day_windows(eff, package.flight_out, package.flight_back) if package and package.flight_out else None
     report = final_checks(ctx.log, ctx.req, package, days, dropped, ctx.conditions, windows)
-    emit("checks", failures=report.failures, passed=report.all_passed)
+    emit("checks", failures=report.failures, passed=report.all_passed, report=report.model_dump(mode="json"))
+    if ctx.system:
+        checkpoint = RunResult(run_id=ctx.run_id, system=ctx.system, request_id=ctx.req.request_id,
+            request=ctx.req, status=Status.OK_PLAN if report.all_passed else Status.CONFLICT_UNRESOLVED,
+            package=package, candidates=ctx.candidates, days=days, dropped=dropped,
+            day_conditions=ctx.conditions, weather_status=ctx.weather_status,
+            check_report=report, all_checks_passed=report.all_passed, rounds_used=rounds_used,
+            llm_calls=ctx.llm_calls, tokens_in=ctx.tokens_in, tokens_out=ctx.tokens_out,
+            tool_log=ctx.log.dump(), wall_time_s=round(ctx.elapsed(), 3),
+            notes=["Checked draft checkpoint; final completion is reported separately."])
+        emit("checkpoint", result=checkpoint.model_dump(mode="json"))
     return report
 
 
@@ -108,10 +120,10 @@ def run_system(system: str, raw_request: Any, decide: Callable[[RunContext], Dec
         cands = build_candidates(log, req, conditions=conditions)
         emit("candidates", count=cands[0].get("n_within_budget", len(cands)), retained=len(cands))
         ctx = RunContext(run_id=run_id, req=req, log=log, conditions=conditions, weather_status=wstatus,
-                         candidates=cands, t0=t0, deadline_s=deadline_s)
+                         candidates=cands, t0=t0, deadline_s=deadline_s, system=code)
         dec = decide(ctx)
         if dec.check_report is None and dec.package is not None:
-            dec.check_report = run_checks(ctx, dec.package, dec.days, dec.dropped)
+            dec.check_report = run_checks(ctx, dec.package, dec.days, dec.dropped, rounds_used=dec.rounds_used)
         status = dec.status
         if status == Status.OK_PLAN and (dec.check_report is None or not dec.check_report.all_passed):
             status = Status.CONFLICT_UNRESOLVED

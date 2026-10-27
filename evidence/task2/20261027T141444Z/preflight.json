@@ -1,0 +1,6 @@
+{
+  "ready": true,
+  "reason": "model gemini/gemini-3.1-flash-lite",
+  "model_calls_made": false,
+  "note": "Configuration check only; credentials, quota and model availability are not verified online."
+}

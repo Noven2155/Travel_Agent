@@ -1,0 +1,8 @@
+{
+  "verification": "LOCAL_ONLY",
+  "real_model_calls_made": false,
+  "tests_passed": 139,
+  "warnings": 224,
+  "model_free_api_smoke": "passed; unconfigured B/C errors expected",
+  "gemini_success_after_this_fix": "not verified"
+}

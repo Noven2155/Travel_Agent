@@ -1,0 +1,1330 @@
+[
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "initializing_agents",
+    "ts": "2026-10-27T14:14:56.529649+00:00"
+  },
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "intake",
+    "ts": "2026-10-27T14:15:02.864473+00:00"
+  },
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "catalog",
+    "ts": "2026-10-27T14:15:03.339320+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "get_forecast",
+    "call_id": "get_forecast#001",
+    "ts": "2026-10-27T14:15:03.339599+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "get_forecast",
+    "call_id": "get_forecast#001",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:03.339669+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#002",
+    "ts": "2026-10-27T14:15:03.339829+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#002",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:15:03.339924+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#003",
+    "ts": "2026-10-27T14:15:03.339992+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#003",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:15:03.340027+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_hotels",
+    "call_id": "search_hotels#004",
+    "ts": "2026-10-27T14:15:03.354948+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_hotels",
+    "call_id": "search_hotels#004",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:03.355086+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_cars",
+    "call_id": "search_cars#005",
+    "ts": "2026-10-27T14:15:03.355569+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_cars",
+    "call_id": "search_cars#005",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:03.355633+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "rank_packages",
+    "call_id": "rank_packages#006",
+    "ts": "2026-10-27T14:15:03.382219+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "rank_packages",
+    "call_id": "rank_packages#006",
+    "status": "OK",
+    "duration_s": 0.0002,
+    "ts": "2026-10-27T14:15:03.382389+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#007",
+    "ts": "2026-10-27T14:15:03.382597+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#007",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:15:03.382649+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#008",
+    "ts": "2026-10-27T14:15:03.382712+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#008",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:15:03.382748+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#009",
+    "ts": "2026-10-27T14:15:03.382808+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#009",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:15:03.382845+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#010",
+    "ts": "2026-10-27T14:15:03.382948+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#010",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:15:03.382990+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#011",
+    "ts": "2026-10-27T14:15:03.383074+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#011",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T14:15:03.383106+00:00"
+  },
+  {
+    "kind": "candidates",
+    "actor": "code",
+    "count": 4098,
+    "retained": 5,
+    "ts": "2026-10-27T14:15:03.383614+00:00"
+  },
+  {
+    "kind": "agent",
+    "actor": "TripPlanner",
+    "round": 1,
+    "stage": "planning",
+    "ts": "2026-10-27T14:15:08.384201+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "87f5c19b-d471-4af4-a0db-583c8dbf5d8a",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:08.491085+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "87f5c19b-d471-4af4-a0db-583c8dbf5d8a",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:25.314353+00:00",
+    "error": "Google Gemini API error: 503 - This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "usage": {}
+  },
+  {
+    "kind": "retry",
+    "actor": "TripPlanner",
+    "attempt": 2,
+    "error": "ServerError; transient provider error; retrying after 2.0s",
+    "ts": "2026-10-27T14:15:25.324479+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "57d16508-079d-48b3-b24a-f1ac03e9589d",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:27.382484+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "57d16508-079d-48b3-b24a-f1ac03e9589d",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:28.224390+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 5477
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#012",
+    "ts": "2026-10-27T14:15:28.243686+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#012",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:28.243842+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 4.057,
+    "ts": "2026-10-27T14:15:28.365189+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "6ca54f28-850c-45be-b1f7-0982254785b6",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:32.434014+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "6ca54f28-850c-45be-b1f7-0982254785b6",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:33.279352+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 80,
+      "total_tokens": 8353
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#013",
+    "ts": "2026-10-27T14:15:33.284008+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#013",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:33.284125+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 4.083,
+    "ts": "2026-10-27T14:15:33.389326+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "78c6045f-aeb7-4ab9-975d-17f3a622722f",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:37.483416+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "78c6045f-aeb7-4ab9-975d-17f3a622722f",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:38.780773+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 136,
+      "total_tokens": 8730
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#014",
+    "ts": "2026-10-27T14:15:38.786792+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#014",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:38.786924+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 3.64,
+    "ts": "2026-10-27T14:15:38.883639+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "791e1899-2b5a-4978-afc5-975c8b3d1fe0",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:42.535078+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "791e1899-2b5a-4978-afc5-975c8b3d1fe0",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:43.539380+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 127,
+      "total_tokens": 9192
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#015",
+    "ts": "2026-10-27T14:15:43.544651+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#015",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:43.544751+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 3.91,
+    "ts": "2026-10-27T14:15:43.664463+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "1c5c146c-35af-4e78-a3d4-a4570dc07cce",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:47.586143+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "1c5c146c-35af-4e78-a3d4-a4570dc07cce",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:48.700759+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 125,
+      "total_tokens": 9442
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#016",
+    "ts": "2026-10-27T14:15:48.704366+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#016",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:48.704489+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 3.824,
+    "ts": "2026-10-27T14:15:48.801545+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "6e2f3820-cfe6-4ee0-9cc7-5402f0626161",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:52.636539+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "6e2f3820-cfe6-4ee0-9cc7-5402f0626161",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:54.835290+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 125,
+      "total_tokens": 9691
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#017",
+    "ts": "2026-10-27T14:15:54.840492+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#017",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:15:54.840612+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 2.725,
+    "ts": "2026-10-27T14:15:54.951427+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "051f25e5-054a-4ec1-b625-2aef950dc330",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:15:57.687778+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "051f25e5-054a-4ec1-b625-2aef950dc330",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:00.444264+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 61,
+      "total_tokens": 9876
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#018",
+    "ts": "2026-10-27T14:16:00.449529+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#018",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:16:00.449647+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 2.17,
+    "ts": "2026-10-27T14:16:00.557341+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "8036dd1a-7954-4a65-be9b-9299e3bf5e80",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:02.738306+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "8036dd1a-7954-4a65-be9b-9299e3bf5e80",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:05.376572+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 866,
+      "total_tokens": 10865
+    }
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 2.357,
+    "ts": "2026-10-27T14:16:05.420986+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "model",
+    "call_id": "ad6b3be8-dff0-47f0-afce-5d414832671d",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:07.791353+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "model",
+    "call_id": "ad6b3be8-dff0-47f0-afce-5d414832671d",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:16.706859+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 1645,
+      "total_tokens": 4722
+    }
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "746a69c6-4e26-4654-b2b4-8b1e4dbcf7d2",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:16.744654+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "746a69c6-4e26-4654-b2b4-8b1e4dbcf7d2",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:17.678667+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 5477
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#019",
+    "ts": "2026-10-27T14:16:17.684783+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#019",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:16:17.684937+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 4.001,
+    "ts": "2026-10-27T14:16:17.782304+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "1207ea5e-c258-488a-9b8c-92b423639deb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:21.794851+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "1207ea5e-c258-488a-9b8c-92b423639deb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:22.661929+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 32,
+      "total_tokens": 8305
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "get_place_details",
+    "call_id": "get_place_details#020",
+    "ts": "2026-10-27T14:16:22.665674+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "get_place_details",
+    "call_id": "get_place_details#020",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:16:22.665801+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 4.068,
+    "ts": "2026-10-27T14:16:22.766267+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "f87dab74-1c4e-430a-a986-a1875ad04cfc",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:26.845712+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "f87dab74-1c4e-430a-a986-a1875ad04cfc",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:28.658847+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 80,
+      "total_tokens": 8764
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#021",
+    "ts": "2026-10-27T14:16:28.663338+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#021",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:16:28.663455+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 3.125,
+    "ts": "2026-10-27T14:16:28.760002+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "5f58c2a8-290f-4115-a0d9-5c0bdf0d643c",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:31.897637+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "5f58c2a8-290f-4115-a0d9-5c0bdf0d643c",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:33.044086+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 136,
+      "total_tokens": 9141
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#022",
+    "ts": "2026-10-27T14:16:33.051177+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#022",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:16:33.051321+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 3.799,
+    "ts": "2026-10-27T14:16:33.137140+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "947759e7-8eda-4188-8892-5e7aa779fa56",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:36.947306+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "947759e7-8eda-4188-8892-5e7aa779fa56",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:37.957130+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 127,
+      "total_tokens": 9603
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#023",
+    "ts": "2026-10-27T14:16:37.961659+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#023",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:16:37.961772+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 3.925,
+    "ts": "2026-10-27T14:16:38.061714+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "3155ccaa-2a1e-42cd-baa7-d4e1b7c74b4e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:41.999201+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "3155ccaa-2a1e-42cd-baa7-d4e1b7c74b4e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:43.101891+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 93,
+      "total_tokens": 9821
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#024",
+    "ts": "2026-10-27T14:16:43.108540+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#024",
+    "status": "OK",
+    "duration_s": 0.0011,
+    "ts": "2026-10-27T14:16:43.109709+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 3.826,
+    "ts": "2026-10-27T14:16:43.211666+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "822bf3d5-89e0-4ba4-af65-6deb1f9ee2cc",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:16:47.049683+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "822bf3d5-89e0-4ba4-af65-6deb1f9ee2cc",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:15.076285+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 93,
+      "total_tokens": 10038
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#025",
+    "ts": "2026-10-27T14:17:15.080539+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#025",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:17:15.080663+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "fb4e4f49-473a-4318-9e41-99bee44e46b1",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:15.218076+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "fb4e4f49-473a-4318-9e41-99bee44e46b1",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:25.316165+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 933,
+      "total_tokens": 11095
+    }
+  },
+  {
+    "kind": "llm_start",
+    "actor": "model",
+    "call_id": "32148250-6e80-49bb-acef-1f7bf4e8a18b",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:25.346737+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "model",
+    "call_id": "32148250-6e80-49bb-acef-1f7bf4e8a18b",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:30.621304+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 1530,
+      "total_tokens": 4674
+    }
+  },
+  {
+    "kind": "checks",
+    "actor": "code",
+    "failures": [
+      "travel",
+      "weather_rule",
+      "grounding"
+    ],
+    "passed": false,
+    "ts": "2026-10-27T14:17:30.655754+00:00"
+  },
+  {
+    "kind": "agent",
+    "actor": "TripPlanner",
+    "round": 2,
+    "stage": "planning",
+    "ts": "2026-10-27T14:17:30.666681+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "59f1b86d-263a-4bb0-8ffe-8d05cbc2eb30",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:30.755389+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "59f1b86d-263a-4bb0-8ffe-8d05cbc2eb30",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:37.041391+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 7218
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#026",
+    "ts": "2026-10-27T14:17:37.047463+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#026",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:17:37.047562+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "e83ea195-939b-4a57-ba83-e32080e0f72d",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:37.175809+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "e83ea195-939b-4a57-ba83-e32080e0f72d",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:39.920471+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 136,
+      "total_tokens": 10150
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#027",
+    "ts": "2026-10-27T14:17:39.927396+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#027",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:17:39.927541+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 2.207,
+    "ts": "2026-10-27T14:17:40.011453+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "7d8eb362-48a5-4007-abd2-81663274dbff",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:42.232969+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "7d8eb362-48a5-4007-abd2-81663274dbff",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:45.588596+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 61,
+      "total_tokens": 10546
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#028",
+    "ts": "2026-10-27T14:17:45.592603+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#028",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:17:45.592701+00:00"
+  },
+  {
+    "kind": "rate_wait",
+    "actor": "model",
+    "model": "gemini-3.1-flash-lite",
+    "seconds": 1.578,
+    "ts": "2026-10-27T14:17:45.693570+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "96d5aef5-3cd2-4d8f-90fd-98055183e6eb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:47.281513+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "96d5aef5-3cd2-4d8f-90fd-98055183e6eb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:54.746060+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 94,
+      "total_tokens": 10763
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#029",
+    "ts": "2026-10-27T14:17:54.751216+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#029",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:17:54.751320+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "9ca730a9-618e-4699-b854-624f2db7e3bb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:17:54.857758+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "9ca730a9-618e-4699-b854-624f2db7e3bb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:10.363079+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 94,
+      "total_tokens": 10982
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#030",
+    "ts": "2026-10-27T14:18:10.366811+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#030",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:18:10.366942+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "ab511221-a896-425d-b161-54e00e4e3c94",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:10.478708+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "ab511221-a896-425d-b161-54e00e4e3c94",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:26.309256+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 61,
+      "total_tokens": 11168
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#031",
+    "ts": "2026-10-27T14:18:26.313535+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#031",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:18:26.313648+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "9b6848de-0645-438c-a286-a86ffac223e7",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:26.403695+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "9b6848de-0645-438c-a286-a86ffac223e7",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:31.396661+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 80,
+      "total_tokens": 11371
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#032",
+    "ts": "2026-10-27T14:18:31.402177+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#032",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:18:31.402280+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "c0797bf1-af29-40c7-a4ed-d21b2e5bbdf2",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:31.507294+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "c0797bf1-af29-40c7-a4ed-d21b2e5bbdf2",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:37.191374+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 1538,
+      "total_tokens": 13150
+    }
+  },
+  {
+    "kind": "llm_start",
+    "actor": "model",
+    "call_id": "4319926a-3ee4-4c58-8b6f-6c588e995099",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:37.223012+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "model",
+    "call_id": "4319926a-3ee4-4c58-8b6f-6c588e995099",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:51.070174+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 1600,
+      "total_tokens": 5349
+    }
+  },
+  {
+    "kind": "checks",
+    "actor": "code",
+    "failures": [
+      "weather_rule"
+    ],
+    "passed": false,
+    "ts": "2026-10-27T14:18:51.088746+00:00"
+  },
+  {
+    "kind": "agent",
+    "actor": "TripPlanner",
+    "round": 3,
+    "stage": "planning",
+    "ts": "2026-10-27T14:18:51.107937+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "506daadd-a227-41e7-8f32-c99179466aed",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:18:51.178613+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "506daadd-a227-41e7-8f32-c99179466aed",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:19:09.549169+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 6877
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#033",
+    "ts": "2026-10-27T14:19:09.559551+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#033",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T14:19:09.559705+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "9fca3a1f-d861-490b-b0e6-f629db51eb2b",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T14:19:09.664560+00:00",
+    "error": "",
+    "usage": {}
+  }
+]

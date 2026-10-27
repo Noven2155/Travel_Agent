@@ -9,6 +9,7 @@ from typing import Any, Optional
 from pydantic import BaseModel
 
 from .. import config as C
+from ..checks import place_facts
 from ..models import CheckReport, Status, TripPlan
 from .agent_common import (RULES_TEXT, account_usage, days_from_itinerary, feedback_text, finish, grounding_guardrail,
                            llm_or_error, package_from_decision, request_context)
@@ -54,7 +55,16 @@ def build_agent(ctx: RunContext, llm, time_left: float):
     from crewai import Agent
     return Agent(role=ROLE, goal=GOAL, backstory=BACKSTORY, tools=make_tools(ctx.log, ALL_AGENT_TOOLS), llm=llm,
                  allow_delegation=False, max_iter=MAX_ITER, max_execution_time=int(max(5, min(MAX_EXEC_S, time_left))),
-                 guardrail=grounding_guardrail(ctx, "trip"), guardrail_max_retries=1, verbose=False)
+                 verbose=False)
+
+
+def run_planner_task(ctx: RunContext, llm, prompt: str):
+    """Run one planner through the same structured Task/Crew output path as C."""
+    from crewai import Crew, Process, Task
+    agent = build_agent(ctx, llm, ctx.time_left())
+    task = Task(description=prompt, expected_output="A complete TripPlan JSON object", agent=agent,
+                output_pydantic=TripPlan, guardrail=grounding_guardrail(ctx, "trip"), guardrail_max_retries=1)
+    return Crew(agents=[agent], tasks=[task], process=Process.sequential, verbose=False).kickoff()
 
 
 def make_flow(ctx: RunContext):
@@ -75,7 +85,14 @@ def make_flow(ctx: RunContext):
                       "check_day_load. Return the TripPlan JSON.\n\n" + RULES_TEXT + "\n\nCONTEXT:\n" +
                       json.dumps(request_context(ctx), default=str))
             if self.state.feedback:
-                prompt += "\n\n" + self.state.feedback
+                prompt = ("Repair the previous TripPlan in the SAME run. Preserve fields that already passed. "
+                          "Reuse logged facts and call_ids; do not repeat catalog searches just to retrieve them again. "
+                          "For OUT_OF_HORIZON set weather_note=null on every item. "
+                          "Return the complete corrected TripPlan.\n\n" + RULES_TEXT + "\n\nCONTEXT:\n" +
+                          json.dumps(request_context(ctx), default=str) + "\n\n" + self.state.feedback +
+                          "\n\nLOGGED PLACE FACTS:\n" + json.dumps(place_facts(ctx.log), default=str) +
+                          "\n\nLOGGED TRAVEL RESULTS:\n" + json.dumps([
+                              e["output"] for e in ctx.log.entries if e["tool"] == "get_travel_time"], default=str))
             before = usage_of(llm)
             last_err = None
             for _attempt in range(2):
@@ -87,7 +104,7 @@ def make_flow(ctx: RunContext):
                          error=f"{type(last_err).__name__}; transient provider error; retrying after {delay:.1f}s")
                     time.sleep(delay)
                 try:
-                    out = build_agent(ctx, llm, ctx.time_left()).kickoff(prompt, response_format=TripPlan)
+                    out = run_planner_task(ctx, llm, prompt)
                     plan = out.pydantic if getattr(out, "pydantic", None) is not None else TripPlan.model_validate_json(out.raw)
                     self.state.plan = plan.model_dump()
                     last_err = None
@@ -115,7 +132,7 @@ def make_flow(ctx: RunContext):
             plan = TripPlan.model_validate(self.state.plan)
             pkg = package_from_decision(ctx, plan.package)
             days = days_from_itinerary(ctx, pkg, plan.itinerary)
-            rep = run_checks(ctx, pkg, days, plan.itinerary.dropped)
+            rep = run_checks(ctx, pkg, days, plan.itinerary.dropped, rounds_used=self.state.round)
             self.state.report = rep.model_dump()
             if rep.all_passed:
                 self.state.outcome = "ok"
@@ -126,7 +143,7 @@ def make_flow(ctx: RunContext):
             if ctx.time_left() < 10:
                 self.state.outcome = "timeout"
                 return "stop"
-            self.state.feedback = feedback_text(rep, self.state.plan)
+            self.state.feedback = feedback_text(rep, self.state.plan, max_chars=None)
             return "replan"
 
         @listen("stop")

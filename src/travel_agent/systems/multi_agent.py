@@ -217,7 +217,7 @@ def make_flow(ctx: RunContext):
             pkg = package_from_decision(ctx, PackageDecision.model_validate(self.state.package))
             it = ItineraryPlan.model_validate(self.state.itinerary)
             days = days_from_itinerary(ctx, pkg, it)
-            rep = run_checks(ctx, pkg, days, it.dropped)
+            rep = run_checks(ctx, pkg, days, it.dropped, rounds_used=self.state.rounds)
             self.state.report = rep.model_dump()
             if rep.all_passed and it.status == "OK":
                 self.state.outcome = "ok"
@@ -275,6 +275,6 @@ def decide_multi(ctx: RunContext) -> Decision:
         unc = PlaceShortlist.model_validate(st.shortlist).uncovered_prefs
         if unc:
             tradeoffs.append("uncovered preferences: " + ", ".join(unc))
-    rep_full = run_checks(ctx, pkg, days, it.dropped) if status != Status.OK_PLAN or rep is None else rep
+    rep_full = run_checks(ctx, pkg, days, it.dropped, rounds_used=st.rounds) if status != Status.OK_PLAN or rep is None else rep
     return finish(ctx, status, pkg, days, it.dropped, tradeoffs, rep_full, st.rounds,
                   st.message or ("" if status == Status.OK_PLAN else "failed checks: " + ", ".join(rep_full.failures)))

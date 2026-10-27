@@ -54,7 +54,7 @@ def validate_slot(slot: dict, request: dict, system: str = "single") -> dict:
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
     checks_passed = bool(checks and checks["checks"] and all(c["passed"] for c in checks["checks"]))
-    real_calls = observed.get("llm_completed", 0) > 0 and result.get("llm_calls", 0) > 0
+    real_calls = observed.get("llm_completed", 0) > 0
     within_limits = (slot.get("process_time_s", float("inf")) <= C.DEADLINE_S
                      and 1 <= result.get("rounds_used", 0) <= C.MAX_ROUNDS)
     passed = (result.get("status") == "OK_PLAN" and result.get("all_checks_passed")
@@ -120,6 +120,8 @@ def run_proof(output: Path, *, preflight_only: bool = False) -> dict:
         write_json(folder / "metrics.json", dict(metrics=slot["metrics"], monitoring=slot["monitoring"],
                     process_time_s=slot["process_time_s"], started_at=slot["started_at"], finished_at=slot["finished_at"]))
         write_json(folder / "events.json", slot["events"])
+        if slot.get("partial_result"):
+            write_json(folder / "last_draft.json", slot["partial_result"])
         validation[system] = validate_slot(slot, request, system)
         write_json(folder / "validation.json", validation[system])
         print(f"Finished {system}: {slot['result']['status']}; proof_passed={validation[system]['passed']}", flush=True)

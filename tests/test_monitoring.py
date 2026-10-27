@@ -51,8 +51,9 @@ def test_tool_boundaries_are_measured():
         log.record(cid,"search_places",{},dict(status="OK"))
     finally:
         sink.reset(token)
-    assert [e["kind"] for e in items] == ["tool_start", "tool"]
-    assert items[1]["duration_s"] >= 0
+    assert [e["kind"] for e in items] == ["tool_start", "tool_record", "tool"]
+    assert items[1]["entry"]["output"] == {"status": "OK"}
+    assert items[2]["duration_s"] >= 0
 
 
 def test_streamlit_shows_partial_result_while_other_system_is_running():

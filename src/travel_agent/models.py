@@ -386,6 +386,7 @@ class RunResult(BaseModel):
     tokens_in: int = 0
     tokens_out: int = 0
     wall_time_s: float = 0.0
+    usage_partial: bool = False
     tool_log_path: Optional[str] = None
     tool_log: list[dict[str, Any]] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list)

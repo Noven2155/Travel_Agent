@@ -15,7 +15,7 @@ import uuid
 
 from . import config as C
 from . import prefs as P
-from .models import CheckReport, CheckResult, Status, TripRequest
+from .models import CheckReport, CheckResult, RunResult, Status, TripRequest
 from .monitoring import progress, redact
 
 RUNTIME = Path(os.environ.get("TRAVEL_RUNTIME_DIR", C.REPO_ROOT / "runtime"))
@@ -126,7 +126,13 @@ def _child(system, req, original_text, input_mode, event_queue):
     os.environ.setdefault("OTEL_SDK_DISABLED", "true")
     from .events import sink
     from .systems import run
-    callback = lambda data: event_queue.put(("event", redact(dict(data, ts=data.get("ts") or utc_now()))))
+    def callback(data):
+        if data.get("kind") == "checkpoint":
+            event_queue.put(("checkpoint", redact(data["result"])))
+        elif data.get("kind") == "tool_record":
+            event_queue.put(("tool_record", redact(data)))
+        else:
+            event_queue.put(("event", redact(dict(data, ts=data.get("ts") or utc_now()))))
     sink.set(callback)
     flush = lambda: None
     try:
@@ -146,6 +152,25 @@ def _child(system, req, original_text, input_mode, event_queue):
     except BaseException as exc:
         flush()
         event_queue.put(("error", redact(f"{type(exc).__name__}: {exc}")))
+
+
+def interrupted_result(data, system, slot, elapsed, timed_out):
+    """Retain actual drafts and observed work without turning interruption into success."""
+    observed = progress(slot, deadline_s=C.DEADLINE_S)
+    partial = dict(slot.get("partial_result") or {})
+    partial.update(run_id=partial.get("run_id") or slot.get("worker_run_id") or f"supervisor-{data['id']}-{system}",
+        system={"rules": "A", "single": "B", "multi": "C"}[system], request_id=data["request"]["request_id"],
+        request=partial.get("request") or data["request"],
+        status="TIMEOUT" if timed_out else "TECHNICAL_ERROR", all_checks_passed=False,
+        message=(f"The system reached its {C.DEADLINE_S}-second execution limit." if timed_out
+                 else slot.get("error", "Process ended without a result")),
+        wall_time_s=round(elapsed, 3), rounds_used=max(partial.get("rounds_used", 0), observed["round"]),
+        llm_calls=max(partial.get("llm_calls", 0), observed["llm_completed"]), usage_partial=True,
+        tokens_in=observed["tokens_in_observed"] or partial.get("tokens_in", 0),
+        tokens_out=observed["tokens_out_observed"] or partial.get("tokens_out", 0),
+        tool_log=slot.get("observed_tool_log") or partial.get("tool_log", []))
+    partial.setdefault("notes", []).append("Interrupted execution: retained drafts and token usage are partial; no final success is claimed.")
+    return RunResult.model_validate(partial).model_dump(mode="json")
 
 
 def _execute(data, system, lock):
@@ -174,6 +199,14 @@ def _execute(data, system, lock):
             if kind == "error":
                 slot["error"] = item
                 break
+            if kind in ("checkpoint", "tool_record"):
+                with lock:
+                    if kind == "checkpoint":
+                        slot["partial_result"] = item
+                    else:
+                        slot["worker_run_id"] = item["run_id"]
+                        slot.setdefault("observed_tool_log", []).append(item["entry"])
+                continue
             with lock:
                 slot["events"].append(item)
                 if item["kind"] == "agent":
@@ -193,19 +226,17 @@ def _execute(data, system, lock):
             process.kill()
         events.close()
     with lock:
+        slot.update(state="complete", finished_at=utc_now())
         if result is None:
             timed_out = time.monotonic() - start >= C.DEADLINE_S
-            message = f"The system reached its {C.DEADLINE_S}-second execution limit." if timed_out else slot.get("error", "Process ended without a result")
-            result = dict(status="TIMEOUT" if timed_out else "TECHNICAL_ERROR", message=message,
-                          all_checks_passed=False, wall_time_s=round(time.monotonic() - start, 3), rounds_used=0,
-                          llm_calls=0, tokens_in=0, tokens_out=0, tool_log=[], days=[], request=data["request"])
+            result = interrupted_result(data, system, slot, time.monotonic() - start, timed_out)
         slot.update(state="complete", finished_at=utc_now(), result=result, metrics=metrics(result, data["pricing"]),
                     process_time_s=round(time.monotonic()-start, 3))
         observed = progress(slot, deadline_s=C.DEADLINE_S)
         slot["monitoring"] = observed
         slot["metrics"].update(llm_calls_attempted=max(observed["llm_started"], result.get("llm_calls", 0)), llm_calls_failed=observed["llm_failed"],
                                llm_calls_unfinished=observed["llm_unfinished"], tool_calls_observed=observed["tools_completed"])
-        if observed["llm_started"] and not result.get("llm_calls"):
+        if result.get("usage_partial") or (observed["llm_started"] and not result.get("llm_calls")):
             slot["metrics"]["estimated_llm_cost_usd"] = None
             slot["metrics"].update(tokens_in=observed["tokens_in_observed"], tokens_out=observed["tokens_out_observed"], usage_partial=True)
             slot["metrics"]["notes"].append("Model calls occurred; complete token usage was not reported before termination.")
