@@ -1,0 +1,55 @@
+{
+  "review_type": "final_offline_evidence_review",
+  "attempt": "20261027T145224Z",
+  "source_commit": "37b08cca82e23952cb428126c1894bc730d89b60",
+  "original_zip_sha256": "7a6fcdbe46900448721296fc2d5c88378263dbb3ac1c95535a0bc546130e168f",
+  "scenario_id": "S01",
+  "real_provider": "gemini/gemini-3.1-flash-lite",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "max_tokens": 8192,
+    "timeout_s": 60,
+    "rpm": 12
+  },
+  "task2_complete": false,
+  "independent_real_model_run_in_this_review": false,
+  "systems": {
+    "B": {
+      "id": "B-20261027T145243-e0dd3c",
+      "status": "TECHNICAL_ERROR",
+      "time_s": 86.103,
+      "rounds": 1,
+      "llm_started": 6,
+      "llm_completed": 0,
+      "llm_failed": 6,
+      "final_plan": false,
+      "errors": [
+        "504",
+        "503"
+      ]
+    },
+    "C": {
+      "id": "C-20261027T145422-10d621",
+      "status": "TECHNICAL_ERROR",
+      "time_s": 145.264,
+      "rounds": 2,
+      "llm_started": 10,
+      "llm_completed": 4,
+      "llm_failed": 6,
+      "final_plan": false,
+      "checks_passed": 9,
+      "checks_total": 10,
+      "failed_check": "coverage",
+      "coverage": 0,
+      "partial_package_usd": 1386.8,
+      "errors": [
+        "503",
+        "504"
+      ]
+    }
+  },
+  "result": "Work item closed with documented partial evidence. Formal two-system proof remains unfulfilled.",
+  "provenance_note": "Digest extracted from the user-supplied ZIP; original full ZIP remains in the conversation artifact, not committed to this public repo.",
+  "main_notebook": "Uses shared runtime refreshed from GitHub main by default; live real-model UI execution was not independently verified."
+}
