@@ -102,9 +102,11 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 
 ## מסמכים
 
+- **היקף מאושר ושמות ליד האחריות (27.10.2026): [דף הצוות](docs/TEAM_SCOPE_HE.md).** רן — מוצר ותיעוד; גלית — סוכנים ואינטגרציה; שמואל — נתונים ומקומות; דניאל — הערכה ומסלול.
+
 - אפיון וארכיטקטורה: `docs/spec/Travel_Architecture_and_Plan_HE.md` (+ `.svg`)
-- מסמכי בוני הסוכנים: `docs/agent_specs/` (Markdown + Word)
-- מסמך העברה וסטטוס (עודכן 22.10.2026): `docs/Travel_Project_Handoff_HE.md` — סעיף 15 הוא מקור האמת לסטטוס; סעיפים 10–14 היסטוריים
+- מפרטי שלושת הסוכנים הפעילים: [אינדקס המפרטים](docs/agent_specs/README.md) (Markdown + Word). מפרטי GM והמבקר שמורים כרעיונות מחוץ להיקף המאושר.
+- מסמך העברה קודם (22.10.2026): `docs/Travel_Project_Handoff_HE.md` — סעיף 15 שומר את מצב ההרצות המתועד. החלטות ההיקף והשיבוץ מ־27.10 נמצאות ב[דף הצוות](docs/TEAM_SCOPE_HE.md), הגובר על תכנון ההרחבות במסמך ההעברה הקודם.
 - עיצוב ומוצר: `docs/DESIGN.md`, `docs/PRODUCT.md`, הנחיות לסוכני קוד: `docs/AGENTS.md`
 - הפעלת Streamlit: `docs/README_STREAMLIT_HE.md`
 - ארכיון (היקף קודם וקבצים שאינם בשימוש, לרקע בלבד): `archive/` — ראו `archive/README.md`

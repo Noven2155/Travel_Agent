@@ -1,28 +1,61 @@
-# מפרט מפתח: מומחה מסלול
+# מפרט סוכן המסלול
 
-סטטוס: תפקיד קיים כיום כ־itinerary. מיועד למפתח/ת עצמאי/ת.
+עודכן ב־27.10.2026. תפקיד פעיל ב־C בשם itinerary. אחראי: דניאל. בודקת נוספת: גלית. ההיקף המחייב מפורט ב[דף הצוות](../TEAM_SCOPE_HE.md).
 
-## אחריות וגבולות
-לתזמן shortlist לימים, לפי חבילה, שעות, חלונות חסומים, קצב, מרחק ומזג אוויר. לא משנה חבילה, לא ממציא שעות, ולא טוען לזמני ניווט חיים. זמני נסיעה הם אומדן קוד גיאוגרפי.
+## אחריות והצדקה
 
-## קלט
-request:TripRequest; package:PackageDecision; package_details:Package; places:PlaceShortlist; place_details:list[object]; day_conditions:list[DayCondition]; previous_feedback:list[string]?.
-TripRequest: TripRequest (models.py): request_id:string; city:Chicago|New York; origin:string(3, uppercase); start_date/end_date:date; travelers:int 1–6; budget_usd:int>0; wants_car:boolean; pace:relaxed|normal|packed (normal); interests:list[Interest] 1–4 from food,culture,attractions,nightlife,family,nature,shows,shopping,extreme/adventure; avoid:list[Interest]=[]; hotel_preference:any|central (any); as_of:date; free_text?:string; depart_flex_days/return_flex_days:int 0–1; soft_prefs:list[central,nonstop,exact_dates,dry_days,long_days,under_preferred_budget]; preferred_budget_usd?:int; request_text?:string (original); daily_blocked_windows:list[{start:HH:MM,end:HH:MM,label:string}]; max_walk_minutes?:int; day_start/day_end?:HH:MM; accessibility:boolean=false (unsupported data); no_early_flight_before?:HH:MM; priority_weights:map[string,float]; unparsed_requirements:list[string].
-DayCondition: date,lead_days,precip_mm?,precip_h?,apparent_max?,gust_max?,flags[],source,fetched_at.
-PackageDecision: flight_out_ref,flight_back_ref,hotel_ref,car_ref?,price_call_id,total_price,tradeoffs[],relaxed_constraint?,rationale.
-כלי מקום עשוי לכלול opening_hours,website,address,description_short,source_url.
+משבץ מקומות לימים ולשעות לפי נסיעות, קצב ומזג אוויר כדי לרכז את בדיקת האפשרות לבצע את התוכנית. אינו מחפש מקומות חדשים ואינו מחליף חבילה.
 
-## כלים מורשים
-get_travel_time(pairs:[[from_id,to_id]],mode=walk|transit|drive)
-check_day_load(day_items,pace,edge_day=false)
-אין חיפוש מקום/לינה/טיסות.
+## הקלט המועבר כיום
 
-## פלט קיים: ItineraryPlan
-status:OK|CANNOT_SCHEDULE; days:DayPlan[]; dropped:Dropped[]; cannot_reason:DAY_LOAD|TRAVEL_TIME|WEATHER|HOTEL_TOO_FAR|null; explanation:string.
-DayPlan: date:string; items:Item[]; flags:string[]; window?:[HH:MM,HH:MM].
-Item: place_id,name,kind=activity|meal,start,end,mode=walk|transit|drive,travel_min:int,travel_call_id,from_id,weather_note?.
-Dropped: place_id,reason (WEATHER/NO_SLOT/DAY_LOAD/CLOSED).
-הקונפיגורציה קובעת relaxed עד 2 פעילויות/6 שעות/60 דקות נסיעה; normal 3/8/90; packed 5/10/120; עד 2 ארוחות ביום; יום הגעה/עזיבה פעילות אחת; buffers 90/180 דקות.
+pace, travel_mode, lodging_ref, day_windows, weather, places ו־interests. רשומות places מועשרות מהיומן ב־place_id, name, category, tags, indoor, minutes ו־opening_hours. מתווספים RULES_TEXT ומשוב אם קיים. אין reviewer בסוף הזרימה. לא כל TripRequest מועבר כיום במפורש למשימה; אכיפת שדות נוספים דורשת בדיקה נפרדת.
 
-## בדיקות וקבלה
-אין פעילות בחלון חסום; שעות היום והטיסות מכובדות; כל מקום קיים וכל נסיעה קשורה ל־call_id; day load עובר check_day_load. שעות פתיחה לא ידועות מסומנות. אי אפשר לתזמן: CANNOT_SCHEDULE עם סיבה; אין להסתיר מקומות שנפלו.
+## הכלים המורשים
+
+- get_travel_time(pairs, mode='transit') כאשר pairs הוא רשימת זוגות מזהים
+- check_day_load(day_items, pace, edge_day=False)
+
+הכלים מחושבים בקוד. זמני הנסיעה הם אומדן גיאוגרפי, ואין להציגם כניווט חי. check_day_load מחשב מגבלות; final_checks בודק את התוכנית לאחר החזרת הסוכן.
+
+## הפלט הקיים
+
+הקטע הבא מועתק מ־models.py. המסלול נשמר ב־days[].items; אין מבנה activities חדש. start ו־end הם מחרוזות HH:MM בשעה המקומית.
+
+```python
+class Item(BaseModel):
+    place_id: str
+    name: str = ""
+    kind: Literal["activity", "meal"] = "activity"
+    start: str            # HH:MM local city time
+    end: str
+    mode: Literal["walk", "transit", "drive"]
+    travel_min: int
+    travel_call_id: str
+    from_id: str = ""     # previous location (stay ref or place_id); used by the travel check
+    weather_note: Optional[str] = None
+
+class DayPlan(BaseModel):
+    date: str
+    items: list[Item] = Field(default_factory=list)
+    flags: list[str] = Field(default_factory=list)
+    window: Optional[tuple[str, str]] = None
+
+class Dropped(BaseModel):
+    place_id: str
+    reason: str
+
+class ItineraryPlan(BaseModel):
+    status: Literal["OK", "CANNOT_SCHEDULE"] = "OK"
+    days: list[DayPlan] = Field(default_factory=list)
+    dropped: list[Dropped] = Field(default_factory=list)
+    cannot_reason: Optional[Literal["DAY_LOAD", "TRAVEL_TIME", "WEATHER", "HOTEL_TOO_FAR"]] = None
+    explanation: str = ""
+```
+
+## בדיקות וניתוב
+
+כשל day_load, travel או weather_rule חוזר למסלול. HOTEL_TOO_FAR מחזיר למנהל הטיול. כשל כיסוי עשוי להחזיר קודם ל־places פעם אחת. תוצאה שאינה עוברת בדיקות אינה מאושרת רק משום שהסוכן מסביר אותה. מקום שלא שובץ נרשם ב־dropped עם סיבה.
+
+## מגבלות ומצב אימות
+
+max_iter=5 ועד 75 שניות להפעלה, בכפוף לזמן שנותר. config.py קובע relaxed עד שתי פעילויות, שש שעות ושישים דקות נסיעה; normal שלוש פעילויות, שמונה שעות ותשעים דקות; packed חמש פעילויות, עשר שעות ומאה ועשרים דקות. הארוחות אינן נספרות כפעילויות אך נכללות בשעות. ביום הגעה או עזיבה לכל היותר פעילות אחת; עד שתי ארוחות ביום. תחילת יום הגעה לאחר נחיתה ועוד 90 דקות וסיום יום עזיבה לפני המראה פחות 180 דקות. קיום השדות וההנחיות אינו הוכחת הרצה מול מודל אמיתי.

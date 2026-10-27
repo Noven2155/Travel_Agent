@@ -1,27 +1,47 @@
-# מפרט מפתח: מומחה חבילות
+# מפרט מנהל הטיול
 
-סטטוס: התפקיד קיים ב־C הנוכחי בשם trip_manager. מטרת מסמך זה לתת למפתח/ת ממשק ממוקד.
+עודכן ב־27.10.2026. תפקיד פעיל ב־C בשם trip_manager. אחראית: גלית. בודק נוסף: רן. ההיקף המחייב מפורט ב[דף הצוות](../TEAM_SCOPE_HE.md).
 
-## אחריות וגבולות
-בחירת טיסת הלוך/חזור, לינה ורכב אם נדרש; להציג מחיר ופשרות. אין הזמנה ואין זמינות חיה. קיבולת רכב היא אומדן; מעל 4 נוסעים מוחזר NEEDS_DATA. העלות אינה כוללת בהכרח את כל העמלות.
+## אחריות והצדקה
 
-## קלט
-request:TripRequest; planning_brief:PlanningBrief; candidates:list[Package] או תוצאות כלים; previous_feedback:list[string]?; weather:list[DayCondition].
-TripRequest: TripRequest (models.py): request_id:string; city:Chicago|New York; origin:string(3, uppercase); start_date/end_date:date; travelers:int 1–6; budget_usd:int>0; wants_car:boolean; pace:relaxed|normal|packed (normal); interests:list[Interest] 1–4 from food,culture,attractions,nightlife,family,nature,shows,shopping,extreme/adventure; avoid:list[Interest]=[]; hotel_preference:any|central (any); as_of:date; free_text?:string; depart_flex_days/return_flex_days:int 0–1; soft_prefs:list[central,nonstop,exact_dates,dry_days,long_days,under_preferred_budget]; preferred_budget_usd?:int; request_text?:string (original); daily_blocked_windows:list[{start:HH:MM,end:HH:MM,label:string}]; max_walk_minutes?:int; day_start/day_end?:HH:MM; accessibility:boolean=false (unsupported data); no_early_flight_before?:HH:MM; priority_weights:map[string,float]; unparsed_requirements:list[string].
-Package קיים: refs:{flight_out:string,flight_back:string,stay:string,car:string|null}; price_lines:{flights:number,lodging:number,car:number}; total:number; price_call_id:string; flight_out/flight_back/stay/car:object|null; fees_complete:boolean.
+בוחר טיסות הלוך וחזור, לינה ורכב לפי הצורך ומנמק פשרות, משום שהחלטות החבילה מחייבות איזון משותף בין מחיר, תאריכים ומיקום. אינו בוחר מקומות, אינו מתזמן ואינו מנתב את הסוכנים האחרים.
 
-## כלים מורשים
-search_flights(origin,airports,date,min_seats,direction=out|back)
-search_hotels(city,check_in,check_out,guests,central=false)
-search_cars(airport,start,end,travelers)
-calculate_price(refs:{flight_out,flight_back,stay,car},travelers,nights)
-אין כלי מקומות/מסלול או כתיבה לקטלוג.
+## הקלט המועבר כיום
 
-## פלט קיים: PackageDecision
-flight_out_ref:string; flight_back_ref:string; hotel_ref:string; car_ref:string|null; price_call_id:string; total_price:number; tradeoffs:list[string]=[]; relaxed_constraint:string|null; rationale:string עד 600 תווים. כל ref ו־price_call_id חייבים להופיע ביומן הכלים.
-calculate_price מחזיר refs, travelers, nights, lines{flights,lodging,car}, total, rental_days?, fees_complete=false, currency=USD. זה מקור הסכום התקף.
+המשימה מקבלת request מתוך TripRequest, nights, top5_candidates מתומחרים עם price_call_id ו־city_airports. מתווספים RULES_TEXT ומשוב בדיקות אם יש תיקון. אין brief של GM. קוד build_candidates מכין את המועמדים לפני הפעלת הסוכן.
 
-## זרימת עבודה וקבלה
-חפש טיסות בכל חלונות הגמישות, עם min_seats=travelers; חפש לינה לפי עיר/תאריכים/אורחים; רכב רק אם נדרש; חשב total בכלי; השווה לתקציב הקשיח ואז דרג העדפות רכות.
-אין הצעה: NO_PACKAGE_IN_CATALOG. מידע חסר: NEEDS_DATA. ref לא תקין: INVALID_REF. ספק נכשל: TECHNICAL_ERROR.
-בדיקות: סכום תואם לכלי; אין עובדה/מחיר מומצאים; תאריכים/קיבולת/נוסעים תקינים; פלט Pydantic תקף.
+## הכלים המורשים
+
+ממשק CrewAI נקבע ב־crew_tools.py. הפרמטרים הבאים מועברים בשמותיהם:
+
+- search_flights(origin, airports, date, min_seats, direction)
+- search_hotels(city, check_in, check_out, guests, central=False)
+- search_cars(airport, start, end, travelers)
+- calculate_price(flight_out, flight_back, stay, travelers, nights, car=None)
+
+אין חיפוש מקומות, כלי מסלול או כתיבה לקטלוג. המחיר חייב להישען על תוצאת calculate_price מההרצה.
+
+## הפלט הקיים
+
+הקטע הבא מועתק מ־models.py. אין שדה status או selected_package_refs בתוך PackageDecision. המרת ההחלטה ל־Package ולסטטוס הריצה מתבצעת בקוד.
+
+```python
+class PackageDecision(BaseModel):
+    flight_out_ref: str
+    flight_back_ref: str
+    hotel_ref: str
+    car_ref: Optional[str] = None
+    price_call_id: str
+    total_price: float
+    tradeoffs: list[str] = Field(default_factory=list)
+    relaxed_constraint: Optional[str] = None
+    rationale: str = Field(default="", max_length=600)
+```
+
+## בדיקות וניתוב
+
+תקציב, תאריכים, קיבולת ורכב נבדקים בקוד. כשל בחבילה או HOTEL_TOO_FAR חוזר למנהל הטיול בתוך המגבלות הכוללות. בחירה חדשה מאפסת את המקומות ואת המסלול. מזהים, מחיר ו־price_call_id חייבים להיות מגובים ביומן הכלים.
+
+## מגבלות ומצב אימות
+
+max_iter=4 ו־max_execution_time עד 60 שניות להפעלה, בכפוף לזמן שנותר למערכת. עד שלושה סבבים ו־270 שניות למערכת כולה. קיבולת רכב היא אומדן; מעל ארבעה נוסעים עם רכב מטופלים כחוסר מידע בקוד המשותף. מחיר החבילה אינו כולל בהכרח את כל העמלות או עלויות הפעילויות. קיום הסוכן בקוד אינו הוכחת הצלחה מול Gemini.
