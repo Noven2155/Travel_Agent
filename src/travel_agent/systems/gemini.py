@@ -37,20 +37,35 @@ class ConfiguredGeminiCompletion(GeminiCompletion):
             try:
                 return super().call(*args, **kwargs)
             except Exception as exc:
-                if getattr(exc, "code", None) != 429:
+                code = getattr(exc, "code", None) or getattr(exc, "status_code", None)
+                if code == 429:
+                    # Handle quota cooldown here rather than restarting the whole CrewAI task.
+                    exc._travel_rate_limit_handled = True
+                    delay = retry_delay(exc)
+                    if delay is None:
+                        raise
+                    pause = max(delay, 2 ** attempt)
+                    limiter.defer(pause)
+                    if attempt == 2:
+                        raise
+                    if self._progress_callback:
+                        self._progress_callback(dict(kind="retry", actor="model", model=self.model,
+                            attempt=attempt + 2, seconds=pause + 1,
+                            error="Gemini 429; waiting before retrying the same request."))
+                elif code in (503, 504):
+                    # Retry a short provider outage with the SAME messages and tool context.
+                    # The enclosing process deadline still limits the complete run.
+                    exc._travel_provider_retry_handled = True
+                    if attempt == 2:
+                        raise
+                    pause = (3., 7.)[attempt]
+                    limiter.defer(pause)
+                    if self._progress_callback:
+                        self._progress_callback(dict(kind="retry", actor="model", model=self.model,
+                            attempt=attempt + 2, seconds=pause + 1,
+                            error=f"Gemini {code}; retrying the same request after a short cooldown."))
+                else:
                     raise
-                # Prevent the outer agent wrapper from restarting an entire task after this retry policy.
-                exc._travel_rate_limit_handled = True
-                delay = retry_delay(exc)
-                if delay is None:
-                    raise
-                pause = max(delay, 2 ** attempt)
-                limiter.defer(pause)
-                if attempt == 2:
-                    raise
-                if self._progress_callback:
-                    self._progress_callback(dict(kind="retry", actor="model", model=self.model,
-                        attempt=attempt + 2, seconds=pause + 1, error="Gemini 429; waiting before retrying the same request."))
 
     async def acall(self, *args, **kwargs):
         return await asyncio.to_thread(self.call, *args, **kwargs)
