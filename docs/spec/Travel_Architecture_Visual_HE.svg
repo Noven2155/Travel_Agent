@@ -39,7 +39,7 @@
 <text x="267" y="340" text-anchor="middle" class="label">Intake + אימות סכימה</text><text x="267" y="362" text-anchor="middle" class="small">TripRequest • שמירת request_text המקורי</text>
 <path d="M446 347 H500" class="tealline"/>
 <rect x="505" y="315" width="330" height="64" rx="12" class="card implemented"/>
-<text x="670" y="340" text-anchor="middle" class="label">Parsing + מזג אוויר</text><text x="670" y="362" text-anchor="middle" class="small">A: keyword • B/C: hybrid LLM לפי הקוד</text>
+<text x="670" y="340" text-anchor="middle" class="label">Parsing + מזג אוויר</text><text x="670" y="362" text-anchor="middle" class="small">קלט מובנה עיקרי • טקסט חופשי בניסוי נפרד</text>
 <path d="M836 347 H890" class="tealline"/>
 <rect x="895" y="315" width="335" height="64" rx="12" class="card implemented"/>
 <text x="1062" y="340" text-anchor="middle" class="label">בניית מועמדי חבילה</text><text x="1062" y="362" text-anchor="middle" class="small">flight / lodging / car candidates</text>
@@ -64,16 +64,16 @@
 
 <!-- system lanes -->
 <rect x="490" y="430" width="390" height="530" rx="18" fill="#f0fdfa" stroke="#99f6e4" stroke-width="2"/>
-<text x="520" y="466" class="section">A · Code</text><rect x="780" y="444" width="70" height="30" rx="15" fill="#ccfbf1"/><text x="815" y="464" text-anchor="middle" class="small">פעיל</text>
+<text x="520" y="466" class="section">A · Code</text><rect x="780" y="444" width="70" height="30" rx="15" fill="#ccfbf1"/><text x="815" y="464" text-anchor="middle" class="small">בקוד</text>
 <rect x="525" y="505" width="320" height="92" rx="12" class="card implemented"/>
 <text x="685" y="533" text-anchor="middle" class="label">Rules engine</text><text x="685" y="556" text-anchor="middle" class="small">בחירה ודירוג דטרמיניסטיים</text><text x="685" y="577" text-anchor="middle" class="small">0 קריאות מודל</text>
 <rect x="525" y="622" width="320" height="95" rx="12" class="card"/>
 <text x="685" y="650" text-anchor="middle" class="label">אותם כלים ונתונים</text><text x="685" y="673" text-anchor="middle" class="small">חבילה • מקומות • תזמון</text><text x="685" y="695" text-anchor="middle" class="small">validators קשיחים</text>
-<text x="685" y="766" text-anchor="middle" class="body">פלט: RunResult + TripPlan</text>
+<text x="685" y="766" text-anchor="middle" class="body">פלט: RunResult</text>
 <text x="685" y="790" text-anchor="middle" class="small">בדיקות, מקורות, מחיר ומשך</text>
 
 <rect x="900" y="430" width="390" height="530" rx="18" fill="#eff6ff" stroke="#bfdbfe" stroke-width="2"/>
-<text x="930" y="466" class="section">B · Single Agent</text><rect x="1190" y="444" width="70" height="30" rx="15" fill="#ccfbf1"/><text x="1225" y="464" text-anchor="middle" class="small">פעיל</text>
+<text x="930" y="466" class="section">B · Single Agent</text><rect x="1190" y="444" width="70" height="30" rx="15" fill="#ccfbf1"/><text x="1225" y="464" text-anchor="middle" class="small">בקוד</text>
 <rect x="935" y="505" width="320" height="92" rx="12" class="card implemented"/>
 <text x="1095" y="533" text-anchor="middle" class="label">TripPlanner · סוכן יחיד</text><text x="1095" y="556" text-anchor="middle" class="small">מתכנן מקצה לקצה</text><text x="1095" y="577" text-anchor="middle" class="small">כלי תכנון משותפים</text>
 <rect x="935" y="622" width="320" height="95" rx="12" class="card"/>
@@ -82,24 +82,25 @@
 <text x="1095" y="790" text-anchor="middle" class="small">החלטות ותכנון בתוך agent אחד</text>
 
 <rect x="1310" y="430" width="435" height="530" rx="18" fill="#faf5ff" stroke="#ddd6fe" stroke-width="2"/>
-<text x="1340" y="466" class="section">C · Committee</text><rect x="1618" y="444" width="92" height="30" rx="15" fill="#ede9fe"/><text x="1664" y="464" text-anchor="middle" class="small">מתוכנן</text>
-<rect x="1345" y="505" width="365" height="60" rx="11" class="card planned"/>
-<text x="1527" y="530" text-anchor="middle" class="label">GM Agent · brief / הכרעה</text><text x="1527" y="550" text-anchor="middle" class="small">סוכן שמפרש ומתווך</text>
-<path d="M1432 566 V597" fill="none" stroke="#7c3aed" stroke-width="2"/>
-<rect x="1345" y="598" width="175" height="69" rx="10" class="card planned"/><text x="1432" y="624" text-anchor="middle" class="label">מומחה חבילות</text><text x="1432" y="647" text-anchor="middle" class="small">טיסות · לינה · רכב</text>
-<rect x="1535" y="598" width="175" height="69" rx="10" class="card planned"/><text x="1622" y="624" text-anchor="middle" class="label">מומחה מקומות</text><text x="1622" y="647" text-anchor="middle" class="small">אטרקציות · מסעדות</text>
-<path d="M1521 632 H1531 M1622 668 V685 H1527 V698" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="1345" y="699" width="365" height="60" rx="10" class="card planned"/><text x="1527" y="724" text-anchor="middle" class="label">מומחה מסלול</text><text x="1527" y="745" text-anchor="middle" class="small">לו״ז • נסיעות • מזג אוויר</text>
-<path d="M1527 760 V775" class="line"/>
-<rect x="1345" y="776" width="365" height="64" rx="10" class="card planned"/><text x="1527" y="801" text-anchor="middle" class="label">מבקר דרישות איכותני</text><text x="1527" y="823" text-anchor="middle" class="small">fit / tension / unknown + ראיות</text>
-<path d="M1345 812 H1328 V535 H1342" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
-<text x="1527" y="880" text-anchor="middle" class="small">רצף תלוי־תוצר: חבילה → מקומות → מסלול</text>
+<text x="1340" y="466" class="section">C · Three Agents</text>
+<text x="1527" y="495" text-anchor="middle" class="small">שלושה סוכנים קיימים בקוד</text>
+<rect x="1345" y="515" width="365" height="72" rx="11" class="card implemented"/>
+<text x="1527" y="544" text-anchor="middle" class="label">Trip Manager · מנהל טיול</text>
+<text x="1527" y="568" text-anchor="middle" class="small">חבילת טיסות לינה ורכב · גלית</text>
+<path d="M1527 589 V617" class="tealline"/>
+<rect x="1345" y="620" width="365" height="72" rx="11" class="card implemented"/>
+<text x="1527" y="649" text-anchor="middle" class="label">Places · מקומות</text>
+<text x="1527" y="673" text-anchor="middle" class="small">אטרקציות ומסעדות · שמואל</text>
+<path d="M1527 694 V722" class="tealline"/>
+<rect x="1345" y="725" width="365" height="72" rx="11" class="card implemented"/>
+<text x="1527" y="754" text-anchor="middle" class="label">Itinerary · מסלול</text>
+<text x="1527" y="778" text-anchor="middle" class="small">ימים שעות נסיעות ומזג אוויר · דניאל</text>
+<text x="1527" y="838" text-anchor="middle" class="small">בדיקות וניתוב תיקונים מתבצעים בקוד</text>
+<text x="1527" y="868" text-anchor="middle" class="small">3 rounds | 270 seconds total</text>
+<text x="1527" y="899" text-anchor="middle" class="small">התרשים אינו ראיה להצלחת מודל אמיתי</text>
 
-<!-- data connections -->
-<path d="M460 670 H480 V560 H522" class="line"/>
-<path d="M480 670 V670 H932" class="line"/>
-<path d="M480 670 V670 H1342" class="line"/>
-<text x="480" y="645" text-anchor="middle" class="small">read-only</text>
+<!-- Shared data feeds the common pipeline without crossing the system cards. -->
+<path d="M460 670 H475 V418 H1492 V380" class="line"/>
 
 <!-- validation / persistence -->
 <rect x="55" y="985" width="1690" height="180" rx="18" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
@@ -107,7 +108,7 @@
 <rect x="95" y="1042" width="405" height="88" rx="12" class="card implemented"/>
 <text x="297" y="1070" text-anchor="middle" class="label">Validators בקוד — סמכות קשיחה</text><text x="297" y="1092" text-anchor="middle" class="small">תקציב • תאריכים • קיבולת • סכימה • עומס</text><text x="297" y="1112" text-anchor="middle" class="small">בדיקת מקורות/grounding</text>
 <rect x="535" y="1042" width="325" height="88" rx="12" class="card"/>
-<text x="697" y="1070" text-anchor="middle" class="label">GM מכריע ב־C</text><text x="697" y="1092" text-anchor="middle" class="small">בוחר פשרה/תיקון על בסיס ראיות</text><text x="697" y="1112" text-anchor="middle" class="small">לא עוקף hard fail</text>
+<text x="697" y="1070" text-anchor="middle" class="label">נתב תיקונים בקוד C</text><text x="697" y="1092" text-anchor="middle" class="small">מחזיר לסוכן האחראי לפי סוג הכשל</text><text x="697" y="1112" text-anchor="middle" class="small">final_checks קובעים pass או fail</text>
 <rect x="895" y="1042" width="370" height="88" rx="12" class="card implemented"/>
 <text x="1080" y="1070" text-anchor="middle" class="label">SQLite + events / tool log</text><text x="1080" y="1092" text-anchor="middle" class="small">תוצאות • סטטוסים • משכים • קריאות/טוקנים</text><text x="1080" y="1112" text-anchor="middle" class="small">לא כותבים חזרה למקורות הנתונים</text>
 <rect x="1300" y="1042" width="405" height="88" rx="12" class="card"/>
@@ -115,14 +116,14 @@
 <path d="M500 1086 H530 M860 1086 H890 M1266 1086 H1295" class="line"/>
 <path d="M685 802 V965 H300 V1038" fill="none" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
 <path d="M1095 802 V965 H300" fill="none" stroke="#64748b" stroke-width="1.8"/>
-<path d="M1527 885 V970 H300" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+<path d="M1527 885 V970 H300" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)"/>
 <path d="M500 1086 V1150 H1078 V1134" class="line"/>
 
 <!-- legend and note -->
 <line x1="90" y1="1210" x2="145" y2="1210" stroke="#0f766e" stroke-width="3"/>
 <text x="155" y="1215" class="small">קיים/מאומת בקוד</text>
-<line x1="330" y1="1210" x2="385" y2="1210" stroke="#7c3aed" stroke-width="3" stroke-dasharray="8 5"/>
-<text x="395" y="1215" class="small">תכנון יעד — דורש מימוש</text>
-<text x="900" y="1255" text-anchor="middle" class="small">הערה: תרשים זה מתאר קוד ותכנון מתוך מסמכי הפרויקט. קובצי data/ לא היו זמינים בתיקיית Drive שנבדקה; הסכמה צפויה אומתה מול data_access.py / tools.py.</text>
-<text x="900" y="1290" text-anchor="middle" class="small">מצבי הפעלה: demo_parallel להצגה; benchmark_isolated למדידה. יעד C עדיין אינו פעיל ואסור לייחס אליו מדדי ריצה קיימים.</text>
+
+<text x="395" y="1215" class="small">היקף מאושר לקראת 30.10.2026</text>
+<text x="900" y="1255" text-anchor="middle" class="small">עודכן 27.10.2026 · מקור ההיקף וחלוקת האחריות: docs/TEAM_SCOPE_HE.md · אין שינוי קוד במשימה זו</text>
+<text x="900" y="1290" text-anchor="middle" class="small">demo_parallel להצגה · benchmark_isolated למדידה · GM נוסף ומבקר אינם בהיקף המאושר</text>
 </svg>
