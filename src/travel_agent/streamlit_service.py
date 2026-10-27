@@ -106,7 +106,9 @@ class ComparisonJob:
                        PYTHONPATH=str(self.project / "src"), PYTHONIOENCODING="utf-8", WEATHER_MODE="fixture",
                        CREWAI_DISABLE_TELEMETRY="true", OTEL_SDK_DISABLED="true")
             env.setdefault("LLM_TIMEOUT_S", "60")
-            env.setdefault("LLM_MAX_TOKENS", "4096")
+            env.setdefault("LLM_MAX_TOKENS", "8192")
+            env.setdefault("LLM_RPM", "12")
+            env.setdefault("TRAVEL_RATE_LIMIT_DB", str(self.project / "runtime/gemini_rate.sqlite"))
             diagnostic = self.workspace / (body["id"] + ".log")
             with diagnostic.open("w", encoding="utf-8") as log:
                 process = subprocess.Popen([sys.executable, "-m", "travel_agent.ui_worker"], cwd=self.project,

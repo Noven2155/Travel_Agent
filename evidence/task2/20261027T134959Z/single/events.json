@@ -1,0 +1,922 @@
+[
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "initializing_agents",
+    "ts": "2026-10-27T13:50:09.388206+00:00"
+  },
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "intake",
+    "ts": "2026-10-27T13:50:15.954840+00:00"
+  },
+  {
+    "kind": "stage",
+    "actor": "code",
+    "stage": "catalog",
+    "ts": "2026-10-27T13:50:16.275450+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "get_forecast",
+    "call_id": "get_forecast#001",
+    "ts": "2026-10-27T13:50:16.275698+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "get_forecast",
+    "call_id": "get_forecast#001",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:16.275767+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#002",
+    "ts": "2026-10-27T13:50:16.275988+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#002",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T13:50:16.276045+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#003",
+    "ts": "2026-10-27T13:50:16.276095+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_flights",
+    "call_id": "search_flights#003",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T13:50:16.276132+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_hotels",
+    "call_id": "search_hotels#004",
+    "ts": "2026-10-27T13:50:16.290641+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_hotels",
+    "call_id": "search_hotels#004",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:16.290788+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "search_cars",
+    "call_id": "search_cars#005",
+    "ts": "2026-10-27T13:50:16.291293+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "search_cars",
+    "call_id": "search_cars#005",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:16.291361+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "rank_packages",
+    "call_id": "rank_packages#006",
+    "ts": "2026-10-27T13:50:16.318132+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "rank_packages",
+    "call_id": "rank_packages#006",
+    "status": "OK",
+    "duration_s": 0.0002,
+    "ts": "2026-10-27T13:50:16.318323+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#007",
+    "ts": "2026-10-27T13:50:16.318489+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#007",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T13:50:16.318537+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#008",
+    "ts": "2026-10-27T13:50:16.318598+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#008",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T13:50:16.318641+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#009",
+    "ts": "2026-10-27T13:50:16.318691+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#009",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T13:50:16.318726+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#010",
+    "ts": "2026-10-27T13:50:16.318771+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#010",
+    "status": "OK",
+    "duration_s": 0.0,
+    "ts": "2026-10-27T13:50:16.318802+00:00"
+  },
+  {
+    "kind": "tool_start",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#011",
+    "ts": "2026-10-27T13:50:16.318843+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "code",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#011",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:16.318951+00:00"
+  },
+  {
+    "kind": "candidates",
+    "actor": "code",
+    "count": 4098,
+    "retained": 5,
+    "ts": "2026-10-27T13:50:16.319451+00:00"
+  },
+  {
+    "kind": "agent",
+    "actor": "TripPlanner",
+    "round": 1,
+    "stage": "planning",
+    "ts": "2026-10-27T13:50:21.468223+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "c32242b0-872e-44a2-b5d7-28f0484c5c56",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:21.527575+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "c32242b0-872e-44a2-b5d7-28f0484c5c56",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:22.704761+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 5477
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#012",
+    "ts": "2026-10-27T13:50:22.726189+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#012",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:22.726334+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "f0d4c358-a2cd-4190-8d62-34ebda9addcb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:22.837925+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "f0d4c358-a2cd-4190-8d62-34ebda9addcb",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:23.846313+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 80,
+      "total_tokens": 8353
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#013",
+    "ts": "2026-10-27T13:50:23.850371+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#013",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:23.850486+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "bc0a74fc-4fa2-498d-914c-9604d6d892f9",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:23.937934+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "bc0a74fc-4fa2-498d-914c-9604d6d892f9",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:25.209983+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 136,
+      "total_tokens": 8730
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#014",
+    "ts": "2026-10-27T13:50:25.214612+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#014",
+    "status": "OK",
+    "duration_s": 0.0009,
+    "ts": "2026-10-27T13:50:25.215535+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "2141e63c-098c-497e-8308-43951b97f9f7",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:25.314744+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "2141e63c-098c-497e-8308-43951b97f9f7",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:26.242634+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 127,
+      "total_tokens": 9192
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#015",
+    "ts": "2026-10-27T13:50:26.247636+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#015",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:26.247750+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "17315ff2-163d-487a-8db4-842569a1ae09",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:26.345107+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "17315ff2-163d-487a-8db4-842569a1ae09",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:27.622392+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 125,
+      "total_tokens": 9442
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#016",
+    "ts": "2026-10-27T13:50:27.626408+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#016",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:27.626528+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "cdbe446e-867a-4e1e-bf19-c82139d514f8",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:27.726415+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "cdbe446e-867a-4e1e-bf19-c82139d514f8",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:28.824071+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 125,
+      "total_tokens": 9691
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#017",
+    "ts": "2026-10-27T13:50:28.827758+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#017",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:28.827887+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "c85b6a98-7e62-4a50-8ae2-6890275ed281",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:28.911216+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "c85b6a98-7e62-4a50-8ae2-6890275ed281",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:30.027911+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 61,
+      "total_tokens": 9876
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#018",
+    "ts": "2026-10-27T13:50:30.031493+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#018",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:30.031608+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "dd0ad960-5280-456c-9df9-20631e3fb706",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:30.117487+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "dd0ad960-5280-456c-9df9-20631e3fb706",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:32.912634+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 866,
+      "total_tokens": 10865
+    }
+  },
+  {
+    "kind": "llm_start",
+    "actor": "model",
+    "call_id": "3efc8a57-44aa-4097-ae21-88d20f611468",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:32.932486+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "model",
+    "call_id": "3efc8a57-44aa-4097-ae21-88d20f611468",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:38.659103+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 1645,
+      "total_tokens": 4722
+    }
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "e849c12a-3854-4fc7-99d2-2e6603d9362e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:38.690993+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "e849c12a-3854-4fc7-99d2-2e6603d9362e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:39.711117+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 5477
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#019",
+    "ts": "2026-10-27T13:50:39.720200+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#019",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:39.720358+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "4ef2b8c0-9eb7-43be-b0b2-09bd9dda4984",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:39.814520+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "4ef2b8c0-9eb7-43be-b0b2-09bd9dda4984",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:41.029550+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 32,
+      "total_tokens": 8305
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "get_place_details",
+    "call_id": "get_place_details#020",
+    "ts": "2026-10-27T13:50:41.033382+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "get_place_details",
+    "call_id": "get_place_details#020",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:41.033503+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "6287afde-cafc-406d-b8d9-7c3fbc0ee6de",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:41.134083+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "6287afde-cafc-406d-b8d9-7c3fbc0ee6de",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:42.311404+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 80,
+      "total_tokens": 8764
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#021",
+    "ts": "2026-10-27T13:50:42.314809+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "calculate_price",
+    "call_id": "calculate_price#021",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:42.314957+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "af93e765-8a9e-48f6-92ed-0d4657a589a4",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:42.411125+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "af93e765-8a9e-48f6-92ed-0d4657a589a4",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:50.202437+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 136,
+      "total_tokens": 9141
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#022",
+    "ts": "2026-10-27T13:50:50.207921+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "get_travel_time",
+    "call_id": "get_travel_time#022",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:50.208025+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "8289ccd7-a54e-4eb4-b680-30dc615d2a25",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:50.306067+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "8289ccd7-a54e-4eb4-b680-30dc615d2a25",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:52.262689+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 127,
+      "total_tokens": 9603
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#023",
+    "ts": "2026-10-27T13:50:52.266713+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#023",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:52.266826+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "3ecaac2b-2191-4774-a63b-e1253de19f68",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:52.363663+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "3ecaac2b-2191-4774-a63b-e1253de19f68",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:53.559123+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 93,
+      "total_tokens": 9821
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#024",
+    "ts": "2026-10-27T13:50:53.562394+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#024",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:53.562512+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "876d3d16-aacc-46e3-838f-8f9f9388c285",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:53.644010+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "876d3d16-aacc-46e3-838f-8f9f9388c285",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:55.566709+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 93,
+      "total_tokens": 10038
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#025",
+    "ts": "2026-10-27T13:50:55.570533+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "check_day_load",
+    "call_id": "check_day_load#025",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:50:55.570659+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "403977c8-f725-43c0-95eb-af9de0ca214e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:55.665577+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "403977c8-f725-43c0-95eb-af9de0ca214e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:55.795070+00:00",
+    "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 4.216051387s.",
+    "usage": {}
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "47fa9c42-f4f5-49f8-a56a-f854760b4161",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:56.754607+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "47fa9c42-f4f5-49f8-a56a-f854760b4161",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:56.885406+00:00",
+    "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 3.125215396s.",
+    "usage": {}
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "d3bd41ad-0584-4a74-a2db-0f3661a177a7",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:58.968923+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "d3bd41ad-0584-4a74-a2db-0f3661a177a7",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:50:59.102078+00:00",
+    "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 909.265226ms.",
+    "usage": {}
+  },
+  {
+    "kind": "retry",
+    "actor": "TripPlanner",
+    "attempt": 2,
+    "error": "ClientError; transient provider error; retrying after 2.0s",
+    "ts": "2026-10-27T13:50:59.110057+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "d641aa25-89e7-499b-89f8-669fd5832d44",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:01.168779+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_end",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "d641aa25-89e7-499b-89f8-669fd5832d44",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:03.140138+00:00",
+    "error": "",
+    "usage": {
+      "completion_tokens": 86,
+      "total_tokens": 5477
+    }
+  },
+  {
+    "kind": "tool_start",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#026",
+    "ts": "2026-10-27T13:51:03.146815+00:00"
+  },
+  {
+    "kind": "tool",
+    "actor": "TripPlanner",
+    "tool": "search_places",
+    "call_id": "search_places#026",
+    "status": "OK",
+    "duration_s": 0.0001,
+    "ts": "2026-10-27T13:51:03.146963+00:00"
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "a65c7670-c7dc-40b2-85e6-7fe17223626e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:03.238747+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "a65c7670-c7dc-40b2-85e6-7fe17223626e",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:03.343306+00:00",
+    "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 56.666668273s.",
+    "usage": {}
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "77028929-629c-4e85-8537-6f47725b63a4",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:04.203595+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "77028929-629c-4e85-8537-6f47725b63a4",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:04.303081+00:00",
+    "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 55.707581352s.",
+    "usage": {}
+  },
+  {
+    "kind": "llm_start",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "4f9f8477-27fe-4eb7-b57c-2eb98aa2ce21",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:06.583520+00:00",
+    "error": "",
+    "usage": {}
+  },
+  {
+    "kind": "llm_error",
+    "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+    "call_id": "4f9f8477-27fe-4eb7-b57c-2eb98aa2ce21",
+    "model": "gemini-3.1-flash-lite",
+    "ts": "2026-10-27T13:51:06.711657+00:00",
+    "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 53.301011008s.",
+    "usage": {}
+  }
+]

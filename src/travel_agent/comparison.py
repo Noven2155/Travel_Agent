@@ -237,11 +237,14 @@ def start(request, request_text, title, mode="demo_parallel", input_mode="struct
     try:
         req = TripRequest.model_validate(request)
         req = req.model_copy(update={"request_id": "UI-" + uuid.uuid4().hex[:8]})
+        from .systems.llm import settings
+        model_settings = settings()
         data = dict(id=str(uuid.uuid4()), title=title, created_at=utc_now(), status="running", mode=mode,
                     input_mode=input_mode, request=req.model_dump(mode="json"), request_text=request_text,
                     snapshot_sha256=hashlib.sha256(C.INVENTORY_PATH.read_bytes()).hexdigest(),
                     pricing=pricing or {},
-                    model=os.environ.get("LLM_MODEL", "ollama/qwen2.5:7b-instruct"),
+                    model=model_settings["model"],
+                    model_settings={k: model_settings[k] for k in ("model", "temperature", "max_tokens", "seed", "timeout", "rpm")},
                     runs={s: dict(state="waiting", events=[]) for s in SYSTEMS})
         save(data)
         threading.Thread(target=_coordinate, args=(data,), daemon=True).start()

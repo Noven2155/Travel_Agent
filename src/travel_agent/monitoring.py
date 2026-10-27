@@ -47,6 +47,7 @@ def describe(event):
     if kind == "agent": return "הופעל סוכן: " + event.get("actor", "")
     if kind == "candidates": return f'נמצאו {event.get("count", 0):,} צירופי חבילות בתקציב'
     if kind == "checks": return "בדיקות התוכנית עברו" if event.get("passed") else "נמצאו אילוצים לתיקון"
+    if kind == "rate_wait": return "Waiting for Gemini request quota"
     return str(kind or "עדכון")
 
 
@@ -83,6 +84,8 @@ def progress(slot, now=None, deadline_s=270):
     elapsed = seconds(timestamp(slot.get("finished_at")) or now, slot.get("started_at"))
     action = STAGES.get(slot.get("stage"), "המערכת פועלת")
     active_since = last.get("ts") or slot.get("started_at")
+    if last.get("kind") == "rate_wait":
+        action = "Waiting for Gemini request quota"
     if pending:
         action, active_since = "ממתינה לתשובת המודל", pending[-1]["started_at"]
     elif pending_tools:

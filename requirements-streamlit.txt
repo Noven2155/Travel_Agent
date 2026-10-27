@@ -1,5 +1,6 @@
 streamlit==1.66.1
 pandas>=2.0,<3
-pydantic>=2.7,<3
-crewai[google-genai]>=1.15,<1.16
+pydantic==2.12.5
+crewai[google-genai]==1.15.30
+google-genai==1.65.0
 httpx[socks]>=0.27

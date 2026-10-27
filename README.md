@@ -118,11 +118,9 @@ python -m eval.run_eval --help                     # הערכה; תוצאות ג
 
 ## סטטוס ובעיות ידועות (27.10.2026)
 
-- **משימה 2 — הכנה נבדקה, הרצת Gemini עדיין חסומה במפתח:** [מצב והוראות הפעלה](docs/TASK2_RUN_HE.md) · [מחברת B/C ממוקדת](https://colab.research.google.com/github/Noven2155/Travel_Agent/blob/main/notebooks/travel_task2_bc_colab.ipynb). התוצרים המקומיים מסומנים `NOT_RUN`; אין עדיין הוכחת הרצה מול מודל אמיתי.
-
-- **B ו־C טרם הושלמו מקצה לקצה מול Gemini.** בהרצה האחרונה בסביבת Colab, B הסתיימה ב־`TECHNICAL_ERROR` ו־C ב־`TIMEOUT`; הסיבה טרם אובחנה. נוסף ניטור (`monitoring.py`, `events.py`) והוספו ניסיונות חוזרים לשגיאות ספק זמניות, אך אין להניח שהבעיה נפתרה. יתרון למולטי־אייג'נט הוא השערה לבדיקה, לא תוצאה.
-- **`tests/test_checks.py::test_weather_rule_rain_day_outdoor`** דווחה במסמך ההעברה כנכשלת בהרצה ממוקדת (ציפייה לפריט `dropped` עם `reason=WEATHER`, כשהבייסליין בוחר מראש פעילות פנים). בגרסה שבמאגר הבדיקה מריצה את `rules_basic` ועוברת; בהרצה על הענף הזה כל 115 הבדיקות עברו. יש לוודא שוב בסביבת Colab.
-- הממשק הישן `app/streamlit_app.py` הוסר לטובת `streamlit_app.py` החדש.
+- **משימה 2 — הרצה ראשונה אמיתית:** C הסתיימה ב־`OK_PLAN` בסבב אחד וב־74.906 שניות; עשר בדיקות התוכנית עברו. B הסתיימה ב־`TECHNICAL_ERROR` עקב מכסת Gemini של בקשות לדקה (`429`). נוספו בקרת קצב משותפת והמתנה לפי תשובת הספק, וגם המחברת הראשית עודכנה. **התיקון טרם אומת בהרצה אמיתית חדשה ומשימה 2 עדיין פתוחה.** [דוח מפורט, חריגות וראיות](docs/TASK2_FIRST_RUN_HE.md) · [מחברת B/C ממוקדת](https://colab.research.google.com/github/Noven2155/Travel_Agent/blob/main/notebooks/travel_task2_bc_colab.ipynb).
+- בבדיקה ידנית של C נמצאו ארוחות באורך 75–90 דקות מול הנחיה של 60 דקות; בדיקות הקוד הקיימות לא אוכפות זאת. כל הימים בתרחיש היו מחוץ לטווח תחזית מזג האוויר. אין להסיק מהרצה יחידה יתרון איכותי למערכת מסוימת.
+- בדיקות ההכנה הראשוניות מסומנות `NOT_RUN`; ראיות Colab האמיתיות נשמרו בנפרד. מפתחות אינם נשמרים במאגר.
 
 ## מסמכים
 
@@ -145,4 +143,4 @@ Final project (Agentic AI course, BIU DS23 team 8). Compares three planners for 
 
 Run: Colab (`notebooks/travel_streamlit_colab.ipynb`, key from Colab Secrets `GEMINI_API_KEY`), local Streamlit (`streamlit run streamlit_app.py`), or React + FastAPI (`python scripts/start.py`; `frontend/dist` is not committed, `npm run build` regenerates it). Tests: `python -m pytest -q`.
 
-Known issues: B/C have not yet completed an end-to-end run with Gemini (last Colab run: B `TECHNICAL_ERROR`, C `TIMEOUT`, root cause not yet diagnosed). Availability and car capacity in the data are synthetic/estimated. See `docs/` for the specification and agent-builder documents.
+Live task-2 result: C completed with `OK_PLAN` and passed the current code checks; B failed with Gemini RPM quota errors (429). Shared pacing, provider-delay retries and the main notebook were updated; a new real run is still required. Manual review found meal-duration exceptions not enforced by current checks. Availability and car capacity in the data are synthetic/estimated. See `docs/` for the specification and agent-builder documents.

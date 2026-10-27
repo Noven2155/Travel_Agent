@@ -1,0 +1,136 @@
+{
+  "single": {
+    "passed": false,
+    "checks": {
+      "checks": [
+        {
+          "name": "approved_input",
+          "passed": true,
+          "details": []
+        }
+      ],
+      "coverage": null,
+      "rain_days": []
+    },
+    "same_approved_input": true,
+    "system_matches": true,
+    "real_model_calls_observed": true,
+    "within_limits": true,
+    "output_validation_error": "",
+    "failed_checks": []
+  },
+  "multi": {
+    "passed": true,
+    "checks": {
+      "checks": [
+        {
+          "name": "schema",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "budget",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "dates",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "capacity",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "car",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "day_load",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "travel",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "weather_rule",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "coverage",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "grounding",
+          "passed": true,
+          "details": []
+        },
+        {
+          "name": "approved_input",
+          "passed": true,
+          "details": []
+        }
+      ],
+      "coverage": 1.0,
+      "rain_days": []
+    },
+    "same_approved_input": true,
+    "system_matches": true,
+    "real_model_calls_observed": true,
+    "within_limits": true,
+    "output_validation_error": "",
+    "failed_checks": []
+  },
+  "source_snapshot_matched_before_fixes": true,
+  "original_zip_sha256": "3680f645860f934a87be0673b90e694f6110426de5023859e7437d98dd6b4d5a",
+  "original_files_sha256": {
+    "comparison.json": "f3ffa92f1fad77095945b227147a3714796b91aa2fe17e7de3a1db0569863181",
+    "manifest.json": "cd5fa476662908576bd04f50808acfc4fa6feab17b3878713a5c28a1f3aded3b",
+    "multi/events.json": "b47375a56ee031797c1facbef5a387712751554682b1d2daf975c1d0b2850e51",
+    "multi/metrics.json": "bf47714223a5e42c04b340db4a851b8a308760273445b4b117f62a73da0dad0c",
+    "multi/result.json": "fa93a12727df90694201a552efb7dfd44f3f2027e8eae463f4bbba66b2eff5ed",
+    "multi/tool_log.json": "cd0639f8e4e4a43cc6ab68bed9f787fb33cc1319b85183f7d75690655869c55c",
+    "multi/validation.json": "4048009ef282b6107d5787ec174082aaf0241b3ef3e9b1ff31e49603a56ab80f",
+    "preflight.json": "c3c7272def1604e533226eb8f503469e18583b1edd4588a2c2f875aca936cd5b",
+    "request.json": "8d104f03be074fcb0cf64a1fb8af1ebec4fa70be30f8a80f7f71a6eaada9c2a3",
+    "single/events.json": "589bcdfd2403e214ac5c60290ac4cbb8eef4649bee53fbc33b43a4aa6ef6de14",
+    "single/metrics.json": "d5f8d7a149fade0e63d7e59ce9e57dfdf9729b252383726afdacec7a553929eb",
+    "single/result.json": "a1b3a59f9f5f7c1fd5caf061f86e1ca1619c31e66e41bbc1c559be27204f3122",
+    "single/tool_log.json": "2da7ea57f220cb51bd1af3943392bd5f27bd755431cd898ab509951ddbda5d92",
+    "single/validation.json": "5d695b684e730daca67a13e5fffa7a3bbda6f16c9ffc4ed7b46a4468e1193afb",
+    "summary.json": "6e9da123b005aeaa1142a21f0a7db5fe21c136dc73be8e3204a05707e3e63fc2"
+  },
+  "verification_note": "Reviewed uploaded Colab evidence and repeated code checks locally; no new model calls made during review.",
+  "manual_observations": [
+    {
+      "code": "MEAL_DURATION_NOT_ENFORCED",
+      "date": "2022-08-20",
+      "place_id": "osm:node/2149694269",
+      "observed_minutes": 90,
+      "configured_minutes": 60
+    },
+    {
+      "code": "MEAL_DURATION_NOT_ENFORCED",
+      "date": "2022-08-21",
+      "place_id": "osm:node/6323196242",
+      "observed_minutes": 75,
+      "configured_minutes": 60
+    },
+    {
+      "code": "MEAL_DURATION_NOT_ENFORCED",
+      "date": "2022-08-22",
+      "place_id": "osm:node/6292139275",
+      "observed_minutes": 90,
+      "configured_minutes": 60
+    }
+  ],
+  "weather_test_limitation": "All scenario dates were OUT_OF_HORIZON; this run does not verify rainy-day scheduling."
+}

@@ -1,0 +1,9 @@
+{
+  "validation_type": "LOCAL_ONLY_AFTER_FIX",
+  "real_model_calls_made": false,
+  "full_suite_passed": 134,
+  "full_suite_warnings": 185,
+  "final_targeted_passed": 11,
+  "notebooks": "Code cells compiled; main refresh cell executed with a mocked server in a temporary directory.",
+  "remaining": "New real B/C run and real main-notebook verification required."
+}

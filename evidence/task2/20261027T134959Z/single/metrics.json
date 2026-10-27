@@ -1,0 +1,585 @@
+{
+  "metrics": {
+    "valid_plan": false,
+    "time_s": 50.794,
+    "rounds": 1,
+    "checks_passed": 0,
+    "checks_total": 0,
+    "interests_coverage": null,
+    "soft_satisfaction": null,
+    "soft_preferences": {},
+    "package_usd": null,
+    "tool_calls": 26,
+    "llm_calls": 17,
+    "tokens_in": 138990,
+    "tokens_out": 3984,
+    "estimated_llm_cost_usd": null,
+    "cost_basis": "not_configured",
+    "notes": [
+      "Travel time and visit duration are estimates.",
+      "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+    ],
+    "llm_calls_attempted": 23,
+    "llm_calls_failed": 6,
+    "llm_calls_unfinished": 0,
+    "tool_calls_observed": 26
+  },
+  "monitoring": {
+    "state": "complete",
+    "actor": "TripPlanner",
+    "stage": "planning",
+    "events": 104,
+    "result_status": "TECHNICAL_ERROR",
+    "elapsed_s": 57.8,
+    "remaining_s": null,
+    "current_action": "ההרצה הסתיימה",
+    "action_elapsed_s": null,
+    "last_update_at": "2026-10-27T13:51:06.711657+00:00",
+    "idle_s": 0.1,
+    "llm_started": 23,
+    "llm_completed": 17,
+    "llm_failed": 6,
+    "llm_in_flight": 0,
+    "llm_unfinished": 0,
+    "calls": [
+      {
+        "id": "c32242b0-872e-44a2-b5d7-28f0484c5c56",
+        "started_at": "2026-10-27T13:50:21.527575+00:00",
+        "finished_at": "2026-10-27T13:50:22.704761+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 86,
+          "total_tokens": 5477
+        },
+        "duration_s": 1.2
+      },
+      {
+        "id": "f0d4c358-a2cd-4190-8d62-34ebda9addcb",
+        "started_at": "2026-10-27T13:50:22.837925+00:00",
+        "finished_at": "2026-10-27T13:50:23.846313+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 80,
+          "total_tokens": 8353
+        },
+        "duration_s": 1.0
+      },
+      {
+        "id": "bc0a74fc-4fa2-498d-914c-9604d6d892f9",
+        "started_at": "2026-10-27T13:50:23.937934+00:00",
+        "finished_at": "2026-10-27T13:50:25.209983+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 136,
+          "total_tokens": 8730
+        },
+        "duration_s": 1.3
+      },
+      {
+        "id": "2141e63c-098c-497e-8308-43951b97f9f7",
+        "started_at": "2026-10-27T13:50:25.314744+00:00",
+        "finished_at": "2026-10-27T13:50:26.242634+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 127,
+          "total_tokens": 9192
+        },
+        "duration_s": 0.9
+      },
+      {
+        "id": "17315ff2-163d-487a-8db4-842569a1ae09",
+        "started_at": "2026-10-27T13:50:26.345107+00:00",
+        "finished_at": "2026-10-27T13:50:27.622392+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 125,
+          "total_tokens": 9442
+        },
+        "duration_s": 1.3
+      },
+      {
+        "id": "cdbe446e-867a-4e1e-bf19-c82139d514f8",
+        "started_at": "2026-10-27T13:50:27.726415+00:00",
+        "finished_at": "2026-10-27T13:50:28.824071+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 125,
+          "total_tokens": 9691
+        },
+        "duration_s": 1.1
+      },
+      {
+        "id": "c85b6a98-7e62-4a50-8ae2-6890275ed281",
+        "started_at": "2026-10-27T13:50:28.911216+00:00",
+        "finished_at": "2026-10-27T13:50:30.027911+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 61,
+          "total_tokens": 9876
+        },
+        "duration_s": 1.1
+      },
+      {
+        "id": "dd0ad960-5280-456c-9df9-20631e3fb706",
+        "started_at": "2026-10-27T13:50:30.117487+00:00",
+        "finished_at": "2026-10-27T13:50:32.912634+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 866,
+          "total_tokens": 10865
+        },
+        "duration_s": 2.8
+      },
+      {
+        "id": "3efc8a57-44aa-4097-ae21-88d20f611468",
+        "started_at": "2026-10-27T13:50:32.932486+00:00",
+        "finished_at": "2026-10-27T13:50:38.659103+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "model",
+        "usage": {
+          "completion_tokens": 1645,
+          "total_tokens": 4722
+        },
+        "duration_s": 5.7
+      },
+      {
+        "id": "e849c12a-3854-4fc7-99d2-2e6603d9362e",
+        "started_at": "2026-10-27T13:50:38.690993+00:00",
+        "finished_at": "2026-10-27T13:50:39.711117+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 86,
+          "total_tokens": 5477
+        },
+        "duration_s": 1.0
+      },
+      {
+        "id": "4ef2b8c0-9eb7-43be-b0b2-09bd9dda4984",
+        "started_at": "2026-10-27T13:50:39.814520+00:00",
+        "finished_at": "2026-10-27T13:50:41.029550+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 32,
+          "total_tokens": 8305
+        },
+        "duration_s": 1.2
+      },
+      {
+        "id": "6287afde-cafc-406d-b8d9-7c3fbc0ee6de",
+        "started_at": "2026-10-27T13:50:41.134083+00:00",
+        "finished_at": "2026-10-27T13:50:42.311404+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 80,
+          "total_tokens": 8764
+        },
+        "duration_s": 1.2
+      },
+      {
+        "id": "af93e765-8a9e-48f6-92ed-0d4657a589a4",
+        "started_at": "2026-10-27T13:50:42.411125+00:00",
+        "finished_at": "2026-10-27T13:50:50.202437+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 136,
+          "total_tokens": 9141
+        },
+        "duration_s": 7.8
+      },
+      {
+        "id": "8289ccd7-a54e-4eb4-b680-30dc615d2a25",
+        "started_at": "2026-10-27T13:50:50.306067+00:00",
+        "finished_at": "2026-10-27T13:50:52.262689+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 127,
+          "total_tokens": 9603
+        },
+        "duration_s": 2.0
+      },
+      {
+        "id": "3ecaac2b-2191-4774-a63b-e1253de19f68",
+        "started_at": "2026-10-27T13:50:52.363663+00:00",
+        "finished_at": "2026-10-27T13:50:53.559123+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 93,
+          "total_tokens": 9821
+        },
+        "duration_s": 1.2
+      },
+      {
+        "id": "876d3d16-aacc-46e3-838f-8f9f9388c285",
+        "started_at": "2026-10-27T13:50:53.644010+00:00",
+        "finished_at": "2026-10-27T13:50:55.566709+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 93,
+          "total_tokens": 10038
+        },
+        "duration_s": 1.9
+      },
+      {
+        "id": "403977c8-f725-43c0-95eb-af9de0ca214e",
+        "started_at": "2026-10-27T13:50:55.665577+00:00",
+        "finished_at": "2026-10-27T13:50:55.795070+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 4.216051387s.",
+        "duration_s": 0.1
+      },
+      {
+        "id": "47fa9c42-f4f5-49f8-a56a-f854760b4161",
+        "started_at": "2026-10-27T13:50:56.754607+00:00",
+        "finished_at": "2026-10-27T13:50:56.885406+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 3.125215396s.",
+        "duration_s": 0.1
+      },
+      {
+        "id": "d3bd41ad-0584-4a74-a2db-0f3661a177a7",
+        "started_at": "2026-10-27T13:50:58.968923+00:00",
+        "finished_at": "2026-10-27T13:50:59.102078+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 909.265226ms.",
+        "duration_s": 0.1
+      },
+      {
+        "id": "d641aa25-89e7-499b-89f8-669fd5832d44",
+        "started_at": "2026-10-27T13:51:01.168779+00:00",
+        "finished_at": "2026-10-27T13:51:03.140138+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "usage": {
+          "completion_tokens": 86,
+          "total_tokens": 5477
+        },
+        "duration_s": 2.0
+      },
+      {
+        "id": "a65c7670-c7dc-40b2-85e6-7fe17223626e",
+        "started_at": "2026-10-27T13:51:03.238747+00:00",
+        "finished_at": "2026-10-27T13:51:03.343306+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 56.666668273s.",
+        "duration_s": 0.1
+      },
+      {
+        "id": "77028929-629c-4e85-8537-6f47725b63a4",
+        "started_at": "2026-10-27T13:51:04.203595+00:00",
+        "finished_at": "2026-10-27T13:51:04.303081+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 55.707581352s.",
+        "duration_s": 0.1
+      },
+      {
+        "id": "4f9f8477-27fe-4eb7-b57c-2eb98aa2ce21",
+        "started_at": "2026-10-27T13:51:06.583520+00:00",
+        "finished_at": "2026-10-27T13:51:06.711657+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 53.301011008s.",
+        "duration_s": 0.1
+      }
+    ],
+    "tools_started": 26,
+    "tools_completed": 26,
+    "tokens_in_observed": 0,
+    "tokens_out_observed": 3984,
+    "retries": 1,
+    "round": 1,
+    "recent": [
+      {
+        "time": "2026-10-27T13:50:42.314809+00:00",
+        "actor": "TripPlanner",
+        "action": "התחילה calculate_price",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:42.314957+00:00",
+        "actor": "TripPlanner",
+        "action": "הסתיימה calculate_price",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:50:42.411125+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:50.202437+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:50.207921+00:00",
+        "actor": "TripPlanner",
+        "action": "התחילה חישוב זמן מעבר",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:50.208025+00:00",
+        "actor": "TripPlanner",
+        "action": "הסתיימה חישוב זמן מעבר",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:50:50.306067+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:52.262689+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:52.266713+00:00",
+        "actor": "TripPlanner",
+        "action": "התחילה בדיקת עומס יומי",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:52.266826+00:00",
+        "actor": "TripPlanner",
+        "action": "הסתיימה בדיקת עומס יומי",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:50:52.363663+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:53.559123+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:53.562394+00:00",
+        "actor": "TripPlanner",
+        "action": "התחילה בדיקת עומס יומי",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:53.562512+00:00",
+        "actor": "TripPlanner",
+        "action": "הסתיימה בדיקת עומס יומי",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:50:53.644010+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:55.566709+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:55.570533+00:00",
+        "actor": "TripPlanner",
+        "action": "התחילה בדיקת עומס יומי",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:55.570659+00:00",
+        "actor": "TripPlanner",
+        "action": "הסתיימה בדיקת עומס יומי",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:50:55.665577+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:55.795070+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 4.216051387s."
+      },
+      {
+        "time": "2026-10-27T13:50:56.754607+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:56.885406+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 3.125215396s."
+      },
+      {
+        "time": "2026-10-27T13:50:58.968923+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:50:59.102078+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 909.265226ms."
+      },
+      {
+        "time": "2026-10-27T13:50:59.110057+00:00",
+        "actor": "TripPlanner",
+        "action": "ניסיון חוזר לאחר שגיאה",
+        "duration_s": null,
+        "detail": "ClientError; transient provider error; retrying after 2.0s"
+      },
+      {
+        "time": "2026-10-27T13:51:01.168779+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:03.140138+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:03.146815+00:00",
+        "actor": "TripPlanner",
+        "action": "התחילה חיפוש מקומות",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:03.146963+00:00",
+        "actor": "TripPlanner",
+        "action": "הסתיימה חיפוש מקומות",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:51:03.238747+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:03.343306+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 56.666668273s."
+      },
+      {
+        "time": "2026-10-27T13:51:04.203595+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:04.303081+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 55.707581352s."
+      },
+      {
+        "time": "2026-10-27T13:51:06.583520+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:06.711657+00:00",
+        "actor": "Trip planner for one traveler or a small party in Chicago or New York",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 53.301011008s."
+      }
+    ],
+    "error_detail": "agent failed: ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\\nPlease retry in 53.301011008s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'description': 'Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.', 'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.1-flash-lite'}, 'quotaValue': '15'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '53s'}]}}"
+  },
+  "process_time_s": 57.788,
+  "started_at": "2026-10-27T13:50:08.993560+00:00",
+  "finished_at": "2026-10-27T13:51:06.781297+00:00"
+}

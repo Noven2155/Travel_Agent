@@ -1,0 +1,20 @@
+{
+  "passed": false,
+  "checks": {
+    "checks": [
+      {
+        "name": "approved_input",
+        "passed": true,
+        "details": []
+      }
+    ],
+    "coverage": null,
+    "rain_days": []
+  },
+  "same_approved_input": true,
+  "system_matches": true,
+  "real_model_calls_observed": true,
+  "within_limits": true,
+  "output_validation_error": "",
+  "failed_checks": []
+}

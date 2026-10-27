@@ -84,7 +84,7 @@ def run_proof(output: Path, *, preflight_only: bool = False) -> dict:
     before = snapshot()
     manifest = dict(created_at=comparison.utc_now(), source_commit=source_commit(), scenario_id="S01",
                     systems=["single", "multi"], mode="benchmark_isolated", input_mode="structured",
-                    settings={k: model_settings[k] for k in ("model", "temperature", "max_tokens", "seed", "timeout")},
+                    settings={k: model_settings[k] for k in ("model", "temperature", "max_tokens", "seed", "timeout", "rpm")},
                     limits=dict(max_rounds=C.MAX_ROUNDS, deadline_s=C.DEADLINE_S), weather_mode="fixture",
                     file_sha256=before, python=platform.python_version(),
                     packages={d.metadata["Name"]: d.version for d in distributions() if d.metadata["Name"]},

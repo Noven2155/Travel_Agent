@@ -1,0 +1,402 @@
+{
+  "metrics": {
+    "valid_plan": true,
+    "time_s": 74.906,
+    "rounds": 1,
+    "checks_passed": 10,
+    "checks_total": 10,
+    "interests_coverage": 1.0,
+    "soft_satisfaction": null,
+    "soft_preferences": {},
+    "package_usd": 1386.8,
+    "tool_calls": 15,
+    "llm_calls": 6,
+    "tokens_in": 26239,
+    "tokens_out": 3574,
+    "estimated_llm_cost_usd": null,
+    "cost_basis": "not_configured",
+    "notes": [
+      "Travel time and visit duration are estimates.",
+      "Package price excludes unrecorded lodging/car fees, meals and attraction tickets."
+    ],
+    "llm_calls_attempted": 8,
+    "llm_calls_failed": 2,
+    "llm_calls_unfinished": 0,
+    "tool_calls_observed": 15
+  },
+  "monitoring": {
+    "state": "complete",
+    "actor": "itinerary",
+    "stage": "itinerary",
+    "events": 54,
+    "result_status": "OK_PLAN",
+    "elapsed_s": 80.9,
+    "remaining_s": null,
+    "current_action": "ההרצה הסתיימה",
+    "action_elapsed_s": null,
+    "last_update_at": "2026-10-27T13:52:27.635691+00:00",
+    "idle_s": 0.1,
+    "llm_started": 8,
+    "llm_completed": 6,
+    "llm_failed": 2,
+    "llm_in_flight": 0,
+    "llm_unfinished": 0,
+    "calls": [
+      {
+        "id": "8b183e0c-3eaf-4aff-b717-e0d46d69d4b3",
+        "started_at": "2026-10-27T13:51:19.000467+00:00",
+        "finished_at": "2026-10-27T13:51:19.191763+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip manager who builds the package",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 40.818432626s.",
+        "duration_s": 0.2
+      },
+      {
+        "id": "c6db072b-60a6-465c-9dfa-fad5ef85276f",
+        "started_at": "2026-10-27T13:51:20.372254+00:00",
+        "finished_at": "2026-10-27T13:51:20.493530+00:00",
+        "status": "failed",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip manager who builds the package",
+        "error": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 39.516903831s.",
+        "duration_s": 0.1
+      },
+      {
+        "id": "182756b8-7399-4b78-ad73-d961d7acfb14",
+        "started_at": "2026-10-27T13:51:22.360619+00:00",
+        "finished_at": "2026-10-27T13:51:25.694802+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Trip manager who builds the package",
+        "usage": {
+          "completion_tokens": 267,
+          "total_tokens": 5315
+        },
+        "duration_s": 3.3
+      },
+      {
+        "id": "663b915c-cbb1-47bb-ae5c-72e77a316bd6",
+        "started_at": "2026-10-27T13:51:25.787751+00:00",
+        "finished_at": "2026-10-27T13:52:00.227047+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Local guide who matches places to preferences",
+        "usage": {
+          "completion_tokens": 86,
+          "total_tokens": 2597
+        },
+        "duration_s": 34.4
+      },
+      {
+        "id": "fd4a6ff0-833c-478f-bd1a-ab423f8a6642",
+        "started_at": "2026-10-27T13:52:00.419812+00:00",
+        "finished_at": "2026-10-27T13:52:04.125671+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Local guide who matches places to preferences",
+        "usage": {
+          "completion_tokens": 865,
+          "total_tokens": 6258
+        },
+        "duration_s": 3.7
+      },
+      {
+        "id": "5d0fb082-3c4f-4132-a833-0fe3e1de646f",
+        "started_at": "2026-10-27T13:52:04.220540+00:00",
+        "finished_at": "2026-10-27T13:52:07.575896+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Scheduler who balances days",
+        "usage": {
+          "completion_tokens": 1059,
+          "total_tokens": 4366
+        },
+        "duration_s": 3.4
+      },
+      {
+        "id": "08a15b04-2112-430a-ac3e-3d365b3a06df",
+        "started_at": "2026-10-27T13:52:07.602214+00:00",
+        "finished_at": "2026-10-27T13:52:20.409409+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Scheduler who balances days",
+        "usage": {
+          "completion_tokens": 221,
+          "total_tokens": 4758
+        },
+        "duration_s": 12.8
+      },
+      {
+        "id": "31d8e788-2630-4328-b46d-6e3291f7aea6",
+        "started_at": "2026-10-27T13:52:20.688602+00:00",
+        "finished_at": "2026-10-27T13:52:27.589725+00:00",
+        "status": "complete",
+        "model": "gemini-3.1-flash-lite",
+        "actor": "Scheduler who balances days",
+        "usage": {
+          "completion_tokens": 1076,
+          "total_tokens": 6519
+        },
+        "duration_s": 6.9
+      }
+    ],
+    "tools_started": 15,
+    "tools_completed": 15,
+    "tokens_in_observed": 0,
+    "tokens_out_observed": 3574,
+    "retries": 0,
+    "round": 0,
+    "recent": [
+      {
+        "time": "2026-10-27T13:51:13.276030+00:00",
+        "actor": "code",
+        "action": "התחילה calculate_price",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:13.276085+00:00",
+        "actor": "code",
+        "action": "הסתיימה calculate_price",
+        "duration_s": 0.0,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:51:13.276156+00:00",
+        "actor": "code",
+        "action": "התחילה calculate_price",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:13.276207+00:00",
+        "actor": "code",
+        "action": "הסתיימה calculate_price",
+        "duration_s": 0.0,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:51:13.276274+00:00",
+        "actor": "code",
+        "action": "התחילה calculate_price",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:13.276324+00:00",
+        "actor": "code",
+        "action": "הסתיימה calculate_price",
+        "duration_s": 0.0,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:51:13.277131+00:00",
+        "actor": "code",
+        "action": "נמצאו 4,098 צירופי חבילות בתקציב",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:18.902513+00:00",
+        "actor": "trip_manager",
+        "action": "הופעל סוכן: trip_manager",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:19.000467+00:00",
+        "actor": "Trip manager who builds the package",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:19.191763+00:00",
+        "actor": "Trip manager who builds the package",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 40.818432626s."
+      },
+      {
+        "time": "2026-10-27T13:51:20.372254+00:00",
+        "actor": "Trip manager who builds the package",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:20.493530+00:00",
+        "actor": "Trip manager who builds the package",
+        "action": "קריאת מודל נכשלה",
+        "duration_s": null,
+        "detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 39.516903831s."
+      },
+      {
+        "time": "2026-10-27T13:51:22.360619+00:00",
+        "actor": "Trip manager who builds the package",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:25.694802+00:00",
+        "actor": "Trip manager who builds the package",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:25.740220+00:00",
+        "actor": "places",
+        "action": "הופעל סוכן: places",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:51:25.787751+00:00",
+        "actor": "Local guide who matches places to preferences",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:00.227047+00:00",
+        "actor": "Local guide who matches places to preferences",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:00.246811+00:00",
+        "actor": "places",
+        "action": "התחילה חיפוש מקומות",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:00.247009+00:00",
+        "actor": "places",
+        "action": "הסתיימה חיפוש מקומות",
+        "duration_s": 0.0002,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:52:00.419812+00:00",
+        "actor": "Local guide who matches places to preferences",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:04.125671+00:00",
+        "actor": "Local guide who matches places to preferences",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:04.163495+00:00",
+        "actor": "itinerary",
+        "action": "הופעל סוכן: itinerary",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:04.220540+00:00",
+        "actor": "Scheduler who balances days",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:07.575896+00:00",
+        "actor": "Scheduler who balances days",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:07.602214+00:00",
+        "actor": "Scheduler who balances days",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:20.409409+00:00",
+        "actor": "Scheduler who balances days",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:20.417244+00:00",
+        "actor": "itinerary",
+        "action": "התחילה חישוב זמן מעבר",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:20.417403+00:00",
+        "actor": "itinerary",
+        "action": "הסתיימה חישוב זמן מעבר",
+        "duration_s": 0.0002,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:52:20.418201+00:00",
+        "actor": "itinerary",
+        "action": "התחילה חישוב זמן מעבר",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:20.418307+00:00",
+        "actor": "itinerary",
+        "action": "הסתיימה חישוב זמן מעבר",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:52:20.422397+00:00",
+        "actor": "itinerary",
+        "action": "התחילה חישוב זמן מעבר",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:20.422529+00:00",
+        "actor": "itinerary",
+        "action": "הסתיימה חישוב זמן מעבר",
+        "duration_s": 0.0001,
+        "detail": "OK"
+      },
+      {
+        "time": "2026-10-27T13:52:20.688602+00:00",
+        "actor": "Scheduler who balances days",
+        "action": "נשלחה קריאה למודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:27.589725+00:00",
+        "actor": "Scheduler who balances days",
+        "action": "התקבלה תשובת מודל",
+        "duration_s": null,
+        "detail": ""
+      },
+      {
+        "time": "2026-10-27T13:52:27.635691+00:00",
+        "actor": "code",
+        "action": "בדיקות התוכנית עברו",
+        "duration_s": null,
+        "detail": ""
+      }
+    ],
+    "error_detail": "Google Gemini API error: 429 - You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 15, model: gemini-3.1-flash-lite, description: Generate content requests per minute limit exceeded on Free Tier. See https://ai.google.dev/gemini-api/docs/rate-limits.\nPlease retry in 39.516903831s."
+  },
+  "process_time_s": 80.923,
+  "started_at": "2026-10-27T13:51:06.803378+00:00",
+  "finished_at": "2026-10-27T13:52:27.726254+00:00"
+}

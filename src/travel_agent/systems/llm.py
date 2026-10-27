@@ -43,7 +43,8 @@ def settings() -> dict[str, Any]:
                 max_tokens=int(os.environ.get("LLM_MAX_TOKENS", "2048")),
                 seed=int(os.environ.get("LLM_SEED", "42")),
                 base_url=os.environ.get("OLLAMA_HOST") or os.environ.get("LLM_BASE_URL"),
-                timeout=float(os.environ.get("LLM_TIMEOUT_S", "120")))
+                timeout=float(os.environ.get("LLM_TIMEOUT_S", "120")),
+                rpm=float(os.environ.get("LLM_RPM", "12")))
 
 
 def availability() -> tuple[bool, str]:
@@ -96,7 +97,8 @@ def make_llm(role: str = "default"):
             temperature=s["temperature"], max_tokens=s["max_tokens"],
             max_output_tokens=s["max_tokens"], seed=s["seed"],
             api_key=os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY"),
-            client_params={"http_options": {"timeout": int(s["timeout"] * 1000)}},
+            client_params={"http_options": {"timeout": int(s["timeout"] * 1000), "retry_options": {"attempts": 1}}},
+            requests_per_minute=s["rpm"],
             thinking_config={"include_thoughts": False},
         )
     if s["base_url"] and s["model"].startswith("ollama"):

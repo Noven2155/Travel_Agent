@@ -1,0 +1,100 @@
+{
+  "task2_complete": false,
+  "execution": "REAL_MODEL_ATTEMPT",
+  "data_and_code_unchanged": true,
+  "finished_at": "2026-10-27T13:52:27.866767+00:00",
+  "systems": {
+    "single": {
+      "status": "TECHNICAL_ERROR",
+      "passed": false,
+      "checks": {
+        "checks": [
+          {
+            "name": "approved_input",
+            "passed": true,
+            "details": []
+          }
+        ],
+        "coverage": null,
+        "rain_days": []
+      },
+      "same_approved_input": true,
+      "system_matches": true,
+      "real_model_calls_observed": true,
+      "within_limits": true,
+      "output_validation_error": "",
+      "failed_checks": []
+    },
+    "multi": {
+      "status": "OK_PLAN",
+      "passed": true,
+      "checks": {
+        "checks": [
+          {
+            "name": "schema",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "budget",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "dates",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "capacity",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "car",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "day_load",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "travel",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "weather_rule",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "coverage",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "grounding",
+            "passed": true,
+            "details": []
+          },
+          {
+            "name": "approved_input",
+            "passed": true,
+            "details": []
+          }
+        ],
+        "coverage": 1.0,
+        "rain_days": []
+      },
+      "same_approved_input": true,
+      "system_matches": true,
+      "real_model_calls_observed": true,
+      "within_limits": true,
+      "output_validation_error": "",
+      "failed_checks": []
+    }
+  }
+}
