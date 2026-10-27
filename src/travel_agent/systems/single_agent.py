@@ -45,7 +45,7 @@ def _grounding_retry_feedback(ctx: RunContext, error: Exception) -> str:
     places = place_facts(ctx.log)
     travel = [
         {"call_id": entry["call_id"], "pairs": entry["args"].get("pairs", []),
-         "mode": entry["args"].get("mode"), "output": entry["output"]}
+         "mode": entry["args"].get("mode")}
         for entry in ctx.log.by_tool("get_travel_time")
     ]
     return (
