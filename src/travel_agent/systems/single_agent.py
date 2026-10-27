@@ -20,7 +20,8 @@ from ..events import emit
 
 
 def _retryable_provider_error(exc: Exception) -> bool:
-    if getattr(exc, "_travel_rate_limit_handled", False):
+    if (getattr(exc, "_travel_rate_limit_handled", False) or
+            getattr(exc, "_travel_provider_retry_handled", False)):
         return False
     status = getattr(exc, "status_code", None) or getattr(exc, "status", None)
     if status in (408, 429, 500, 502, 503, 504):
