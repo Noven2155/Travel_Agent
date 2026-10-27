@@ -59,12 +59,12 @@ Current proof settings: Gemini `gemini-3.1-flash-lite`, temperature 0, seed 42, 
 ### Status — October 27, 2026
 
 - **Two real runs:** C returned `OK_PLAN` in one round both times (74.906 and 106.076 seconds); all 10 existing plan checks passed. B first stopped on request-quota errors (429), then reached the 270-second deadline after plan-validation failures. No 429 errors were observed in the second run.
-- B now uses a single-agent structured Task/Crew path, full repair feedback and logged evidence. Interrupted runs retain draft plans, tool logs and observed counters. The main notebook uses this shared runtime. **The latest changes still require real-model verification. Task 2 remains open.**
+- B now uses a single-agent structured Task/Crew path, full repair feedback and logged evidence. Interrupted runs retain draft plans, tool logs and observed counters. The main notebook uses this shared runtime. **Three real attempts are now recorded. C passed existing checks twice, while B has not produced a fully validated plan; both failed in the third attempt amid Gemini 503/504 errors. Task 2 is closed as a work item with partial evidence, not a verified two-system success.**
 - The old timeout export zeroed B's counters and omitted identity fields, despite the second run containing 28 completed model responses. Original evidence is retained; the reporting defect is fixed for future runs.
 - Manual review found meals lasting 75–90 minutes despite the 60-minute instruction. Existing validators did not detect this. All scenario dates were outside the forecast horizon; rainy-day scheduling was not verified.
 - **139 local tests passed.** Scripted LLM and simulated SDK/process tests are local checks. They do not prove Gemini success, and no general quality or speed advantage has been established.
 
-See the [latest report](docs/TASK2_SECOND_RUN_HE.md), [first-run report](docs/TASK2_FIRST_RUN_HE.md) and [second-run evidence](evidence/task2/20261027T141444Z/). Reports are in Hebrew; execution records are JSON.
+See the [final report](docs/TASK2_FINAL_HE.md), [second-run report](docs/TASK2_SECOND_RUN_HE.md), [first-run report](docs/TASK2_FIRST_RUN_HE.md) and [second-run evidence](evidence/task2/20261027T141444Z/). Reports are in Hebrew; execution records are JSON.
 
 ## Data and limitations
 
