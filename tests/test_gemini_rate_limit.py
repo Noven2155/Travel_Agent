@@ -110,3 +110,62 @@ def test_authentication_failure_is_not_retried(tmp_path, monkeypatch, clock):
     with pytest.raises(ClientError):
         make_model(monkeypatch, tmp_path).call([])
     assert len(calls) == 1 and not clock["sleeps"]
+
+
+class TemporaryProviderError(Exception):
+    code = 503
+
+
+def test_503_retries_same_messages_without_restarting_agent(tmp_path, monkeypatch, clock):
+    messages = [{"role": "user", "content": "approved trip request"}]
+    calls, events = [], []
+
+    def sdk_call(self, *args, **kwargs):
+        calls.append(args[0])
+        if len(calls) == 1:
+            raise TemporaryProviderError("503 UNAVAILABLE: high demand")
+        return "response after transient outage"
+
+    monkeypatch.setattr(GeminiCompletion, "call", sdk_call)
+    token = sink.set(events.append)
+    try:
+        result = make_model(monkeypatch, tmp_path).call(messages)
+    finally:
+        sink.reset(token)
+    assert result == "response after transient outage"
+    assert len(calls) == 2 and all(call is messages for call in calls)
+    assert any(e.get("kind") == "retry" and "503" in e.get("error", "") for e in events)
+    assert clock["now"] >= 1004.
+
+
+def test_503_exhaustion_keeps_error_and_suppresses_outer_task_retry(tmp_path, monkeypatch, clock):
+    calls = []
+
+    def sdk_call(self, *args, **kwargs):
+        calls.append(args[0])
+        raise TemporaryProviderError("503 UNAVAILABLE: high demand")
+
+    monkeypatch.setattr(GeminiCompletion, "call", sdk_call)
+    model = make_model(monkeypatch, tmp_path)
+    messages = [{"role": "user", "content": "same request"}]
+    with pytest.raises(TemporaryProviderError) as error:
+        model.call(messages)
+    assert len(calls) == 3 and all(call is messages for call in calls)
+    assert not retry_single(error.value)
+    assert not retry_multi(error.value)
+
+
+def test_ordinary_400_is_not_retried(tmp_path, monkeypatch, clock):
+    calls = []
+
+    class InvalidRequest(Exception):
+        code = 400
+
+    def sdk_call(self, *args, **kwargs):
+        calls.append(1)
+        raise InvalidRequest("400 INVALID_ARGUMENT")
+
+    monkeypatch.setattr(GeminiCompletion, "call", sdk_call)
+    with pytest.raises(InvalidRequest):
+        make_model(monkeypatch, tmp_path).call([])
+    assert len(calls) == 1
