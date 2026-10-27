@@ -56,3 +56,63 @@ def test_no_llm_gives_technical_error(cases, monkeypatch, system):
     r = run(system, TripRequest.from_case(cases["A01"]))
     assert r.status.value == "TECHNICAL_ERROR"
     assert "LLM not available" in r.message
+
+
+def test_single_uses_next_round_for_grounding_guardrail_failure(cases, fake, monkeypatch):
+    from travel_agent.systems import single_agent
+
+    original = single_agent.run_planner_task
+    attempts = []
+
+    def fail_once_then_plan(ctx, llm, prompt):
+        attempts.append(prompt)
+        if len(attempts) == 1:
+            raise RuntimeError(
+                "Task failed guardrail validation after 1 retries. Last error: "
+                "Grounding errors - place_id PL_001 was not returned by a tool; "
+                "travel_call_id get_travel_time#002 is not a tool call of this run"
+            )
+        assert "Valid place IDs returned in this run" in prompt
+        assert "Valid get_travel_time calls from this run" in prompt
+        return original(ctx, llm, prompt)
+
+    monkeypatch.setattr(single_agent, "run_planner_task", fail_once_then_plan)
+    result = run("single", TripRequest.from_case(cases["A01"]))
+    assert result.status.value == "OK_PLAN", result.message
+    assert result.rounds_used == 2
+    assert len(attempts) == 2
+
+
+def test_single_exhausts_rounds_without_accepting_ungrounded_plan(cases, fake, monkeypatch):
+    from travel_agent.systems import single_agent
+
+    attempts = []
+
+    def always_invalid(ctx, llm, prompt):
+        attempts.append(prompt)
+        raise RuntimeError(
+            "Task failed guardrail validation after 1 retries. Last error: "
+            "Grounding errors - place_id PL_001 was not returned by a tool"
+        )
+
+    monkeypatch.setattr(single_agent, "run_planner_task", always_invalid)
+    result = run("single", TripRequest.from_case(cases["A01"]))
+    assert result.status.value == "TECHNICAL_ERROR"
+    assert result.rounds_used == 3
+    assert len(attempts) == 3
+
+
+def test_single_does_not_use_grounding_repair_for_provider_503(cases, fake, monkeypatch):
+    from travel_agent.systems import single_agent
+
+    attempts = []
+
+    def provider_unavailable(ctx, llm, prompt):
+        attempts.append(prompt)
+        raise RuntimeError("503 UNAVAILABLE: high demand")
+
+    monkeypatch.setattr(single_agent, "run_planner_task", provider_unavailable)
+    result = run("single", TripRequest.from_case(cases["A01"]))
+    assert result.status.value == "TECHNICAL_ERROR"
+    assert result.rounds_used == 1
+    assert len(attempts) == 2  # Existing bounded provider retry, not a new planning round.
